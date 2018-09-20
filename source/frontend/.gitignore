@@ -2,7 +2,7 @@
 /node_modules
 
 # Webpack build directory
-/app/build
+/bundle
 
 # Packaged app
 /release-builds
