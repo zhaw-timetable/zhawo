@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 // For flux
-import * as Actions from './actions/Actions.js';
-import Store from './stores/Store.js';
+import * as Actions from '../../actions/Actions.js';
+import Store from '../../stores/Store.js';
 
-class App extends Component {
+class FluxExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,4 +47,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default FluxExample;
