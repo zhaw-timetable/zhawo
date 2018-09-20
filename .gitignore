@@ -1,0 +1,41 @@
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+
+
+#--------------------- Latex ---------------------
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+*.bib
+*.lof
+*.lot
+*.run.xml
+
+# PDF output - usually a bad idea to keep this in Git
+*.pdf
+
+# Latexmk
+*.fdb_latexmk
+
+# SyncTeX
+*.synctex.gz
+
+# LaTeX Beamer
+*.snm
+*.vrb
+*.nav
+*.out
+
+# BibTeX
+*.bbl
+*.blg
+
+
+.vscode
+reports/test-report.xml
