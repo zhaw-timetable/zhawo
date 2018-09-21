@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+//stylesheet
+import './FluxExample.sass';
+
 // For flux
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
