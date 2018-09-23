@@ -10,10 +10,10 @@
 # Jest
 /coverage
 
-#sass
+# Sass
 .sass-cache
 
-# misc
+# Misc
 .DS_Store
 .env.local
 .env.development.local

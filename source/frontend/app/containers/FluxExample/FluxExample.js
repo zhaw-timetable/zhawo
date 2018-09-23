@@ -35,8 +35,8 @@ class FluxExample extends Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <h1 className="FluxExampleTitle">{this.state.name}</h1>
+      <div className="FluxExample">
+        <h1>{this.state.name}</h1>
         <input
           type="text"
           value={this.state.name}

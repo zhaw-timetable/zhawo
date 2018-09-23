@@ -17,7 +17,7 @@ class App extends Component<AppProps, AppState> {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <h1>{this.state.appTitle}</h1>
         <FluxExample />
       </div>
