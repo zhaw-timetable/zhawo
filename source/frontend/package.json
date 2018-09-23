@@ -1,8 +1,8 @@
 {
-  "name": "zhaw-timetable",
+  "name": "zhaw-timetable-frontend",
   "version": "0.0.1",
   "description": "A timetable progressive web application for ZHAW School of Engineering",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/zhaw-timetable/zhaw-timetable#readme",
   "dependencies": {
+    "babel-core": "^6.26.3",
     "flux": "^3.1.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
