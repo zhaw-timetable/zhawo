@@ -9,4 +9,4 @@ cache:
     - source/frontend/node_modules
     - source/backend/node_modules
 script:
-  - cd $TEST_DIR && npm install && npm run test
+  - cd $TEST_DIR && npm install && npm run test && npm run coveralls
