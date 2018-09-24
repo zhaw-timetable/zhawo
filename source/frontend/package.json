@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "coverage": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "clean": "rm -rf node_modules && rm -rf bundle",
     "reinstall": "npm run clean && npm install",
     "precommit": "pretty-quick --staged",
