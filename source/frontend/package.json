@@ -1,15 +1,17 @@
 {
-  "name": "zhaw-timetable",
+  "name": "zhaw-timetable-frontend",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A timetable progressive web application for ZHAW School of Engineering",
+  "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "clean": "rm -rf node_modules && rm -rf bundle",
     "reinstall": "npm run clean && npm install",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -31,17 +33,39 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.2",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "flow-bin": "^0.81.0",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.0.0-rc.14",
+    "jest": "^23.6.0",
+    "jest-enzyme": "^6.1.2",
     "node-sass": "^4.9.3",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.7.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss|sass)$": "babel-jest"
+    },
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ]
   }
 }

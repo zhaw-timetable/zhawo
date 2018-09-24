@@ -1,22 +1,17 @@
+// @flow
+
 import React, { Component } from 'react';
-
-//stylesheet
 import './FluxExample.sass';
-
-// For flux
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
 
-class FluxExample extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: Store.getName()
-    };
+type Props = {};
+type State = { name: any };
 
-    this.refreshName = this.refreshName.bind(this);
-    this.handleChangeTextField = this.handleChangeTextField.bind(this);
-  }
+class FluxExample extends Component<Props, State> {
+  state = {
+    name: Store.getName()
+  };
 
   // Bind change listener
   componentWillMount() {
@@ -28,18 +23,19 @@ class FluxExample extends Component {
     Store.removeListener('name_changed', this.refreshName);
   }
 
-  refreshName() {
+  refreshName = () => {
     this.setState({
       name: Store.getName()
     });
-  }
+  };
 
-  handleChangeTextField(event) {
-    Actions.setName(event.target.value);
-  }
+  handleChangeTextField = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    Actions.setName(e.target.value);
+  };
+
   render() {
     return (
-      <div>
+      <div className="FluxExample">
         <h1>{this.state.name}</h1>
         <input
           type="text"
@@ -50,4 +46,5 @@ class FluxExample extends Component {
     );
   }
 }
+
 export default FluxExample;

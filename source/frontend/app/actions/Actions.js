@@ -1,8 +1,10 @@
+// @flow
+
 import dispatcher from '../dispatcher';
 
-export function setName(text) {
+export function setName(text: string) {
   dispatcher.dispatch({
     type: 'SET_NAME',
-    text
+    payload: text
   });
 }

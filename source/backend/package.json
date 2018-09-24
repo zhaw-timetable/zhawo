@@ -1,0 +1,19 @@
+{
+  "name": "zhaw-timetable-backend",
+  "version": "0.0.1",
+  "description": "A timetable progressive web application for ZHAW School of Engineering",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaw-timetable/zhaw-timetable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhaw-timetable/zhaw-timetable/issues"
+  },
+  "homepage": "https://github.com/zhaw-timetable/zhaw-timetable#readme"
+}
