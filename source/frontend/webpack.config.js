@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './main.js',
+  entry: ['@babel/polyfill', './main.js'],
   output: {
     path: path.join(__dirname, '/bundle'),
     filename: 'index.js'
@@ -43,7 +43,8 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({ filename: 'main.css' }),
     new HtmlWebpackPlugin({
-      template: './app/index.html'
+      template: './app/index.html',
+      inject: false
     })
   ]
 };
