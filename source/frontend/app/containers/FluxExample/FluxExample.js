@@ -16,6 +16,7 @@ class FluxExample extends Component<Props, State> {
   // Bind change listener
   componentWillMount() {
     Store.on('name_changed', this.refreshName);
+    this.updateTimetable();
   }
 
   // Unbind change listener
@@ -32,6 +33,22 @@ class FluxExample extends Component<Props, State> {
   handleChangeTextField = (e: SyntheticInputEvent<HTMLInputElement>) => {
     Actions.setName(e.target.value);
   };
+
+  async updateTimetable() {
+    const stream = await fetch('http://localhost:4000/username', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userName: 'bachmdo2',
+        startDate: '27-09-2018'
+      })
+    });
+    const response = await stream.json();
+    console.log(response.days);
+  }
 
   render() {
     return (
