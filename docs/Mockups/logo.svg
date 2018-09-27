@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>Assets/App Icon/iTunesArtwork</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Assets/App-Icon/iTunesArtwork">
+            <g id="Logo" transform="translate(-1.000000, 0.000000)">
+                <rect id="logo-bg" fill="#0076FF" x="0" y="0" width="516" height="516"></rect>
+                <text id="?" transform="translate(240.000000, 336.000000) rotate(-90.000000) translate(-240.000000, -336.000000) " font-family="Roboto-Light, Roboto" font-size="400" font-weight="300" fill="#EFEFF4">
+                    <tspan x="151" y="473">?</tspan>
+                </text>
+                <text id="W" font-family="Roboto-Bold, Roboto" font-size="200" font-weight="bold" fill="#EFEFF4">
+                    <tspan x="284" y="260">W</tspan>
+                </text>
+                <text id="zha" font-family="Roboto-Light, Roboto" font-size="144" font-weight="300" fill="#EFEFF4">
+                    <tspan x="53" y="208">zha</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
