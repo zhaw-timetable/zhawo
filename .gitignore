@@ -6,6 +6,8 @@
 .env.production.local
 npm-debug.log*
 
+*.sketch
+
 
 #--------------------- Latex ---------------------
 # LaTeX temporary files
@@ -17,8 +19,6 @@ npm-debug.log*
 *.lot
 *.run.xml
 
-# PDF output - usually a bad idea to keep this in Git
-*.pdf
 
 # Latexmk
 *.fdb_latexmk
