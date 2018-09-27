@@ -1,3 +1,5 @@
+// @flow
+
 import express from "express";
 import signale from "signale";
 import morgan from "morgan";
@@ -12,12 +14,14 @@ app.use(cors());
 app.use(morgan("common"));
 app.use(bodyParser.json());
 
+type HeadersType = { "User-Agent": string };
+
 app.post("/username", async (req, res) => {
-  const userName = req.body.userName;
-  const startDate = req.body.startDate;
-  const url = `https://api.apps.engineering.zhaw.ch/v1/schedules/students/${userName}?startingAt=${startDate}`;
-  const method = "GET";
-  const headers = {
+  const userName: string = req.body.userName;
+  const startDate: string = req.body.startDate;
+  const url: string = `https://api.apps.engineering.zhaw.ch/v1/schedules/students/${userName}?startingAt=${startDate}`;
+  const method: string = "GET";
+  const headers: HeadersType = {
     "User-Agent": "Timetable-Test (bachmdo2@students.zhaw.ch)"
   };
   const config = { method, headers };
