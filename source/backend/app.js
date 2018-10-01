@@ -22,7 +22,7 @@ app.post("/username", async (req, res) => {
   const url: string = `https://api.apps.engineering.zhaw.ch/v1/schedules/students/${userName}?startingAt=${startDate}`;
   const method: string = "GET";
   const headers: HeadersType = {
-    "User-Agent": "Timetable-Test (bachmdo2@students.zhaw.ch)"
+    "User-Agent": "Zhawo (https://github.com/zhaw-timetable/zhawo)"
   };
   const config = { method, headers };
   const response = await fetch(url, config).catch(err => console.log(err));
@@ -30,6 +30,4 @@ app.post("/username", async (req, res) => {
   res.json(json);
 });
 
-app.listen(4000, () => {
-  signale.start("Server running on http://localhost:4000");
-});
+export default app;
