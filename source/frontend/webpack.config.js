@@ -37,6 +37,10 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader'
       }
     ]
   },

@@ -2,8 +2,11 @@
 
 import React, { Component } from 'react';
 import './sass/main.sass';
+import './font/font.scss';
 import * as Actions from './actions/Actions.js';
 import Store from './stores/Store.js';
+
+import AppBar from './containers/AppBar/AppBar.js';
 import FluxExample from './containers/FluxExample/FluxExample.js';
 
 type AppProps = {};
@@ -18,7 +21,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div className="App">
-        <h1>{this.state.appTitle}</h1>
+        <AppBar title={this.state.appTitle} />
         <FluxExample />
       </div>
     );

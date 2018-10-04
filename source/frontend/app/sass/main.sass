@@ -1,7 +1,23 @@
 @import 'reset'
 @import 'vars'
+//https://css-tricks.com/snippets/css/complete-guide-grid/
+
+.App
+  font-family: Roboto
+  display: grid
+  grid-template-columns: 200px 1fr 200px
+  grid-template-rows: auto 1fr auto
+  height: 100vh
+
+// Mobile
+@media (max-width: 768px)
+  .App
+    display: flex
+    flex-direction: column
+    min-height: 100vh
 
 h1
+  font-weight: bold
+  font-size: 14px
   color: $primary-color
-  background-color: black
   font-size: 2em
