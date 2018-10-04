@@ -1,13 +1,20 @@
 <p align="center">
-  <img src="docs/assets/logo_readme.png?raw=true">
-  <br>
   <a href="https://travis-ci.org/zhaw-timetable/zhawo" target="_blank">
   <img src="https://travis-ci.org/zhaw-timetable/zhawo.svg?branch=master" />
   </a>
   <a href="https://codecov.io/gh/zhaw-timetable/zhawo" target="_blank">
   <img src="https://codecov.io/gh/zhaw-timetable/zhawo/branch/master/graph/badge.svg" />
   </a>
+  <a href="https://github.com/prettier/prettier" target="_blank">
+  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" />
+  </a>
 </p>
+    <hr>
+  <p align="center">
+  <img src="docs/assets/logo_readme.png?raw=true" height="200" width="200" />
+</p>
+
+<hr>
 
 ## About
 
@@ -22,6 +29,8 @@ A few features that we are planning to implement:
 - Menu plans: There are menu plans on the official provider of the mensa food's website. However, this site is rather unknown and we plan to include an easy way to check today's and upcoming menus and prices.
 
 - Student events: We plan to work with vszhaw to bring more attention to student parties and events, by integrating their event feed into zhawo.
+
+<hr>
 
 ## Development
 
@@ -38,3 +47,27 @@ There is an npm script provided in the root folder of this repository to start b
 
   npm start
 ```
+
+Both backend and frontend are JavaScript stacks. We are using Flow.js for static type checking. For continous integration we are using Travis CI. For test coverage we are using Codecov. We enforce a consistent coding style with prettier pre-commit hooks.
+
+<hr>
+
+## Workflow
+
+_work in progress_
+
+<hr>
+
+## Sprint Planning
+
+**Sprint 1 (Thu 4 Oct - Thu 11 Oct 2018)**
+
+_work in progress_
+
+<hr>
+
+## User Stories
+
+_work in progress_
+
+<hr>
