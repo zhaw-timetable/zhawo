@@ -1,27 +1,26 @@
 // @flow
 
 import React, { Component } from 'react';
-import './AppBar.sass';
+import './Nav.sass';
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
 
 type Props = { title: string };
 type State = { title: string };
 
-class AppBar extends Component<Props, State> {
+class Nav extends Component<Props, State> {
   state = {
     title: this.props.title
   };
 
   render() {
     return (
-      <div className="AppBar">
-        Menu
-        <title>{this.state.title}</title>
-        Search
+      <div className="Nav">
+        <span>VsZHAW</span> <span>ZHWO</span> <b>Stundenplan</b>{' '}
+        <span>Menu</span> <span>Profile</span>
       </div>
     );
   }
 }
 
-export default AppBar;
+export default Nav;

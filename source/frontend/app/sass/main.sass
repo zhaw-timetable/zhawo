@@ -2,12 +2,15 @@
 @import 'vars'
 //https://css-tricks.com/snippets/css/complete-guide-grid/
 
+body
+  background-color: $bg-color
+
 .App
   font-family: Roboto
   display: grid
   grid-template-columns: 200px 1fr 200px
-  grid-template-rows: auto 1fr auto
-  height: 100vh
+  color: $primary-color
+
 
 // Mobile
 @media (max-width: 768px)
@@ -19,5 +22,4 @@
 h1
   font-weight: bold
   font-size: 14px
-  color: $primary-color
   font-size: 2em
