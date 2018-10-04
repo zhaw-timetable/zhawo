@@ -11,5 +11,6 @@ script:
   - npm test
   - npm run codecov
   - cd ../backend
+  - npm install
   - npm test
   - npm run codecov
