@@ -35,7 +35,7 @@ class FluxExample extends Component<Props, State> {
   };
 
   async updateTimetable() {
-    const stream = await fetch('http://localhost:4000/username', {
+    const stream = await fetch('http://localhost:4000/api/timetable/students', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
