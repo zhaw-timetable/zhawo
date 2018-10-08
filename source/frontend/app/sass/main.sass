@@ -7,17 +7,17 @@ body
 
 .App
   font-family: Roboto
-  display: grid
-  grid-template-columns: 200px 1fr 200px
+  display: flex
+  flex-direction: column
+  min-height: 100vh
   color: $primary-color
 
 
-// Mobile
-@media (max-width: 768px)
+// Desktop
+@media (min-width: 768px)
   .App
-    display: flex
-    flex-direction: column
-    min-height: 100vh
+    display: grid
+    grid-template-columns: 200px 1fr 200px
 
 h1
   font-weight: bold

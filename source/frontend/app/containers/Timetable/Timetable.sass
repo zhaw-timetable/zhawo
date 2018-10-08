@@ -1,9 +1,23 @@
 @import '../../sass/vars'
 .Timetable
   grid-column-start: 2
-
   display: grid
   grid-template-columns: 50px auto
 
-  .content
-    overflow: scroll
+  .Hour
+    grid-column-start: 1
+    border-right: solid 1px
+    border-color: $secondary-color
+
+  .Lesson
+    grid-column-start: 2
+    grid-row-start: 2
+    grid-row-end: 4
+
+    width: 90%
+    height: 90%
+
+    margin-left: 5%
+
+    border: solid 1px
+    border-color: $secondary-color

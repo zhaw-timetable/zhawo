@@ -7,13 +7,47 @@ import Store from '../../stores/Store.js';
 
 import Timebar from '../Timebar/Timebar.js';
 import Calendar from '../Calendar/Calendar.js';
+import Lessons from '../Lessons/Lessons.js';
 
 type Props = {};
-type State = { month: any };
+type State = { month: any, hours: any };
 
 class Timetable extends Component<Props, State> {
   state = {
-    month: Store.getName()
+    month: Store.getName(),
+    hours: [
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '09:35',
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '08:50',
+      '09:35',
+      '09:35',
+      '08:00',
+      '08:45',
+      '08:50',
+      '09:35',
+      '08:50',
+      '09:35',
+      '09:35'
+    ]
   };
 
   // Bind change listener
@@ -36,9 +70,12 @@ class Timetable extends Component<Props, State> {
     return (
       <div className="Timetable">
         <Calendar month={this.state.month} />
-        <div className="content">
-          <Timebar />
-        </div>
+        {this.state.hours.map(h => (
+          <div className="Hour" key={h} id={h}>
+            {h}
+          </div>
+        ))}
+        <div className="Lesson">MKR</div>
       </div>
     );
   }
