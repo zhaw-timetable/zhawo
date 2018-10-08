@@ -5,13 +5,11 @@ import './Nav.sass';
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
 
-type Props = { title: string };
-type State = { title: string };
+type Props = {};
+type State = {};
 
 class Nav extends Component<Props, State> {
-  state = {
-    title: this.props.title
-  };
+  state = {};
 
   render() {
     return (

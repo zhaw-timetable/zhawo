@@ -5,9 +5,7 @@ import './Timetable.sass';
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
 
-import Timebar from '../Timebar/Timebar.js';
 import Calendar from '../Calendar/Calendar.js';
-import Lessons from '../Lessons/Lessons.js';
 
 type Props = {};
 type State = { month: any, hours: any };
@@ -75,7 +73,9 @@ class Timetable extends Component<Props, State> {
             {h}
           </div>
         ))}
-        <div className="Lesson">MKR</div>
+        <div className="Lesson Lesson1">MKR</div>
+        <div className="Lesson Lesson2">MKR</div>
+        <div className="Lesson Lesson3">MKR</div>
       </div>
     );
   }
