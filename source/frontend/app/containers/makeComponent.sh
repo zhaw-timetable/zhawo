@@ -62,6 +62,8 @@ it('should render one root element with className $name', () => {
 EOF
 
 cat > $name.sass <<EOF
+@import '../../sass/vars'
+
 .$name
 EOF
 
