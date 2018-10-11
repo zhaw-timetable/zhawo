@@ -60,7 +60,7 @@ _work in progress_
 
 ## Sprint Planning
 
-**Sprint 1 (Thu 4 Oct - Thu 11 Oct 2018)**
+**Sprint 1 (Thu 4 Oct - Thu 18 Oct 2018)**
 
 _work in progress_
 
