@@ -10,6 +10,8 @@ import AppBar from './containers/AppBar/AppBar.js';
 import Timetable from './containers/Timetable/Timetable.js';
 import Nav from './containers/Nav/Nav.js';
 
+import Login from './containers/Login/Login.js';
+
 type AppProps = {};
 
 type AppState = {
@@ -25,12 +27,23 @@ class App extends Component<AppProps, AppState> {
     // do actual work part 2
   }
 
-  render() {
+  /* Timetable
+   render() {
     return (
       <div className="App">
         <AppBar title={this.state.appTitle} />
         <Timetable />
         <Nav />
+      </div>
+    );
+  }
+}*/
+
+  // Login
+  render() {
+    return (
+      <div className="App">
+        <Login />
       </div>
     );
   }

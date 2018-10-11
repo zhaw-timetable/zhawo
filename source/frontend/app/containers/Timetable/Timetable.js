@@ -69,7 +69,7 @@ class Timetable extends Component<Props, State> {
       <div className="Timetable">
         <Calendar month={this.state.month} />
         {this.state.hours.map(h => (
-          <div className="Hour" key={h} id={h}>
+          <div className="Hour" key={h.concat(Math.random().toString())} id={h}>
             {h}
           </div>
         ))}
