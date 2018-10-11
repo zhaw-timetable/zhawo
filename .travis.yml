@@ -9,6 +9,8 @@ script:
   - cd ./source/frontend/
   - npm install
   - npm test
-  - npm run coveralls
+  - npm run codecov
   - cd ../backend
+  - npm install
   - npm test
+  - npm run codecov
