@@ -1,5 +1,5 @@
 import { Router } from "express";
-import students from "./students";
+import username from "./username";
 
 export default ({ config, db }) => {
   // ../api/timetable
@@ -7,7 +7,7 @@ export default ({ config, db }) => {
   let router = Router();
 
   // import routes after timetable
-  router.use("/students", students({ config, db }));
+  router.use("/username", username({ config, db }));
 
   return router;
 };
