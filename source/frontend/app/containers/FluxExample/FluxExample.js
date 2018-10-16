@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import './FluxExample.sass';
-import * as Actions from '../../actions/GlobalActions';
+import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore';
 
 type Props = {};
