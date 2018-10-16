@@ -11,7 +11,7 @@ import Store from './stores/Store.js';
 import AppBar from './containers/AppBar/AppBar.js';
 import Timetable from './containers/Timetable/Timetable.js';
 import Nav from './containers/Nav/Nav.js';
-
+import NotFound from './containers/NotFound/NotFound.js';
 import Login from './containers/Login/Login.js';
 
 type AppProps = {};
@@ -48,12 +48,14 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div className="App">
+        <AppBar title={this.state.appTitle} />
         <Router>
           <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/home" component={Timetable} />
+            <Route exact path="/app/" component={Timetable} />
+            <Route component={NotFound} />
           </Switch>
         </Router>
+        <Nav />
       </div>
     );
   }
