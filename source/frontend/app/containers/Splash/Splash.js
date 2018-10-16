@@ -20,7 +20,7 @@ class Splash extends Component<Props, State> {
   render() {
     return (
       <div className="Splash">
-        <svg className="SplashSVG" viewBox="-80 0 700 600" version="1.1">
+        <svg className="SplashSVG" viewBox="-80 0 700 500" version="1.1">
           <g id="Logo">
             <text
               id="questionmark"
