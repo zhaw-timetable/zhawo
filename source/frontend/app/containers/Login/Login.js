@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Login.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+import * as globalActions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore';
 
-import Splash from '../Splash/Splash.js';
+import Splash from '../Splash/Splash';
 
 type Props = {};
 type State = {};
