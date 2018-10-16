@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import './AppBar.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+import * as Actions from '../../actions/GlobalActions.js';
+import globalStore from '../../stores/GlobalStore.js';
 
 type Props = { title: string };
 type State = { title: string };

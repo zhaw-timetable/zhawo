@@ -2,17 +2,21 @@
 
 import React, { Component } from 'react';
 import './Timetable.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
 
-import Calendar from '../Calendar/Calendar.js';
+import * as globalActions from '../../actions/GlobalActions';
+import * as timetableActions from '../../actions/TimetableActions';
+
+import globalStore from '../../stores/GlobalStore';
+import timetableStore from '../../stores/TimetableStore';
+
+import Calendar from '../Calendar/Calendar';
 
 type Props = {};
 type State = { month: any, hours: any };
 
 class Timetable extends Component<Props, State> {
   state = {
-    month: Store.getName(),
+    month: globalStore.getName(),
     hours: [
       '08:00',
       '08:45',
@@ -50,17 +54,17 @@ class Timetable extends Component<Props, State> {
 
   // Bind change listener
   componentWillMount() {
-    Store.on('name_changed', this.refreshName);
+    globalStore.on('name_changed', this.refreshName);
   }
 
   // Unbind change listener
   componentWillUnmount() {
-    Store.removeListener('name_changed', this.refreshName);
+    globalStore.removeListener('name_changed', this.refreshName);
   }
 
   refreshName = () => {
     this.setState({
-      month: Store.getName()
+      month: globalStore.getName()
     });
   };
 
@@ -69,7 +73,7 @@ class Timetable extends Component<Props, State> {
       <div className="Timetable">
         <Calendar month={this.state.month} />
         {this.state.hours.map(h => (
-          <div className="Hour" key={h} id={h}>
+          <div className="Hour" key={h.concat(Math.random().toString())} id={h}>
             {h}
           </div>
         ))}

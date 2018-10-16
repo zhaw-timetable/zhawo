@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import './sass/main.sass';
 import './font/font.scss';
-import * as Actions from './actions/Actions.js';
-import Store from './stores/Store.js';
+import * as globalActions from './actions/GlobalActions';
+import globalStore from './stores/GlobalStore.js';
 
 import AppBar from './containers/AppBar/AppBar.js';
 import Timetable from './containers/Timetable/Timetable.js';
@@ -19,11 +19,7 @@ type AppState = {
 class App extends Component<AppProps, AppState> {
   state = { appTitle: 'Timetable' };
 
-  componentWillMount() {
-    console.log(process.env.NODE_ENV);
-
-    // do actual work part 2
-  }
+  componentWillMount() {}
 
   render() {
     return (

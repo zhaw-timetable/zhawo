@@ -2,53 +2,36 @@
 
 import React, { Component } from 'react';
 import './FluxExample.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+import * as Actions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore';
 
 type Props = {};
 type State = { name: any };
 
 class FluxExample extends Component<Props, State> {
   state = {
-    name: Store.getName()
+    name: globalStore.getName()
   };
 
   // Bind change listener
   componentWillMount() {
-    Store.on('name_changed', this.refreshName);
-    this.updateTimetable();
+    globalStore.on('name_changed', this.refreshName);
   }
 
   // Unbind change listener
   componentWillUnmount() {
-    Store.removeListener('name_changed', this.refreshName);
+    globalStore.removeListener('name_changed', this.refreshName);
   }
 
   refreshName = () => {
     this.setState({
-      name: Store.getName()
+      name: globalStore.getName()
     });
   };
 
   handleChangeTextField = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    Actions.setName(e.target.value);
+    globalActions.setName(e.target.value);
   };
-
-  async updateTimetable() {
-    const stream = await fetch('http://localhost:4000/api/timetable/students', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userName: 'bachmdo2',
-        startDate: '27-09-2018'
-      })
-    });
-    const response = await stream.json();
-    console.log(response.days);
-  }
 
   render() {
     return (

@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import './Calendar.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+import * as globalActions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore';
 
 type Props = { month: any };
 type State = { month: any };
