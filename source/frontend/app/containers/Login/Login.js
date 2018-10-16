@@ -23,7 +23,12 @@ class Login extends Component<Props, State> {
     return (
       <div className="Login">
         <Splash />
-        <button>hi</button>
+        <div className="formContainer">
+          <div class="group">
+            <input placeholder="Username" type="text" required />
+          </div>
+          <button>Let's Go</button>
+        </div>
       </div>
     );
   }
