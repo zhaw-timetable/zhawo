@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import './sass/main.sass';
 import './font/font.scss';
 import * as Actions from './actions/Actions.js';
@@ -37,13 +39,21 @@ class App extends Component<AppProps, AppState> {
       </div>
     );
   }
-}*/
+}
+
+<Route component={NotFoundComponent}></Route>
+*/
 
   // Login
   render() {
     return (
       <div className="App">
-        <Login />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/home" component={Timetable} />
+          </Switch>
+        </Router>
       </div>
     );
   }
