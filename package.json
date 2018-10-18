@@ -1,0 +1,27 @@
+{
+  "name": "zhawo",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/zhaw-timetable/zhawo.svg?branch=master)](https://travis-ci.org/zhaw-timetable/zhawo)\r [![Coverage Status](https://coveralls.io/repos/github/zhaw-timetable/zhawo/badge.svg)](https://coveralls.io/github/zhaw-timetable/zhawo)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "frontend": "cd source/frontend && npm start",
+    "backend": "cd source/backend && npm start",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaw-timetable/zhawo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhaw-timetable/zhawo/issues"
+  },
+  "homepage": "https://github.com/zhaw-timetable/zhawo#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}

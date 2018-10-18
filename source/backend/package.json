@@ -4,9 +4,11 @@
   "description": "A timetable progressive web application for ZHAW School of Engineering",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon --exec babel-node main.js",
+    "start": "nodemon -w app --exec babel-node app",
     "flow": "flow",
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "codecov": "codecov"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,7 @@
     "express": "^4.16.3",
     "morgan": "^1.9.1",
     "node-fetch": "^2.2.0",
-    "nodemon": "^1.18.4",
-    "signale": "^1.3.0"
+    "nodemon": "^1.18.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -33,6 +34,12 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
-    "flow-bin": "^0.81.0"
+    "codecov": "^3.1.0",
+    "flow-bin": "^0.81.0",
+    "jest": "^23.6.0"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }
