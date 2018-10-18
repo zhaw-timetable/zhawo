@@ -29,12 +29,11 @@ h1
 
 
 
-
-
 // TODO: make own compantent
 
 input
   color: $text-color
+  font-size: 14px
   width: 100%
   display: block
   border: none
@@ -44,18 +43,20 @@ input
   outline: none
 
 
-  &:focus, &:valid
+  &:focus
     box-shadow: none
     outline: none
     border-color: $selection-color
 
+  &:invalid
+    outline: none
 
 
 button
   border: none
   background: #1abc9c
   cursor: pointer
-  border-radius: 3px
+  border-radius: 0px
   padding: 6px
   width: 200px
 
