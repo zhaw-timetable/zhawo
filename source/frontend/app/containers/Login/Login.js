@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import './Login.sass';
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
@@ -24,10 +26,12 @@ class Login extends Component<Props, State> {
       <div className="Login">
         <Splash />
         <div className="formContainer">
-          <div class="group">
+          <div className="group">
             <input placeholder="Username" type="text" required />
           </div>
-          <button>Let's Go</button>
+          <Link to="/main">
+            <button>Let's Go</button>
+          </Link>
         </div>
       </div>
     );

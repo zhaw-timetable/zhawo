@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import './sass/main.sass';
 import './font/font.scss';
 import * as Actions from './actions/Actions.js';
@@ -9,7 +11,7 @@ import Store from './stores/Store.js';
 import AppBar from './containers/AppBar/AppBar.js';
 import Timetable from './containers/Timetable/Timetable.js';
 import Nav from './containers/Nav/Nav.js';
-
+import NotFound from './containers/NotFound/NotFound.js';
 import Login from './containers/Login/Login.js';
 
 type AppProps = {};
@@ -37,13 +39,23 @@ class App extends Component<AppProps, AppState> {
       </div>
     );
   }
-}*/
+}
+
+<Route component={NotFoundComponent}></Route>
+*/
 
   // Login
   render() {
     return (
       <div className="App">
-        <Login />
+        <AppBar title={this.state.appTitle} />
+        <Router>
+          <Switch>
+            <Route exact path="/main" component={Timetable} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+        <Nav />
       </div>
     );
   }
