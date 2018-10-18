@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { format, isToday } from 'date-fns';
+import { format, isToday, isSameDay } from 'date-fns';
 
 import './Calendar.sass';
 
@@ -40,24 +40,20 @@ class Calendar extends Component<Props, State> {
   render() {
     return (
       <div className="Calendar">
-        <div className="days">
+        <div className="week">
           {this.state.displayWeek.map(date => (
-            <div className="day" key={date}>
-              {format(date, 'dd')}
+            <div
+              className={`day ${
+                isSameDay(date, this.state.displayDate) ? 'active' : ''
+              } ${isToday(date) ? 'today' : ''}`}
+              key={date}
+              name={date}
+              onClick={() => timetableActions.gotoDay(date)}
+            >
+              <div className="name">{format(date, 'dd')}</div>
+              <div className="date">{format(date, 'D')}</div>
             </div>
           ))}
-        </div>
-        <div className="dates">
-          <div className="week">
-            {this.state.displayWeek.map(date => (
-              <div
-                className={`date ${isToday(date) ? 'active' : ''}`}
-                key={date}
-              >
-                {format(date, 'D')}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     );

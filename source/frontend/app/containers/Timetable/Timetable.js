@@ -19,11 +19,11 @@ class Timetable extends Component<Props, State> {
   state = {
     name: globalStore.getName(),
     month: globalStore.getName(),
-    timetable: null
+    timetable: timetableStore.timetableDisplayDate
   };
 
   componentDidMount() {
-    const currentDate = format(new Date(), 'DD-MM-YYYY');
+    const currentDate = new Date();
     const userName = 'bachmdo2';
     timetableActions.getTimetableByUsername(userName, currentDate);
   }
@@ -48,7 +48,7 @@ class Timetable extends Component<Props, State> {
 
   refreshTimetable = () => {
     this.setState({
-      timetable: timetableStore.timetable
+      timetable: timetableStore.timetableDisplayDate
     });
   };
 
@@ -57,7 +57,7 @@ class Timetable extends Component<Props, State> {
       <div className="Timetable">
         <Calendar month={this.state.month} />
         {this.state.timetable &&
-          this.state.timetable.days[0].slots.map(slot => (
+          this.state.timetable.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
               <div className="SlotTime">
                 <div className="SlotStartTime">
@@ -70,7 +70,7 @@ class Timetable extends Component<Props, State> {
             </Fragment>
           ))}
         {this.state.timetable &&
-          this.state.timetable.days[0].events.map(event => (
+          this.state.timetable.events.map(event => (
             <Fragment key={event.name}>
               <div
                 className="Event"
