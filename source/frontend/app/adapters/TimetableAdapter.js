@@ -7,7 +7,7 @@ const POST = 'POST';
 const PUT = 'PUT';
 const DELETE = 'DELETE';
 
-const DEFAULT_HEADERS = { 'Content-Type:': 'application/json' };
+const DEFAULT_HEADERS = { 'Content-Type': 'application/json' };
 
 export function fetchByUsername(userName, startDate) {
   return new Promise(async (resolve, reject) => {
@@ -17,11 +17,12 @@ export function fetchByUsername(userName, startDate) {
       userName,
       startDate
     });
+    const headers = DEFAULT_HEADERS;
     const config = { method, body, headers };
     const response = await fetch(url, config).catch(err => reject(err));
     if (response) {
       const json = await response.json().catch(err => reject(err));
-      json && resolve(response);
+      json && resolve(json);
     }
   });
 }
