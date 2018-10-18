@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import './NotFound.sass';
+
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore';
 

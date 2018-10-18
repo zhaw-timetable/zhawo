@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Login.sass';
-import * as globalActions from '../../actions/GlobalActions';
+
 import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
 
 import Splash from '../Splash/Splash';
 

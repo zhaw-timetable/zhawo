@@ -7,7 +7,7 @@ import * as timetableAdapter from '../adapters/TimetableAdapter';
 
 export const getTimetableByUsername = async function(
   userName: string,
-  startDate: string
+  startDate: Date
 ) {
   dispatcher.dispatch({
     type: 'GET_TIMETABLE_STARTED'

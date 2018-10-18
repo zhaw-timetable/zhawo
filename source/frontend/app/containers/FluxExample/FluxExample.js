@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 import './FluxExample.sass';
-import * as globalActions from '../../actions/GlobalActions';
+
 import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
 
 type Props = {};
 type State = { name: any };

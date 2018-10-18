@@ -4,11 +4,11 @@ import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
 import './Timetable.sass';
 
-import * as globalActions from '../../actions/GlobalActions';
-import * as timetableActions from '../../actions/TimetableActions';
-
 import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
+
 import timetableStore from '../../stores/TimetableStore';
+import * as timetableActions from '../../actions/TimetableActions';
 
 import Calendar from '../Calendar/Calendar';
 
