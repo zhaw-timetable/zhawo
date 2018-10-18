@@ -29,7 +29,7 @@ class Login extends Component<Props, State> {
           <div className="group">
             <input placeholder="Username" type="text" required />
           </div>
-          <Link to="/app">
+          <Link to="/main">
             <button>Let's Go</button>
           </Link>
         </div>

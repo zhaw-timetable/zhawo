@@ -4,7 +4,7 @@
   "description": "A timetable progressive web application for ZHAW School of Engineering",
   "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --hot",
+    "start": "webpack-dev-server --history-api-fallback --mode=development --hot",
     "build": "webpack --mode=production",
     "test": "jest --coverage",
     "watch": "jest --watch",

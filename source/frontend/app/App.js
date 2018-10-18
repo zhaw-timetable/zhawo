@@ -25,29 +25,13 @@ class App extends Component<AppProps, AppState> {
 
   componentWillMount() {}
 
-  /* Timetable
-   render() {
-    return (
-      <div className="App">
-        <AppBar title={this.state.appTitle} />
-        <Timetable />
-        <Nav />
-      </div>
-    );
-  }
-}
-
-<Route component={NotFoundComponent}></Route>
-*/
-
-  // Login
   render() {
     return (
       <div className="App">
         <AppBar title={this.state.appTitle} />
         <Router>
           <Switch>
-            <Route exact path="/app/" component={Timetable} />
+            <Route exact path="/main" component={Timetable} />
             <Route component={NotFound} />
           </Switch>
         </Router>
