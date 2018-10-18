@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  mode: process.env.NODE_ENV, // production or development
   entry: ['@babel/polyfill', './main.js'],
   output: {
     path: path.join(__dirname, '/bundle'),
@@ -37,11 +38,19 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader'
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin({ filename: 'main.css' }),
+    new ExtractTextPlugin({
+      filename: 'main.css',
+      allChunks: true,
+      disable: process.env.NODE_ENV != 'production'
+    }),
     new HtmlWebpackPlugin({
       template: './app/index.html',
       inject: false

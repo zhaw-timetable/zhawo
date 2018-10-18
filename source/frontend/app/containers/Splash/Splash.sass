@@ -1,0 +1,77 @@
+@import '../../sass/vars'
+
+.Splash
+  background-color: #0076FF
+  width: 100%
+
+  #Logo
+
+    display: block
+    margin: auto
+
+  #zha
+    animation: load-zha 4s
+
+  @keyframes load-zha
+    0%
+      opacity: 0
+    100%
+      opacity: 1
+
+  #W
+    font-family: Roboto-Bold, Roboto
+    font-size: 200px
+    font-weight: bold
+    animation: load-w 3s
+
+
+  @keyframes load-w
+    0%
+      opacity: 0
+    30%
+      opacity: 0
+    100%
+      font-size: 200px
+      opacity: 1
+
+  #o
+    font-family: Roboto-Bold, Roboto
+    font-size: 55px
+    font-weight: bold
+    animation: load-o 6s
+    opacity: 0
+
+
+
+  @keyframes load-o
+    0%
+      font-size: 200px
+      transform: translate(110px, -90px)
+      opacity: 0
+    30%
+      transform: translate(110px, -90px)
+      font-size: 200px
+      opacity: 0
+    45%
+      transform: translate(110px, -90px)
+      font-size: 200px
+      opacity: 1
+
+    60%
+      font-size: 55px
+      transform: translate(0px, 0px)
+
+    70%
+      opacity: 1
+
+
+  #questionmark
+    animation: load-questionmark 8s
+
+  @keyframes load-questionmark
+    0%
+      opacity: 0
+    50%
+      opacity: 0
+    100%
+      opacity: 1
