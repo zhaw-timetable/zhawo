@@ -3,7 +3,7 @@ import dispatcher from '../dispatcher.js';
 import * as timetableAdapter from '../adapters/TimetableAdapter';
 
 const USERNAME = 'bachmdo2';
-const STARTDATE = '15/10/2018';
+const STARTDATE = '2018-10-15';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
