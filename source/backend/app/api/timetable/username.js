@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { format } from "date-fns";
 
 import { Router } from "express";
 
@@ -15,7 +16,7 @@ export default ({ config, db }) => {
   router.post("/", async (req, res) => {
     const userName = req.body.userName;
     const startDate = req.body.startDate;
-
+    const formattedDate = format(new Date(startDate), "YYYY-MM-DD");
     const method = "GET";
     const headers = {
       "User-Agent": "Zhawo (https://github.com/zhaw-timetable/zhawo)"
@@ -29,7 +30,7 @@ export default ({ config, db }) => {
     } else {
       userType = "students";
     }
-    const url = `https://api.apps.engineering.zhaw.ch/v1/schedules/${userType}/${userName}?startingAt=${startDate}`;
+    const url = `https://api.apps.engineering.zhaw.ch/v1/schedules/${userType}/${userName}?startingAt=${formattedDate}`;
     console.log(url);
     const response = await fetch(url, config).catch(err => console.log(err));
     const json = await response.json();
