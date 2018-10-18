@@ -1,35 +1,62 @@
 // @flow
 
 import React, { Component } from 'react';
-import './Calendar.sass';
-import * as globalActions from '../../actions/GlobalActions';
-import globalStore from '../../stores/GlobalStore';
+import { format, isToday } from 'date-fns';
 
-type Props = { month: any };
-type State = { month: any };
+import './Calendar.sass';
+
+import * as globalActions from '../../actions/GlobalActions';
+import * as timetableActions from '../../actions/TimetableActions';
+
+import globalStore from '../../stores/GlobalStore';
+import timetableStore from '../../stores/TimetableStore';
+
+type Props = {};
+type State = { displayDate: Date, displayWeek: any };
 
 class Calendar extends Component<Props, State> {
-  state = { month: this.props.month };
+  state = {
+    displayDate: timetableStore.displayDate,
+    displayWeek: timetableStore.displayWeek
+  };
+
+  // Bind change listener
+  componentWillMount() {
+    timetableStore.on('timetable_changed', this.refreshNavigation);
+  }
+
+  // Unbind change listener
+  componentWillUnmount() {
+    timetableStore.on('timetable_changed', this.refreshNavigation);
+  }
+
+  refreshNavigation = () => {
+    this.setState({
+      displayDate: timetableStore.displayDate,
+      displayWeek: timetableStore.displayWeek
+    });
+  };
 
   render() {
     return (
       <div className="Calendar">
         <div className="days">
-          <div className="day">M</div>
-          <div className="day">T</div>
-          <div className="day">W</div>
-          <div className="day">T</div>
-          <div className="day">F</div>
-          <div className="day">S</div>
+          {this.state.displayWeek.map(date => (
+            <div className="day" key={date}>
+              {format(date, 'dd')}
+            </div>
+          ))}
         </div>
         <div className="dates">
           <div className="week">
-            <div className="date">1</div>
-            <div className="date">2</div>
-            <div className="date active">3</div>
-            <div className="date">4</div>
-            <div className="date">5</div>
-            <div className="date">6</div>
+            {this.state.displayWeek.map(date => (
+              <div
+                className={`date ${isToday(date) ? 'active' : ''}`}
+                key={date}
+              >
+                {format(date, 'D')}
+              </div>
+            ))}
           </div>
         </div>
       </div>
