@@ -29,22 +29,6 @@ class App extends Component<AppProps, AppState> {
     // do actual work part 2
   }
 
-  /* Timetable
-   render() {
-    return (
-      <div className="App">
-        <AppBar title={this.state.appTitle} />
-        <Timetable />
-        <Nav />
-      </div>
-    );
-  }
-}
-
-<Route component={NotFoundComponent}></Route>
-*/
-
-  // Login
   render() {
     return (
       <div className="App">
