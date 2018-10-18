@@ -3,14 +3,14 @@
 import dispatcher from '../dispatcher';
 import * as timetableAdapter from '../adapters/TimetableAdapter';
 
-export async function getTimetableByUsername(
+export const getTimetableByUsername = async function(
   userName: string,
   startDate: string
 ) {
   dispatcher.dispatch({
     type: 'GET_TIMETABLE_STARTED'
   });
-  const response = timetableAdapter.fetchByUsername(userName, startDate);
+  const response = await timetableAdapter.fetchByUsername(userName, startDate);
   if (response) {
     dispatcher.dispatch({
       type: 'GET_TIMETABLE_SUCCESS',
@@ -21,4 +21,4 @@ export async function getTimetableByUsername(
       type: 'GET_TIMETABLE_FAIL'
     });
   }
-}
+};
