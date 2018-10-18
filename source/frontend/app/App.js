@@ -51,7 +51,7 @@ class App extends Component<AppProps, AppState> {
         <AppBar title={this.state.appTitle} />
         <Router>
           <Switch>
-            <Route exact path="/app/" component={Timetable} />
+            <Route exact path="/main" component={Timetable} />
             <Route component={NotFound} />
           </Switch>
         </Router>
