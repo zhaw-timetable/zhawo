@@ -1,6 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
+
+import { Link } from 'react-router-dom';
+
 import './Nav.sass';
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore';
@@ -14,8 +17,11 @@ class Nav extends Component<Props, State> {
   render() {
     return (
       <div className="Nav">
-        <span>VsZHAW</span> <span>ZHWO</span> <b>Stundenplan</b>{' '}
-        <span>Menu</span> <span>Profile</span>
+        <Link to="/vszhaw">VsZHAW</Link>
+        <Link to="/zhawo">ZHWO</Link>
+        <Link to="/timetable">Stundenplan</Link>
+        <Link to="/menu">Menu</Link>
+        <Link to="/profile">Profile</Link>
       </div>
     );
   }

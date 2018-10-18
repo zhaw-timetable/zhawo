@@ -5,19 +5,17 @@ import './AppBar.sass';
 import * as Actions from '../../actions/GlobalActions.js';
 import globalStore from '../../stores/GlobalStore.js';
 
-type Props = { title: string };
-type State = { title: string };
+type Props = {};
+type State = {};
 
 class AppBar extends Component<Props, State> {
-  state = {
-    title: this.props.title
-  };
+  state = {};
 
   render() {
     return (
       <div className="AppBar">
         Menu
-        <title>{this.state.title}</title>
+        <title>ZHAWO</title>
         Search
       </div>
     );
