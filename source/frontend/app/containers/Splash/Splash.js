@@ -1,9 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
+
 import './Splash.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+
+import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
 
 type Props = {};
 type State = {};

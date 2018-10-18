@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 import './NotFound.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+
+import * as globalActions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore';
 
 type Props = {};
 type State = {};

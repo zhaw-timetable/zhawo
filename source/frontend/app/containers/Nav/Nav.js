@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Nav.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+
+import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
 
 type Props = {};
 type State = {};

@@ -1,9 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
+
 import './AppBar.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+
+import globalStore from '../../stores/GlobalStore.js';
+import * as Actions from '../../actions/GlobalActions.js';
 
 type Props = {};
 type State = {};

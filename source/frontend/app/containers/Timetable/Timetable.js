@@ -1,66 +1,54 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { format } from 'date-fns';
 import './Timetable.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
 
-import Calendar from '../Calendar/Calendar.js';
+import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
+
+import timetableStore from '../../stores/TimetableStore';
+import * as timetableActions from '../../actions/TimetableActions';
+
+import Calendar from '../Calendar/Calendar';
 
 type Props = {};
-type State = { month: any, hours: any };
+type State = { month: any, timetable: any };
 
 class Timetable extends Component<Props, State> {
   state = {
-    month: Store.getName(),
-    hours: [
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '09:35',
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '08:50',
-      '09:35',
-      '09:35',
-      '08:00',
-      '08:45',
-      '08:50',
-      '09:35',
-      '08:50',
-      '09:35',
-      '09:35'
-    ]
+    name: globalStore.getName(),
+    month: globalStore.getName(),
+    timetable: timetableStore.timetableDisplayDate
   };
+
+  componentDidMount() {
+    const currentDate = new Date();
+    const userName = 'bachmdo2';
+    timetableActions.getTimetableByUsername(userName, currentDate);
+  }
 
   // Bind change listener
   componentWillMount() {
-    Store.on('name_changed', this.refreshName);
+    globalStore.on('name_changed', this.refreshName);
+    timetableStore.on('timetable_changed', this.refreshTimetable);
   }
 
   // Unbind change listener
   componentWillUnmount() {
-    Store.removeListener('name_changed', this.refreshName);
+    globalStore.removeListener('name_changed', this.refreshName);
+    timetableStore.on('timetable_changed', this.refreshTimetable);
   }
 
   refreshName = () => {
     this.setState({
-      month: Store.getName()
+      month: globalStore.getName()
+    });
+  };
+
+  refreshTimetable = () => {
+    this.setState({
+      timetable: timetableStore.timetableDisplayDate
     });
   };
 
@@ -68,14 +56,33 @@ class Timetable extends Component<Props, State> {
     return (
       <div className="Timetable">
         <Calendar month={this.state.month} />
-        {this.state.hours.map(h => (
-          <div className="Hour" key={h.concat(Math.random().toString())} id={h}>
-            {h}
-          </div>
-        ))}
-        <div className="Lesson Lesson1">MKR</div>
-        <div className="Lesson Lesson2">MKR</div>
-        <div className="Lesson Lesson3">MKR</div>
+        {this.state.timetable &&
+          this.state.timetable.slots.map(slot => (
+            <Fragment key={format(slot.startTime, 'HH:mm')}>
+              <div className="SlotTime">
+                <div className="SlotStartTime">
+                  {format(slot.startTime, 'HH:mm')}
+                </div>
+                <div className="SlotEndTime">
+                  {format(slot.endTime, 'HH:mm')}
+                </div>
+              </div>
+            </Fragment>
+          ))}
+        {this.state.timetable &&
+          this.state.timetable.events.map(event => (
+            <Fragment key={event.name}>
+              <div
+                className="Event"
+                style={{
+                  gridRowStart: event.startSlot + 2,
+                  gridRowEnd: event.endSlot + 2
+                }}
+              >
+                {event.name}
+              </div>
+            </Fragment>
+          ))}
       </div>
     );
   }

@@ -1,25 +1,42 @@
 @import '../../sass/vars'
 
 .Calendar
-  grid-column: span 2
-
+  grid-column-start: span 2
   height: 35
   padding: 10px
   text-align: center
   border-bottom: solid 0.5px
   border-color: $secondary-color
+  box-sizing: border-box
 
-  .days
-    margin-bottom: 5px
+  .week    
+    box-sizing: border-box
     display: grid
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
-    font-weight: bold
 
-  .week
-    display: grid
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
-    font-family: Roboto Light
-    font-size: 14px
+    .today
+      box-sizing: border-box
+      border: solid 2px $secondary-color
 
-  .active
-    border-bottom: solid 0.5px $accent-color
+    .active
+      border-bottom: solid 4px $accent-color
+
+    .day
+      box-sizing: border-box
+      padding-top: 5px
+      padding-bottom: 5px
+
+      &:hover
+        cursor: pointer
+
+      .name
+        margin-bottom: 5px
+        font-weight: bold
+        font-family: Roboto Light
+        font-size: 14px
+
+      .date
+        font-family: Roboto Light
+        font-size: 14px
+
+      

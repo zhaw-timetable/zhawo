@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './sass/main.sass';
 import './font/font.scss';
-import * as Actions from './actions/Actions.js';
-import Store from './stores/Store.js';
+import * as globalActions from './actions/GlobalActions';
+import globalStore from './stores/GlobalStore.js';
 
 import AppBar from './containers/AppBar/AppBar.js';
 import Timetable from './containers/Timetable/Timetable.js';
@@ -32,7 +32,6 @@ class App extends Component<AppProps, AppState> {
   componentWillMount() {
     console.log(process.env.NODE_ENV);
     console.log(window.location.pathname != '/');
-
     // do actual work part 2
   }
 
