@@ -39,12 +39,16 @@ This project is split up into a backend Node service (`./source/backend`) and a 
 There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all dependencies have been installed.
 
 ```
-# Install concurrently module
-
+# Install concurrently module:
   npm install
 
-# Run backend and frontend concurrently
+# Install dependencies for both frontend and backend:
+  npm run install-both
 
+# Run tests for both frontend and backend:
+  npm run test-both
+
+# Run backend and frontend for development:
   npm start
 ```
 
@@ -54,20 +58,26 @@ Both backend and frontend are JavaScript stacks. We are using Flow.js for static
 
 ## Workflow
 
-_work in progress_
+Product backlog is managed with GitHub issues. All user stories must be labeled correctly with story points. Sprint Planning is done using the GitHub Projects board. For each Sprint, a new Project is added with 3 boards for `ToDo`, `In Progress` and `Done`.
+
+When working on a feature/user story, the developer assigns himself to the issue and moves it from `ToDo` to `In Progress`. Each developed feature is initially on it's own feature branch. The branch is to follow the following naming convention: `feature/{descriptive-name}`. If development of a feature is complete, a pull request onto the `master` branch is made and the code reviewed by a team member whenever possible. After being reviewed the branch can be merged into the `master` branch and the issue can be moved to `Done` on the Sprint board.
 
 <hr>
 
 ## Sprint Planning
 
-**Sprint 1 (Thu 4 Oct - Thu 18 Oct 2018)**
+**Sprint 2 (Thu 18 Oct - Thu 1 Nov 2018)**
 
 _work in progress_
+
+**Sprint 1 (Thu 4 Oct - Thu 18 Oct 2018)**
+
+_to be reviewed_
 
 <hr>
 
-## User Stories
+## Product Backlog
 
-_work in progress_
+_work in progress (see issues labeled `user story` for now)_
 
 <hr>
