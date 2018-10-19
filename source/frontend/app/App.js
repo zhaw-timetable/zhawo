@@ -40,7 +40,6 @@ class App extends Component<AppProps, AppState> {
       <Router>
         <div className="App">
           <AppBar />
-          <Nav />
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/timetable" component={Timetable} />
@@ -50,6 +49,7 @@ class App extends Component<AppProps, AppState> {
             <Route exact path="/profile" component={Profile} />
             <Route component={NotFound} />
           </Switch>
+          <Nav />
         </div>
       </Router>
     );
