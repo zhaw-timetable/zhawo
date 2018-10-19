@@ -7,9 +7,15 @@
     "doc": "docs"
   },
   "scripts": {
-    "frontend": "cd source/frontend && npm start",
-    "backend": "cd source/backend && npm start",
-    "start": "concurrently \"npm run frontend\" \"npm run backend\" "
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
+    "start-frontend": "cd source/frontend && npm start",
+    "start-backend": "cd source/backend && npm start",
+    "install-both": "concurrently \"npm run install-frontend\" \"npm run install-backend\" ",
+    "install-frontend": "cd source/frontend && npm install",
+    "install-backend": "cd source/backend && npm install",
+    "test-both": "concurrently \"npm run test-frontend\" \"npm run test-backend\" ",
+    "test-frontend": "cd source/frontend && npm test",
+    "test-backend": "cd source/backend && npm test"
   },
   "repository": {
     "type": "git",
