@@ -3,16 +3,17 @@
 .Calendar
   grid-column-start: span 2
   height: 35
-  padding: 10px
+  padding: 0 10px
   text-align: center
   border-bottom: solid 0.5px
   border-color: $secondary-color
   box-sizing: border-box
 
-  .week    
+  .week
     box-sizing: border-box
     display: grid
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+    height: 100%
 
     .today
       box-sizing: border-box
@@ -23,14 +24,13 @@
 
     .day
       box-sizing: border-box
-      padding-top: 5px
       padding-bottom: 5px
 
       &:hover
         cursor: pointer
 
       .name
-        margin-bottom: 5px
+        margin: 10px 0
         font-weight: bold
         font-family: Roboto Light
         font-size: 14px
@@ -38,5 +38,3 @@
       .date
         font-family: Roboto Light
         font-size: 14px
-
-      

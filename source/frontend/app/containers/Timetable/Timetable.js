@@ -13,19 +13,19 @@ import * as timetableActions from '../../actions/TimetableActions';
 import Calendar from '../Calendar/Calendar';
 
 type Props = {};
-type State = { month: any, timetable: any };
+type State = { month: any, timetable: any, username: any };
 
 class Timetable extends Component<Props, State> {
   state = {
     name: globalStore.getName(),
     month: globalStore.getName(),
-    timetable: timetableStore.timetableDisplayDate
+    timetable: timetableStore.timetableDisplayDate,
+    username: globalStore.getUsername()
   };
 
   componentDidMount() {
     const currentDate = new Date();
-    const userName = 'bachmdo2';
-    timetableActions.getTimetableByUsername(userName, currentDate);
+    timetableActions.getTimetableByUsername(this.state.username, currentDate);
   }
 
   // Bind change listener
@@ -37,7 +37,7 @@ class Timetable extends Component<Props, State> {
   // Unbind change listener
   componentWillUnmount() {
     globalStore.removeListener('name_changed', this.refreshName);
-    timetableStore.on('timetable_changed', this.refreshTimetable);
+    timetableStore.removeListener('timetable_changed', this.refreshTimetable);
   }
 
   refreshName = () => {
