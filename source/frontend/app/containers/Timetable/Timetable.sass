@@ -2,6 +2,7 @@
 .Timetable
   flex-grow: 1
   grid-column-start: 2
+  grid-column-end: 4
   display: grid
   grid-template-columns: 50px auto
 
@@ -9,9 +10,14 @@
     grid-column-start: 1
     border-right: solid 1px
     border-color: $secondary-color
+    padding: 5px
+    display: flex
+    justify-content: space-between
+    flex-direction: column
 
   .Event
     grid-column-start: 2
+    padding: 5px
 
     width: 90%
     height: 90%
