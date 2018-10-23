@@ -7,6 +7,8 @@ import './AppBar.sass';
 import globalStore from '../../stores/GlobalStore.js';
 import * as Actions from '../../actions/GlobalActions.js';
 
+import Search from '../Search/Search.js';
+
 type Props = {};
 type State = {};
 
@@ -18,7 +20,7 @@ class AppBar extends Component<Props, State> {
       <div className="AppBar">
         Menu
         <title>ZHAWO</title>
-        Search
+        <Search />
       </div>
     );
   }

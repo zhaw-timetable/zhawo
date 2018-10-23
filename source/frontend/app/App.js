@@ -30,9 +30,7 @@ class App extends Component<AppProps, AppState> {
   };
 
   componentWillMount() {
-    console.log(process.env.NODE_ENV);
-    console.log(window.location.pathname != '/');
-    // do actual work part 2
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
   }
 
   render() {
