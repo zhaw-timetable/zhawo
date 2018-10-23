@@ -18,7 +18,6 @@ class TimetableStore extends EventEmitter {
     this.slots = [];
     this.timetable = null;
     this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
-    this.searchUsername = '';
   }
 
   getSearchUsername() {
