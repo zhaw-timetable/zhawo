@@ -9,17 +9,12 @@ mkdir $name
 cd $name
 
 cat > $name.js <<EOF
-// @flow
-
 import React, { Component } from 'react';
 import './$name.sass';
 import * as Actions from '../../actions/Actions.js';
 import Store from '../../stores/Store.js';
 
-type Props = {};
-type State = {};
-
-class $name extends Component<Props, State> {
+class $name extends Component {
   state = {};
 
   // Bind change listener
@@ -50,6 +45,10 @@ import { configure, shallow } from 'enzyme';
 configure({ adapter: new Adapter() });
 
 import $name from './$name';
+
+beforeEach(() => {
+  console.log = jest.fn();
+});
 
 it('renders without crashing', () => {
   shallow(<$name />);
