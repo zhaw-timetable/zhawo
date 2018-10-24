@@ -34,7 +34,7 @@ module.exports = {
         })
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -83,5 +83,8 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'app/pwa' } // define the path of the files to be copied
     ])
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 };
