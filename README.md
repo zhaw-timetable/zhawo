@@ -52,7 +52,7 @@ There is an npm script provided in the root folder of this repository to start b
   npm start
 ```
 
-Both backend and frontend are JavaScript stacks. We are using Flow.js for static type checking. For continous integration we are using Travis CI. For test coverage we are using Codecov. We enforce a consistent coding style with prettier pre-commit hooks.
+Both backend and frontend are JavaScript stacks. For continous integration we are using Travis CI. For test coverage we are using Codecov. We enforce a consistent coding style with prettier pre-commit hooks.
 
 <hr>
 
