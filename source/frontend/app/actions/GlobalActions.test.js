@@ -5,6 +5,7 @@ const NAME = 'justmejulian';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
+  console.log = jest.fn();
 });
 
 it('import should be defined', () => {
@@ -12,14 +13,14 @@ it('import should be defined', () => {
 });
 
 it('all actions should be defined', () => {
-  expect(globalActions.setName).toBeDefined();
+  expect(globalActions.setUsername).toBeDefined();
 });
 
-it('setName should dispatch correct type with payload', () => {
-  globalActions.setName(NAME);
+it('setUsername should dispatch correct type with payload', () => {
+  globalActions.setUsername(NAME);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
-    type: 'SET_NAME',
+    type: 'SET_USERNAME',
     payload: NAME
   });
 });
