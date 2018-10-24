@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Menu from './Menu';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Menu />);
 });

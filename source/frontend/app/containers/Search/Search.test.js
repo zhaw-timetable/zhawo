@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Search from './Search';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Search />);
 });

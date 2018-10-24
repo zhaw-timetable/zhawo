@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
 import './Timetable.sass';
@@ -12,13 +10,9 @@ import * as timetableActions from '../../actions/TimetableActions';
 
 import Calendar from '../Calendar/Calendar';
 
-type Props = {};
-type State = { month: any, timetable: any, username: any };
-
-class Timetable extends Component<Props, State> {
+class Timetable extends Component {
   state = {
-    name: globalStore.getName(),
-    month: globalStore.getName(),
+    month: globalStore.getUsername(),
     timetable: timetableStore.timetableDisplayDate,
     username: globalStore.getUsername()
   };
@@ -42,7 +36,7 @@ class Timetable extends Component<Props, State> {
 
   refreshName = () => {
     this.setState({
-      month: globalStore.getName()
+      month: globalStore.getUsername()
     });
   };
 
@@ -55,7 +49,7 @@ class Timetable extends Component<Props, State> {
   render() {
     return (
       <div className="Timetable">
-        <Calendar month={this.state.month} />
+        <Calendar />
         {this.state.timetable &&
           this.state.timetable.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
@@ -71,7 +65,7 @@ class Timetable extends Component<Props, State> {
           ))}
         {this.state.timetable &&
           this.state.timetable.events.map(event => (
-            <Fragment key={event.name}>
+            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
               <div
                 className="Event"
                 style={{

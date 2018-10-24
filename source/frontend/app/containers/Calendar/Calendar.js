@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 import { format, isToday, isSameDay } from 'date-fns';
 
@@ -11,10 +9,7 @@ import * as globalActions from '../../actions/GlobalActions';
 import timetableStore from '../../stores/TimetableStore';
 import * as timetableActions from '../../actions/TimetableActions';
 
-type Props = {};
-type State = { displayDate: Date, displayWeek: any };
-
-class Calendar extends Component<Props, State> {
+class Calendar extends Component {
   state = {
     displayDate: timetableStore.displayDate,
     displayWeek: timetableStore.displayWeek

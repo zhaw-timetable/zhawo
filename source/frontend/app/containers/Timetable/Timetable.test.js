@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Timetable from './Timetable';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Timetable />);
 });

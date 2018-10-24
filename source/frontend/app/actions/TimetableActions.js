@@ -1,14 +1,9 @@
-// @flow
-
 import { format, startOfWeek } from 'date-fns';
 
 import dispatcher from '../dispatcher';
 import * as timetableAdapter from '../adapters/TimetableAdapter';
 
-export const getTimetableByUsername = async function(
-  userName: string,
-  startDate: Date
-) {
+export const getTimetableByUsername = async function(userName, startDate) {
   dispatcher.dispatch({
     type: 'GET_TIMETABLE_STARTED'
   });
@@ -32,7 +27,7 @@ export const getTimetableByUsername = async function(
   }
 };
 
-export const gotoDay = function(targetDate: Date) {
+export const gotoDay = function(targetDate) {
   dispatcher.dispatch({
     type: 'GOTO_DAY',
     payload: targetDate
