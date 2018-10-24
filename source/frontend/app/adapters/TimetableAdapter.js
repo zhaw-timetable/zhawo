@@ -20,9 +20,7 @@ export function fetchByUsername(userName, startDate) {
     const headers = DEFAULT_HEADERS;
     const config = { method, body, headers };
     const response = await fetch(url, config).catch(err => reject(err));
-    if (response) {
-      const json = await response.json().catch(err => reject(err));
-      json && resolve(json);
-    }
+    const json = await response.json().catch(err => reject(err));
+    json && resolve(json);
   });
 }
