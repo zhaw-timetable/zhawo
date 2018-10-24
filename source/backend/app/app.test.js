@@ -23,7 +23,7 @@ const LECTURER_NAME = 'lect';
 const STARTDATE = new Date();
 
 it('POST to /api/timetable/username/ should respond correctly', async () => {
-  fetch.mockResponse(JSON.stringify({ status: 'ok' }));
+  fetch.once(JSON.stringify({ status: 'ok' }));
   const response = await request(app)
     .post('/api/timetable/username')
     .send({
@@ -35,7 +35,7 @@ it('POST to /api/timetable/username/ should respond correctly', async () => {
 });
 
 it('POST to /api/timetable/username/ should call /students/ endpoint for student', async () => {
-  fetch.mockResponse(JSON.stringify({ status: 'ok' }));
+  fetch.once(JSON.stringify({ status: 'ok' }));
   const response = await request(app)
     .post('/api/timetable/username')
     .send({
@@ -50,7 +50,7 @@ it('POST to /api/timetable/username/ should call /students/ endpoint for student
 });
 
 it('POST to /api/timetable/username/ should call /lecturers/ endpoint for lecturer', async () => {
-  fetch.mockResponse(JSON.stringify({ status: 'ok' }));
+  fetch.once(JSON.stringify({ status: 'ok' }));
   const response = await request(app)
     .post('/api/timetable/username')
     .send({
