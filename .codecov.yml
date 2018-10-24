@@ -8,7 +8,7 @@ coverage:
   range: "40...100"
 
   status:
-    project: on
+    project: off
     patch: off
 
 parsers:
