@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
@@ -23,25 +21,15 @@ import VsZHAW from './containers/VsZHAW/VsZHAW.js';
 import Menu from './containers/Menu/Menu.js';
 import Profile from './containers/Profile/Profile.js';
 
-type AppProps = {
-  location: any,
-  history: any
-};
-
-type AppState = {
-  appTitle: string,
-  username: string
-};
-
-class App extends Component<AppProps, AppState> {
+class App extends Component {
   state = {
     appTitle: 'Timetable',
     username: globalStore.getUsername()
   };
 
-  componentWillMount() {
-    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-  }
+  // componentWillMount() {
+  //   console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+  // }
 
   render() {
     const LoggedOutRoutes = [<Route exact path="/login" component={Login} />];
@@ -75,16 +63,18 @@ class App extends Component<AppProps, AppState> {
     );
 
     return (
-      <Router>
-        <Switch>
-          <SecretRoute exact path="/" component={Timetable} />
-          <SecretRoute exact path="/zhawo" component={ZHAWO} />
-          <SecretRoute exact path="/vszhaw" component={VsZHAW} />
-          <SecretRoute exact path="/menu" component={Menu} />
-          <SecretRoute exact path="/profile" component={Profile} />
-          <SecretRoute component={NotFound} />
-        </Switch>
-      </Router>
+      <div className="App">
+        <Router>
+          <Switch>
+            <SecretRoute exact path="/" component={Timetable} />
+            <SecretRoute exact path="/zhawo" component={ZHAWO} />
+            <SecretRoute exact path="/vszhaw" component={VsZHAW} />
+            <SecretRoute exact path="/menu" component={Menu} />
+            <SecretRoute exact path="/profile" component={Profile} />
+            <SecretRoute component={NotFound} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
