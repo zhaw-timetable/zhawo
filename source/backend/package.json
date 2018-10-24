@@ -5,21 +5,21 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon -w app --exec babel-node app",
-    "flow": "flow",
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "jest --coverage",
+    "test-only": "jest",
+    "watch": "jest --watch",
     "codecov": "codecov"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhaw-timetable/zhaw-timetable.git"
+    "url": "git+https://github.com/zhaw-timetable/zhawo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zhaw-timetable/zhaw-timetable/issues"
+    "url": "https://github.com/zhaw-timetable/zhawo/issues"
   },
-  "homepage": "https://github.com/zhaw-timetable/zhaw-timetable#readme",
+  "homepage": "https://github.com/zhaw-timetable/zhawo#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
@@ -33,14 +33,8 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
     "codecov": "^3.1.0",
-    "flow-bin": "^0.81.0",
     "jest": "^23.6.0"
-  },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
   }
 }
