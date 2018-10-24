@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 
 import './VsZHAW.sass';
@@ -7,10 +5,7 @@ import './VsZHAW.sass';
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-type Props = {};
-type State = {};
-
-class VsZHAW extends Component<Props, State> {
+class VsZHAW extends Component {
   state = {};
 
   // Bind change listener

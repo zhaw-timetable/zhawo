@@ -1,15 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
 import './NotFound.sass';
 
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore';
 
-type Props = {};
-type State = {};
-
-class NotFound extends Component<Props, State> {
+class NotFound extends Component {
   state = {};
 
   // Bind change listener

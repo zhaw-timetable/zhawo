@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
@@ -9,10 +7,7 @@ import './Nav.sass';
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-type Props = {};
-type State = {};
-
-class Nav extends Component<Props, State> {
+class Nav extends Component {
   state = {};
 
   render() {

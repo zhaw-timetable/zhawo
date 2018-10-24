@@ -4,10 +4,7 @@ import './Search.sass';
 import timetableStore from '../../stores/TimetableStore';
 import * as timetableActions from '../../actions/TimetableActions';
 
-type Props = {};
-type State = { showInput: boolean };
-
-class Search extends Component<Props, State> {
+class Search extends Component {
   state = { showInput: false };
 
   // Bind change listener

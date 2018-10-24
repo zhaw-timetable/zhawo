@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Login from './Login';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Login />);
 });

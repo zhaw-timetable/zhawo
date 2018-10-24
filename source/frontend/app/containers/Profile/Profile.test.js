@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Profile from './Profile';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Profile />);
 });

@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 
 import './AppBar.sass';
@@ -9,13 +7,10 @@ import * as Actions from '../../actions/GlobalActions.js';
 
 import * as timetableActions from '../../actions/TimetableActions';
 
-import Search from '../Search/Search.js';
-import CalendarSVG from '../CalendarSVG/CalendarSVG.js';
+import Search from '../Search/Search';
+import CalendarSVG from '../CalendarSVG/CalendarSVG';
 
-type Props = {};
-type State = {};
-
-class AppBar extends Component<Props, State> {
+class AppBar extends Component {
   state = {};
 
   render() {

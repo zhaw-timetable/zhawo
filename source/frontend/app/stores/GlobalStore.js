@@ -4,13 +4,7 @@ import dispatcher from '../dispatcher';
 class GlobalStore extends EventEmitter {
   constructor() {
     super();
-    this.name = 'Hello World';
-    //this.username = '';
     this.username = '';
-  }
-
-  getName() {
-    return this.name;
   }
 
   getUsername() {

@@ -1,16 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
-
-import './Menu.sass';
+import './ZHAWO.sass';
 
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-type Props = {};
-type State = {};
-
-class Menu extends Component<Props, State> {
+class ZHAWO extends Component {
   state = {};
 
   // Bind change listener
@@ -21,11 +15,11 @@ class Menu extends Component<Props, State> {
 
   render() {
     return (
-      <div className="Menu">
-        <h1>Menu</h1>
+      <div className="ZHAWO">
+        <h1>ZHAWO</h1>
       </div>
     );
   }
 }
 
-export default Menu;
+export default ZHAWO;

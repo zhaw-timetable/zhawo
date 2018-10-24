@@ -8,10 +8,7 @@ import * as globalActions from '../../actions/GlobalActions';
 
 import Splash from '../Splash/Splash';
 
-type Props = {};
-type State = {};
-
-class Login extends Component<Props, State> {
+class Login extends Component {
   state = {
     input: '',
     redirectToPreviousRoute: false
