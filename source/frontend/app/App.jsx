@@ -11,15 +11,15 @@ import './font/font.scss';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
-import AppBar from './containers/AppBar/AppBar.js';
-import Timetable from './containers/Timetable/Timetable.js';
-import Nav from './containers/Nav/Nav.js';
-import NotFound from './containers/NotFound/NotFound.js';
-import Login from './containers/Login/Login.js';
-import ZHAWO from './containers/ZHAWO/ZHAWO.js';
-import VsZHAW from './containers/VsZHAW/VsZHAW.js';
-import Menu from './containers/Menu/Menu.js';
-import Profile from './containers/Profile/Profile.js';
+import AppBar from './containers/AppBar/AppBar.jsx';
+import Timetable from './containers/Timetable/Timetable.jsx';
+import Nav from './containers/Nav/Nav.jsx';
+import NotFound from './containers/NotFound/NotFound.jsx';
+import Login from './containers/Login/Login.jsx';
+import ZHAWO from './containers/ZHAWO/ZHAWO.jsx';
+import VsZHAW from './containers/VsZHAW/VsZHAW.jsx';
+import Menu from './containers/Menu/Menu.jsx';
+import Profile from './containers/Profile/Profile.jsx';
 
 class App extends Component {
   state = {
