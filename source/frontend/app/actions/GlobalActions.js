@@ -8,3 +8,10 @@ export function setName(text: string) {
     payload: text
   });
 }
+
+export function setUsername(text: string) {
+  dispatcher.dispatch({
+    type: 'SET_USERNAME',
+    payload: text
+  });
+}

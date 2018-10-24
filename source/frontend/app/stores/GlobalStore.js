@@ -5,7 +5,8 @@ class GlobalStore extends EventEmitter {
   constructor() {
     super();
     this.name = 'Hello World';
-    this.username = 'vissejul';
+    //this.username = '';
+    this.username = '';
   }
 
   getName() {
@@ -23,7 +24,7 @@ class GlobalStore extends EventEmitter {
         this.emit('name_changed');
         break;
       case 'SET_USERNAME':
-        this.name = action.payload;
+        this.username = action.payload;
         this.emit('username_changed');
         break;
     }

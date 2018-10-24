@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 import './Search.sass';
 
@@ -25,13 +23,10 @@ class Search extends Component<Props, State> {
     });
   };
 
-  handleKeyPress = (
-    e: SyntheticKeyboardEvent<> & { target: SyntheticEvent<HTMLButtonElement> }
-  ) => {
+  handleKeyPress = e => {
     const { value } = e.target;
     const { key } = e;
     if (key === 'Enter') {
-      console.log('Enter Pressed');
       const currentDate = new Date();
       timetableActions.getTimetableByUsername(value, currentDate);
     }
