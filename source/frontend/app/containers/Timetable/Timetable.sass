@@ -4,13 +4,17 @@
   grid-column-start: 2
   grid-column-end: 4
   display: grid
-  grid-template-columns: 50px auto
+  grid-template-columns: 55px auto
 
   .SlotTime
+    margin-left: auto
+    margin-right: auto
     grid-column-start: 1
-    border-right: solid 1px
+    border-right: solid 1.5px
     border-color: $secondary-color
-    padding: 5px
+
+    box-sizing: border-box
+    padding: 5px 3px
     display: flex
     justify-content: space-between
     flex-direction: column
@@ -18,11 +22,16 @@
   .Event
     grid-column-start: 2
     padding: 5px
+    box-sizing: border-box
+    margin-top: 5px
 
     width: 90%
-    height: 90%
 
     margin-left: 5%
 
     border: solid 1px
     border-color: $secondary-color
+
+
+  .active
+      border-color: $selection-color

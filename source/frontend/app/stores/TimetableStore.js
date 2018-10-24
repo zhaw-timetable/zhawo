@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import {
   format,
   startOfWeek,
+  startOfMonth,
   addDays,
   isSameDay,
   startOfDay,
@@ -15,6 +16,7 @@ class TimetableStore extends EventEmitter {
     super();
     this.displayDate = addDays(new Date(), 0);
     this.displayWeek = this.createDisplayWeek(this.displayDate);
+    this.displayMonth = this.createDisplayMonth(this.displayDate);
     this.slots = [];
     this.timetable = null;
     this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
@@ -37,6 +39,7 @@ class TimetableStore extends EventEmitter {
       case 'GOTO_DAY':
         this.displayDate = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDate);
+        this.displayMonth = this.createDisplayMonth(this.displayDate);
         this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
         this.emit('timetable_changed');
         break;
@@ -62,6 +65,17 @@ class TimetableStore extends EventEmitter {
     const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
     const weekArray = Array.apply(null, Array(6));
     return weekArray.map((value, index) => addDays(weekStartDate, index));
+  }
+
+  createDisplayMonth(date) {
+    const monthStart = startOfMonth(date);
+    var weekStartDate = startOfWeek(monthStart, { weekStartsOn: 1 });
+    const monthArray = [];
+    for (var i = 0; i < 5; i++) {
+      monthArray[i] = this.createDisplayWeek(weekStartDate);
+      weekStartDate = addDays(weekStartDate, 7);
+    }
+    return monthArray;
   }
 
   findTimetableForDate(date) {

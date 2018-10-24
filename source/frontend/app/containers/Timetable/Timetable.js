@@ -52,6 +52,8 @@ class Timetable extends Component<Props, State> {
     });
   };
 
+  // TODO: set active hour and lesson to class active
+
   render() {
     return (
       <div className="Timetable">
