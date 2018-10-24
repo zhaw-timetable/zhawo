@@ -1,11 +1,7 @@
 {
   "name": "zhawo",
-  "version": "1.0.0",
-  "description": "[![Build Status](https://travis-ci.org/zhaw-timetable/zhawo.svg?branch=master)](https://travis-ci.org/zhaw-timetable/zhawo)\r [![Coverage Status](https://coveralls.io/repos/github/zhaw-timetable/zhawo/badge.svg)](https://coveralls.io/github/zhaw-timetable/zhawo)",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "version": "0.0.1",
+  "description": "",
   "scripts": {
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\" ",
     "start-frontend": "cd source/frontend && npm start",
@@ -14,8 +10,8 @@
     "install-frontend": "cd source/frontend && npm install",
     "install-backend": "cd source/backend && npm install",
     "test-both": "concurrently \"npm run test-frontend\" \"npm run test-backend\" ",
-    "test-frontend": "cd source/frontend && npm test",
-    "test-backend": "cd source/backend && npm test"
+    "test-frontend": "cd source/frontend && npm run test-only",
+    "test-backend": "cd source/backend && npm run test-only"
   },
   "repository": {
     "type": "git",
