@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Nav from './Nav';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Nav />);
 });

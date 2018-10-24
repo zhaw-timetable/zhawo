@@ -7,6 +7,7 @@ const STARTDATE = '2018-10-15';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
+  console.log = jest.fn();
 });
 
 it('import should be defined', () => {

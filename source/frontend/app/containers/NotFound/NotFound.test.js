@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import NotFound from './NotFound';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<NotFound />);
 });

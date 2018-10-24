@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import Calendar from './Calendar';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<Calendar />);
 });

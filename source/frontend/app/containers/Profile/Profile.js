@@ -1,15 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
 import './Profile.sass';
 
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-type Props = {};
-type State = {};
-
-class Profile extends Component<Props, State> {
+class Profile extends Component {
   state = {};
 
   // Bind change listener

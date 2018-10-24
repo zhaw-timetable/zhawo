@@ -20,6 +20,10 @@ class TimetableStore extends EventEmitter {
     this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
   }
 
+  getSearchUsername() {
+    return this.searchUsername;
+  }
+
   handleActions(action) {
     switch (action.type) {
       case 'GET_TIMETABLE_STARTED':

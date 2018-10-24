@@ -1,15 +1,10 @@
-// @flow
-
 import React, { Component } from 'react';
 import './ZHAWO.sass';
 
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-type Props = {};
-type State = {};
-
-class ZHAWO extends Component<Props, State> {
+class ZHAWO extends Component {
   state = {};
 
   // Bind change listener

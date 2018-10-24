@@ -6,6 +6,10 @@ configure({ adapter: new Adapter() });
 
 import VsZHAW from './VsZHAW';
 
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
 it('renders without crashing', () => {
   shallow(<VsZHAW />);
 });

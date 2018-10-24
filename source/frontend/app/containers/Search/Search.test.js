@@ -4,17 +4,17 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import Timetable from './Timetable';
+import Search from './Search';
 
 beforeEach(() => {
   console.log = jest.fn();
 });
 
 it('renders without crashing', () => {
-  shallow(<Timetable />);
+  shallow(<Search />);
 });
 
-it('should render one root element with className Timetable', () => {
-  const wrapper = shallow(<Timetable />);
-  expect(wrapper.find('.Timetable')).toHaveLength(1);
+it('should render one root element with className Search', () => {
+  const wrapper = shallow(<Search />);
+  expect(wrapper.find('.Search')).toHaveLength(1);
 });
