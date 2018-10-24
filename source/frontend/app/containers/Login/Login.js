@@ -46,7 +46,7 @@ class Login extends Component<Props, State> {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const from = { pathname: '/' };
     const { redirectToPreviousRoute } = this.state;
 
     if (redirectToPreviousRoute) {
