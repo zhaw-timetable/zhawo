@@ -11,13 +11,13 @@ Node.js server applicaton using Express. The backend is relying heavily on the o
 
   npm start
 
-# Run test suite
+# Run test suite with coverage report
 
   npm test
 
-# Create test coverage report
+# Run test watcher for development
 
-  npm run coverage
+  npm run watch
 ```
 
 ## Database Setup

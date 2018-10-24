@@ -8,7 +8,7 @@ mkdir $name
 
 cd $name
 
-cat > $name.js <<EOF
+cat > $name.jsx <<EOF
 import React, { Component } from 'react';
 import './$name.sass';
 import * as Actions from '../../actions/Actions.js';

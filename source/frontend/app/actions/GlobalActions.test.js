@@ -1,7 +1,7 @@
 import * as globalActions from './GlobalActions';
 import dispatcher from '../dispatcher.js';
 
-const NAME = 'justmejulian';
+const NAME = 'vissejul';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
