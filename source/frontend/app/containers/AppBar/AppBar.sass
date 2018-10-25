@@ -1,9 +1,7 @@
 @import '../../sass/vars'
 
 .AppBar
-
-  grid-column: span 3
-
+  grid-row-start: 1
   display: flex
   justify-content: space-between
 
@@ -23,3 +21,10 @@
   #CalendarSVG
     width: 26px
     height: 26px
+    fill: $text-color
+
+
+// Desktop
+@media (min-width: $media-min-width)
+  .AppBar
+    grid-column: span 3
