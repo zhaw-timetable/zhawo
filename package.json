@@ -12,8 +12,8 @@
     "test-both": "concurrently \"npm run test-frontend\" \"npm run test-backend\" ",
     "test-frontend": "cd source/frontend && npm run test-only",
     "test-backend": "cd source/backend && npm run test-only",
-    "build-frontend": "cd source/frontend && npm run build",
-    "build-backend": "cd source/backend && npm run build",
+    "build-frontend": "cd source/frontend && npm install && npm run build",
+    "build-backend": "cd source/backend && npm install && npm run build",
     "build": "npm run build-backend && npm run build-frontend",
     "precommit": "npm run test-both"
   },
