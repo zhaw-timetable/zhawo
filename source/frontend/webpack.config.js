@@ -6,8 +6,10 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV != 'production');
+
 module.exports = {
-  mode: process.env.NODE_ENV, // production or development
   entry: ['@babel/polyfill', './main.js'],
   output: {
     path: path.join(__dirname, '/bundle'),
