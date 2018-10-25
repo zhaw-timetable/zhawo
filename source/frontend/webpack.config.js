@@ -11,7 +11,7 @@ console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
 module.exports = {
   entry: ['@babel/polyfill', './main.js'],
   output: {
-    path: path.join(__dirname, '/bundle'),
+    path: path.join(__dirname, '../build/bundle'),
     filename: 'index.js'
   },
   devServer: {
