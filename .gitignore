@@ -44,7 +44,4 @@ npm-debug.log*
 reports/test-report.xml
 
 node_modules
-<<<<<<< HEAD
-dist
-=======
->>>>>>> b17809ae753cb5a27d6fe2f2a6ef9e1a69466ae4
+
