@@ -7,5 +7,5 @@ configure({ adapter: new Adapter() });
 import ZHAWOSVG from './ZHAWOSVG';
 
 it('renders without crashing', () => {
-  shallow(<ZHWOSVG />);
+  shallow(<ZHAWOSVG />);
 });
