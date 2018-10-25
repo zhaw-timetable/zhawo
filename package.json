@@ -16,7 +16,8 @@
     "build-backend": "cd source/backend && npm install && npm run build",
     "build": "npm run build-backend && npm run build-frontend",
     "serve": "cd source/backend && npm run serve",
-    "precommit": "npm run test-both"
+    "precommit": "npm run test-both",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
