@@ -15,7 +15,7 @@
     "build-frontend": "cd source/frontend && npm install && npm run build",
     "build-backend": "cd source/backend && npm install && npm run build",
     "build": "npm run build-backend && npm run build-frontend",
-    "serve": "node source/build",
+    "serve": "cd source/backend && npm run serve",
     "precommit": "npm run test-both"
   },
   "repository": {
