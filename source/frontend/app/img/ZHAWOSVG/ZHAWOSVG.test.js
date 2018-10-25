@@ -4,7 +4,7 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import ZHWOSVG from './ZHWOSVG';
+import ZHAWOSVG from './ZHWOSVG';
 
 it('renders without crashing', () => {
   shallow(<ZHWOSVG />);

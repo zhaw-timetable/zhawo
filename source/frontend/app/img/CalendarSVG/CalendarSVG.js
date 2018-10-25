@@ -9,7 +9,7 @@ class CalendarSVG extends Component {
     return (
       <svg
         id="CalendarSVG"
-        viewBox="0 0 26 26"
+        viewBox="0 0 26 30"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         onClick={this.props.onClick}
