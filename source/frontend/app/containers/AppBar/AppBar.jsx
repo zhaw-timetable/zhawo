@@ -7,8 +7,8 @@ import * as Actions from '../../actions/GlobalActions.js';
 
 import * as timetableActions from '../../actions/TimetableActions';
 
-import Search from '../Search/Search.js';
-import CalendarSVG from '../../img/CalendarSVG/CalendarSVG.js';
+import Search from '../Search/Search';
+import CalendarSVG from '../../img/CalendarSVG/CalendarSVG';
 
 class AppBar extends Component {
   state = {};

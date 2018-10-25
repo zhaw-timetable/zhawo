@@ -32,17 +32,6 @@ class App extends Component {
   // }
 
   render() {
-    const LoggedOutRoutes = [<Route exact path="/login" component={Login} />];
-    const LoggedInRoutes = [
-      <Route exact path="/timetable" component={Timetable} />,
-      <Route exact path="/zhawo" component={ZHAWO} />,
-      <Route exact path="/vszhaw" component={VsZHAW} />,
-      <Route exact path="/menu" component={Menu} />,
-      <Route exact path="/profile" component={Profile} />
-    ];
-
-    // TODO: need to know if is a correct username
-
     const SecretRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
@@ -63,7 +52,7 @@ class App extends Component {
     );
 
     return (
-      <div className="App">
+      <div>
         <Router>
           <Switch>
             <SecretRoute exact path="/" component={Timetable} />
