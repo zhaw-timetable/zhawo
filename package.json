@@ -11,7 +11,8 @@
     "install-backend": "cd source/backend && npm install",
     "test-both": "concurrently \"npm run test-frontend\" \"npm run test-backend\" ",
     "test-frontend": "cd source/frontend && npm run test-only",
-    "test-backend": "cd source/backend && npm run test-only"
+    "test-backend": "cd source/backend && npm run test-only",
+    "precommit": "npm run test-both"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/zhaw-timetable/zhawo#readme",
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "husky": "^1.1.2"
   }
 }
