@@ -4,14 +4,6 @@ import './CalendarSVG.sass';
 import { format } from 'date-fns';
 
 class CalendarSVG extends Component {
-  state = {};
-
-  // Bind change listener
-  componentWillMount() {}
-
-  // Unbind change listener
-  componentWillUnmount() {}
-
   render() {
     const currentDate = new Date();
     return (

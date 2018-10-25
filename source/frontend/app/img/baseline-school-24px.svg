@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="29px" viewBox="0 0 35 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>baseline-school-24px</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="App-bar" transform="translate(-18.000000, -6.000000)">
+            <g transform="translate(16.000000, -1.000000)" id="baseline-school-24px">
+                <g transform="translate(0.651310, 3.000000)">
+                    <g id="Group" transform="translate(0.000000, 0.000000)">
+                        <polygon id="Shape" points="0 -3.55271368e-15 37.3053794 -3.55271368e-15 37.3053794 37.4057725 0 37.4057725"></polygon>
+                        <path d="M7.77195404,20.5420034 L7.77195404,26.7762988 L18.6526897,32.7300509 L29.5334253,26.7762988 L29.5334253,20.5420034 L18.6526897,26.4957555 L7.77195404,20.5420034 L7.77195404,20.5420034 Z M18.6526897,4.67572156 L1.55439081,14.0271647 L18.6526897,23.3786078 L32.642207,15.7260102 L32.642207,26.4957555 L35.7509886,26.4957555 L35.7509886,14.0271647 L18.6526897,4.67572156 L18.6526897,4.67572156 Z" id="Shape" fill="#EFEFF4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

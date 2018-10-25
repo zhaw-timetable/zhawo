@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 
 import './Splash.sass';
@@ -5,7 +7,10 @@ import './Splash.sass';
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-class Splash extends Component {
+type Props = {};
+type State = {};
+
+class Splash extends Component<Props, State> {
   state = {};
 
   // Bind change listener

@@ -4,12 +4,8 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import CalendarSVG from './CalendarSVG';
-
-beforeEach(() => {
-  console.log = jest.fn();
-});
+import ZHWOSVG from './ZHWOSVG';
 
 it('renders without crashing', () => {
-  shallow(<CalendarSVG />);
+  shallow(<ZHWOSVG />);
 });
