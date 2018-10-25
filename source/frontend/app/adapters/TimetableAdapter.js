@@ -1,6 +1,12 @@
-import { apiUrl } from '../config.json';
+let basePath = '';
 
-const BASE_URL = apiUrl.concat('/api/timetable');
+if (process.env.NODE_ENV == 'development') {
+  basePath = 'http://localhost:4000';
+} else {
+  basePath = window.location.origin;
+}
+
+const BASE_URL = basePath.concat('/api/timetable');
 
 const GET = 'GET';
 const POST = 'POST';
