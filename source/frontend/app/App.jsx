@@ -52,18 +52,16 @@ class App extends Component {
     );
 
     return (
-      <div>
-        <Router>
-          <Switch>
-            <SecretRoute exact path="/" component={Timetable} />
-            <SecretRoute exact path="/zhawo" component={ZHAWO} />
-            <SecretRoute exact path="/vszhaw" component={VsZHAW} />
-            <SecretRoute exact path="/menu" component={Menu} />
-            <SecretRoute exact path="/profile" component={Profile} />
-            <SecretRoute component={NotFound} />
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <Switch>
+          <SecretRoute exact path="/" component={Timetable} />
+          <SecretRoute exact path="/zhawo" component={ZHAWO} />
+          <SecretRoute exact path="/vszhaw" component={VsZHAW} />
+          <SecretRoute exact path="/menu" component={Menu} />
+          <SecretRoute exact path="/profile" component={Profile} />
+          <SecretRoute component={NotFound} />
+        </Switch>
+      </Router>
     );
   }
 }
