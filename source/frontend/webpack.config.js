@@ -54,7 +54,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'main.css',
       allChunks: true,
-      disable: process.env.NODE_ENV != 'production'
+      disable: process.env.NODE_ENV == 'development'
     }),
     new HtmlWebpackPlugin({
       template: './app/index.html',
