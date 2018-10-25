@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon -w app --exec babel-node app",
-    "build": "./node_modules/.bin/babel app -d dist --copy-files --presets env,es2015,stage-2",
+    "build": "./node_modules/.bin/babel app -d ../build --copy-files --presets env,es2015,stage-2",
     "serve": "node dist",
     "test": "jest --coverage",
     "test-only": "jest",
