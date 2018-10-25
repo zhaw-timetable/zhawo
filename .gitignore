@@ -41,3 +41,4 @@ npm-debug.log*
 reports/test-report.xml
 
 node_modules
+dist
