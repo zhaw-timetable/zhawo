@@ -7,6 +7,7 @@ import initializeDb from './db';
 import middleware from './middleware';
 import api from './api';
 import config from './config.json';
+import path from 'path';
 
 let app = express();
 app.server = http.createServer(app);
@@ -15,6 +16,8 @@ app.server = http.createServer(app);
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
+
+app.use(express.static(__dirname + '/bundle'));
 
 // 3rd party middleware
 app.use(
@@ -36,6 +39,11 @@ initializeDb(db => {
 
   // api router
   app.use('/api', api({ config, db }));
+});
+
+// only used in production, bundle contains frontend
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/bundle/index.html'));
 });
 
 export default app;
