@@ -33,6 +33,7 @@
     "concurrently": "^4.0.1"
   },
   "devDependencies": {
-    "husky": "^1.1.2"
+    "husky": "^1.1.2",
+    "idb": "^2.1.3"
   }
 }
