@@ -20,7 +20,9 @@ class Login extends Component {
   }
 
   // Unbind change listener
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    globalStore.removeListener('username_changed', this.login);
+  }
 
   handleUsernameInputChange = e => {
     this.setState({ input: e.target.value });
@@ -39,6 +41,7 @@ class Login extends Component {
 
   setUsername = () => {
     // Sets globalStore username to value of input
+    console.log('Setting username');
     globalActions.setUsername(this.state.input);
   };
 

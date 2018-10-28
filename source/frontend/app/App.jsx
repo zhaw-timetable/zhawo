@@ -23,13 +23,15 @@ import Profile from './containers/Profile/Profile.jsx';
 
 class App extends Component {
   state = {
-    appTitle: 'Timetable',
-    username: globalStore.getUsername()
+    appTitle: 'Timetable'
   };
 
-  // componentWillMount() {
-  //   console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-  // }
+  componentDidMount() {}
+
+  componentWillMount() {
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+    globalActions.setUsernameFromDB();
+  }
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
