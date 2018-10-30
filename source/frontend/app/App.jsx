@@ -11,7 +11,7 @@ import './font/font.scss';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
-import * as timetableActions from './actions/timetableActions';
+import * as timetableActions from './actions/TimetableActions';
 
 import AppBar from './containers/AppBar/AppBar.jsx';
 import Timetable from './containers/Timetable/Timetable.jsx';
