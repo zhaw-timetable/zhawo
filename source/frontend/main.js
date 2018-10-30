@@ -7,4 +7,6 @@ import App from './app/App.jsx';
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-registerServiceWorker();
+if (process.env.NODE_ENV === 'production') {
+  registerServiceWorker();
+}
