@@ -17,10 +17,7 @@ class Timetable extends Component {
     username: globalStore.getUsername()
   };
 
-  componentDidMount() {
-    const currentDate = new Date();
-    timetableActions.getTimetableByUsername(this.state.username, currentDate);
-  }
+  componentDidMount() {}
 
   // Bind change listener
   componentWillMount() {

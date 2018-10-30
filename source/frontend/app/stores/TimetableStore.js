@@ -26,13 +26,14 @@ class TimetableStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      case 'GET_TIMETABLE_STARTED':
-        break;
       case 'GET_TIMETABLE_SUCCESS':
         this.slots = action.payload.days[0].slots;
         this.timetable = this.addSlotInfoToEvents(action.payload);
         this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
         this.emit('timetable_changed');
+        break;
+      case 'GET_TIMETABLE_FAIL':
+        console.log('GET TIMETABLE FAILED');
         break;
       case 'GOTO_DAY':
         this.displayDate = action.payload;

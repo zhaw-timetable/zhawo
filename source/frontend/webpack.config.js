@@ -68,6 +68,7 @@ module.exports = {
       // used to populate the caches, to ensure the responses are fresh.
       // If a URL is already hashed by Webpack, then there is no concern
       // about it being stale, and the cache-busting can be skipped.
+      cacheId: 'zhaw-timetable',
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'service-worker.js',
       logger(message) {

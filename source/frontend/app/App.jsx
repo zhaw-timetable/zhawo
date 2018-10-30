@@ -11,6 +11,8 @@ import './font/font.scss';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
+import * as timetableActions from './actions/timetableActions';
+
 import AppBar from './containers/AppBar/AppBar.jsx';
 import Timetable from './containers/Timetable/Timetable.jsx';
 import Nav from './containers/Nav/Nav.jsx';
@@ -26,12 +28,25 @@ class App extends Component {
     appTitle: 'Timetable'
   };
 
-  componentDidMount() {}
-
+  // Bind change listener
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
     globalActions.setUsernameFromDB();
+
+    globalStore.on('username_changed', this.handleUsernameChanged);
   }
+
+  // Unbind change listener
+  componentWillUnmount() {
+    globalStore.removeListener('username_changed', this.handleUsernameChanged);
+  }
+
+  handleUsernameChanged = () => {
+    console.log('Username changed');
+    const currentDate = new Date();
+    console.log('Getting timetable for ' + globalStore.username);
+    timetableActions.getTimetableByUsername(globalStore.username, currentDate);
+  };
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (

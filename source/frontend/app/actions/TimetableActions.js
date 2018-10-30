@@ -4,9 +4,6 @@ import dispatcher from '../dispatcher';
 import * as timetableAdapter from '../adapters/TimetableAdapter';
 
 export const getTimetableByUsername = async function(userName, startDate) {
-  dispatcher.dispatch({
-    type: 'GET_TIMETABLE_STARTED'
-  });
   const formattedDate = format(
     startOfWeek(startDate, { weekStartsOn: 1 }),
     'YYYY-MM-DD'
