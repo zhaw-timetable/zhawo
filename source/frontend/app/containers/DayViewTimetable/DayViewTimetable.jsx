@@ -14,7 +14,7 @@ class DayViewTimetable extends Component {
 
   render() {
     return (
-      <Fragment>
+      <Fragment className="DayViewTimetable">
         {this.props.timetable &&
           this.props.timetable.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>

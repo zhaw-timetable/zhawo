@@ -4,12 +4,12 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import DayViewTimetable from './DayViewTimetable';
+import WeekViewTimetable from './WeekViewTimetable';
 
 beforeEach(() => {
   console.log = jest.fn();
 });
 
 it('renders without crashing', () => {
-  shallow(<DayViewTimetable />);
+  shallow(<WeekViewTimetable />);
 });
