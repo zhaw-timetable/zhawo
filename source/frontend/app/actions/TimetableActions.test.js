@@ -24,16 +24,13 @@ it('getTimetableByUsername should dispatch correct type with payload when gettin
   timetableAdapter.fetchByUsername = jest.fn(() => Promise.resolve(PAYLOAD));
   await timetableActions.getTimetableByUsername(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
-  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
-    type: 'GET_TIMETABLE_STARTED'
-  });
   expect(timetableAdapter.fetchByUsername).toHaveBeenCalled();
   expect(timetableAdapter.fetchByUsername).toHaveBeenCalledWith(
     USERNAME,
     STARTDATE
   );
-  expect(dispatcher.dispatch).toHaveBeenCalledTimes(2);
-  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(2, {
+  expect(dispatcher.dispatch).toHaveBeenCalledTimes(1);
+  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
     type: 'GET_TIMETABLE_SUCCESS',
     payload: PAYLOAD
   });
@@ -43,16 +40,13 @@ it('getTimetableByUsername should dispatch correct type when NOT getting respons
   timetableAdapter.fetchByUsername = jest.fn(() => Promise.resolve(null));
   await timetableActions.getTimetableByUsername(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
-  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
-    type: 'GET_TIMETABLE_STARTED'
-  });
   expect(timetableAdapter.fetchByUsername).toHaveBeenCalled();
   expect(timetableAdapter.fetchByUsername).toHaveBeenCalledWith(
     USERNAME,
     STARTDATE
   );
-  expect(dispatcher.dispatch).toHaveBeenCalledTimes(2);
-  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(2, {
+  expect(dispatcher.dispatch).toHaveBeenCalledTimes(1);
+  expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
     type: 'GET_TIMETABLE_FAIL'
   });
 });
