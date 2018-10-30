@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { format } from 'date-fns';
 import './Timetable.sass';
 
 import globalStore from '../../stores/GlobalStore';
@@ -9,6 +8,7 @@ import timetableStore from '../../stores/TimetableStore';
 import * as timetableActions from '../../actions/TimetableActions';
 
 import Calendar from '../Calendar/Calendar';
+import DayViewTimetable from '../DayViewTimetable/DayViewTimetable';
 
 class Timetable extends Component {
   state = {
@@ -50,33 +50,7 @@ class Timetable extends Component {
     return (
       <div className="Timetable">
         <Calendar />
-        {this.state.timetable &&
-          this.state.timetable.slots.map(slot => (
-            <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div className="SlotTime">
-                <div className="SlotStartTime">
-                  {format(slot.startTime, 'HH:mm')}
-                </div>
-                <div className="SlotEndTime">
-                  {format(slot.endTime, 'HH:mm')}
-                </div>
-              </div>
-            </Fragment>
-          ))}
-        {this.state.timetable &&
-          this.state.timetable.events.map(event => (
-            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
-              <div
-                className="Event"
-                style={{
-                  gridRowStart: event.startSlot + 2,
-                  gridRowEnd: event.endSlot + 2
-                }}
-              >
-                {event.name}
-              </div>
-            </Fragment>
-          ))}
+        <DayViewTimetable timetable={this.state.timetable} />
       </div>
     );
   }
