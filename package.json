@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/zhaw-timetable/zhawo#readme",
   "devDependencies": {
-    "husky": "^1.1.2",
     "npm-run-all": "^4.1.3"
   }
 }
