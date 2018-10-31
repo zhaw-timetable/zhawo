@@ -50,6 +50,43 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    https: true,
+    stats: {
+      all: undefined,
+      assets: false,
+      assetsSort: 'field',
+      builtAt: true,
+      cached: false,
+      cachedAssets: false,
+      children: false,
+      chunks: false,
+      chunkGroups: false,
+      chunkModules: false,
+      chunkOrigins: false,
+      chunksSort: 'field',
+      colors: false,
+      depth: false,
+      entrypoints: false,
+      env: true,
+      errors: true,
+      errorDetails: true,
+      hash: false,
+      maxModules: 15,
+      modules: false,
+      modulesSort: 'field',
+      moduleTrace: true,
+      performance: true,
+      providedExports: false,
+      publicPath: false,
+      reasons: false,
+      source: false,
+      timings: false,
+      usedExports: false,
+      version: false,
+      warnings: true
+    }
+  },
   plugins: [
     new ExtractTextPlugin({
       filename: 'main.css',
