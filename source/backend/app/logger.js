@@ -10,12 +10,16 @@ if (process.env.NODE_ENV === 'production') {
     displayTimestamp: true,
     displayDate: true
   });
-} else {
+}
+if (process.env.NODE_ENV === 'development') {
   signale.config({
     displayFilename: true,
     displayTimestamp: false,
     displayDate: false
   });
+}
+if (process.env.NODE_ENV === 'test') {
+  signale.disable();
 }
 
 export default signale;
