@@ -1,13 +1,7 @@
 <p align="center">
-  <a href="https://travis-ci.org/zhaw-timetable/zhawo" target="_blank">
-  <img src="https://travis-ci.org/zhaw-timetable/zhawo.svg?branch=master" />
-  </a>
-  <a href="https://codecov.io/gh/zhaw-timetable/zhawo" target="_blank">
-  <img src="https://codecov.io/gh/zhaw-timetable/zhawo/branch/master/graph/badge.svg" />
-  </a>
-  <a href="https://github.com/prettier/prettier" target="_blank">
-  <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" />
-  </a>
+  <a href="https://travis-ci.org/zhaw-timetable/zhawo" target="_blank"><img src="https://travis-ci.org/zhaw-timetable/zhawo.svg?branch=master" /></a>
+  <a href="https://codecov.io/gh/zhaw-timetable/zhawo" target="_blank"><img src="https://codecov.io/gh/zhaw-timetable/zhawo/branch/master/graph/badge.svg" /></a>
+  <a href="https://github.com/prettier/prettier" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" /></a>
 </p>
     <hr>
   <p align="center">
@@ -36,20 +30,20 @@ A few features that we are planning to implement:
 
 This project is split up into a backend Node service (`./source/backend`) and a frontend progressive web app built with React (`./source/frontend`). For development, please refer to the respective readmes.
 
-There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all dependencies have been installed.
+There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all root dependencies have been installed.
 
 ```
-# Install concurrently module:
+# Install root dependencies:
   npm install
 
 # Install dependencies for both frontend and backend:
   npm run install-both
 
+# Run backend and frontend for development:
+  npm run start-both
+
 # Run tests for both frontend and backend:
   npm run test-both
-
-# Run backend and frontend for development:
-  npm start
 ```
 
 Both backend and frontend are JavaScript stacks. For continous integration we are using Travis CI. For test coverage we are using Codecov. We enforce a consistent coding style with prettier pre-commit hooks.
