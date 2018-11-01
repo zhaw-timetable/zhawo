@@ -4,14 +4,11 @@ import { Link } from 'react-router-dom';
 
 import './Nav.sass';
 
-import globalStore from '../../stores/GlobalStore';
-import * as globalActions from '../../actions/GlobalActions';
-
-import CalendarSVG from '../../img/CalendarSVG/CalendarSVG';
-import MenuSVG from '../../img/MenuSVG/MenuSVG';
-import ProfileSVG from '../../img/ProfileSVG/ProfileSVG';
-import VsZHAWSVG from '../../img/VsZHAWSVG/VsZHAWSVG';
-import ZHAWOSVG from '../../img/ZHAWOSVG/ZHAWOSVG';
+import CalendarSVG from '../../assets/img/CalendarSVG/CalendarSVG';
+import MenuSVG from '../../assets/img/MenuSVG/MenuSVG';
+import ProfileSVG from '../../assets/img/ProfileSVG/ProfileSVG';
+import VsZHAWSVG from '../../assets/img/VsZHAWSVG/VsZHAWSVG';
+import ZHAWOSVG from '../../assets/img/ZHAWOSVG/ZHAWOSVG';
 
 class Nav extends Component {
   state = {};

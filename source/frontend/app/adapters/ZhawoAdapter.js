@@ -1,3 +1,5 @@
+import { format, startOfWeek } from 'date-fns';
+
 const GET = 'GET';
 const POST = 'POST';
 const HEADERS = { 'Content-Type': 'application/json' };
@@ -8,6 +10,10 @@ const apiUrl = `${address}/api/v1`;
 // f.ex. route = students, name = bachmdo2, startDate = date
 export function getScheduleResource(route, name, startDate) {
   return new Promise(async (resolve, reject) => {
+    startDate = format(
+      startOfWeek(startDate, { weekStartsOn: 1 }),
+      'YYYY-MM-DD'
+    );
     const url = `${apiUrl}/schedules/${route}`;
     const body = JSON.stringify({
       name,

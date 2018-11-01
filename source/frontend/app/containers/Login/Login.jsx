@@ -6,7 +6,7 @@ import './Login.sass';
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-import Splash from '../../img/Splash/Splash';
+import Splash from '../../assets/img/Splash/Splash';
 
 class Login extends Component {
   state = {

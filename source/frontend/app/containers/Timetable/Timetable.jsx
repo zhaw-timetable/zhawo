@@ -6,7 +6,7 @@ import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
 import timetableStore from '../../stores/TimetableStore';
-import * as timetableActions from '../../actions/TimetableActions';
+import * as scheduleActions from '../../actions/ScheduleActions';
 
 import Calendar from '../Calendar/Calendar';
 
@@ -19,7 +19,11 @@ class Timetable extends Component {
 
   componentDidMount() {
     const currentDate = new Date();
-    timetableActions.getTimetableByUsername(this.state.username, currentDate);
+    scheduleActions.getSchedule(
+      'students',
+      globalStore.getUsername(),
+      currentDate
+    );
   }
 
   // Bind change listener

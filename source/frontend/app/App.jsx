@@ -6,8 +6,8 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import './sass/main.sass';
-import './font/font.scss';
+import './assets/sass/main.sass';
+import './assets/font/font.scss';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 

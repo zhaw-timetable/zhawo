@@ -7,7 +7,7 @@ import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
 import timetableStore from '../../stores/TimetableStore';
-import * as timetableActions from '../../actions/TimetableActions';
+import * as scheduleActions from '../../actions/ScheduleActions';
 
 class Calendar extends Component {
   state = {
@@ -32,6 +32,10 @@ class Calendar extends Component {
     });
   };
 
+  handleDateClick = date => e => {
+    scheduleActions.gotoDay(date);
+  };
+
   render() {
     return (
       <div className="Calendar">
@@ -43,7 +47,7 @@ class Calendar extends Component {
               } ${isToday(date) ? 'today' : ''}`}
               key={date}
               name={date}
-              onClick={() => timetableActions.gotoDay(date)}
+              onClick={this.handleDateClick(date)}
             >
               <div className="name">{format(date, 'dd')}</div>
               <div className="date">{format(date, 'D')}</div>

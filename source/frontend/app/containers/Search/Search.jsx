@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import './Search.sass';
 
 import timetableStore from '../../stores/TimetableStore';
-import * as timetableActions from '../../actions/TimetableActions';
+import * as scheduleActions from '../../actions/ScheduleActions';
 
 class Search extends Component {
   state = { showInput: false };
 
-  // Bind change listener
-  componentWillMount() {}
-
-  // Unbind change listener
-  componentWillUnmount() {}
-
   toggleShowInput = () => {
-    console.log('changing show input');
     this.setState({
       showInput: !this.state.showInput
     });
@@ -25,7 +18,8 @@ class Search extends Component {
     const { key } = e;
     if (key === 'Enter') {
       const currentDate = new Date();
-      timetableActions.getTimetableByUsername(value, currentDate);
+      this.toggleShowInput();
+      scheduleActions.getSchedule('students', value, currentDate);
     }
   };
 
@@ -46,7 +40,7 @@ class Search extends Component {
             type="text"
             name="search"
             autoFocus
-            onKeyPress={e => this.handleKeyPress(e)}
+            onKeyPress={this.handleKeyPress}
           />
         )}
       </div>
