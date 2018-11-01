@@ -53,6 +53,11 @@
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
       "<rootDir>/node_modules/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/app/db.js",
+      "<rootDir>/app/logger.js",
+      "<rootDir>/app/setupJest.js"
     ]
   }
 }
