@@ -12,7 +12,9 @@ const HEADERS = {
 export function getResource(base, resource, resourceName, startDate) {
   return new Promise(async (resolve, reject) => {
     const dateString = format(new Date(startDate), 'YYYY-MM-DD');
-    const config = { GET, HEADERS };
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
     const url = `https://api.apps.engineering.zhaw.ch/v1/${base}/${resource}/${resourceName}?startingAt=${dateString}`;
     const response = await fetch(url, config).catch(err => logger.error(err));
     const json = await response.json();
