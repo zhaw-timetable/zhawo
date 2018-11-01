@@ -4,7 +4,7 @@
   "description": "A timetable progressive web application for ZHAW School of Engineering",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon -w app --exec babel-node app",
+    "start": "cross-env NODE_ENV=development nodemon -w app --exec babel-node app",
     "build": "./node_modules/.bin/babel app -d dist --copy-files --presets env,es2015,stage-2",
     "serve": "node dist",
     "test": "jest --coverage",
