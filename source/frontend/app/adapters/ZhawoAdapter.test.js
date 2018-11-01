@@ -1,4 +1,4 @@
-import * as timetableAdapter from './TimetableAdapter';
+import * as timetableAdapter from './ZhawoAdapter';
 
 beforeEach(() => {
   fetch.resetMocks();
