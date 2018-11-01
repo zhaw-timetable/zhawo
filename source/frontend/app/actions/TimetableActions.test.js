@@ -1,6 +1,6 @@
 import * as timetableActions from './TimetableActions';
 import dispatcher from '../dispatcher.js';
-import * as timetableAdapter from '../adapters/TimetableAdapter';
+import * as timetableAdapter from '../adapters/ZhawoAdapter';
 
 const USERNAME = 'bachmdo2';
 const STARTDATE = '2018-10-15';

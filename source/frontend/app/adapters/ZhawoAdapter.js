@@ -11,10 +11,12 @@ export function getResource(base, resource, name, startDate) {
       name,
       startDate
     });
-    const config = { POST, body, HEADERS };
+    const method = POST;
+    const headers = HEADERS;
+    const config = { method, body, headers };
     const response = await fetch(url, config).catch(err => console.error(err));
     const json = await response.json().catch(err => console.error(err));
     json ? resolve(json) : reject();
-    console.log(`Fetched from ${url}`);
+    console.info(`Fetched from ${url}`);
   });
 }
