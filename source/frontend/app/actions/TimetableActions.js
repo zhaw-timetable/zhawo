@@ -12,12 +12,7 @@ export const getTimetableByUsername = async function(name, startDate) {
     startOfWeek(startDate, { weekStartsOn: 1 }),
     'YYYY-MM-DD'
   );
-  const response = await api.getResource(
-    'schedules',
-    'students',
-    name,
-    dateString
-  );
+  const response = await api.getScheduleResource('students', name, dateString);
   if (response) {
     dispatcher.dispatch({
       type: 'GET_TIMETABLE_SUCCESS',
