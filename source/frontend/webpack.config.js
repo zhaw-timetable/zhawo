@@ -51,7 +51,7 @@ module.exports = {
     ]
   },
   devServer: {
-    https: true,
+    https: false,
     stats: {
       all: undefined,
       assets: false,
