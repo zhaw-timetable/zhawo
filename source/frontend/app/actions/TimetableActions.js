@@ -1,20 +1,18 @@
 import { format, startOfWeek } from 'date-fns';
 
 import dispatcher from '../dispatcher';
-import * as timetableAdapter from '../adapters/TimetableAdapter';
+import * as api from '../adapters/ZhawoAdapter';
 
-export const getTimetableByUsername = async function(userName, startDate) {
+//TODO: add param for resource here and change method name to be more general
+export const getTimetableByUsername = async function(name, startDate) {
   dispatcher.dispatch({
     type: 'GET_TIMETABLE_STARTED'
   });
-  const formattedDate = format(
+  const dateString = format(
     startOfWeek(startDate, { weekStartsOn: 1 }),
     'YYYY-MM-DD'
   );
-  const response = await timetableAdapter.fetchByUsername(
-    userName,
-    formattedDate
-  );
+  const response = await api.getScheduleResource('students', name, dateString);
   if (response) {
     dispatcher.dispatch({
       type: 'GET_TIMETABLE_SUCCESS',

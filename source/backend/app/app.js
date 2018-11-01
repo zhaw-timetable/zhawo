@@ -12,14 +12,14 @@ import path from 'path';
 let app = express();
 app.server = http.createServer(app);
 
-// logger if not test env
 if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));
+  process.env.NODE_ENV === 'development'
+    ? app.use(morgan('dev'))
+    : app.use(morgan('common'));
 }
 
 app.use(express.static(__dirname + '/bundle'));
 
-// 3rd party middleware
 app.use(
   cors({
     exposedHeaders: config.corsHeaders
@@ -32,18 +32,17 @@ app.use(
   })
 );
 
-// connect to db
+// connect to db if necessary
 initializeDb(db => {
-  // internal middleware
   app.use(middleware({ config, db }));
-
-  // api router
   app.use('/api', api({ config, db }));
 });
 
-// only used in production, bundle contains frontend
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/bundle/index.html'));
-});
+// only used in production, bundle contains frontend build
+if (process.env.NODE_ENV === 'production') {
+  app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/bundle/index.html'));
+  });
+}
 
 export default app;
