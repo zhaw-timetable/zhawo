@@ -4,10 +4,18 @@ const signale = new Signale({
   scope: 'backend'
 });
 
-signale.config({
-  displayFilename: true,
-  displayTimestamp: true,
-  displayDate: true
-});
+if (process.env.NODE_ENV === 'production') {
+  signale.config({
+    displayFilename: true,
+    displayTimestamp: true,
+    displayDate: true
+  });
+} else {
+  signale.config({
+    displayFilename: true,
+    displayTimestamp: false,
+    displayDate: false
+  });
+}
 
 export default signale;
