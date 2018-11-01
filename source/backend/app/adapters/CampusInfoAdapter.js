@@ -8,14 +8,30 @@ const HEADERS = {
   'Content-Type': 'application/json',
   'User-Agent': 'Zhawo (https://github.com/zhaw-timetable/zhawo)'
 };
+const apiUrl = 'https://api.apps.engineering.zhaw.ch/v1';
 
-export function getResource(base, resource, resourceName, startDate) {
+// f.ex. route = students, name = bachmdo2, startDate = date
+export function getScheduleResource(route, name, startDate) {
   return new Promise(async (resolve, reject) => {
     const dateString = format(new Date(startDate), 'YYYY-MM-DD');
     const method = GET;
     const headers = HEADERS;
     const config = { method, headers };
-    const url = `https://api.apps.engineering.zhaw.ch/v1/${base}/${resource}/${resourceName}?startingAt=${dateString}`;
+    const url = `${apiUrl}/schedules/${route}/${name}?startingAt=${dateString}`;
+    const response = await fetch(url, config).catch(err => logger.error(err));
+    const json = await response.json();
+    json ? resolve(json) : reject();
+    logger.log(`Fetched from ${url}`);
+  });
+}
+
+// f.ex. route = students
+export function getPossibleNames(route) {
+  return new Promise(async (resolve, reject) => {
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const url = `${apiUrl}/schedules/${route}/`;
     const response = await fetch(url, config).catch(err => logger.error(err));
     const json = await response.json();
     json ? resolve(json) : reject();

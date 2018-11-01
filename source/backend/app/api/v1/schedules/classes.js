@@ -8,12 +8,7 @@ export default ({ config, db }) => {
   router.post('/', async (req, res) => {
     const name = req.body.name;
     const startDate = req.body.startDate;
-    const resource = await api.getResource(
-      'schedules',
-      'classes',
-      name,
-      startDate
-    );
+    const resource = await api.getScheduleResource('classes', name, startDate);
     res.json(resource);
   });
 
