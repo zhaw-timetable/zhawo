@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import timetable from './timetable';
+import schedules from './schedules';
 
 export default ({ config, db }) => {
   let v1 = Router();
-  v1.use('/timetable', timetable({ config, db }));
+  v1.use('/schedules', timetable({ config, db }));
   return v1;
 };
