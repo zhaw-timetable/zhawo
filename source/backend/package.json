@@ -49,6 +49,10 @@
     "automock": false,
     "setupFiles": [
       "./app/setupJest.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
     ]
   }
 }
