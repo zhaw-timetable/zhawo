@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
-import './Timetable.sass';
+import './Schedule.sass';
 
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
-import timetableStore from '../../stores/TimetableStore';
+import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
 import Calendar from '../Calendar/Calendar';
 
-class Timetable extends Component {
+class Schedule extends Component {
   state = {
     month: globalStore.getUsername(),
-    timetable: timetableStore.timetableDisplayDate,
+    schedule: scheduleStore.scheduleDisplayDate,
     username: globalStore.getUsername()
   };
 
@@ -29,13 +29,13 @@ class Timetable extends Component {
   // Bind change listener
   componentWillMount() {
     globalStore.on('name_changed', this.refreshName);
-    timetableStore.on('timetable_changed', this.refreshTimetable);
+    scheduleStore.on('timetable_changed', this.refreshSchedule);
   }
 
   // Unbind change listener
   componentWillUnmount() {
     globalStore.removeListener('name_changed', this.refreshName);
-    timetableStore.removeListener('timetable_changed', this.refreshTimetable);
+    scheduleStore.removeListener('timetable_changed', this.refreshSchedule);
   }
 
   refreshName = () => {
@@ -44,18 +44,18 @@ class Timetable extends Component {
     });
   };
 
-  refreshTimetable = () => {
+  refreshSchedule = () => {
     this.setState({
-      timetable: timetableStore.timetableDisplayDate
+      schedule: scheduleStore.scheduleDisplayDate
     });
   };
 
   render() {
     return (
-      <div className="Timetable">
+      <div className="Schedule">
         <Calendar />
-        {this.state.timetable &&
-          this.state.timetable.slots.map(slot => (
+        {this.state.schedule &&
+          this.state.schedule.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
               <div className="SlotTime">
                 <div className="SlotStartTime">
@@ -67,8 +67,8 @@ class Timetable extends Component {
               </div>
             </Fragment>
           ))}
-        {this.state.timetable &&
-          this.state.timetable.events.map(event => (
+        {this.state.schedule &&
+          this.state.schedule.events.map(event => (
             <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
               <div
                 className="Event"
@@ -86,4 +86,4 @@ class Timetable extends Component {
   }
 }
 
-export default Timetable;
+export default Schedule;

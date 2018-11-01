@@ -3,32 +3,29 @@ import { format, isToday, isSameDay } from 'date-fns';
 
 import './Calendar.sass';
 
-import globalStore from '../../stores/GlobalStore';
-import * as globalActions from '../../actions/GlobalActions';
-
-import timetableStore from '../../stores/TimetableStore';
+import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
 class Calendar extends Component {
   state = {
-    displayDate: timetableStore.displayDate,
-    displayWeek: timetableStore.displayWeek
+    displayDate: scheduleStore.displayDate,
+    displayWeek: scheduleStore.displayWeek
   };
 
   // Bind change listener
   componentWillMount() {
-    timetableStore.on('timetable_changed', this.refreshNavigation);
+    scheduleStore.on('timetable_changed', this.refreshNavigation);
   }
 
   // Unbind change listener
   componentWillUnmount() {
-    timetableStore.on('timetable_changed', this.refreshNavigation);
+    scheduleStore.on('timetable_changed', this.refreshNavigation);
   }
 
   refreshNavigation = () => {
     this.setState({
-      displayDate: timetableStore.displayDate,
-      displayWeek: timetableStore.displayWeek
+      displayDate: scheduleStore.displayDate,
+      displayWeek: scheduleStore.displayWeek
     });
   };
 

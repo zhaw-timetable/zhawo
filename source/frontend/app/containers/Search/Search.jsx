@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Search.sass';
 
-import timetableStore from '../../stores/TimetableStore';
+import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
 class Search extends Component {

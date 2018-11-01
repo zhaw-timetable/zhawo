@@ -12,7 +12,7 @@ import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
 import AppBar from './containers/AppBar/AppBar.jsx';
-import Timetable from './containers/Timetable/Timetable.jsx';
+import Schedule from './containers/Schedule/Schedule.jsx';
 import Nav from './containers/Nav/Nav.jsx';
 import NotFound from './containers/NotFound/NotFound.jsx';
 import Login from './containers/Login/Login.jsx';
@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <SecretRoute exact path="/" component={Timetable} />
+          <SecretRoute exact path="/" component={Schedule} />
           <SecretRoute exact path="/zhawo" component={ZHAWO} />
           <SecretRoute exact path="/vszhaw" component={VsZHAW} />
           <SecretRoute exact path="/menu" component={Menu} />

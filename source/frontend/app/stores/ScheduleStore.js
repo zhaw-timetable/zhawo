@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
+import dispatcher from '../dispatcher';
+
 import {
-  format,
   startOfWeek,
   addDays,
   isSameDay,
@@ -8,16 +9,15 @@ import {
   getHours,
   getMinutes
 } from 'date-fns';
-import dispatcher from '../dispatcher';
 
-class TimetableStore extends EventEmitter {
+class ScheduleStore extends EventEmitter {
   constructor() {
     super();
     this.displayDate = addDays(new Date(), 0);
     this.displayWeek = this.createDisplayWeek(this.displayDate);
     this.slots = [];
-    this.timetable = null;
-    this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
+    this.schedule = null;
+    this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
   }
 
   getSearchUsername() {
@@ -28,21 +28,21 @@ class TimetableStore extends EventEmitter {
     switch (action.type) {
       case 'GET_SCHEDULE_OK':
         this.slots = action.payload.days[0].slots;
-        this.timetable = this.addSlotInfoToEvents(action.payload);
-        this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
+        this.schedule = this.addSlotInfoToEvents(action.payload);
+        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
         this.emit('timetable_changed');
         break;
       case 'GOTO_DAY':
         this.displayDate = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDate);
-        this.timetableDisplayDate = this.findTimetableForDate(this.displayDate);
+        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
         this.emit('timetable_changed');
         break;
     }
   }
 
-  addSlotInfoToEvents(timetable) {
-    timetable.days.forEach(day => {
+  addSlotInfoToEvents(schedule) {
+    schedule.days.forEach(day => {
       day.events.forEach(event => {
         event.startSlot = this.slots.findIndex(slot => {
           return (
@@ -53,7 +53,7 @@ class TimetableStore extends EventEmitter {
         event.endSlot = event.startSlot + event.slots.length;
       });
     });
-    return timetable;
+    return schedule;
   }
 
   createDisplayWeek(date) {
@@ -62,9 +62,9 @@ class TimetableStore extends EventEmitter {
     return weekArray.map((value, index) => addDays(weekStartDate, index));
   }
 
-  findTimetableForDate(date) {
-    if (this.timetable) {
-      const foundDay = this.timetable.days.find(day => {
+  findScheduleForDate(date) {
+    if (this.schedule) {
+      const foundDay = this.schedule.days.find(day => {
         return isSameDay(startOfDay(day.date), startOfDay(date));
       });
       return foundDay;
@@ -74,8 +74,8 @@ class TimetableStore extends EventEmitter {
   }
 }
 
-const timetableStore = new TimetableStore();
+const scheduleStore = new ScheduleStore();
 
-dispatcher.register(timetableStore.handleActions.bind(timetableStore));
+dispatcher.register(scheduleStore.handleActions.bind(scheduleStore));
 
-export default timetableStore;
+export default scheduleStore;
