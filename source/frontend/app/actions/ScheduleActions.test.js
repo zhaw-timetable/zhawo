@@ -1,6 +1,6 @@
-import * as timetableActions from './TimetableActions';
+import * as scheduleActions from './ScheduleActions';
 import dispatcher from '../dispatcher.js';
-import * as timetableAdapter from '../adapters/ZhawoAdapter';
+import * as api from '../adapters/ZhawoAdapter';
 
 const USERNAME = 'bachmdo2';
 const STARTDATE = '2018-10-15';
@@ -13,52 +13,46 @@ beforeEach(() => {
 });
 
 xit('import should be defined', () => {
-  expect(timetableActions).toBeDefined();
+  expect(scheduleActions).toBeDefined();
 });
 
 xit('all actions should be defined', () => {
-  expect(timetableActions.getTimetableByUsername).toBeDefined();
+  expect(scheduleActions.getScheduleByUsername).toBeDefined();
 });
 
-xit('getTimetableByUsername should dispatch correct type with payload when getting response', async () => {
-  timetableAdapter.fetchByUsername = jest.fn(() => Promise.resolve(PAYLOAD));
-  await timetableActions.getTimetableByUsername(USERNAME, STARTDATE);
+xit('getScheduleByUsername should dispatch correct type with payload when getting response', async () => {
+  api.fetchByUsername = jest.fn(() => Promise.resolve(PAYLOAD));
+  await scheduleActions.getScheduleByUsername(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
-    type: 'GET_TIMETABLE_STARTED'
+    type: 'GET_Schedule_STARTED'
   });
-  expect(timetableAdapter.fetchByUsername).toHaveBeenCalled();
-  expect(timetableAdapter.fetchByUsername).toHaveBeenCalledWith(
-    USERNAME,
-    STARTDATE
-  );
+  expect(api.fetchByUsername).toHaveBeenCalled();
+  expect(api.fetchByUsername).toHaveBeenCalledWith(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalledTimes(2);
   expect(dispatcher.dispatch).toHaveBeenNthCalledWith(2, {
-    type: 'GET_TIMETABLE_SUCCESS',
+    type: 'GET_Schedule_SUCCESS',
     payload: PAYLOAD
   });
 });
 
-xit('getTimetableByUsername should dispatch correct type when NOT getting response', async () => {
-  timetableAdapter.fetchByUsername = jest.fn(() => Promise.resolve(null));
-  await timetableActions.getTimetableByUsername(USERNAME, STARTDATE);
+xit('getScheduleByUsername should dispatch correct type when NOT getting response', async () => {
+  api.fetchByUsername = jest.fn(() => Promise.resolve(null));
+  await scheduleActions.getScheduleByUsername(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenNthCalledWith(1, {
-    type: 'GET_TIMETABLE_STARTED'
+    type: 'GET_Schedule_STARTED'
   });
-  expect(timetableAdapter.fetchByUsername).toHaveBeenCalled();
-  expect(timetableAdapter.fetchByUsername).toHaveBeenCalledWith(
-    USERNAME,
-    STARTDATE
-  );
+  expect(api.fetchByUsername).toHaveBeenCalled();
+  expect(api.fetchByUsername).toHaveBeenCalledWith(USERNAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalledTimes(2);
   expect(dispatcher.dispatch).toHaveBeenNthCalledWith(2, {
-    type: 'GET_TIMETABLE_FAIL'
+    type: 'GET_Schedule_FAIL'
   });
 });
 
 it('gotoDay should dispatch correct type with payload', () => {
-  timetableActions.gotoDay(DATE);
+  scheduleActions.gotoDay(DATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'GOTO_DAY',
