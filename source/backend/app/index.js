@@ -6,7 +6,7 @@ import config from './config.json';
 app.server.listen(process.env.PORT || config.port, () => {
   let host = app.server.address().address;
   host = host == '::' ? 'localhost' : host;
-  logger.success(
+  logger.log(
     `Express.js server listening on http://${host}:${app.server.address().port}`
   );
 });
