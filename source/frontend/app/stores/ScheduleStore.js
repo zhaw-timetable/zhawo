@@ -15,7 +15,7 @@ class ScheduleStore extends EventEmitter {
     super();
     this.displayDate = addDays(new Date(), 0);
     this.displayWeek = this.createDisplayWeek(this.displayDate);
-    this.slots = [];
+    this.slots = defaultSlots;
     this.schedule = null;
     this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
   }
@@ -27,8 +27,19 @@ class ScheduleStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'GET_SCHEDULE_OK':
-        this.slots = action.payload.days[0].slots;
+        if (action.payload.days) {
+          this.slots = action.payload.days[0].slots || defaultSlots;
+        }
         this.schedule = this.addSlotInfoToEvents(action.payload);
+        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
+        this.emit('timetable_changed');
+        break;
+      case 'GET_SCHEDULE_PRELOAD_OK':
+        if (action.payload.days) {
+          this.slots = action.payload.days[0].slots || defaultSlots;
+        }
+        let extendedSchedule = this.addSlotInfoToEvents(action.payload);
+        this.schedule.days = [...this.schedule.days, ...extendedSchedule.days];
         this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
         this.emit('timetable_changed');
         break;
@@ -42,17 +53,20 @@ class ScheduleStore extends EventEmitter {
   }
 
   addSlotInfoToEvents(schedule) {
-    schedule.days.forEach(day => {
-      day.events.forEach(event => {
-        event.startSlot = this.slots.findIndex(slot => {
-          return (
-            getHours(slot.startTime) === getHours(event.slots[0].startTime) &&
-            getMinutes(slot.startTime) === getMinutes(event.slots[0].startTime)
-          );
+    if (schedule.days) {
+      schedule.days.forEach(day => {
+        day.events.forEach(event => {
+          event.startSlot = this.slots.findIndex(slot => {
+            return (
+              getHours(slot.startTime) === getHours(event.slots[0].startTime) &&
+              getMinutes(slot.startTime) ===
+                getMinutes(event.slots[0].startTime)
+            );
+          });
+          event.endSlot = event.startSlot + event.slots.length;
         });
-        event.endSlot = event.startSlot + event.slots.length;
       });
-    });
+    }
     return schedule;
   }
 
@@ -63,7 +77,7 @@ class ScheduleStore extends EventEmitter {
   }
 
   findScheduleForDate(date) {
-    if (this.schedule) {
+    if (this.schedule && this.schedule.days) {
       const foundDay = this.schedule.days.find(day => {
         return isSameDay(startOfDay(day.date), startOfDay(date));
       });
@@ -73,6 +87,69 @@ class ScheduleStore extends EventEmitter {
     }
   }
 }
+
+const defaultSlots = [
+  {
+    endTime: '2018-10-29T08:45:00+01:00',
+    startTime: '2018-10-29T08:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T09:35:00+01:00',
+    startTime: '2018-10-29T08:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T10:45:00+01:00',
+    startTime: '2018-10-29T10:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T11:35:00+01:00',
+    startTime: '2018-10-29T10:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T12:45:00+01:00',
+    startTime: '2018-10-29T12:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T13:35:00+01:00',
+    startTime: '2018-10-29T12:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T14:45:00+01:00',
+    startTime: '2018-10-29T14:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T15:35:00+01:00',
+    startTime: '2018-10-29T14:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T16:45:00+01:00',
+    startTime: '2018-10-29T16:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T17:35:00+01:00',
+    startTime: '2018-10-29T16:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T18:30:00+01:00',
+    startTime: '2018-10-29T17:45:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T19:25:00+01:00',
+    startTime: '2018-10-29T18:40:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T20:10:00+01:00',
+    startTime: '2018-10-29T19:25:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T21:05:00+01:00',
+    startTime: '2018-10-29T20:20:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T21:50:00+01:00',
+    startTime: '2018-10-29T21:05:00+01:00'
+  }
+];
 
 const scheduleStore = new ScheduleStore();
 
