@@ -13,6 +13,7 @@ import Calendar from '../Calendar/Calendar';
 class Schedule extends Component {
   state = {
     month: globalStore.getUsername(),
+    slots: scheduleStore.slots,
     schedule: scheduleStore.scheduleDisplayDate,
     username: globalStore.getUsername()
   };
@@ -46,6 +47,7 @@ class Schedule extends Component {
 
   refreshSchedule = () => {
     this.setState({
+      slots: scheduleStore.slots,
       schedule: scheduleStore.scheduleDisplayDate
     });
   };
@@ -54,8 +56,8 @@ class Schedule extends Component {
     return (
       <div className="Schedule">
         <Calendar />
-        {this.state.schedule &&
-          this.state.schedule.slots.map(slot => (
+        {this.state.slots &&
+          this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
               <div className="SlotTime">
                 <div className="SlotStartTime">

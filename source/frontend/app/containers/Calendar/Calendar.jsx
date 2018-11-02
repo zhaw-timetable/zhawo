@@ -22,7 +22,7 @@ class Calendar extends Component {
 
   // Unbind change listener
   componentWillUnmount() {
-    scheduleStore.on('timetable_changed', this.refreshNavigation);
+    scheduleStore.removeListener('timetable_changed', this.refreshNavigation);
   }
 
   refreshNavigation = () => {

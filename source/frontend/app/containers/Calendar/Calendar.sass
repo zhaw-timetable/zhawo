@@ -20,15 +20,10 @@
       align-items: center
       max-width: 0.25fr
 
-    .today
-      box-sizing: border-box
-      border: solid 2px $secondary-color
-
-    .active
-      border-bottom: solid 4px $accent-color
-
     .day
       box-sizing: border-box
+      border: solid 2px transparent
+      border-bottom: solid 5px transparent
       padding-bottom: 5px
 
       &:hover
@@ -43,3 +38,9 @@
       .date
         font-family: Roboto Light
         font-size: 14px
+
+    .today
+      border: solid 2px $secondary-color
+
+    .active
+      border-bottom: solid 5px $accent-color
