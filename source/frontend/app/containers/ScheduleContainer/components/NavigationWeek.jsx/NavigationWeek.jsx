@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { format, isToday, isSameDay, addWeeks, subWeeks } from 'date-fns';
+import {
+  format,
+  isToday,
+  isSameDay,
+  addWeeks,
+  subWeeks,
+  getISOWeek
+} from 'date-fns';
+import * as deLocale from 'date-fns/locale/de/index.js';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
 import './NavigationWeek.sass';
 
@@ -46,6 +55,10 @@ class Calendar extends Component {
     scheduleActions.gotoDay(newDate);
   };
 
+  handleMonthClick = e => {
+    console.log('TODO: integrate month navigation here');
+  };
+
   render() {
     return (
       <div className="NavigationWeek">
@@ -67,8 +80,13 @@ class Calendar extends Component {
               name={date}
               onClick={this.handleDateClick(date)}
             >
-              <div className="name">{format(date, 'dd')}</div>
-              <div className="date">{format(date, 'D')}</div>
+              <div className="name">
+                {format(date, 'dd', { locale: deLocale })}
+              </div>
+              <div className="date">
+                {format(date, 'D')}.
+                {format(this.state.displayDay, 'M', { locale: deLocale })}
+              </div>
             </div>
           ))}
           <div className="arrow">
@@ -80,6 +98,14 @@ class Calendar extends Component {
             </IconButton>
           </div>
         </div>
+        {/* <Button
+          onClick={this.handleMonthClick}
+          className="MonthButton"
+          variant="outlined"
+        >
+          {format(this.state.displayDay, 'MMMM', { locale: deLocale })} / Woche{' '}
+          {getISOWeek(this.state.displayDay)}
+        </Button> */}
       </div>
     );
   }
