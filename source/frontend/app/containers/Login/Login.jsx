@@ -10,7 +10,7 @@ import Splash from '../../assets/img/Splash/Splash';
 
 class Login extends Component {
   state = {
-    input: '',
+    input: 'bachmdo2',
     redirectToPreviousRoute: false
   };
 
@@ -56,13 +56,14 @@ class Login extends Component {
           <div className="group">
             <input
               placeholder="Username"
+              defaultValue={this.state.input}
               type="text"
               required
-              onChange={e => this.handleUsernameInputChange(e)}
-              onKeyPress={e => this.handleKeyPress(e)}
+              onChange={this.handleUsernameInputChange}
+              onKeyPress={this.handleKeyPress}
             />
           </div>
-          <button onClick={() => this.setUsername()}>Let's Go</button>
+          <button onClick={this.setUsername}>Let's Go</button>
         </div>
       </div>
     );

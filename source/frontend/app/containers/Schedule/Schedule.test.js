@@ -10,11 +10,11 @@ beforeEach(() => {
   console.log = jest.fn();
 });
 
-it('renders without crashing', () => {
+xit('renders without crashing', () => {
   shallow(<Schedule />);
 });
 
-it('should render one root element with className Schedule', () => {
+xit('should render one root element with className Schedule', () => {
   const wrapper = shallow(<Schedule />);
   expect(wrapper.find('.Schedule')).toHaveLength(1);
 });
