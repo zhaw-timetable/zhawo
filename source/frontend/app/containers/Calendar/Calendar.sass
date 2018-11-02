@@ -2,20 +2,23 @@
 
 .Calendar
   grid-column-start: span 2
-  height: 35
-  padding: 0 10px
   margin-top: 15px
-  margin-bottom: 15px
+  margin-bottom: 10px
   text-align: center
-  // border-bottom: solid 0.5px
   border-color: $secondary-color
   box-sizing: border-box
+  max-height: 68px
 
   .week
     box-sizing: border-box
     display: grid
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+    grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
     height: 100%
+    
+    .arrow
+      display: flex
+      align-items: center
+      max-width: 0.25fr
 
     .today
       box-sizing: border-box

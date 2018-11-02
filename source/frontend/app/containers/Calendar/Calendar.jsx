@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { format, isToday, isSameDay } from 'date-fns';
+import { format, isToday, isSameDay, addWeeks, subWeeks } from 'date-fns';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import IconButton from '@material-ui/core/IconButton';
 
 import './Calendar.sass';
 
@@ -29,14 +32,32 @@ class Calendar extends Component {
     });
   };
 
-  handleDateClick = date => e => {
-    scheduleActions.gotoDay(date);
+  handleDateClick = newDate => e => {
+    scheduleActions.gotoDay(newDate);
+  };
+
+  handleWeekBackClick = e => {
+    const newDate = subWeeks(this.state.displayDate, 1);
+    scheduleActions.gotoDay(newDate);
+  };
+
+  handleWeekForwardClick = e => {
+    const newDate = addWeeks(this.state.displayDate, 1);
+    scheduleActions.gotoDay(newDate);
   };
 
   render() {
     return (
       <div className="Calendar">
         <div className="week">
+          <div className="arrow">
+            <IconButton
+              onClick={this.handleWeekBackClick}
+              aria-label="WeekBack"
+            >
+              <KeyboardArrowLeftIcon />
+            </IconButton>
+          </div>
           {this.state.displayWeek.map(date => (
             <div
               className={`day ${
@@ -50,6 +71,14 @@ class Calendar extends Component {
               <div className="date">{format(date, 'D')}</div>
             </div>
           ))}
+          <div className="arrow">
+            <IconButton
+              onClick={this.handleWeekForwardClick}
+              aria-label="WeekForward"
+            >
+              <KeyboardArrowRightIcon />
+            </IconButton>
+          </div>
         </div>
       </div>
     );
