@@ -40,7 +40,6 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
       }
     }
     schedule ? resolve(schedule) : reject({ status: 404 });
-    console.info(`Fetched from ${url}`);
   });
 }
 
@@ -54,7 +53,6 @@ export function getPossibleNames(route) {
     const response = await fetch(url, config).catch(err => console.error(err));
     const json = await response.json();
     json ? resolve(json) : reject();
-    console.info(`Fetched from ${url}`);
   });
 }
 
