@@ -1,8 +1,8 @@
 import dispatcher from '../dispatcher';
 
-export function setUsername(text) {
+export const setCurrentUser = text => {
   dispatcher.dispatch({
-    type: 'SET_USERNAME',
+    type: 'SET_CURRENT_USER',
     payload: text
   });
-}
+};

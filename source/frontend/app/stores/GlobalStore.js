@@ -4,22 +4,14 @@ import dispatcher from '../dispatcher';
 class GlobalStore extends EventEmitter {
   constructor() {
     super();
-    this.username = '';
-  }
-
-  getUsername() {
-    return this.username;
+    this.currentUser = '';
   }
 
   handleActions(action) {
     switch (action.type) {
-      case 'SET_NAME':
-        this.name = action.payload;
-        this.emit('name_changed');
-        break;
-      case 'SET_USERNAME':
-        this.username = action.payload;
-        this.emit('username_changed');
+      case 'SET_CURRENT_USER':
+        this.currentUser = action.payload;
+        this.emit('current_user_changed');
         break;
     }
   }
