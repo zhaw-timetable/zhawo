@@ -7,19 +7,17 @@ import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
 import Splash from '../../assets/img/Splash/Splash';
+import LoginSearch from './components/LoginSearch/LoginSearch';
 
 class LoginContainer extends Component {
   state = {
-    input: 'bachmdo2',
     redirectToPreviousRoute: false
   };
 
-  // Bind change listener
   componentWillMount() {
     globalStore.on('current_user_changed', this.login);
   }
 
-  // Unbind change listener
   componentWillUnmount() {
     globalStore.removeListener('current_user_changed', this.login);
   }
@@ -28,19 +26,8 @@ class LoginContainer extends Component {
     this.setState({ input: e.target.value });
   };
 
-  handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      this.setCurrentUser();
-    }
-  };
-
   login = () => {
     this.setState({ redirectToPreviousRoute: true });
-  };
-
-  setCurrentUser = () => {
-    // Sets globalStore currentUser to value of input
-    globalActions.setCurrentUser(this.state.input);
   };
 
   render() {
@@ -53,19 +40,7 @@ class LoginContainer extends Component {
     return (
       <div className="LoginContainer">
         <Splash />
-        <div className="formContainer">
-          <div className="group">
-            <input
-              placeholder="Username"
-              defaultValue={this.state.input}
-              type="text"
-              required
-              onChange={this.handleUsernameInputChange}
-              onKeyPress={this.handleKeyPress}
-            />
-          </div>
-          <button onClick={this.setCurrentUser}>Let's Go</button>
-        </div>
+        <LoginSearch />
       </div>
     );
   }
