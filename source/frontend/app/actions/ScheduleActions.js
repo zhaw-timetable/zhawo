@@ -20,7 +20,6 @@ export const getSchedule = async function(route, name, startDate) {
     .getScheduleResource(route, name, startDate, 0)
     .catch(err => {
       console.error(err);
-      // maybe dispatch FAILED event here
     });
   dispatcher.dispatch({
     type: `GET_SCHEDULE_OK${typeSpecifier}`,
@@ -37,7 +36,6 @@ export const getSchedule = async function(route, name, startDate) {
     .getScheduleResource(route, name, startDate, 20)
     .catch(err => {
       console.error(err);
-      // maybe dispatch FAILED event here
     });
   dispatcher.dispatch({
     type: `GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`,
