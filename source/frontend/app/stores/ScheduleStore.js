@@ -13,11 +13,17 @@ import {
 class ScheduleStore extends EventEmitter {
   constructor() {
     super();
-    this.displayDate = addDays(new Date(), 0);
-    this.displayWeek = this.createDisplayWeek(this.displayDate);
+    // general properties
+    this.currentDate = new Date();
     this.slots = defaultSlots;
+    // properties for display
+    this.displayDay = this.currentDate;
+    this.displayWeek = this.createDisplayWeek(this.displayDay);
+    this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+    // properties for data management
     this.schedule = null;
-    this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
+    this.scheduleForCurrentUser = null;
+    this.scheduleForSearchUser = null;
   }
 
   getSearchUsername() {
@@ -26,28 +32,28 @@ class ScheduleStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      case 'GET_SCHEDULE_OK':
+      case 'GET_SCHEDULE_OK_FOR_CU':
         if (action.payload.days) {
           this.slots = action.payload.days[0].slots || defaultSlots;
         }
         this.schedule = this.addSlotInfoToEvents(action.payload);
-        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
-        this.emit('timetable_changed');
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.emit('schedule_changed');
         break;
-      case 'GET_SCHEDULE_PRELOAD_OK':
+      case 'GET_SCHEDULE_PRELOAD_OK_FOR_CU':
         if (action.payload.days) {
           this.slots = action.payload.days[0].slots || defaultSlots;
         }
         let extendedSchedule = this.addSlotInfoToEvents(action.payload);
         this.schedule.days = [...this.schedule.days, ...extendedSchedule.days];
-        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
-        this.emit('timetable_changed');
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.emit('schedule_changed');
         break;
       case 'GOTO_DAY':
-        this.displayDate = action.payload;
-        this.displayWeek = this.createDisplayWeek(this.displayDate);
-        this.scheduleDisplayDate = this.findScheduleForDate(this.displayDate);
-        this.emit('timetable_changed');
+        this.displayDay = action.payload;
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.emit('schedule_changed');
         break;
     }
   }
@@ -76,7 +82,7 @@ class ScheduleStore extends EventEmitter {
     return weekArray.map((value, index) => addDays(weekStartDate, index));
   }
 
-  findScheduleForDate(date) {
+  findScheduleForDay(date) {
     if (this.schedule && this.schedule.days) {
       const foundDay = this.schedule.days.find(day => {
         return isSameDay(startOfDay(day.date), startOfDay(date));

@@ -13,21 +13,21 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 class Calendar extends Component {
   state = {
-    displayDate: scheduleStore.displayDate,
+    displayDay: scheduleStore.displayDay,
     displayWeek: scheduleStore.displayWeek
   };
 
   componentWillMount() {
-    scheduleStore.on('timetable_changed', this.refreshNavigation);
+    scheduleStore.on('schedule_changed', this.refreshNavigation);
   }
 
   componentWillUnmount() {
-    scheduleStore.removeListener('timetable_changed', this.refreshNavigation);
+    scheduleStore.removeListener('schedule_changed', this.refreshNavigation);
   }
 
   refreshNavigation = () => {
     this.setState({
-      displayDate: scheduleStore.displayDate,
+      displayDay: scheduleStore.displayDay,
       displayWeek: scheduleStore.displayWeek
     });
   };
@@ -37,12 +37,12 @@ class Calendar extends Component {
   };
 
   handleWeekBackClick = e => {
-    const newDate = subWeeks(this.state.displayDate, 1);
+    const newDate = subWeeks(this.state.displayDay, 1);
     scheduleActions.gotoDay(newDate);
   };
 
   handleWeekForwardClick = e => {
-    const newDate = addWeeks(this.state.displayDate, 1);
+    const newDate = addWeeks(this.state.displayDay, 1);
     scheduleActions.gotoDay(newDate);
   };
 
@@ -61,7 +61,7 @@ class Calendar extends Component {
           {this.state.displayWeek.map(date => (
             <div
               className={`day ${
-                isSameDay(date, this.state.displayDate) ? 'active' : ''
+                isSameDay(date, this.state.displayDay) ? 'active' : ''
               } ${isToday(date) ? 'today' : ''}`}
               key={date}
               name={date}

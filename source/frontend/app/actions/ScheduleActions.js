@@ -1,41 +1,49 @@
 import dispatcher from '../dispatcher';
 import * as api from '../adapters/ZhawoAdapter';
 
+import globalStore from '../stores/GlobalStore';
+
 export const getSchedule = async function(route, name, startDate) {
+  // Check if this is for the currentUser or for a search
+  const isForCurrentUser = globalStore.currentUser === name;
+  let typeSpecifier;
+  isForCurrentUser
+    ? (typeSpecifier = '_FOR_CU')
+    : (typeSpecifier = '_FOR_SEARCH');
   // Notifying store that async functions is started -> display load spinner
   dispatcher.dispatch({
-    type: 'GET_SCHEDULE_STARTED'
+    type: `GET_SCHEDULE_STARTED${typeSpecifier}`
   });
-  console.log('GET_SCHEDULE_STARTED');
+  console.log(`GET_SCHEDULE_STARTED${typeSpecifier}`);
   // Fetching for current date, for fast display of current schedule
   let schedule = await api
     .getScheduleResource(route, name, startDate, 0)
     .catch(err => {
       console.error(err);
-      //TODO: maybe dispatch FAILED event here
+      // maybe dispatch FAILED event here
     });
   dispatcher.dispatch({
-    type: 'GET_SCHEDULE_OK',
+    type: `GET_SCHEDULE_OK${typeSpecifier}`,
     payload: schedule
   });
-  console.log('GET_SCHEDULE_OK');
+  console.log(`GET_SCHEDULE_OK${typeSpecifier}`);
   // Notifying store that async functions is started -> display load spinner
   dispatcher.dispatch({
-    type: 'GET_SCHEDULE_PRELOAD_STARTED'
+    type: `GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`
   });
-  console.log('GET_SCHEDULE_PRELOAD_STARTED');
+  console.log(`GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`);
   // Fetching around current date, for preloading
   schedule = await api
     .getScheduleResource(route, name, startDate, 20)
     .catch(err => {
       console.error(err);
-      //TODO: maybe dispatch FAILED event here
+      // maybe dispatch FAILED event here
     });
   dispatcher.dispatch({
-    type: 'GET_SCHEDULE_PRELOAD_OK',
+    type: `GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`,
     payload: schedule
   });
-  console.log('GET_SCHEDULE_PRELOAD_OK');
+  console.log(`GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`);
 };
 
 export const gotoDay = function(targetDate) {

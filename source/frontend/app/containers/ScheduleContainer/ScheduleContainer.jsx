@@ -13,33 +13,31 @@ import NavigationWeek from './components/NavigationWeek.jsx/NavigationWeek';
 class Schedule extends Component {
   state = {
     slots: scheduleStore.slots,
-    schedule: scheduleStore.scheduleDisplayDate
+    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
   };
 
   componentDidMount() {
-    //TODO: should probable get currentDate from store?
-    const currentDate = new Date();
     //TODO: save student or lecturer in globalStore and get value from there
     // this will not load properly if lecturer is using the app
     scheduleActions.getSchedule(
       'students',
       globalStore.currentUser,
-      currentDate
+      scheduleStore.currentDate
     );
   }
 
   componentWillMount() {
-    scheduleStore.on('timetable_changed', this.refreshSchedule);
+    scheduleStore.on('schedule_changed', this.refreshSchedule);
   }
 
   componentWillUnmount() {
-    scheduleStore.removeListener('timetable_changed', this.refreshSchedule);
+    scheduleStore.removeListener('schedule_changed', this.refreshSchedule);
   }
 
   refreshSchedule = () => {
     this.setState({
       slots: scheduleStore.slots,
-      schedule: scheduleStore.scheduleDisplayDate
+      scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
     });
   };
 
@@ -60,8 +58,8 @@ class Schedule extends Component {
               </div>
             </Fragment>
           ))}
-        {this.state.schedule &&
-          this.state.schedule.events.map(event => (
+        {this.state.scheduleForDisplayDay &&
+          this.state.scheduleForDisplayDay.events.map(event => (
             <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
               <div
                 className="Event"
