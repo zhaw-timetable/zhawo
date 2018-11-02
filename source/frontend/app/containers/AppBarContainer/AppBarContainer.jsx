@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
 import TodayIcon from '@material-ui/icons/Today';
 
 import './AppBarContainer.sass';
 
 import * as scheduleActions from '../../actions/ScheduleActions';
 
-import TestSearch from './TestSearch';
+import ScheduleSearch from './components/ScheduleSearch/ScheduleSearch';
 
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 import Slide from '@material-ui/core/Slide';
+import scheduleStore from '../../stores/ScheduleStore';
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -28,7 +28,22 @@ function Transition(props) {
 class AppBarContainer extends Component {
   state = {
     open: false,
-    showInput: false
+    showInput: false,
+    currentSearch: scheduleStore.currentSearch
+  };
+
+  componentWillMount() {
+    scheduleStore.on('schedule_changed', this.refreshState);
+  }
+
+  componentWillUnmount() {
+    scheduleStore.removeListener('schedule_changed', this.refreshState);
+  }
+
+  refreshState = () => {
+    this.setState({
+      currentSearch: scheduleStore.currentSearch
+    });
   };
 
   handleGoToTodayClick = e => {
@@ -59,6 +74,10 @@ class AppBarContainer extends Component {
     }
   };
 
+  handleClearSearch = e => {
+    scheduleActions.clearSearch();
+  };
+
   render() {
     return (
       <div className="AppBarContainer">
@@ -83,14 +102,28 @@ class AppBarContainer extends Component {
             >
               <TodayIcon />
             </IconButton>
-            <IconButton
-              aria-owns={open ? 'menu-appbar' : null}
-              aria-haspopup="true"
-              onClick={this.toggleShowInput}
-              color="inherit"
-            >
-              <SearchIcon />
-            </IconButton>
+            {!this.state.currentSearch && (
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : null}
+                aria-haspopup="true"
+                onClick={this.toggleShowInput}
+                color="inherit"
+              >
+                <SearchIcon />
+              </IconButton>
+            )}
+            {this.state.currentSearch && (
+              <Button
+                onClick={this.handleClearSearch}
+                color="default"
+                variant="text"
+                fontSize="small"
+                className="SearchClearButton"
+              >
+                {scheduleStore.currentSearch}
+                <ClearIcon id="SearchClearIcon" />
+              </Button>
+            )}
           </Toolbar>
           <Dialog
             open={this.state.open}
@@ -100,25 +133,7 @@ class AppBarContainer extends Component {
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            {/* <DialogTitle id="alert-dialog-slide-title">
-              {'Stundenplan suchen:'}
-            </DialogTitle> */}
-            <DialogContent>
-              {/* <DialogContentText id="alert-dialog-slide-description">
-                Let Google help apps determine location. This means sending
-                anonymous location data to Google, even when no apps are
-                running.
-              </DialogContentText> */}
-              <TestSearch />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleClose} color="primary">
-                Enter
-              </Button>
-            </DialogActions>
+            <ScheduleSearch handleClose={this.handleClose} />
           </Dialog>
         </AppBar>
       </div>

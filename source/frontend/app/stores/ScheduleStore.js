@@ -20,6 +20,7 @@ class ScheduleStore extends EventEmitter {
     this.displayDay = this.currentDate;
     this.displayWeek = this.createDisplayWeek(this.displayDay);
     this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+    this.currentSearch = '';
     // properties for data management
     this.schedule = null;
     this.scheduleForCurrentUser = null;
@@ -45,17 +46,52 @@ class ScheduleStore extends EventEmitter {
         if (action.payload.days) {
           this.slots = action.payload.days[0].slots || defaultSlots;
         }
-        let extendedSchedule = this.addSlotInfoToEvents(action.payload);
-        this.schedule.days = [...this.schedule.days, ...extendedSchedule.days];
+        let extendedScheduleForCurrentUser = this.addSlotInfoToEvents(
+          action.payload
+        );
+        this.schedule.days = [
+          ...this.schedule.days,
+          ...extendedScheduleForCurrentUser.days
+        ];
         this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
         this.emit('schedule_changed');
         break;
-      //TODO: handle OK_FOR_SEARCH here
+      case 'GET_SCHEDULE_OK_FOR_SEARCH':
+        if (action.payload && action.payload.days) {
+          this.slots = action.payload.days[0].slots || defaultSlots;
+        }
+        this.schedule = this.addSlotInfoToEvents(action.payload);
+        this.scheduleForSearchUser = this.schedule;
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.currentSearch = action.name;
+        this.emit('schedule_changed');
+        break;
+      case 'GET_SCHEDULE_PRELOAD_OK_FOR_SEARCH':
+        if (action.payload.days) {
+          this.slots = action.payload.days[0].slots || defaultSlots;
+        }
+        let extendedScheduleForSearchUser = this.addSlotInfoToEvents(
+          action.payload
+        );
+        this.schedule.days = [
+          ...this.schedule.days,
+          ...extendedScheduleForSearchUser.days
+        ];
+        this.scheduleForSearchUser = this.schedule;
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.emit('schedule_changed');
+        break;
       case 'GOTO_DAY':
         this.displayDay = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDay);
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.emit('schedule_changed');
+        break;
+      case 'CLEAR_SEARCH':
+        this.schedule = this.scheduleForCurrentUser;
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.currentSearch = '';
         this.emit('schedule_changed');
         break;
     }

@@ -23,7 +23,8 @@ export const getSchedule = async function(route, name, startDate) {
     });
   dispatcher.dispatch({
     type: `GET_SCHEDULE_OK${typeSpecifier}`,
-    payload: schedule
+    payload: schedule,
+    name
   });
   console.log(`GET_SCHEDULE_OK${typeSpecifier}`);
   // Notifying store that async functions is started -> display load spinner
@@ -39,7 +40,8 @@ export const getSchedule = async function(route, name, startDate) {
     });
   dispatcher.dispatch({
     type: `GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`,
-    payload: schedule
+    payload: schedule,
+    name
   });
   console.log(`GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`);
 };
@@ -49,4 +51,12 @@ export const gotoDay = function(targetDate) {
     type: 'GOTO_DAY',
     payload: targetDate
   });
+  console.log('GOTO_DAY');
+};
+
+export const clearSearch = function() {
+  dispatcher.dispatch({
+    type: 'CLEAR_SEARCH'
+  });
+  console.log('CLEAR_SEARCH');
 };
