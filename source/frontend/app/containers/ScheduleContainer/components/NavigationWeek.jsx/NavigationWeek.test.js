@@ -1,0 +1,20 @@
+import React from 'react';
+import Adapter from 'enzyme-adapter-react-16';
+import { configure, shallow } from 'enzyme';
+
+configure({ adapter: new Adapter() });
+
+import NavigationWeek from './NavigationWeek';
+
+beforeEach(() => {
+  console.log = jest.fn();
+});
+
+it('renders without crashing', () => {
+  shallow(<NavigationWeek />);
+});
+
+it('should render one root element with className NavigationWeek', () => {
+  const wrapper = shallow(<NavigationWeek />);
+  expect(wrapper.find('.NavigationWeek')).toHaveLength(1);
+});

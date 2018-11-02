@@ -3,27 +3,27 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import './assets/sass/main.sass';
 import './assets/font/font.scss';
+
+import history from './history';
+
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
-import AppBar from './containers/TestAppBar/TestAppBar';
-import TestSearch from './containers/TestAppBar/TestSearch';
-import Schedule from './containers/Schedule/Schedule.jsx';
-// import Nav from './containers/Nav/Nav.jsx';
-import Nav from './containers/TestAppBar/BottomNavigation';
-import NotFound from './containers/NotFound/NotFound.jsx';
-import Login from './containers/Login/Login.jsx';
-import ZHAWO from './containers/ZHAWO/ZHAWO.jsx';
-import VsZHAW from './containers/VsZHAW/VsZHAW.jsx';
-import Menu from './containers/Menu/Menu.jsx';
-import Profile from './containers/Profile/Profile.jsx';
+import AppBarContainer from './containers/AppBarContainer/AppBarContainer';
+import LoginContainer from './containers/LoginContainer/LoginContainer';
+import BottomNavContainer from './containers/BottomNavContainer/BottomNavContainer';
 
-import history from './history';
+import ScheduleContainer from './containers/ScheduleContainer/ScheduleContainer';
+import MensaContainer from './containers/MensaContainer/MensaContainer';
+import RoomSearchContainer from './containers/RoomSearchContainer/RoomSearchContainer.jsx';
+import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
+
+import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer.jsx';
 
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    username: globalStore.getUsername()
+    username: globalStore.currentUser
   };
 
   render() {
@@ -31,16 +31,16 @@ class App extends Component {
       <Route
         {...rest}
         render={props =>
-          globalStore.getUsername() != '' ? (
+          globalStore.currentUser != '' ? (
             <div className="App">
-              <AppBar />
+              <AppBarContainer />
               <Component {...props} />
-              <Nav />
+              <BottomNavContainer />
             </div>
           ) : window.location.pathname != '/login' ? (
             <Redirect to="/login" />
           ) : (
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginContainer} />
           )
         }
       />
@@ -49,13 +49,11 @@ class App extends Component {
     return (
       <Router history={history}>
         <Switch>
-          <SecretRoute exact path="/" component={Schedule} />
-          <SecretRoute exact path="/zhawo" component={ZHAWO} />
-          <SecretRoute exact path="/vszhaw" component={VsZHAW} />
-          <SecretRoute exact path="/menu" component={Menu} />
-          <SecretRoute exact path="/profile" component={Profile} />
-          <SecretRoute exact path="/search" component={TestSearch} />
-          <SecretRoute component={NotFound} />
+          <SecretRoute exact path="/" component={ScheduleContainer} />
+          <SecretRoute exact path="/menu" component={MensaContainer} />
+          <SecretRoute exact path="/zhawo" component={RoomSearchContainer} />
+          <SecretRoute exact path="/vszhaw" component={VsZhawContainer} />
+          <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>
     );
