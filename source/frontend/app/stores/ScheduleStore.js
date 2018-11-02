@@ -33,10 +33,11 @@ class ScheduleStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'GET_SCHEDULE_OK_FOR_CU':
-        if (action.payload.days) {
+        if (action.payload && action.payload.days) {
           this.slots = action.payload.days[0].slots || defaultSlots;
         }
         this.schedule = this.addSlotInfoToEvents(action.payload);
+        this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
         this.emit('schedule_changed');
         break;
@@ -46,9 +47,11 @@ class ScheduleStore extends EventEmitter {
         }
         let extendedSchedule = this.addSlotInfoToEvents(action.payload);
         this.schedule.days = [...this.schedule.days, ...extendedSchedule.days];
+        this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
         this.emit('schedule_changed');
         break;
+      //TODO: handle OK_FOR_SEARCH here
       case 'GOTO_DAY':
         this.displayDay = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDay);

@@ -5,6 +5,8 @@ class GlobalStore extends EventEmitter {
   constructor() {
     super();
     this.currentUser = '';
+    this.possibleNames = [];
+    this.possibleLoginNames = [];
   }
 
   handleActions(action) {
@@ -12,6 +14,20 @@ class GlobalStore extends EventEmitter {
       case 'SET_CURRENT_USER':
         this.currentUser = action.payload;
         this.emit('current_user_changed');
+        break;
+      case 'GET_POSSIBLE_NAMES_OK':
+        this.possibleNames = [
+          ...action.payload.students,
+          ...action.payload.lecturers,
+          ...action.payload.classes,
+          ...action.payload.courses,
+          ...action.payload.rooms
+        ];
+        this.possibleLoginNames = [
+          ...action.payload.students,
+          ...action.payload.lecturers
+        ];
+        this.emit('possible_names_changed');
         break;
     }
   }
