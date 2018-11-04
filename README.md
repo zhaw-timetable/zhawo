@@ -60,18 +60,79 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 ## Sprint Planning
 
-**Sprint 2 (Thu 18 Oct - Thu 1 Nov 2018)**
+### Sprint 3 (Thu 1 Nov - Thu 15 Nov 2018)
 
 _work in progress_
 
-**Sprint 1 (Thu 4 Oct - Thu 18 Oct 2018)**
+### Sprint 2 (Thu 18 Oct - Thu 1 Nov 2018)
 
-_to be reviewed_
+#### Goals
+Complete navigation in timetable. Load timetable for more than current week. Add timetable search for classes, courses, rooms and other people.
+
+#### User stories / tasks
+- [ ] __5 SP__ US11 - As a user I want to view my timetable for a week
+- [x] __1 SP__ US12 - As a user I want to navigate to the current day
+- [x] __2 SP__ US14 - As a user I want to navigate between weeks
+- [ ] __1 SP__ US15 - As a user I want to have a detailed view of my events
+- [x] __2 SP__ US16 - As a user I want to view a specific rooms timetable
+- [x] __2 SP__ US17 - As a user I want to view a specific classes timetable
+- [x] __2 SP__ US18 - As a user I want to view a specific courses timetable
+- [x] __2 SP__ US19 - As a user I want to view another persons timetable
+- [ ] __5 SP__ US55 - As a user I want to navigate to a specific date in a month view
+
+#### Decisions
+- Deploy build to heroku for testing of PWA features and getting customer feedback fast
+- Add pre commit checks for test success to improve general quality of commits and reduce bugs and errors introduced (even on feature branches)
+- Use material-ui framework for common UI elements such as app bar, navigation, menu, buttons etc. to reduce workload
+
+#### Review
+The main goals were achieved. We went from 12 story points in sprint 1 to 22 in this sprint. We expected to not be able to completely implement all the planned user stories. However, both US11 and US55 have been implemented as prototypes that mainly need to be integrated into the updated design. The transition from our own design to using the material-ui framework took a lot of time. In general, we are happy with the progress made in this sprint. A large chunk of the product backlog has been implemented. Only 3 planned user stories for the timetable part of the application remain.
+
+#### Burndown
+_coming soon_
+
+### Sprint 1 (Thu 4 Oct - Thu 18 Oct 2018)
+
+#### Goals
+Implement timetable for one user for one day, set up app components such as app bar and navigation
+
+#### User stories / tasks
+- [x] __3 SP__ US01 - As a user I want to save my credentials/username 
+- [x] __2 SP__ US03 - As a user I want to switch between contexts (settings, timetable, menu, zhawo, vszhaw)
+- [x] __5 SP__ US10 - As a user I want to view my timetable for a day
+- [x] __2 SP__ US13 - As a user I want to navigate between days when using the day view
+
+#### Decisions
+- Users do not need to set up an account for easy access. Setting a default ZHAW name should be enough for the current functionality. May be extended if features require an account (f. ex. editing and extending timetable with notes)
+- Agreed on git workflow with feature branch naming to avoid confusing branch names
+- Only merge into master if Travis build is successful
+- Remove Flow type system as it is not well implemented in our IDEs of choice and sometimes hard to work with in combination with React and flux
+
+#### Review
+All goals were met in this sprint. We don't need to change anything. We managed to implement all 12 planned story points. Will try to get more storypoints done in next sprint.
+
+#### Burndown
+_coming soon_
+
+### Sprint 0 (Thu 4 Oct - Thu 18 Oct 2018)
+
+#### Goals 
+Set up development environment & continuous integration, decide on requirements, create and estimate user stories, set up github projects and issues, decide on workflow
+
+#### Decisions
+- Use React with flux pattern for frontend
+- Frontend communicates with own backend for access to CampusInfo API because it requires a custom User-Agent in the HTTP Header (not allowed in modern browsers for security reasons)
+- Use PWA technologies for caching and cross-platform app installation
+- Use node.js express server in backend to relay communication with CampusInfo API and maybe track users, activity
+- Set up and decide on database architecture only once it's needed
+- Use prettier commit hooks to enforce coding style
+- Use Travis CI and codecov for continuous integration and test coverage reports
+- Use Flow types for type checking in both frontend and backend
 
 <hr>
 
 ## Product Backlog
 
-_work in progress (see issues labeled `user story` for now)_
+_(see issues labeled `user story`)_
 
 <hr>
