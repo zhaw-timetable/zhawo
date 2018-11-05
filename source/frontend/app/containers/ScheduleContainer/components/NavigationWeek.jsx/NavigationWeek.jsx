@@ -11,6 +11,7 @@ import * as deLocale from 'date-fns/locale/de/index.js';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 
 import './NavigationWeek.sass';
@@ -72,22 +73,23 @@ class Calendar extends Component {
             </IconButton>
           </div>
           {this.state.displayWeek.map(date => (
-            <div
-              className={`day ${
-                isSameDay(date, this.state.displayDay) ? 'active' : ''
-              } ${isToday(date) ? 'today' : ''}`}
-              key={date}
-              name={date}
-              onClick={this.handleDateClick(date)}
-            >
-              <div className="name">
-                {format(date, 'dd', { locale: deLocale })}
+            <ButtonBase className="DayButtonBase" key={date}>
+              <div
+                className={`day ${
+                  isSameDay(date, this.state.displayDay) ? 'active' : ''
+                } ${isToday(date) ? 'today' : ''}`}
+                name={date}
+                onClick={this.handleDateClick(date)}
+              >
+                <div className="name">
+                  {format(date, 'dd', { locale: deLocale })}
+                </div>
+                <div className="date">
+                  {format(date, 'D')}.
+                  {format(this.state.displayDay, 'M', { locale: deLocale })}
+                </div>
               </div>
-              <div className="date">
-                {format(date, 'D')}.
-                {format(this.state.displayDay, 'M', { locale: deLocale })}
-              </div>
-            </div>
+            </ButtonBase>
           ))}
           <div className="arrow">
             <IconButton

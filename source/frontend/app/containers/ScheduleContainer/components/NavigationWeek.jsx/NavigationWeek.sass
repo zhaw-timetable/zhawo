@@ -4,27 +4,26 @@
   text-align: center
   border-color: $secondary-color
   box-sizing: border-box
-  padding: 8px
+  max-width: 100vw
 
   .week
     box-sizing: border-box
     display: grid
     grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
+    width: 100%
     height: 60px
 
     .arrow
       display: flex
       align-items: center
-      max-width: 0.25fr
 
     .day
-      padding: 10px
+      display: flex
+      flex-direction: column 
+      align-content: center
+      justify-content: center
       box-sizing: border-box
-      border: solid 2px transparent
       border-bottom: solid 5px transparent
-
-      &:hover
-        cursor: pointer
 
       .name
         font-weight: bold
@@ -36,7 +35,8 @@
         font-size: 14px
 
     .today
-      border: solid 2px $secondary-color
+      font-weight: bolder
+      border-bottom: solid 5px gray
 
     .active
       border-bottom: solid 5px $accent-color

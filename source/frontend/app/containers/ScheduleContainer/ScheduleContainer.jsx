@@ -68,11 +68,16 @@ class Schedule extends Component {
                 <div
                   className="Event"
                   style={{
-                    gridRowStart: event.startSlot + 2,
-                    gridRowEnd: event.endSlot + 2
+                    gridRowStart: event.startSlot + 1,
+                    gridRowEnd: event.endSlot + 1
                   }}
                 >
-                  {event.name}
+                  <div className="EventInfo">{event.name}</div>
+                  <div className="EventRoom">
+                    {event.eventRealizations[0] &&
+                      event.eventRealizations[0].room &&
+                      event.eventRealizations[0].room.name}
+                  </div>
                 </div>
               </Fragment>
             ))}
