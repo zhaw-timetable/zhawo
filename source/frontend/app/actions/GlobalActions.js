@@ -1,10 +1,10 @@
 import dispatcher from '../dispatcher';
 import * as api from '../adapters/ZhawoAdapter';
 
-export const setCurrentUser = text => {
+export const setCurrentUser = (name, type) => {
   dispatcher.dispatch({
     type: 'SET_CURRENT_USER',
-    payload: text
+    payload: { name, type }
   });
   console.log('SET_CURRENT_USER');
 };

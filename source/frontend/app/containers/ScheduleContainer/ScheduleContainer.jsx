@@ -19,10 +19,8 @@ class Schedule extends Component {
   componentDidMount() {
     // only reload if scheduleStore doesnt have the data yet
     if (!scheduleStore.schedule) {
-      //TODO: save student or lecturer in globalStore and get value from there
-      // this will not load properly if lecturer is using the app
       scheduleActions.getSchedule(
-        'students',
+        globalStore.currentUserType,
         globalStore.currentUser,
         scheduleStore.currentDate
       );

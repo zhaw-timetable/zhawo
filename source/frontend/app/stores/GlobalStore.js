@@ -5,6 +5,7 @@ class GlobalStore extends EventEmitter {
   constructor() {
     super();
     this.currentUser = '';
+    this.currentUserType = '';
     this.possibleNames = [];
     this.possibleLoginNames = [];
   }
@@ -12,7 +13,8 @@ class GlobalStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'SET_CURRENT_USER':
-        this.currentUser = action.payload;
+        this.currentUser = action.payload.name;
+        this.currentUserType = action.payload.type;
         this.emit('current_user_changed');
         break;
       case 'GET_POSSIBLE_NAMES_OK':
