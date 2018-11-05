@@ -48,33 +48,37 @@ class Schedule extends Component {
     return (
       <div className="ScheduleContainer">
         <NavigationWeek />
-        {this.state.slots &&
-          this.state.slots.map(slot => (
-            <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div className="SlotTime">
-                <div className="SlotStartTime">
-                  {format(slot.startTime, 'HH:mm')}
+        <div className="LessonContainer">
+          {this.state.slots &&
+            this.state.slots.map(slot => (
+              <Fragment key={format(slot.startTime, 'HH:mm')}>
+                <div className="SlotTime">
+                  <div className="SlotStartTime">
+                    {format(slot.startTime, 'HH:mm')}
+                  </div>
+                  <div className="SlotEndTime">
+                    {format(slot.endTime, 'HH:mm')}
+                  </div>
                 </div>
-                <div className="SlotEndTime">
-                  {format(slot.endTime, 'HH:mm')}
-                </div>
-              </div>
-            </Fragment>
-          ))}
-        {this.state.scheduleForDisplayDay &&
-          this.state.scheduleForDisplayDay.events.map(event => (
-            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
-              <div
-                className="Event"
-                style={{
-                  gridRowStart: event.startSlot + 2,
-                  gridRowEnd: event.endSlot + 2
-                }}
+              </Fragment>
+            ))}
+          {this.state.scheduleForDisplayDay &&
+            this.state.scheduleForDisplayDay.events.map(event => (
+              <Fragment
+                key={format(event.startTime, 'HH:mm').concat(event.name)}
               >
-                {event.name}
-              </div>
-            </Fragment>
-          ))}
+                <div
+                  className="Event"
+                  style={{
+                    gridRowStart: event.startSlot + 2,
+                    gridRowEnd: event.endSlot + 2
+                  }}
+                >
+                  {event.name}
+                </div>
+              </Fragment>
+            ))}
+        </div>
       </div>
     );
   }

@@ -1,36 +1,32 @@
 @import '../../../../assets/sass/vars'
 
 .NavigationWeek
-  grid-column-start: span 2
-  margin-top: 15px
-  // margin-bottom: 10px
   text-align: center
   border-color: $secondary-color
   box-sizing: border-box
-  // max-height: 68px
+  padding: 8px
 
   .week
     box-sizing: border-box
     display: grid
     grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
     height: 60px
-    
+
     .arrow
       display: flex
       align-items: center
       max-width: 0.25fr
 
     .day
+      padding: 10px
       box-sizing: border-box
       border: solid 2px transparent
       border-bottom: solid 5px transparent
-      padding-bottom: 5px
 
       &:hover
         cursor: pointer
 
       .name
-        margin: 10px 0
         font-weight: bold
         font-family: Roboto Light
         font-size: 14px
@@ -46,5 +42,3 @@
       border-bottom: solid 5px $accent-color
 
   .MonthButton
-    margin-top: 5px
-   
