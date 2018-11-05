@@ -102,7 +102,7 @@ Finish and improve timetable features, start implementing room search functional
 ...
 
 #### Burndown
-_coming soon_
+<img src="docs/burndown/burndown_sprint_3-001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -132,7 +132,7 @@ Complete navigation in timetable. Load timetable for more than current week. Add
 The main goals were achieved. We went from 12 story points in sprint 1 to 20 in this sprint. We expected to not be able to completely implement all the planned user stories. However, both US11 and US15 have been implemented as prototypes that mainly need to be integrated into the updated design. The transition from our own design to using the material-ui framework took a lot of time. In general, we are happy with the progress made in this sprint. A large chunk of the product backlog has been implemented. Only 3 planned user stories for the timetable part of the application remain.
 
 #### Burndown
-_coming soon_
+<img src="docs/burndown/burndown_sprint_2-001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -158,7 +158,7 @@ Implement timetable for one user for one day, set up app components such as app 
 All goals were met in this sprint. We don't need to change anything. We managed to implement all 12 planned story points. Will try to get more storypoints done in next sprint.
 
 #### Burndown
-_coming soon_
+<img src="docs/burndown/burndown_sprint_1-001.jpg?raw=true" height=400 />
 
 <hr>
 
