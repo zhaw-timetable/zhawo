@@ -1,4 +1,33 @@
 @import '../../../../assets/sass/vars'
 
 .LoginSearch
+  padding-top: 20px
+  display: flex
+  width: 100%
+  justify-content: center
 
+  ul
+    list-style: none
+
+  .LoadIndicator
+    font-size: 2rem
+
+    span 
+      animation-name: blink
+      animation-duration: 1.4s
+      animation-iteration-count: infinite
+      animation-fill-mode: both
+
+    span:nth-child(2) 
+      animation-delay: .2s
+
+    span:nth-child(3) 
+      animation-delay: .4s
+
+@keyframes blink 
+  0% 
+    opacity: .2
+  20% 
+    opacity: 1
+  100% 
+    pacity: .2
