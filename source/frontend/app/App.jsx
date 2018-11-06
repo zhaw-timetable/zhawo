@@ -29,20 +29,11 @@ class App extends Component {
     username: globalStore.currentUser
   };
 
-  // Bind change listener
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-    // globalActions.setUsernameFromDB();
-    // globalStore.on('current_user_changed', this.handleUsernameChanged);
   }
 
-  // Unbind change listener
-  componentWillUnmount() {
-    // globalStore.removeListener(
-    //   'current_user_changed',
-    //   this.handleUsernameChanged
-    // );
-  }
+  componentWillUnmount() {}
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (

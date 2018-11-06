@@ -2,13 +2,6 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
 import idb from 'idb';
-var dbPromise = idb.open('zhawoDB', 1, function(upgradeDB) {
-  if (!upgradeDB.objectStoreNames.contains('users')) {
-    upgradeDB.createObjectStore('users', {
-      keyPath: 'id'
-    });
-  }
-});
 
 class GlobalStore extends EventEmitter {
   constructor() {
@@ -45,37 +38,41 @@ class GlobalStore extends EventEmitter {
     }
   }
 
-  getUsernameFromDB() {
+  async getUsernameFromDB() {
+    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+      upgradeDB.createObjectStore('users', { autoIncrement: true })
+    );
     console.log('getUserNameFromDB');
-    dbPromise
-      .then(db => {
-        return db
-          .transaction('users')
-          .objectStore('users')
-          .getAll();
-      })
-      .then(allObjs => {
-        console.log(allObjs[0].data.name, allObjs[0].data.type);
-        this.currentUser = allObjs[0].data.name;
-        this.currentUserType = allObjs[0].data.type;
-        this.emit('current_user_changed');
-      });
+
+    let tx = dbInsance.transaction('users', 'readonly');
+    let store = tx.objectStore('users');
+
+    // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
+    let allSavedItems = await store.getAll();
+    console.log(allSavedItems);
+
+    console.log(allSavedItems[0].name, allSavedItems[0].type);
+    this.currentUser = allSavedItems[0].name;
+    this.currentUserType = allSavedItems[0].type;
+    this.emit('current_user_changed');
+
+    dbInsance.close();
   }
 
-  setCurrentUser = async (name, type) => {
-    dbPromise
-      .then(db => {
-        const tx = db.transaction('users', 'readwrite');
-        tx.objectStore('users').put({
-          id: 123456,
-          data: { name: name, type: type }
-        });
-        return tx.complete;
-      })
-      .then(() => {
-        console.log(name, type, ' saved to indexedDB');
-      });
-  };
+  async setCurrentUser(name, type) {
+    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+      upgradeDB.createObjectStore('users', { autoIncrement: true })
+    );
+
+    let tx = dbInsance.transaction('users', 'readwrite');
+    let store = tx.objectStore('users');
+
+    await store.put({ name: name, type: type });
+
+    await tx.complete;
+    console.log(name, type, ' saved to indexedDB');
+    dbInsance.close();
+  }
 }
 
 const globalStore = new GlobalStore();
