@@ -1,0 +1,51 @@
+@import '../../assets/sass/vars'
+
+.ScheduleContainer
+  height: auto
+  width: auto
+  max-width: 100%
+  overflow: auto
+  // minus height of bottom and top bar TODO: do this with variables
+  height: calc(100vh - 56px - 64px)
+
+  .LessonContainer
+    // minus height of navigationweek and 10 extra TODO: do this with variables
+    height: calc(100% - 60px - 10px)
+    display: grid
+    padding-top: 5px
+    grid-template-columns: 56px auto
+
+    .SlotTime
+      font-size: 0.8rem
+      grid-column-start: 1
+      border-color: $secondary-color
+      padding: 3px
+      display: flex
+      justify-content: space-evenly
+      align-items: center
+      flex-direction: column
+      
+    .EventGrid
+      border-top: 1px dashed lightgrey
+      grid-column-start: 2
+
+    .Event
+      display: grid
+      align-content: start
+      grid-template-columns: 4fr 1fr
+      grid-column-start: 2
+      padding: 5px
+      margin: 2px
+      margin-right: 15px
+      align-items: center
+      font-size: 0.8rem
+      border: solid 1px
+      border-color: $secondary-color
+
+      .EventInfo
+        grid-column-start: 1
+
+      .EventRoom
+        width: 100%
+        text-align: end
+        grid-column-start: 2

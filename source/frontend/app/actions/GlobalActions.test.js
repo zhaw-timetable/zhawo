@@ -1,7 +1,8 @@
 import * as globalActions from './GlobalActions';
 import dispatcher from '../dispatcher.js';
 
-const NAME = 'vissejul';
+const NAME = 'foo';
+const TYPE = 'bar';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
@@ -13,14 +14,14 @@ it('import should be defined', () => {
 });
 
 it('all actions should be defined', () => {
-  expect(globalActions.setUsername).toBeDefined();
+  expect(globalActions.setCurrentUser).toBeDefined();
 });
 
 it('setUsername should dispatch correct type with payload', () => {
-  globalActions.setUsername(NAME);
+  globalActions.setCurrentUser(NAME, TYPE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
-    type: 'SET_USERNAME',
-    payload: NAME
+    type: 'SET_CURRENT_USER',
+    payload: { name: NAME, type: TYPE }
   });
 });

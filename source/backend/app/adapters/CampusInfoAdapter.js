@@ -19,9 +19,13 @@ export function getScheduleResource(route, name, startDate) {
     const config = { method, headers };
     const url = `${apiUrl}/schedules/${route}/${name}?startingAt=${dateString}`;
     const response = await fetch(url, config).catch(err => logger.error(err));
-    const json = await response.json();
-    json ? resolve(json) : reject();
-    logger.log(`Fetched from ${url}`);
+    if (response.status === 200) {
+      const json = await response.json().catch(err => logger.error(err));
+      json ? resolve(json) : reject();
+      logger.log(`Fetched from ${url}`);
+    } else {
+      resolve({ status: 404 });
+    }
   });
 }
 

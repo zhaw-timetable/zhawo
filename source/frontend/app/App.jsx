@@ -1,65 +1,59 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import './sass/main.sass';
-import './font/font.scss';
+import './assets/sass/main.sass';
+import './assets/font/font.scss';
+
+import history from './history';
+
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
-import AppBar from './containers/AppBar/AppBar.jsx';
-import Timetable from './containers/Timetable/Timetable.jsx';
-import Nav from './containers/Nav/Nav.jsx';
-import NotFound from './containers/NotFound/NotFound.jsx';
-import Login from './containers/Login/Login.jsx';
-import ZHAWO from './containers/ZHAWO/ZHAWO.jsx';
-import VsZHAW from './containers/VsZHAW/VsZHAW.jsx';
-import Menu from './containers/Menu/Menu.jsx';
-import Profile from './containers/Profile/Profile.jsx';
+import AppBarContainer from './containers/AppBarContainer/AppBarContainer';
+import LoginContainer from './containers/LoginContainer/LoginContainer';
+import BottomNavContainer from './containers/BottomNavContainer/BottomNavContainer';
+
+import ScheduleContainer from './containers/ScheduleContainer/ScheduleContainer';
+import MensaContainer from './containers/MensaContainer/MensaContainer';
+import RoomSearchContainer from './containers/RoomSearchContainer/RoomSearchContainer.jsx';
+import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
+
+import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer.jsx';
 
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    username: globalStore.getUsername()
+    username: globalStore.currentUser
   };
-
-  // componentWillMount() {
-  //   console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-  // }
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
         render={props =>
-          globalStore.getUsername() != '' ? (
+          globalStore.currentUser != '' ? (
             <div className="App">
-              <AppBar />
+              <AppBarContainer />
               <Component {...props} />
-              <Nav />
+              <BottomNavContainer />
             </div>
           ) : window.location.pathname != '/login' ? (
             <Redirect to="/login" />
           ) : (
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginContainer} />
           )
         }
       />
     );
 
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
-          <SecretRoute exact path="/" component={Timetable} />
-          <SecretRoute exact path="/zhawo" component={ZHAWO} />
-          <SecretRoute exact path="/vszhaw" component={VsZHAW} />
-          <SecretRoute exact path="/menu" component={Menu} />
-          <SecretRoute exact path="/profile" component={Profile} />
-          <SecretRoute component={NotFound} />
+          <SecretRoute exact path="/" component={ScheduleContainer} />
+          <SecretRoute exact path="/menu" component={MensaContainer} />
+          <SecretRoute exact path="/zhawo" component={RoomSearchContainer} />
+          <SecretRoute exact path="/vszhaw" component={VsZhawContainer} />
+          <SecretRoute component={NotFoundContainer} />
         </Switch>
       </Router>
     );

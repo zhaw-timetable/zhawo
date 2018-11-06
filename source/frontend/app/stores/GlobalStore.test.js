@@ -4,7 +4,7 @@ beforeEach(() => {
   console.log = jest.fn();
 });
 
-it('basic test', () => {
+it('test exports', () => {
   expect(globalStore).toBeDefined();
-  expect(globalStore.username).toBe('');
+  expect(globalStore.currentUser).toBe('');
 });

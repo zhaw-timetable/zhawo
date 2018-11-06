@@ -1,0 +1,44 @@
+@import '../../../../assets/sass/vars'
+
+.NavigationWeek
+  text-align: center
+  border-color: $secondary-color
+  box-sizing: border-box
+  max-width: 100vw
+
+  .week
+    box-sizing: border-box
+    display: grid
+    grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
+    width: 100%
+    height: 60px
+
+    .arrow
+      display: flex
+      align-items: center
+
+    .day
+      display: flex
+      flex-direction: column 
+      align-content: center
+      justify-content: center
+      box-sizing: border-box
+      border-bottom: solid 5px transparent
+
+      .name
+        font-weight: bold
+        font-family: Roboto Light
+        font-size: 14px
+
+      .date
+        font-family: Roboto Light
+        font-size: 14px
+
+    .today
+      font-weight: bolder
+      border-bottom: solid 5px gray
+
+    .active
+      border-bottom: solid 5px $accent-color
+
+  .MonthButton
