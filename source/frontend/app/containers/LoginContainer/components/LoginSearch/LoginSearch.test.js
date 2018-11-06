@@ -4,17 +4,19 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
+jest.mock('../../../../actions/GlobalActions');
+
 import LoginSearch from './LoginSearch';
 
 beforeEach(() => {
   console.log = jest.fn();
 });
 
-xit('renders without crashing', () => {
+it('renders without crashing', () => {
   shallow(<LoginSearch />);
 });
 
-xit('should render one root element with className LoginSearch', () => {
+it('should render one root element with className LoginSearch', () => {
   const wrapper = shallow(<LoginSearch />);
-  expect(wrapper.find('.LoginContainer')).toHaveLength(1);
+  expect(wrapper.find('.LoginSearch')).toHaveLength(1);
 });
