@@ -6,7 +6,6 @@ export const setCurrentUser = (name, type) => {
     type: 'SET_CURRENT_USER',
     payload: { name, type }
   });
-  console.log('SET_CURRENT_USER');
 };
 
 export const getPossibleNames = async () => {
