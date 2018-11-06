@@ -1,6 +1,15 @@
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
+import idb from 'idb';
+var dbPromise = idb.open('zhawoDB', 1, function(upgradeDB) {
+  if (!upgradeDB.objectStoreNames.contains('users')) {
+    upgradeDB.createObjectStore('users', {
+      keyPath: 'id'
+    });
+  }
+});
+
 class GlobalStore extends EventEmitter {
   constructor() {
     super();
@@ -8,6 +17,7 @@ class GlobalStore extends EventEmitter {
     this.currentUserType = '';
     this.possibleNames = [];
     this.possibleLoginNames = [];
+    this.getUsernameFromDB();
   }
 
   handleActions(action) {
@@ -32,6 +42,38 @@ class GlobalStore extends EventEmitter {
         this.emit('possible_names_changed');
         break;
     }
+  }
+
+  getUsernameFromDB() {
+    console.log('getUserNameFromDB');
+    dbPromise
+      .then(db => {
+        return db
+          .transaction('users')
+          .objectStore('users')
+          .getAll();
+      })
+      // .then(allObjs =>
+      //   dispatcher.dispatch({
+      //     type: 'SET_CURRENT_USER',
+      //     payload: { name: allObjs[0].data.name, type: allObjs[0].data.type }
+      //   })
+      // );
+      .then(allObjs => {
+        console.log(allObjs[0].data.name, allObjs[0].data.type);
+        this.currentUser = allObjs[0].data.name;
+        this.currentUserType = allObjs[0].data.type;
+        this.emit('current_user_changed');
+        // this.handleActions({
+        //   type: 'SET_CURRENT_USER',
+        //   payload: {
+        //     name: allObjs[0].data.name,
+        //     type: allObjs[0].data.type
+        //   }
+        // });
+        // this.currentUser = allObjs[0].data.name;
+        // this.currentUserType = allObjs[0].data.type;
+      });
   }
 }
 

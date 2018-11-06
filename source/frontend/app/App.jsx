@@ -32,31 +32,17 @@ class App extends Component {
   // Bind change listener
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-    //globalActions.setUsernameFromDB();
-    globalStore.on('current_user_changed', this.handleUsernameChanged);
+    // globalActions.setUsernameFromDB();
+    // globalStore.on('current_user_changed', this.handleUsernameChanged);
   }
 
   // Unbind change listener
   componentWillUnmount() {
-    globalStore.removeListener(
-      'current_user_changed',
-      this.handleUsernameChanged
-    );
+    // globalStore.removeListener(
+    //   'current_user_changed',
+    //   this.handleUsernameChanged
+    // );
   }
-
-  handleUsernameChanged = () => {
-    console.log('Username changed');
-    const currentDate = new Date();
-    // only reload if scheduleStore doesnt have the data yet
-    if (!scheduleStore.schedule) {
-      console.log('Getting timetable for ' + globalStore.currentUser);
-      scheduleActions.getSchedule(
-        globalStore.currentUserType,
-        globalStore.currentUser,
-        scheduleStore.currentDate
-      );
-    }
-  };
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
