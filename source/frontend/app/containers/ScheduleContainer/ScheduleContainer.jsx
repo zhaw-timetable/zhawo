@@ -17,7 +17,6 @@ class Schedule extends Component {
   };
 
   componentDidMount() {
-    // only reload if scheduleStore doesnt have the data yet
     if (!scheduleStore.schedule) {
       scheduleActions.getSchedule(
         globalStore.currentUserType,
@@ -29,10 +28,15 @@ class Schedule extends Component {
 
   componentWillMount() {
     scheduleStore.on('schedule_changed', this.refreshSchedule);
+    // globalStore.on('current_user_changed', this.handleUsernameChanged);
   }
 
   componentWillUnmount() {
     scheduleStore.removeListener('schedule_changed', this.refreshSchedule);
+    // globalStore.removeListener(
+    //   'current_user_changed',
+    //   this.handleUsernameChanged
+    // );
   }
 
   refreshSchedule = () => {
@@ -41,6 +45,20 @@ class Schedule extends Component {
       scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
     });
   };
+
+  // handleUsernameChanged = () => {
+  //   console.log('Username changed');
+  //   const currentDate = new Date();
+  //   // only reload if scheduleStore doesnt have the data yet
+  //   if (!scheduleStore.schedule) {
+  //     console.log('Getting timetable for ' + globalStore.currentUser);
+  //     scheduleActions.getSchedule(
+  //       globalStore.currentUserType,
+  //       globalStore.currentUser,
+  //       scheduleStore.currentDate
+  //     );
+  //   }
+  // };
 
   render() {
     return (

@@ -9,6 +9,9 @@ import history from './history';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
+import scheduleStore from './stores/ScheduleStore';
+import * as scheduleActions from './actions/ScheduleActions';
+
 import AppBarContainer from './containers/AppBarContainer/AppBarContainer';
 import LoginContainer from './containers/LoginContainer/LoginContainer';
 import BottomNavContainer from './containers/BottomNavContainer/BottomNavContainer';
@@ -25,6 +28,12 @@ class App extends Component {
     appTitle: 'Timetable',
     username: globalStore.currentUser
   };
+
+  componentWillMount() {
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+  }
+
+  componentWillUnmount() {}
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
