@@ -1,4 +1,4 @@
-import * as api from './zhawoAdapter';
+import * as api from './ZhawoAdapter';
 
 beforeEach(() => {
   fetch.resetMocks();
