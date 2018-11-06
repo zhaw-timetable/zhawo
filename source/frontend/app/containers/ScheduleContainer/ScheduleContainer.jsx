@@ -29,6 +29,8 @@ class Schedule extends Component {
 
   componentWillMount() {
     scheduleStore.on('schedule_changed', this.refreshSchedule);
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+    globalActions.setUsernameFromDB();
   }
 
   componentWillUnmount() {
