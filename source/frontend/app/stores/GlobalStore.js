@@ -25,6 +25,7 @@ class GlobalStore extends EventEmitter {
       case 'SET_CURRENT_USER':
         this.currentUser = action.payload.name;
         this.currentUserType = action.payload.type;
+        this.setCurrentUser(action.payload.name, action.payload.type);
         this.emit('current_user_changed');
         break;
       case 'GET_POSSIBLE_NAMES_OK':
@@ -53,28 +54,28 @@ class GlobalStore extends EventEmitter {
           .objectStore('users')
           .getAll();
       })
-      // .then(allObjs =>
-      //   dispatcher.dispatch({
-      //     type: 'SET_CURRENT_USER',
-      //     payload: { name: allObjs[0].data.name, type: allObjs[0].data.type }
-      //   })
-      // );
       .then(allObjs => {
         console.log(allObjs[0].data.name, allObjs[0].data.type);
         this.currentUser = allObjs[0].data.name;
         this.currentUserType = allObjs[0].data.type;
         this.emit('current_user_changed');
-        // this.handleActions({
-        //   type: 'SET_CURRENT_USER',
-        //   payload: {
-        //     name: allObjs[0].data.name,
-        //     type: allObjs[0].data.type
-        //   }
-        // });
-        // this.currentUser = allObjs[0].data.name;
-        // this.currentUserType = allObjs[0].data.type;
       });
   }
+
+  setCurrentUser = async (name, type) => {
+    dbPromise
+      .then(db => {
+        const tx = db.transaction('users', 'readwrite');
+        tx.objectStore('users').put({
+          id: 123456,
+          data: { name: name, type: type }
+        });
+        return tx.complete;
+      })
+      .then(() => {
+        console.log(name, type, ' saved to indexedDB');
+      });
+  };
 }
 
 const globalStore = new GlobalStore();
