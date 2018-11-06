@@ -19,7 +19,7 @@ class BottomNavContainer extends Component {
         history.push('/');
         break;
       case 1:
-        history.push('/menu');
+        history.push('/mensa');
         break;
       case 2:
         history.push('/zhawo');
