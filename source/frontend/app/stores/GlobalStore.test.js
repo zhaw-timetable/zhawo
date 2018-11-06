@@ -1,10 +1,6 @@
 import globalStore from './GlobalStore';
 
-beforeEach(() => {
-  console.log = jest.fn();
-});
-
-it('test exports', () => {
+it('handleActions should be defined', () => {
   expect(globalStore).toBeDefined();
-  expect(globalStore.currentUser).toBe('');
+  expect(globalStore.handleActions).toBeDefined();
 });

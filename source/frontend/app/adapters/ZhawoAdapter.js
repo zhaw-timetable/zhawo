@@ -4,7 +4,7 @@ const GET = 'GET';
 const POST = 'POST';
 const HEADERS = { 'Content-Type': 'application/json' };
 let address = 'http://localhost:4000';
-if (process.env.NODE_ENV !== 'development') address = window.location.origin;
+if (process.env.NODE_ENV === 'production') address = window.location.origin;
 const apiUrl = `${address}/api/v1`;
 
 // f.ex. route = students, name = bachmdo2, startDate = date
@@ -32,7 +32,7 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
       const scheduleChunk = await response
         .json()
         .catch(err => handleError(err, url));
-      if (!scheduleChunk.status) {
+      if (scheduleChunk && !scheduleChunk.status) {
         schedule ? null : (schedule = scheduleChunk);
         schedule && schedule.days && scheduleChunk.days
           ? (schedule.days = [...schedule.days, ...scheduleChunk.days])
@@ -60,7 +60,7 @@ export function getPossibleNames() {
       let possibleNamesChunk = await response
         .json()
         .catch(err => handleError(err, url));
-      if (!possibleNamesChunk.status) {
+      if (possibleNamesChunk && !possibleNamesChunk.status) {
         // clean up received data, don't know why CampusInfo sends different
         // formats for each route..
         switch (route) {
@@ -94,6 +94,6 @@ export function getPossibleNames() {
   });
 }
 
-function handleError(err, ulr) {
+function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }

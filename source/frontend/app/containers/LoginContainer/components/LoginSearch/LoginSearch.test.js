@@ -4,13 +4,12 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-jest.mock('../../../../actions/GlobalActions');
-
 import LoginSearch from './LoginSearch';
 
-beforeEach(() => {
-  console.log = jest.fn();
-});
+jest.mock('../../../../stores/GlobalStore');
+jest.mock('../../../../actions/GlobalActions');
+jest.mock('../../../../stores/ScheduleStore');
+jest.mock('../../../../actions/ScheduleActions');
 
 it('renders without crashing', () => {
   shallow(<LoginSearch />);

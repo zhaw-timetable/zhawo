@@ -6,15 +6,16 @@ configure({ adapter: new Adapter() });
 
 import ScheduleContainer from './ScheduleContainer';
 
-beforeEach(() => {
-  console.log = jest.fn();
-});
+jest.mock('../../stores/GlobalStore');
+jest.mock('../../actions/GlobalActions');
+jest.mock('../../stores/ScheduleStore');
+jest.mock('../../actions/ScheduleActions');
 
-xit('renders without crashing', () => {
+it('renders without crashing', () => {
   shallow(<ScheduleContainer />);
 });
 
-xit('should render one root element with className ScheduleContainer', () => {
+it('should render one root element with className ScheduleContainer', () => {
   const wrapper = shallow(<ScheduleContainer />);
   expect(wrapper.find('.ScheduleContainer')).toHaveLength(1);
 });
