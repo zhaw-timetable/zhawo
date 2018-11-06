@@ -9,6 +9,9 @@ import history from './history';
 import * as globalActions from './actions/GlobalActions';
 import globalStore from './stores/GlobalStore.js';
 
+import scheduleStore from './stores/ScheduleStore';
+import * as scheduleActions from './actions/ScheduleActions';
+
 import AppBarContainer from './containers/AppBarContainer/AppBarContainer';
 import LoginContainer from './containers/LoginContainer/LoginContainer';
 import BottomNavContainer from './containers/BottomNavContainer/BottomNavContainer';
@@ -24,6 +27,35 @@ class App extends Component {
   state = {
     appTitle: 'Timetable',
     username: globalStore.currentUser
+  };
+
+  // Bind change listener
+  componentWillMount() {
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+    //globalActions.setUsernameFromDB();
+    globalStore.on('current_user_changed', this.handleUsernameChanged);
+  }
+
+  // Unbind change listener
+  componentWillUnmount() {
+    globalStore.removeListener(
+      'current_user_changed',
+      this.handleUsernameChanged
+    );
+  }
+
+  handleUsernameChanged = () => {
+    console.log('Username changed');
+    const currentDate = new Date();
+    // only reload if scheduleStore doesnt have the data yet
+    if (!scheduleStore.schedule) {
+      console.log('Getting timetable for ' + globalStore.currentUser);
+      scheduleActions.getSchedule(
+        globalStore.currentUserType,
+        globalStore.currentUser,
+        scheduleStore.currentDate
+      );
+    }
   };
 
   render() {

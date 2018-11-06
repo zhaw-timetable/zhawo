@@ -16,21 +16,10 @@ class Schedule extends Component {
     scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
   };
 
-  componentDidMount() {
-    // only reload if scheduleStore doesnt have the data yet
-    if (!scheduleStore.schedule) {
-      scheduleActions.getSchedule(
-        globalStore.currentUserType,
-        globalStore.currentUser,
-        scheduleStore.currentDate
-      );
-    }
-  }
+  componentDidMount() {}
 
   componentWillMount() {
     scheduleStore.on('schedule_changed', this.refreshSchedule);
-    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
-    globalActions.setUsernameFromDB();
   }
 
   componentWillUnmount() {
