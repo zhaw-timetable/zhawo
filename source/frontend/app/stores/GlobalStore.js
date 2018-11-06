@@ -39,16 +39,20 @@ class GlobalStore extends EventEmitter {
   }
 
   async getUsernameFromDB() {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
-      upgradeDB.createObjectStore('users', { autoIncrement: true })
-    );
+    let dbInstance = await idb
+      .open('zhawoDB', 1, upgradeDB =>
+        upgradeDB.createObjectStore('users', { autoIncrement: true })
+      )
+      .catch(err => this.handleIdbError(err));
     console.log('getUserNameFromDB');
-
-    let tx = dbInsance.transaction('users', 'readonly');
+    if (!dbInstance) return;
+    let tx = dbInstance.transaction('users', 'readonly');
     let store = tx.objectStore('users');
 
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
-    let allSavedItems = await store.getAll();
+    let allSavedItems = await store
+      .getAll()
+      .catch(err => this.handleIdbError(err));
     console.log(allSavedItems);
 
     console.log(allSavedItems[0].name, allSavedItems[0].type);
@@ -56,22 +60,30 @@ class GlobalStore extends EventEmitter {
     this.currentUserType = allSavedItems[0].type;
     this.emit('current_user_changed');
 
-    dbInsance.close();
+    dbInstance.close();
   }
 
   async setCurrentUser(name, type) {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
-      upgradeDB.createObjectStore('users', { autoIncrement: true })
-    );
-
-    let tx = dbInsance.transaction('users', 'readwrite');
+    let dbInstance = await idb
+      .open('zhawoDB', 1, upgradeDB =>
+        upgradeDB.createObjectStore('users', { autoIncrement: true })
+      )
+      .catch(err => this.handleIdbError(err));
+    if (!dbInstance) return;
+    let tx = dbInstance.transaction('users', 'readwrite');
     let store = tx.objectStore('users');
 
-    await store.put({ name: name, type: type });
+    await store
+      .put({ name: name, type: type })
+      .catch(err => this.handleIdbError(err));
 
     await tx.complete;
     console.log(name, type, ' saved to indexedDB');
-    dbInsance.close();
+    dbInstance.close();
+  }
+
+  handleIdbError(err) {
+    // do something
   }
 }
 
