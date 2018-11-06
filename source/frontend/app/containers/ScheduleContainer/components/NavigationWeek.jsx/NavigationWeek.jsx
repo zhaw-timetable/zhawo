@@ -73,21 +73,20 @@ class Calendar extends Component {
             </IconButton>
           </div>
           {this.state.displayWeek.map(date => (
-            <ButtonBase className="DayButtonBase" key={date}>
-              <div
-                className={`day ${
-                  isSameDay(date, this.state.displayDay) ? 'active' : ''
-                } ${isToday(date) ? 'today' : ''}`}
-                name={date}
-                onClick={this.handleDateClick(date)}
-              >
-                <div className="name">
-                  {format(date, 'dd', { locale: deLocale })}
-                </div>
-                <div className="date">
-                  {format(date, 'D')}.
-                  {format(this.state.displayDay, 'M', { locale: deLocale })}
-                </div>
+            <ButtonBase
+              key={date}
+              className={`DayButtonBase day ${
+                isSameDay(date, this.state.displayDay) ? 'active' : ''
+              } ${isToday(date) ? 'today' : ''}`}
+              name={date}
+              onClick={this.handleDateClick(date)}
+            >
+              <div className="name">
+                {format(date, 'dd', { locale: deLocale })}
+              </div>
+              <div className="date">
+                {format(date, 'D')}.
+                {format(this.state.displayDay, 'M', { locale: deLocale })}
               </div>
             </ButtonBase>
           ))}
