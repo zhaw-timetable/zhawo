@@ -20,30 +20,32 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
-  container: {
-    flexGrow: 1,
-    position: 'relative',
-    height: 250
-  },
-  suggestionsContainerOpen: {
-    position: 'absolute',
-    zIndex: 1,
-    marginTop: theme.spacing.unit,
-    left: 0,
-    right: 0
-  },
-  suggestion: {
-    display: 'block'
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: 'none'
-  }
-});
+//TODO: clean this up!
 
-class IntegrationAutosuggest extends Component {
+// const styles = theme => ({
+//   container: {
+//     flexGrow: 1,
+//     position: 'relative',
+//     height: 250
+//   },
+//   suggestionsContainerOpen: {
+//     position: 'absolute',
+//     zIndex: 1,
+//     marginTop: theme.spacing.unit,
+//     left: 0,
+//     right: 0
+//   },
+//   suggestion: {
+//     display: 'block'
+//   },
+//   suggestionsList: {
+//     margin: 0,
+//     padding: 0,
+//     listStyleType: 'none'
+//   }
+// });
+
+class ScheduleSearch extends Component {
   state = {
     value: '',
     suggestions: [],
@@ -60,13 +62,6 @@ class IntegrationAutosuggest extends Component {
       'possible_names_changed',
       this.refreshPossibleNames
     );
-  }
-
-  componentDidMount() {
-    // only reload if globalStore doesnt have the data yet
-    if (globalStore.possibleNames.length === 0) {
-      globalActions.getPossibleNames();
-    }
   }
 
   refreshPossibleNames = () => {
@@ -148,63 +143,51 @@ class IntegrationAutosuggest extends Component {
   };
 
   render() {
-    const { classes, handleClose } = this.props;
+    const { handleClose } = this.props;
+
+    // theme={{
+    //   container: classes.container,
+    //   suggestionsContainerOpen: classes.suggestionsContainerOpen,
+    //   suggestionsList: classes.suggestionsList,
+    //   suggestion: classes.suggestion
+    // }}
 
     return (
-      <Fragment>
-        <DialogContent>
-          <Autosuggest
-            theme={{
-              container: classes.container,
-              suggestionsContainerOpen: classes.suggestionsContainerOpen,
-              suggestionsList: classes.suggestionsList,
-              suggestion: classes.suggestion
-            }}
-            renderInputComponent={renderInput}
-            suggestions={this.state.suggestions}
-            onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-            renderSuggestionsContainer={renderSuggestionsContainer}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={{
-              classes,
-              placeholder: 'Nach Kürzel suchen',
-              value: this.state.value,
-              onChange: this.handleChange
-            }}
-          />
-        </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.handleEnter} color="primary">
-            Enter
-          </Button>
-        </DialogActions> */}
-      </Fragment>
+      <DialogContent className="ScheduleSearch">
+        <Autosuggest
+          renderInputComponent={renderInput}
+          suggestions={this.state.suggestions}
+          onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+          renderSuggestionsContainer={renderSuggestionsContainer}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={{
+            placeholder: 'Nach Kürzel suchen',
+            value: this.state.value,
+            onChange: this.handleChange
+          }}
+        />
+      </DialogContent>
     );
   }
 }
 
-IntegrationAutosuggest.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// IntegrationAutosuggest.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
-export default withStyles(styles)(IntegrationAutosuggest);
+// export default withStyles(styles)(IntegrationAutosuggest);
+export default ScheduleSearch;
 
 function renderInput(inputProps) {
-  const { classes, ref, ...other } = inputProps;
+  const { ref, ...other } = inputProps;
 
   return (
     <TextField
       fullWidth
       InputProps={{
         inputRef: ref,
-        classes: {
-          input: classes.input
-        },
         ...other
       }}
     />
