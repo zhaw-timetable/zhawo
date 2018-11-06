@@ -4,35 +4,9 @@
 
 Table of Contents
 
-- Allgemeines
-  - [Eigenschaften](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_eigenschaften)
-  - [Konventionen](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_konventionen)
-  - [Versionierung](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_versionierung)
-  - [Zugriff](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_zugriff)
-  - [Caching](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_caching)
-  - [Entwicklung](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_entwicklung)
-- Stundenplan-Ressourcen
-  - [GET /v1/schedules/classes/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_classes)
-  - [GET /v1/schedules/classes/{name}](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_classes_name)
-  - [GET /v1/schedules/courses/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_courses)
-  - [GET /v1/schedules/courses/{name}](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_courses_name)
-  - [GET /v1/schedules/lecturers/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_lecturers)
-  - [GET /v1/schedules/lecturers/{name}](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_lecturers_name)
-  - [GET /v1/schedules/rooms/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_rooms)
-  - [GET /v1/schedules/rooms/{name}](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_rooms_name)
-  - [GET /v1/schedules/students/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_students)
-  - [GET /v1/schedules/students/{name}](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_get_v1_schedules_students_name)
-- Mensa-Ressourcen
-  - [GET /v1/catering/facilities/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#resources-catering-facilities)
-  - [GET /v1/catering/menuplans/years/{year}/weeks/{week}/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#resources-catering-menuplanbyyearandweek)
-- Feed-Ressourcen
-  - [GET /v1/feeds](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#resources-feeds-feeds)
-  - [GET /v1/feeds/{identifier}/feed/](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#resources-feeds-feed)
-- Objekte
-  - [Allgemein](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_allgemein)
-  - [Stundenpläne](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_stundenpläne)
-  - [Mensa](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_mensa)
-  - [Feeds](file:///Users/juianvisser/Documents/ZHAW/git/zhawo/docs/campusinfo_api_doku.html#_feeds)
+[TOC]
+
+
 
 ## Allgemeines
 
