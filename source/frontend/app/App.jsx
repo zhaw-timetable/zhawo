@@ -28,14 +28,24 @@ import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    username: globalStore.currentUser
+    theme: 'darkTheme'
   };
 
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+    globalStore.on('current_user_loggedout', this.handleUserLoggedOut);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    globalStore.removeListener(
+      'current_user_loggedout',
+      this.handleUserLoggedOut
+    );
+  }
+
+  handleUserLoggedOut = () => {
+    this.forceUpdate();
+  };
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
@@ -43,9 +53,9 @@ class App extends Component {
         {...rest}
         render={props =>
           globalStore.currentUser != '' ? (
-            <div className="App darkTheme">
+            <div className={'App ' + this.state.theme}>
               <AppBarContainer />
-              <DrawerContainer />
+              <DrawerContainer className={this.state.theme} />
               <Component {...props} />
               <BottomNavContainer />
             </div>

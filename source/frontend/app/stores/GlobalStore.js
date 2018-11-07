@@ -40,6 +40,13 @@ class GlobalStore extends EventEmitter {
         ];
         this.emit('possible_names_changed');
         break;
+
+      case 'LOGOUT':
+        this.currentUser = '';
+        this.currentUserType = '';
+        this.removeCurrentUser();
+        this.emit('current_user_loggedout');
+        break;
     }
   }
 
@@ -76,6 +83,24 @@ class GlobalStore extends EventEmitter {
 
     await tx.complete;
     console.log(name, type, ' saved to indexedDB');
+    dbInsance.close();
+  }
+
+  async removeCurrentUser() {
+    console.log('RemovING user from indexedDB');
+    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+      upgradeDB.createObjectStore('users', { autoIncrement: true })
+    );
+
+    let tx = dbInsance.transaction('users', 'readwrite');
+    let store = tx.objectStore('users');
+
+    let allSavedItems = await store.getAllKeys();
+
+    await store.delete(allSavedItems[0]);
+
+    await tx.complete;
+    console.log('Removed user from indexedDB');
     dbInsance.close();
   }
 }
