@@ -6,6 +6,9 @@ import idb from 'idb';
 class GlobalStore extends EventEmitter {
   constructor() {
     super();
+
+    this.theme = 'lightTheme';
+
     this.currentUser = '';
     this.currentUserType = '';
     this.possibleNames = [];
@@ -48,6 +51,19 @@ class GlobalStore extends EventEmitter {
         this.removeCurrentUser();
         this.emit('current_user_loggedout');
         break;
+
+      case 'CHANGE_THEME':
+        this.setTheme(action.payload);
+        this.emit('theme_changed');
+        break;
+    }
+  }
+
+  setTheme(value) {
+    if (value) {
+      this.theme = 'darkTheme';
+    } else {
+      this.theme = 'lightTheme';
     }
   }
 

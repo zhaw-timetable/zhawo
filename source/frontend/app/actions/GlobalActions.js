@@ -32,3 +32,10 @@ export const logout = () => {
     type: 'LOGOUT'
   });
 };
+
+export const changeTheme = value => {
+  dispatcher.dispatch({
+    type: 'CHANGE_THEME',
+    payload: value
+  });
+};

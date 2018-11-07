@@ -9,16 +9,23 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class DrawerContainer extends Component {
-  state = { drawerOpen: globalStore.drawerOpen };
+  state = {
+    drawerOpen: globalStore.drawerOpen,
+    themeSwitch: globalStore.theme == 'darkTheme'
+  };
 
   componentWillMount() {
     globalStore.on('drawerOpen_changed', this.handleDrawer);
+    globalStore.on('theme_changed', this.handleThemeChanged);
   }
 
   componentWillUnmount() {
     globalStore.removeListener('drawerOpen_changed', this.handleDrawer);
+    globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
   toggleDrawer = value => {
@@ -31,6 +38,16 @@ class DrawerContainer extends Component {
 
   logout = () => {
     globalActions.logout();
+  };
+
+  handleSwitchChange = () => event => {
+    console.log('changing theme', event.target.checked);
+    globalActions.changeTheme(event.target.checked);
+  };
+
+  handleThemeChanged = () => {
+    console.log(globalStore.theme == 'darkTheme');
+    this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
   };
 
   render() {
@@ -47,6 +64,16 @@ class DrawerContainer extends Component {
         >
           Hi
           <Button onClick={this.logout}>Logout</Button>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={this.state.themeSwitch}
+                onChange={this.handleSwitchChange()}
+                value="themeSwitch"
+              />
+            }
+            label="Dark Mode"
+          />
         </div>
       </Drawer>
     );

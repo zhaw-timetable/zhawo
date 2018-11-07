@@ -28,12 +28,14 @@ import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    theme: 'darkTheme'
+    theme: globalStore.theme
   };
 
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+
     globalStore.on('current_user_loggedout', this.handleUserLoggedOut);
+    globalStore.on('theme_changed', this.handleThemeChanged);
   }
 
   componentWillUnmount() {
@@ -41,10 +43,16 @@ class App extends Component {
       'current_user_loggedout',
       this.handleUserLoggedOut
     );
+    globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
   handleUserLoggedOut = () => {
     this.forceUpdate();
+  };
+
+  handleThemeChanged = () => {
+    console.log('Theme Chnaged', globalStore.theme);
+    this.setState({ theme: globalStore.theme });
   };
 
   render() {
