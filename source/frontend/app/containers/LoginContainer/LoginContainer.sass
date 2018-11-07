@@ -1,38 +1,31 @@
 @import '../../assets/sass/vars'
 
 .LoginContainer
+  background-color: $text-color
+
   grid-column-start: 2
   grid-row-start: 2
 
   margin-left: auto
   margin-right: auto
 
+  height: 100vh
   width: 100%
   flex-grow: 1
 
-  .formContainer
-    margin: 40px 30px
-
-  button
-    height: 32px
-    width: 100%
-    margin-top: 10px
+  .Splash
     background-color: $selection-color
-    color: $primary-color
+    width: 100%
+    display: grid
+    justify-items: center
+    fill: $text-color
+    svg
+      max-width: 80%
 
 
-// // Desktop
-// @media (min-width: $media-min-width)
-//   .Login
-//     width: 320px
-//     height: 80vh
-//     margin-top: 10vh
-
-//     background-color: $text-color
-
-//     input
-//       color: $bg-color
-//       border-bottom: solid 1px $bg-color
-
-//       &:focus
-//         border-color: $selection-color
+// Desktop
+@media (min-width: $media-min-width)
+  .LoginContainer
+    width: 350px
+    height: 500px
+    margin-top: 10vh
