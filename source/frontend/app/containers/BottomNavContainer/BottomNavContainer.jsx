@@ -5,6 +5,8 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import './BottomNavContainer.sass';
+
 import history from '../../history';
 
 class BottomNavContainer extends Component {
@@ -40,10 +42,26 @@ class BottomNavContainer extends Component {
         showLabels
         className="BottomNavContainer"
       >
-        <BottomNavigationAction label="Stundenplan" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Mensa" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Raumsuche" icon={<LocationOnIcon />} />
-        <BottomNavigationAction label="VsZHAW" icon={<LocationOnIcon />} />
+        <BottomNavigationAction
+          className="BottomNavigationAction"
+          label="Stundenplan"
+          icon={<RestoreIcon />}
+        />
+        <BottomNavigationAction
+          className="BottomNavigationAction"
+          label="Mensa"
+          icon={<FavoriteIcon />}
+        />
+        <BottomNavigationAction
+          className="BottomNavigationAction"
+          label="Raumsuche"
+          icon={<LocationOnIcon />}
+        />
+        <BottomNavigationAction
+          className="BottomNavigationAction"
+          label="VsZHAW"
+          icon={<LocationOnIcon />}
+        />
       </BottomNavigation>
     );
   }

@@ -81,7 +81,7 @@ class AppBarContainer extends Component {
   render() {
     return (
       <div className="AppBarContainer">
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="inherit">
           <Toolbar>
             <IconButton
               className="menuButton"
@@ -115,7 +115,7 @@ class AppBarContainer extends Component {
             {this.state.currentSearch && (
               <Button
                 onClick={this.handleClearSearch}
-                color="default"
+                color="inherit"
                 variant="text"
                 fontSize="small"
                 className="SearchClearButton"

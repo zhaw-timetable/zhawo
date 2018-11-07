@@ -41,7 +41,7 @@ class App extends Component {
         {...rest}
         render={props =>
           globalStore.currentUser != '' ? (
-            <div className="App">
+            <div className="App lightTheme">
               <AppBarContainer />
               <Component {...props} />
               <BottomNavContainer />
