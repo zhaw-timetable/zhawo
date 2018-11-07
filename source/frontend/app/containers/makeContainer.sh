@@ -11,8 +11,12 @@ cd $name
 cat > $name.jsx <<EOF
 import React, { Component } from 'react';
 import './$name.sass';
-import * as Actions from '../../actions/Actions.js';
-import Store from '../../stores/Store.js';
+
+import * as globalActions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore.js';
+
+import scheduleStore from '../../stores/ScheduleStore';
+import * as scheduleActions from '../../actions/ScheduleActions';
 
 class $name extends Component {
   state = {};
@@ -61,7 +65,7 @@ it('should render one root element with className $name', () => {
 EOF
 
 cat > $name.sass <<EOF
-@import '../../sass/vars'
+@import '../../assets/sass/vars'
 
 .$name
 EOF
