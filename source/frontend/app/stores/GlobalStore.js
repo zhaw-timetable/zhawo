@@ -42,6 +42,7 @@ class GlobalStore extends EventEmitter {
         break;
 
       case 'LOGOUT':
+        this.drawerOpen = false;
         this.currentUser = '';
         this.currentUserType = '';
         this.removeCurrentUser();
