@@ -3,8 +3,8 @@
 .BottomNavContainer
   background-color: var(--nav-color) !important
 
-  // TODO: not use this the number keeps on changing
-  .MuiBottomNavigationAction-selected-122
+  // Wildcard because the number keeps on changing
+  [class*="MuiBottomNavigationAction-selected-"]
     color: var(--accent-color)
     svg
       fill: var(--accent-color)
