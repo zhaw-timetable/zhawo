@@ -23,10 +23,13 @@ import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
 
 import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer.jsx';
 
+import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
+
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    username: globalStore.currentUser
+    username: globalStore.currentUser,
+    drawerOpen: true
   };
 
   componentWillMount() {
@@ -34,6 +37,12 @@ class App extends Component {
   }
 
   componentWillUnmount() {}
+
+  toggleDrawer = value => {
+    this.setState({
+      drawerOpen: value
+    });
+  };
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
@@ -43,6 +52,10 @@ class App extends Component {
           globalStore.currentUser != '' ? (
             <div className="App lightTheme">
               <AppBarContainer />
+              <DrawerContainer
+                open={this.state.drawerOpen}
+                onClose={() => this.toggleDrawer(false)}
+              />
               <Component {...props} />
               <BottomNavContainer />
             </div>
