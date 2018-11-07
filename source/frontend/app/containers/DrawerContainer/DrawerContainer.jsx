@@ -41,12 +41,10 @@ class DrawerContainer extends Component {
   };
 
   handleSwitchChange = () => event => {
-    console.log('changing theme', event.target.checked);
     globalActions.changeTheme(event.target.checked);
   };
 
   handleThemeChanged = () => {
-    console.log(globalStore.theme == 'darkTheme');
     this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
   };
 

@@ -51,7 +51,6 @@ class App extends Component {
   };
 
   handleThemeChanged = () => {
-    console.log('Theme Chnaged', globalStore.theme);
     this.setState({ theme: globalStore.theme });
   };
 
