@@ -10,6 +10,7 @@ class GlobalStore extends EventEmitter {
     this.currentUserType = '';
     this.possibleNames = [];
     this.possibleLoginNames = [];
+    this.drawerOpen = false;
     this.getUsernameFromDB();
   }
 
@@ -20,6 +21,10 @@ class GlobalStore extends EventEmitter {
         this.currentUserType = action.payload.type;
         this.setCurrentUser(action.payload.name, action.payload.type);
         this.emit('current_user_changed');
+        break;
+      case 'TOGGLE_DRAWER':
+        this.drawerOpen = !this.drawerOpen;
+        this.emit('drawerOpen_changed');
         break;
       case 'GET_POSSIBLE_NAMES_OK':
         this.possibleNames = [

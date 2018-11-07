@@ -10,17 +10,31 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import Drawer from '@material-ui/core/Drawer';
 
 class DrawerContainer extends Component {
-  state = {};
+  state = { drawerOpen: globalStore.drawerOpen };
 
-  // Bind change listener
-  componentWillMount() {}
+  componentWillMount() {
+    globalStore.on('drawerOpen_changed', this.handleDrawer);
+  }
 
-  // Unbind change listener
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    globalStore.removeListener('drawerOpen_changed', this.handleDrawer);
+  }
+
+  toggleDrawer = value => {
+    globalActions.toggleDrawer();
+  };
+
+  handleDrawer = () => {
+    this.setState({ drawerOpen: globalStore.drawerOpen });
+  };
 
   render() {
     return (
-      <Drawer anchor="top" open={this.props.open} onClose={this.props.onClose}>
+      <Drawer
+        anchor="left"
+        open={this.state.drawerOpen}
+        onClose={this.toggleDrawer}
+      >
         <div className="DrawerContainer" tabIndex={0} role="button">
           Hi
         </div>

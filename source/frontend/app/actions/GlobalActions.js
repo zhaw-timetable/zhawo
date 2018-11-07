@@ -20,3 +20,10 @@ export const getPossibleNames = async () => {
   });
   console.log('GET_POSSIBLE_NAMES_OK');
 };
+
+export const toggleDrawer = (name, type) => {
+  dispatcher.dispatch({
+    type: 'TOGGLE_DRAWER',
+    payload: { name, type }
+  });
+};
