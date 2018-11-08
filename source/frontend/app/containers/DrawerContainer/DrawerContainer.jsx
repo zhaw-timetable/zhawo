@@ -11,6 +11,9 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Divider from '@material-ui/core/Divider';
+
+import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
 
 class DrawerContainer extends Component {
   state = {
@@ -60,18 +63,26 @@ class DrawerContainer extends Component {
           tabIndex={0}
           role="button"
         >
-          Hi
-          <Button onClick={this.logout}>Logout</Button>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.themeSwitch}
-                onChange={this.handleSwitchChange()}
-                value="themeSwitch"
-              />
-            }
-            label="Dark Mode"
+          <div className="InfoContainer">
+            <div className="LogoContainer">
+              <LogoSVG />
+            </div>
+            <div className="TextContainer">
+              <h1>Hello {globalStore.currentUser}</h1>
+              <p>Welcome to ZhaWo </p>
+            </div>
+          </div>
+          <Divider />
+          <Switch
+            checked={this.state.themeSwitch}
+            onChange={this.handleSwitchChange()}
+            value="themeSwitch"
           />
+          {!this.state.themeSwitch && 'Dark Mode'}
+          {this.state.themeSwitch && 'Light Mode'}
+          <Button onClick={this.logout} color="inherit">
+            Logout
+          </Button>
         </div>
       </Drawer>
     );
