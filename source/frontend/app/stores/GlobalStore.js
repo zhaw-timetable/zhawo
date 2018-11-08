@@ -92,7 +92,6 @@ class GlobalStore extends EventEmitter {
 
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
     let user = await store.get('username');
-    console.log(user);
 
     if (user) console.log(user.username, user.type);
     this.currentUser = user.username;
@@ -110,7 +109,6 @@ class GlobalStore extends EventEmitter {
 
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
     let theme = await store.get('theme');
-    console.log(theme);
 
     if (theme) this.theme = theme.theme;
     this.emit('theme_changed');
