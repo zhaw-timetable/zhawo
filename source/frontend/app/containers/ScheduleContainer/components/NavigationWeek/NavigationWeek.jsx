@@ -68,6 +68,7 @@ class Calendar extends Component {
             <IconButton
               onClick={this.handleWeekBackClick}
               aria-label="WeekBack"
+              color="inherit"
             >
               <KeyboardArrowLeftIcon />
             </IconButton>
@@ -80,6 +81,7 @@ class Calendar extends Component {
               } ${isToday(date) ? 'today' : ''}`}
               name={date}
               onClick={this.handleDateClick(date)}
+              color="inherit"
             >
               <div className="name">
                 {format(date, 'dd', { locale: deLocale })}
@@ -94,6 +96,7 @@ class Calendar extends Component {
             <IconButton
               onClick={this.handleWeekForwardClick}
               aria-label="WeekForward"
+              color="inherit"
             >
               <KeyboardArrowRightIcon />
             </IconButton>
