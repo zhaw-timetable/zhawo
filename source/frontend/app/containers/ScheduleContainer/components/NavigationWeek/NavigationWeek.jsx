@@ -21,7 +21,7 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 //TODO: display current month somewhere
 
-class Calendar extends Component {
+class NavigationWeek extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
     displayWeek: scheduleStore.displayWeek
@@ -115,4 +115,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default NavigationWeek;

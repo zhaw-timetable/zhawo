@@ -9,11 +9,13 @@ import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
 import NavigationWeek from './components/NavigationWeek/NavigationWeek';
+import NavigationMonth from './components/NavigationMonth/NavigationMonth';
 
 class Schedule extends Component {
   state = {
     slots: scheduleStore.slots,
-    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay,
+    isOpen: false
   };
 
   componentDidMount() {
@@ -41,10 +43,18 @@ class Schedule extends Component {
     });
   };
 
+  toggleMonthView = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  };
+
   render() {
     return (
       <div className="ScheduleContainer">
-        <NavigationWeek />
+        {this.state.isOpen && <NavigationWeek />}
+        {!this.state.isOpen && <NavigationMonth />}
+        <div id="Gripper" onClick={this.toggleMonthView} />
         <div className="LessonContainer">
           {this.state.slots &&
             this.state.slots.map(slot => (
