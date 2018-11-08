@@ -1,3 +1,14 @@
 @import '../../assets/sass/vars'
 
 .BottomNavContainer
+  background-color: var(--nav-color) !important
+
+  // Wildcard because the number keeps on changing
+  [class*="MuiBottomNavigationAction-selected-"]
+    color: var(--accent-color)
+    svg
+      fill: var(--accent-color)
+
+
+  .BottomNavigationAction
+    color: var(--text-color) !important
