@@ -3,8 +3,13 @@ import {
   format,
   isToday,
   isSameDay,
+  isSameMonth,
   addWeeks,
   subWeeks,
+  addMonths,
+  subMonths,
+  startOfWeek,
+  startOfMonth,
   getISOWeek
 } from 'date-fns';
 import * as deLocale from 'date-fns/locale/de/index.js';
@@ -47,15 +52,30 @@ class NavigationMonth extends Component {
   handleDateClick = newDate => e => {
     scheduleActions.gotoDay(newDate);
   };
+  // Goes to first monday of last month
+  handleMonthBackClick = e => {
+    const nextDate = subMonths(this.state.displayDay, 1);
+    console.log('newDate', nextDate);
+    const firstOfMonth = startOfMonth(nextDate);
+    console.log('firstOfMonth', firstOfMonth);
+    var firstOfWeek = startOfWeek(firstOfMonth, { weekStartsOn: 1 });
+    if (!isSameMonth(firstOfMonth, firstOfWeek))
+      firstOfWeek = addWeeks(firstOfWeek, 1);
+    console.log('First of week', firstOfWeek);
 
-  handleWeekBackClick = e => {
-    const newDate = subWeeks(this.state.displayDay, 1);
-    scheduleActions.gotoDay(newDate);
+    scheduleActions.gotoDay(firstOfWeek);
   };
-
-  handleWeekForwardClick = e => {
-    const newDate = addWeeks(this.state.displayDay, 1);
-    scheduleActions.gotoDay(newDate);
+  // Goes to first monday of next month
+  handleMonthForwardClick = e => {
+    const nextDate = addMonths(this.state.displayDay, 1);
+    console.log('newDate', nextDate);
+    const firstOfMonth = startOfMonth(nextDate);
+    console.log('firstOfMonth', firstOfMonth);
+    var firstOfWeek = startOfWeek(firstOfMonth, { weekStartsOn: 1 });
+    if (!isSameMonth(firstOfMonth, firstOfWeek))
+      firstOfWeek = addWeeks(firstOfWeek, 1);
+    console.log('First of week', firstOfWeek);
+    scheduleActions.gotoDay(firstOfWeek);
   };
 
   handleMonthClick = e => {
@@ -67,7 +87,7 @@ class NavigationMonth extends Component {
       <div className="NavigationMonth">
         <div className="arrow">
           <IconButton
-            onClick={this.handleWeekBackClick}
+            onClick={this.handleMonthBackClick}
             aria-label="WeekBack"
             color="inherit"
           >
@@ -91,14 +111,14 @@ class NavigationMonth extends Component {
                 onClick={this.handleDateClick(date)}
                 color="inherit"
               >
-                <div className="date">{format(date, 'D')}.</div>
+                <div className="date">{format(date, 'D')}</div>
               </ButtonBase>
             ))
           )}
         </div>
         <div className="arrow">
           <IconButton
-            onClick={this.handleWeekForwardClick}
+            onClick={this.handleMonthForwardClick}
             aria-label="WeekForward"
             color="inherit"
           >
