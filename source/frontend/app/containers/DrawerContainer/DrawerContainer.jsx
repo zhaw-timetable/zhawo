@@ -45,7 +45,7 @@ class DrawerContainer extends Component {
     globalActions.logout();
   };
 
-  handleSwitchChange = () => event => {
+  handleSwitchChange = event => {
     globalActions.changeTheme(event.target.checked);
   };
 
@@ -85,7 +85,7 @@ class DrawerContainer extends Component {
           <Divider />
           <Switch
             checked={this.state.themeSwitch}
-            onChange={this.handleSwitchChange()}
+            onChange={this.handleSwitchChange}
             value="themeSwitch"
           />
           {!this.state.themeSwitch && 'Dark Mode'}

@@ -82,7 +82,7 @@ class GlobalStore extends EventEmitter {
     let user = await store.get('username');
     console.log(user);
 
-    console.log(user.username, user.type);
+    if (user) console.log(user.username, user.type);
     this.currentUser = user.username;
     this.currentUserType = user.type;
 
@@ -102,7 +102,7 @@ class GlobalStore extends EventEmitter {
     let theme = await store.get('theme');
     console.log(theme);
 
-    this.theme = theme.theme;
+    if (theme) this.theme = theme.theme;
     this.emit('theme_changed');
 
     dbInsance.close();
