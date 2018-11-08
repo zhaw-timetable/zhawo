@@ -52,8 +52,8 @@ class Schedule extends Component {
   render() {
     return (
       <div className="ScheduleContainer">
-        {this.state.isOpen && <NavigationWeek />}
-        {!this.state.isOpen && <NavigationMonth />}
+        {!this.state.isOpen && <NavigationWeek />}
+        {this.state.isOpen && <NavigationMonth />}
         <div id="Gripper" onClick={this.toggleMonthView} />
         <div className="LessonContainer">
           {this.state.slots &&
