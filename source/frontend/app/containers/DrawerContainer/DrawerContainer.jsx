@@ -10,8 +10,10 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider';
+
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
 
@@ -31,7 +33,7 @@ class DrawerContainer extends Component {
     globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
-  toggleDrawer = value => {
+  toggleDrawer = () => {
     globalActions.toggleDrawer();
   };
 
@@ -71,6 +73,14 @@ class DrawerContainer extends Component {
               <h1>Hello {globalStore.currentUser}</h1>
               <p>Welcome to ZhaWo </p>
             </div>
+            <IconButton
+              className="closeButton"
+              color="inherit"
+              aria-label="Close"
+              onClick={this.toggleDrawer}
+            >
+              <CloseIcon />
+            </IconButton>
           </div>
           <Divider />
           <Switch
@@ -80,7 +90,7 @@ class DrawerContainer extends Component {
           />
           {!this.state.themeSwitch && 'Dark Mode'}
           {this.state.themeSwitch && 'Light Mode'}
-          <Button onClick={this.logout} color="inherit">
+          <Button className="LogoutBtn" onClick={this.logout} color="inherit">
             Logout
           </Button>
         </div>
