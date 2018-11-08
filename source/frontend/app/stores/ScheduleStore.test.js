@@ -1,6 +1,6 @@
 import scheduleStore from './ScheduleStore';
 
-it('basic test', () => {
+it('handleActions should be defined', () => {
   expect(scheduleStore).toBeDefined();
   expect(scheduleStore.handleActions).toBeDefined();
 });

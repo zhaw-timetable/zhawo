@@ -30,7 +30,7 @@ function Transition(props) {
 
 class AppBarContainer extends Component {
   state = {
-    open: false,
+    isScheduleSearchOpen: false,
     showInput: false,
     currentSearch: scheduleStore.currentSearch
   };
@@ -56,25 +56,15 @@ class AppBarContainer extends Component {
   };
 
   toggleShowInput = () => {
-    this.setState({ open: true });
+    this.setState({ isScheduleSearchOpen: true });
   };
 
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ isScheduleSearchOpen: true });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleKeyPress = e => {
-    const { value } = e.target;
-    const { key } = e;
-    if (key === 'Enter') {
-      const currentDate = new Date();
-      this.toggleShowInput();
-      scheduleActions.getSchedule('students', value, currentDate);
-    }
+    this.setState({ isScheduleSearchOpen: false });
   };
 
   handleClearSearch = e => {
@@ -101,9 +91,8 @@ class AppBarContainer extends Component {
             <Typography variant="h6" color="inherit" className="flex">
               ZHAWO
             </Typography>
-            {/* <Button color="inherit">Login</Button> */}
             <IconButton
-              aria-owns={open ? 'menu-appbar' : null}
+              aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
               aria-haspopup="true"
               onClick={this.handleGoToTodayClick}
               color="inherit"
@@ -112,7 +101,9 @@ class AppBarContainer extends Component {
             </IconButton>
             {!this.state.currentSearch && (
               <IconButton
-                aria-owns={open ? 'menu-appbar' : null}
+                aria-owns={
+                  this.state.isScheduleSearchOpen ? 'menu-appbar' : null
+                }
                 aria-haspopup="true"
                 onClick={this.toggleShowInput}
                 color="inherit"
@@ -134,7 +125,7 @@ class AppBarContainer extends Component {
             )}
           </Toolbar>
           <Dialog
-            open={this.state.open}
+            open={this.state.isScheduleSearchOpen}
             TransitionComponent={Transition}
             keepMounted
             onClose={this.handleClose}

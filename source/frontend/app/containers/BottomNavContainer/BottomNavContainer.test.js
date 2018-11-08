@@ -6,9 +6,10 @@ configure({ adapter: new Adapter() });
 
 import BottomNavContainer from './BottomNavContainer';
 
-beforeEach(() => {
-  console.log = jest.fn();
-});
+jest.mock('../../stores/GlobalStore');
+jest.mock('../../actions/GlobalActions');
+jest.mock('../../stores/ScheduleStore');
+jest.mock('../../actions/ScheduleActions');
 
 it('renders without crashing', () => {
   shallow(<BottomNavContainer />);

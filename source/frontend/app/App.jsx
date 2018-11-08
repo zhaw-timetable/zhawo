@@ -79,7 +79,7 @@ class App extends Component {
       <Router history={history}>
         <Switch>
           <SecretRoute exact path="/" component={ScheduleContainer} />
-          <SecretRoute exact path="/menu" component={MensaContainer} />
+          <SecretRoute exact path="/mensa" component={MensaContainer} />
           <SecretRoute exact path="/zhawo" component={RoomSearchContainer} />
           <SecretRoute exact path="/vszhaw" component={VsZhawContainer} />
           <SecretRoute component={NotFoundContainer} />
