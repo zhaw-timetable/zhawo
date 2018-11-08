@@ -23,17 +23,36 @@ import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
 
 import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer.jsx';
 
+import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
+
 class App extends Component {
   state = {
     appTitle: 'Timetable',
-    username: globalStore.currentUser
+    theme: globalStore.theme
   };
 
   componentWillMount() {
     console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+
+    globalStore.on('current_user_loggedout', this.handleUserLoggedOut);
+    globalStore.on('theme_changed', this.handleThemeChanged);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    globalStore.removeListener(
+      'current_user_loggedout',
+      this.handleUserLoggedOut
+    );
+    globalStore.removeListener('theme_changed', this.handleThemeChanged);
+  }
+
+  handleUserLoggedOut = () => {
+    this.forceUpdate();
+  };
+
+  handleThemeChanged = () => {
+    this.setState({ theme: globalStore.theme });
+  };
 
   render() {
     const SecretRoute = ({ component: Component, ...rest }) => (
@@ -41,8 +60,9 @@ class App extends Component {
         {...rest}
         render={props =>
           globalStore.currentUser != '' ? (
-            <div className="App">
+            <div className={'App ' + this.state.theme}>
               <AppBarContainer />
+              <DrawerContainer className={this.state.theme} />
               <Component {...props} />
               <BottomNavContainer />
             </div>

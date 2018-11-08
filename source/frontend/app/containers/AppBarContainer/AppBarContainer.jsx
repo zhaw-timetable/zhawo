@@ -21,6 +21,9 @@ import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import scheduleStore from '../../stores/ScheduleStore';
 
+import * as globalActions from '../../actions/GlobalActions';
+import globalStore from '../../stores/GlobalStore.js';
+
 function Transition(props) {
   return <Slide direction="down" {...props} />;
 }
@@ -68,15 +71,20 @@ class AppBarContainer extends Component {
     scheduleActions.clearSearch();
   };
 
+  toggleDrawer = value => {
+    globalActions.toggleDrawer();
+  };
+
   render() {
     return (
       <div className="AppBarContainer">
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="inherit">
           <Toolbar>
             <IconButton
               className="menuButton"
               color="inherit"
               aria-label="Menu"
+              onClick={this.toggleDrawer}
             >
               <MenuIcon />
             </IconButton>
@@ -106,7 +114,7 @@ class AppBarContainer extends Component {
             {this.state.currentSearch && (
               <Button
                 onClick={this.handleClearSearch}
-                color="default"
+                color="inherit"
                 variant="text"
                 fontSize="small"
                 className="SearchClearButton"

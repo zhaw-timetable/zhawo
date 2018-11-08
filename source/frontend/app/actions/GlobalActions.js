@@ -20,3 +20,22 @@ export const getPossibleNames = async () => {
   });
   console.log('GET_POSSIBLE_NAMES_OK');
 };
+
+export const toggleDrawer = () => {
+  dispatcher.dispatch({
+    type: 'TOGGLE_DRAWER'
+  });
+};
+
+export const logout = () => {
+  dispatcher.dispatch({
+    type: 'LOGOUT'
+  });
+};
+
+export const changeTheme = value => {
+  dispatcher.dispatch({
+    type: 'CHANGE_THEME',
+    payload: value
+  });
+};

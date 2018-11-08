@@ -22,18 +22,17 @@ class Splash extends Component {
               fontFamily="Roboto Light"
               fontSize="400"
               fontWeight="300"
-              fill="#black"
             >
               <tspan x="150" y="483">
                 ?
               </tspan>
             </text>
-            <text id="W" fill="black">
+            <text id="W">
               <tspan x="284" y="260">
                 W
               </tspan>
             </text>
-            <text id="o" fill="black">
+            <text id="o">
               <tspan x="358" y="355">
                 o
               </tspan>
@@ -43,7 +42,6 @@ class Splash extends Component {
               fontFamily="Roboto Light"
               fontSize="144"
               fontWeight="300"
-              fill="black"
             >
               <tspan x="53" y="208">
                 zha
