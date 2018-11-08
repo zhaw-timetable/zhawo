@@ -71,11 +71,11 @@ class GlobalStore extends EventEmitter {
   }
 
   async getUsernameFromDB() {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+    let dbInstance = await idb.open('zhawoDB', 1, upgradeDB =>
       upgradeDB.createObjectStore('info', { keyPath: 'id' })
     );
 
-    let tx = dbInsance.transaction('info', 'readonly');
+    let tx = dbInstance.transaction('info', 'readonly');
     let store = tx.objectStore('info');
 
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
@@ -87,15 +87,15 @@ class GlobalStore extends EventEmitter {
     this.currentUserType = user.type;
 
     this.emit('current_user_changed');
-    dbInsance.close();
+    dbInstance.close();
   }
 
   async getThemeFromDB() {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+    let dbInstance = await idb.open('zhawoDB', 1, upgradeDB =>
       upgradeDB.createObjectStore('info', { keyPath: 'id' })
     );
 
-    let tx = dbInsance.transaction('info', 'readonly');
+    let tx = dbInstance.transaction('info', 'readonly');
     let store = tx.objectStore('info');
 
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
@@ -111,26 +111,26 @@ class GlobalStore extends EventEmitter {
   // TODO: change so that what you are saving is the key
 
   async setThemeInDB(theme) {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+    let dbInstance = await idb.open('zhawoDB', 1, upgradeDB =>
       upgradeDB.createObjectStore('info', { keyPath: 'id' })
     );
 
-    let tx = dbInsance.transaction('info', 'readwrite');
+    let tx = dbInstance.transaction('info', 'readwrite');
     let store = tx.objectStore('info');
 
     await store.put({ id: 'theme', theme: theme });
 
     await tx.complete;
     console.log(theme, ' saved to indexedDB');
-    dbInsance.close();
+    dbInstance.close();
   }
 
   async setCurrentUser(name, type) {
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+    let dbInstance = await idb.open('zhawoDB', 1, upgradeDB =>
       upgradeDB.createObjectStore('info', { keyPath: 'id' })
     );
 
-    let tx = dbInsance.transaction('info', 'readwrite');
+    let tx = dbInstance.transaction('info', 'readwrite');
     let store = tx.objectStore('info');
 
     await store.put({ id: 'username', username: name, type: type });
@@ -146,11 +146,11 @@ class GlobalStore extends EventEmitter {
 
   async removeCurrentUser() {
     console.log('Removing user from indexedDB');
-    let dbInsance = await idb.open('zhawoDB', 1, upgradeDB =>
+    let dbInstance = await idb.open('zhawoDB', 1, upgradeDB =>
       upgradeDB.createObjectStore('info', { autoIncrement: false })
     );
 
-    let tx = dbInsance.transaction('info', 'readwrite');
+    let tx = dbInstance.transaction('info', 'readwrite');
     let store = tx.objectStore('info');
 
     let allSavedItems = await store.getAllKeys();
@@ -159,7 +159,7 @@ class GlobalStore extends EventEmitter {
 
     await tx.complete;
     console.log('Removed user from indexedDB');
-    dbInsance.close();
+    dbInstance.close();
   }
 }
 
