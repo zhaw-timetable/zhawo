@@ -115,8 +115,7 @@ class LoginSearch extends Component {
             inputProps={{
               placeholder: 'Nach Kürzel suchen',
               value: this.state.value,
-              onChange: this.handleChange,
-              setCurrentUser: this.setCurrentUser
+              onChange: this.handleChange
             }}
           />
         )}
@@ -135,7 +134,7 @@ class LoginSearch extends Component {
 export default LoginSearch;
 
 const Input = inputProps => {
-  const { ref, setCurrentUser, ...other } = inputProps;
+  const { ref, ...other } = inputProps;
   return (
     <TextField
       fullWidth
