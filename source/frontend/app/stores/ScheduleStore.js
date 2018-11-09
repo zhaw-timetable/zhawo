@@ -6,6 +6,7 @@ import {
   addDays,
   isSameDay,
   startOfDay,
+  startOfMonth,
   getHours,
   getMinutes
 } from 'date-fns';
@@ -19,6 +20,8 @@ class ScheduleStore extends EventEmitter {
     // properties for display
     this.displayDay = this.currentDate;
     this.displayWeek = this.createDisplayWeek(this.displayDay);
+    this.displayMonth = this.createDisplayMonth(this.displayDay);
+
     this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
     this.currentSearch = '';
     // properties for data management
@@ -86,6 +89,7 @@ class ScheduleStore extends EventEmitter {
         this.displayDay = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDay);
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.displayMonth = this.createDisplayMonth(this.displayDay);
         this.emit('schedule_changed');
         break;
       case 'CLEAR_SEARCH':
@@ -119,6 +123,18 @@ class ScheduleStore extends EventEmitter {
     const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
     const weekArray = Array.apply(null, Array(6));
     return weekArray.map((value, index) => addDays(weekStartDate, index));
+  }
+
+  createDisplayMonth(date) {
+    const monthStart = startOfMonth(date);
+    var weekStartDate = startOfWeek(monthStart, { weekStartsOn: 1 });
+    const monthArray = [];
+    for (var i = 0; i < 5; i++) {
+      monthArray[i] = this.createDisplayWeek(weekStartDate);
+      weekStartDate = addDays(weekStartDate, 7);
+    }
+    console.log(monthArray);
+    return monthArray;
   }
 
   findScheduleForDay(date) {
