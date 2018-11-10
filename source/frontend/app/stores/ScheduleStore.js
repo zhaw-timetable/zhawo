@@ -23,6 +23,7 @@ class ScheduleStore extends EventEmitter {
     this.displayMonth = this.createDisplayMonth(this.displayDay);
 
     this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+    this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
     this.currentSearch = '';
     // properties for data management
     this.schedule = null;
@@ -35,6 +36,7 @@ class ScheduleStore extends EventEmitter {
   }
 
   handleActions(action) {
+    // Todo: change so that it doesnt get scheduleForDisplayDay and scheduleForDisplayWeek every time
     switch (action.type) {
       case 'GET_SCHEDULE_OK_FOR_CU':
         if (action.payload && action.payload.days) {
@@ -43,6 +45,7 @@ class ScheduleStore extends EventEmitter {
         this.schedule = this.addSlotInfoToEvents(action.payload);
         this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
         this.emit('schedule_changed');
         break;
       case 'GET_SCHEDULE_PRELOAD_OK_FOR_CU':
@@ -58,6 +61,7 @@ class ScheduleStore extends EventEmitter {
         ];
         this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
         this.emit('schedule_changed');
         break;
       case 'GET_SCHEDULE_OK_FOR_SEARCH':
@@ -67,6 +71,7 @@ class ScheduleStore extends EventEmitter {
         this.schedule = this.addSlotInfoToEvents(action.payload);
         this.scheduleForSearchUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
         this.currentSearch = action.name;
         this.emit('schedule_changed');
         break;
@@ -83,12 +88,14 @@ class ScheduleStore extends EventEmitter {
         ];
         this.scheduleForSearchUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
         this.emit('schedule_changed');
         break;
       case 'GOTO_DAY':
         this.displayDay = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDay);
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
         this.displayMonth = this.createDisplayMonth(this.displayDay);
         this.emit('schedule_changed');
         break;
@@ -133,7 +140,6 @@ class ScheduleStore extends EventEmitter {
       monthArray[i] = this.createDisplayWeek(weekStartDate);
       weekStartDate = addDays(weekStartDate, 7);
     }
-    console.log(monthArray);
     return monthArray;
   }
 
@@ -146,6 +152,15 @@ class ScheduleStore extends EventEmitter {
     } else {
       return null;
     }
+  }
+
+  findScheduleForWeek(date) {
+    const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
+    var foundDays = [];
+    for (var i = 0; i < 6; i++) {
+      foundDays[i] = this.findScheduleForDay(addDays(weekStartDate, i));
+    }
+    return foundDays;
   }
 }
 
