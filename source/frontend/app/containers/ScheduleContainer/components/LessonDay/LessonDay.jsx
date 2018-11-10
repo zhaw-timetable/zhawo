@@ -31,7 +31,7 @@ class LessonDay extends Component {
 
   render() {
     return (
-      <div className="LessonDay">
+      <div className="LessonDay LessonContainer">
         {this.state.slots &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
