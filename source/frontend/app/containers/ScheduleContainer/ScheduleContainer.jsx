@@ -10,6 +10,7 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import NavigationWeek from './components/NavigationWeek/NavigationWeek';
 import NavigationMonth from './components/NavigationMonth/NavigationMonth';
 import LessonDay from './components/LessonDay/LessonDay';
+import LessonWeek from './components/LessonWeek/LessonWeek';
 
 class Schedule extends Component {
   state = {
@@ -44,7 +45,8 @@ class Schedule extends Component {
         {!this.state.isOpen && <NavigationWeek />}
         {this.state.isOpen && <NavigationMonth />}
         <div id="Gripper" onClick={this.toggleMonthView} />
-        <LessonDay />
+        {/*<LessonDay />*/}
+        <LessonWeek />
       </div>
     );
   }

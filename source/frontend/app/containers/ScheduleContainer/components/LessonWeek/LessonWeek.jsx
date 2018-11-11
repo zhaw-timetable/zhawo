@@ -31,6 +31,8 @@ class LessonWeek extends Component {
   };
 
   render() {
+    var dayCount = 1;
+
     return (
       <div className="LessonWeek LessonContainer">
         {this.state.slots &&
@@ -46,6 +48,33 @@ class LessonWeek extends Component {
               </div>
             </Fragment>
           ))}
+        {this.state.scheduleForDisplayWeek &&
+          this.state.scheduleForDisplayWeek.map(day =>
+            day.events.map(event => (
+              <Fragment
+                key={format(event.startTime, 'HH:mm').concat(event.name)}
+              >
+                <div
+                  className="Event"
+                  style={{
+                    gridColumnStart: event.day + 1,
+                    gridRowStart: event.startSlot + 1,
+                    gridRowEnd: event.endSlot + 1
+                  }}
+                >
+                  <div className="EventInfo">
+                    {event.name}
+                    {day.index}
+                  </div>
+                  <div className="EventRoom">
+                    {event.eventRealizations[0] &&
+                      event.eventRealizations[0].room &&
+                      event.eventRealizations[0].room.name}
+                  </div>
+                </div>
+              </Fragment>
+            ))
+          )}
       </div>
     );
   }

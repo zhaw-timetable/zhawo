@@ -8,7 +8,8 @@ import {
   startOfDay,
   startOfMonth,
   getHours,
-  getMinutes
+  getMinutes,
+  getDay
 } from 'date-fns';
 
 class ScheduleStore extends EventEmitter {
@@ -120,6 +121,7 @@ class ScheduleStore extends EventEmitter {
             );
           });
           event.endSlot = event.startSlot + event.slots.length;
+          event.day = getDay(event.startTime);
         });
       });
     }
@@ -155,12 +157,16 @@ class ScheduleStore extends EventEmitter {
   }
 
   findScheduleForWeek(date) {
-    const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
-    var foundDays = [];
-    for (var i = 0; i < 6; i++) {
-      foundDays[i] = this.findScheduleForDay(addDays(weekStartDate, i));
+    if (this.schedule && this.schedule.days) {
+      const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
+      var foundDays = [];
+      for (var i = 0; i < 6; i++) {
+        foundDays[i] = this.findScheduleForDay(addDays(weekStartDate, i));
+      }
+      return foundDays;
+    } else {
+      return null;
     }
-    return foundDays;
   }
 }
 
