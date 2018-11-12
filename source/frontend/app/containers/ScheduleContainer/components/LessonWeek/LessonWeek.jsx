@@ -34,7 +34,7 @@ class LessonWeek extends Component {
     var dayCount = 1;
 
     return (
-      <div className="LessonWeek LessonContainer">
+      <Fragment>
         {this.state.slots &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
@@ -58,14 +58,11 @@ class LessonWeek extends Component {
                   className="Event"
                   style={{
                     gridColumnStart: event.day + 1,
-                    gridRowStart: event.startSlot + 1,
-                    gridRowEnd: event.endSlot + 1
+                    gridRowStart: event.startSlot + 3,
+                    gridRowEnd: event.endSlot + 3
                   }}
                 >
-                  <div className="EventInfo">
-                    {event.name}
-                    {day.index}
-                  </div>
+                  <div className="EventInfo">{event.name}</div>
                   <div className="EventRoom">
                     {event.eventRealizations[0] &&
                       event.eventRealizations[0].room &&
@@ -75,7 +72,7 @@ class LessonWeek extends Component {
               </Fragment>
             ))
           )}
-      </div>
+      </Fragment>
     );
   }
 }

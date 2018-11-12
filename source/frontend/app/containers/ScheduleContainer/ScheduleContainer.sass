@@ -5,10 +5,12 @@
   width: auto
   max-width: 100%
 
-  display: flex
-  flex-direction: column
+  display: grid
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
 
   #Gripper
+    grid-column: 1 / 9
+    grid-row-start: 2
     cursor: pointer
     background: var(--secondary-color)
     border-radius: 5px
@@ -17,19 +19,12 @@
     margin-left: auto
     margin-right: auto
 
-  .LessonContainer
-    flex-grow: 1
-    height: 100%
-    display: grid
-    grid-template-rows: repeat(15, 1fr)
-    padding-top: 5px
-    overflow: auto
-    .SlotTime
-      font-size: 0.8rem
-      grid-column-start: 1
-      border-color: var(--secondary-color)
-      margin: 2px
-      display: flex
-      justify-content: space-between
-      align-items: center
-      flex-direction: column
+  .SlotTime
+    font-size: 0.8rem
+    grid-column-start: 1
+    border-color: var(--secondary-color)
+    margin: 2px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-direction: column

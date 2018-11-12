@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   format,
   isToday,
@@ -62,45 +62,43 @@ class NavigationWeek extends Component {
 
   render() {
     return (
-      <div className="NavigationWeek">
-        <div className="week">
-          <div className="arrow">
-            <IconButton
-              onClick={this.handleWeekBackClick}
-              aria-label="WeekBack"
-              color="inherit"
-            >
-              <KeyboardArrowLeftIcon />
-            </IconButton>
-          </div>
-          {this.state.displayWeek.map(date => (
-            <ButtonBase
-              key={date}
-              className={`DayButtonBase day ${
-                isSameDay(date, this.state.displayDay) ? 'active' : ''
-              } ${isToday(date) ? 'today' : ''}`}
-              name={date}
-              onClick={this.handleDateClick(date)}
-              color="inherit"
-            >
-              <div className="name">
-                {format(date, 'dd', { locale: deLocale })}
-              </div>
-              <div className="date">
-                {format(date, 'D')}.
-                {format(this.state.displayDay, 'M', { locale: deLocale })}
-              </div>
-            </ButtonBase>
-          ))}
-          <div className="arrow">
-            <IconButton
-              onClick={this.handleWeekForwardClick}
-              aria-label="WeekForward"
-              color="inherit"
-            >
-              <KeyboardArrowRightIcon />
-            </IconButton>
-          </div>
+      <Fragment>
+        <div className="arrow">
+          <IconButton
+            onClick={this.handleWeekBackClick}
+            aria-label="WeekBack"
+            color="inherit"
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+        </div>
+        {this.state.displayWeek.map(date => (
+          <ButtonBase
+            key={date}
+            className={`DayButtonBase day ${
+              isSameDay(date, this.state.displayDay) ? 'active' : ''
+            } ${isToday(date) ? 'today' : ''}`}
+            name={date}
+            onClick={this.handleDateClick(date)}
+            color="inherit"
+          >
+            <div className="name">
+              {format(date, 'dd', { locale: deLocale })}
+            </div>
+            <div className="date">
+              {format(date, 'D')}.
+              {format(this.state.displayDay, 'M', { locale: deLocale })}
+            </div>
+          </ButtonBase>
+        ))}
+        <div className="arrow">
+          <IconButton
+            onClick={this.handleWeekForwardClick}
+            aria-label="WeekForward"
+            color="inherit"
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
         </div>
         {/* <Button
           onClick={this.handleMonthClick}
@@ -110,7 +108,7 @@ class NavigationWeek extends Component {
           {format(this.state.displayDay, 'MMMM', { locale: deLocale })} / Woche{' '}
           {getISOWeek(this.state.displayDay)}
         </Button> */}
-      </div>
+      </Fragment>
     );
   }
 }
