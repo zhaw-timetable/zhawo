@@ -14,7 +14,8 @@ import LessonWeek from './components/LessonWeek/LessonWeek';
 
 class Schedule extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    isDayView: globalStore.isDayView
   };
 
   componentDidMount() {
@@ -27,16 +28,22 @@ class Schedule extends Component {
     }
   }
 
-  // Bind change listener
-  componentWillMount() {}
+  componentWillMount() {
+    globalStore.on('isDayView_changed', this.handleView);
+  }
 
-  // Unbind change listener
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    globalStore.removeListener('isDayView_changed', this.handleView);
+  }
 
   toggleMonthView = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  };
+
+  handleView = () => {
+    this.setState({ isDayView: globalStore.isDayView });
   };
 
   render() {
@@ -46,8 +53,8 @@ class Schedule extends Component {
         {this.state.isOpen && <NavigationMonth />}
         {/* Todo remove gripper in week view and change function of arrows*/}
         <div id="Gripper" onClick={this.toggleMonthView} />
-        {/*<LessonWeek />*/}
-        <LessonDay />
+        {this.state.isDayView && <LessonDay />}
+        {!this.state.isDayView && <LessonWeek />}
       </div>
     );
   }
