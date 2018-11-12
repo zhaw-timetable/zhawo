@@ -60,7 +60,6 @@ class GlobalStore extends EventEmitter {
         break;
 
       case 'SET_DAYVIEW':
-        console.log(action.payload);
         this.isDayView = action.payload;
         this.emit('isDayView_changed');
         break;
