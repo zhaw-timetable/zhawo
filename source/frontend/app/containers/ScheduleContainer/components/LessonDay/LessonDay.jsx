@@ -31,7 +31,7 @@ class LessonDay extends Component {
 
   render() {
     return (
-      <div className="LessonDay LessonContainer">
+      <Fragment>
         {this.state.slots &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
@@ -49,10 +49,10 @@ class LessonDay extends Component {
           this.state.scheduleForDisplayDay.events.map(event => (
             <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
               <div
-                className="Event"
+                className="LessonDayEvent"
                 style={{
-                  gridRowStart: event.startSlot + 1,
-                  gridRowEnd: event.endSlot + 1
+                  gridRowStart: event.startSlot + 3,
+                  gridRowEnd: event.endSlot + 3
                 }}
               >
                 <div className="EventInfo">{event.name}</div>
@@ -64,7 +64,7 @@ class LessonDay extends Component {
               </div>
             </Fragment>
           ))}
-      </div>
+      </Fragment>
     );
   }
 }

@@ -1,27 +1,20 @@
-.LessonDay
-  grid-template-columns: 56px auto
-  
-  .EventGrid
-    border-top: 1px dashed var(--secondary-color)
+.LessonDayEvent
+  display: grid
+  align-content: start
+  grid-template-columns: 4fr 1fr
+  grid-column: 2 / 9
+  padding: 5px
+  margin: 3px
+  margin-right: 15px
+  align-items: center
+  font-size: 0.8rem
+  border: solid 1px
+  border-color: var(--secondary-color)
+
+  .EventInfo
+    grid-column-start: 1
+
+  .EventRoom
+    width: 100%
+    text-align: end
     grid-column-start: 2
-
-  .Event
-    display: grid
-    align-content: start
-    grid-template-columns: 4fr 1fr
-    grid-column-start: 2
-    padding: 5px
-    margin: 3px
-    margin-right: 15px
-    align-items: center
-    font-size: 0.8rem
-    border: solid 1px
-    border-color: var(--secondary-color)
-
-    .EventInfo
-      grid-column-start: 1
-
-    .EventRoom
-      width: 100%
-      text-align: end
-      grid-column-start: 2

@@ -13,8 +13,3 @@ beforeEach(() => {
 it('renders without crashing', () => {
   shallow(<LessonDay />);
 });
-
-it('should render one root element with className LessonMonth', () => {
-  const wrapper = shallow(<LessonDay />);
-  expect(wrapper.find('.LessonDay')).toHaveLength(1);
-});

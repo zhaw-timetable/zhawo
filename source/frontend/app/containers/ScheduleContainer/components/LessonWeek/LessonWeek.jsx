@@ -55,7 +55,7 @@ class LessonWeek extends Component {
                 key={format(event.startTime, 'HH:mm').concat(event.name)}
               >
                 <div
-                  className="Event"
+                  className="LessonWeekEvent"
                   style={{
                     gridColumnStart: event.day + 1,
                     gridRowStart: event.startSlot + 3,
