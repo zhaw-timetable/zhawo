@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import './ScheduleSearch.sass';
+import './ScheduleContextMenu.sass';
 
 import globalStore from '../../../../stores/GlobalStore';
 import * as globalActions from '../../../../actions/GlobalActions';
@@ -22,7 +22,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 
-class ScheduleSearch extends Component {
+class ScheduleContextMenu extends Component {
   state = {
     isScheduleSearchOpen: false,
     showInput: false,
@@ -191,7 +191,7 @@ class ScheduleSearch extends Component {
   }
 }
 
-export default ScheduleSearch;
+export default ScheduleContextMenu;
 
 const Input = inputProps => {
   const { ref, ...other } = inputProps;

@@ -4,7 +4,7 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import ScheduleSearch from './ScheduleSearch';
+import ScheduleContextMenu from './ScheduleContextMenu.test';
 
 jest.mock('../../../../stores/GlobalStore');
 jest.mock('../../../../actions/GlobalActions');
@@ -12,5 +12,5 @@ jest.mock('../../../../stores/ScheduleStore');
 jest.mock('../../../../actions/ScheduleActions');
 
 it('renders without crashing', () => {
-  shallow(<ScheduleSearch />);
+  shallow(<ScheduleContextMenu />);
 });

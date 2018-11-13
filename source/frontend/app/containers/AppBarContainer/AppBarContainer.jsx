@@ -8,13 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import * as scheduleActions from '../../actions/ScheduleActions';
-import scheduleStore from '../../stores/ScheduleStore';
-
-import * as globalActions from '../../actions/GlobalActions';
-import globalStore from '../../stores/GlobalStore.js';
-
-import ScheduleSearch from './components/ScheduleSearch/ScheduleSearch';
+import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
 
 class AppBarContainer extends Component {
   render() {
@@ -33,7 +27,7 @@ class AppBarContainer extends Component {
             <Typography variant="h6" color="inherit" className="flex">
               ZHAWO
             </Typography>
-            <ScheduleSearch />
+            <ScheduleContextMenu />
           </Toolbar>
         </AppBar>
       </div>
