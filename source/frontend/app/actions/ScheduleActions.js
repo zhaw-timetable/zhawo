@@ -28,22 +28,22 @@ export const getSchedule = async function(route, name, startDate) {
   });
   console.log(`GET_SCHEDULE_OK${typeSpecifier}`);
   // Notifying store that async functions is started -> display load spinner
-  dispatcher.dispatch({
-    type: `GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`
-  });
-  console.log(`GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`);
-  // Fetching around current date, for preloading
-  schedule = await api
-    .getScheduleResource(route, name, startDate, 20)
-    .catch(err => {
-      console.error(err);
-    });
-  dispatcher.dispatch({
-    type: `GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`,
-    payload: schedule,
-    name
-  });
-  console.log(`GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`);
+  // dispatcher.dispatch({
+  //   type: `GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`
+  // });
+  // console.log(`GET_SCHEDULE_PRELOAD_STARTED${typeSpecifier}`);
+  // // Fetching around current date, for preloading
+  // schedule = await api
+  //   .getScheduleResource(route, name, startDate, 20)
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
+  // dispatcher.dispatch({
+  //   type: `GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`,
+  //   payload: schedule,
+  //   name
+  // });
+  // console.log(`GET_SCHEDULE_PRELOAD_OK${typeSpecifier}`);
 };
 
 export const gotoDay = function(targetDate) {

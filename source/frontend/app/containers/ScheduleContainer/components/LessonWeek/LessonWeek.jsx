@@ -8,6 +8,8 @@ import globalStore from '../../../../stores/GlobalStore.js';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+//TODO: fix this with new schedule stuff
+
 class LessonWeek extends Component {
   state = {
     slots: scheduleStore.slots,

@@ -68,6 +68,8 @@ class LessonDay extends Component {
     clearInterval(this.timerId);
   }
 
+  //TODO: make not static again..
+
   render() {
     return (
       <Fragment>
