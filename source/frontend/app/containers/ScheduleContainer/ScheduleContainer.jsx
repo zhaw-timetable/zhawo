@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './ScheduleContainer.sass';
 
 import globalStore from '../../stores/GlobalStore';
@@ -7,10 +7,14 @@ import * as globalActions from '../../actions/GlobalActions';
 import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
+import AppBarContainer from '../AppBarContainer/AppBarContainer';
+
 import NavigationWeek from './components/NavigationWeek/NavigationWeek';
 import NavigationMonth from './components/NavigationMonth/NavigationMonth';
 import LessonDay from './components/LessonDay/LessonDay';
 import LessonWeek from './components/LessonWeek/LessonWeek';
+import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
+
 
 class Schedule extends Component {
   state = {
@@ -48,14 +52,20 @@ class Schedule extends Component {
 
   render() {
     return (
-      <div className="ScheduleContainer">
-        {!this.state.isOpen && <NavigationWeek />}
-        {this.state.isOpen && <NavigationMonth />}
-        {/* Todo remove gripper in week view and change function of arrows*/}
-        <div id="Gripper" onClick={this.toggleMonthView} />
-        {this.state.isDayView && <LessonDay />}
-        {!this.state.isDayView && <LessonWeek />}
-      </div>
+      <Fragment>
+        <AppBarContainer>
+          <ScheduleContextMenu />
+        </AppBarContainer>
+        <div className="ScheduleContainer">
+          {!this.state.isOpen && <NavigationWeek />}
+          {this.state.isOpen && <NavigationMonth />}
+          {/* Todo remove gripper in week view and change function of arrows*/}
+          <div id="Gripper" onClick={this.toggleMonthView} />
+          {this.state.isDayView && <LessonDay />}
+          {!this.state.isDayView && <LessonWeek />}
+        </div>
+      </Fragment>
+
     );
   }
 }
