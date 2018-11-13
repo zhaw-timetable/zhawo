@@ -50,7 +50,9 @@ class DrawerContainer extends Component {
   };
 
   handleThemeChanged = () => {
-    this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
+    if (globalStore.drawerOpen) {
+      this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
+    }
   };
 
   render() {

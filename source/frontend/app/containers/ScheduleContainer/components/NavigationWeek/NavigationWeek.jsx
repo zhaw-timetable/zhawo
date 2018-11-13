@@ -21,7 +21,7 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 //TODO: display current month somewhere
 
-class Calendar extends Component {
+class NavigationWeek extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
     displayWeek: scheduleStore.displayWeek
@@ -68,6 +68,7 @@ class Calendar extends Component {
             <IconButton
               onClick={this.handleWeekBackClick}
               aria-label="WeekBack"
+              color="inherit"
             >
               <KeyboardArrowLeftIcon />
             </IconButton>
@@ -80,6 +81,7 @@ class Calendar extends Component {
               } ${isToday(date) ? 'today' : ''}`}
               name={date}
               onClick={this.handleDateClick(date)}
+              color="inherit"
             >
               <div className="name">
                 {format(date, 'dd', { locale: deLocale })}
@@ -94,6 +96,7 @@ class Calendar extends Component {
             <IconButton
               onClick={this.handleWeekForwardClick}
               aria-label="WeekForward"
+              color="inherit"
             >
               <KeyboardArrowRightIcon />
             </IconButton>
@@ -112,4 +115,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default NavigationWeek;
