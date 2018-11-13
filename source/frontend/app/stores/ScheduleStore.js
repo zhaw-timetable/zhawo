@@ -98,7 +98,15 @@ class ScheduleStore extends EventEmitter {
         this.currentSearch = '';
         this.emit('schedule_changed');
         break;
+      case 'LOGOUT':
+        this.clearStore();
+        break;
     }
+  }
+
+  clearStore() {
+    //TODO: delete everything that is saved in this store
+    console.log('should clear scheduleStore now');
   }
 
   addSlotInfoToEvents(schedule) {

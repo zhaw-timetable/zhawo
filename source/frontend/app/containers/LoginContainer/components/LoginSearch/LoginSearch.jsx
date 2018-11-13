@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './LoginSearch.sass';
 
+import scheduleStore from '../../../../stores/ScheduleStore';
+import * as scheduleActions from '../../../../actions/ScheduleActions';
+
 import globalStore from '../../../../stores/GlobalStore';
 import * as globalActions from '../../../../actions/GlobalActions';
 
@@ -66,35 +69,34 @@ class LoginSearch extends Component {
     });
   };
 
-  setCurrentUser = () => {
-    // Sets globalStore currentUser to value of input
-    globalActions.setCurrentUser(this.state.value);
-  };
-
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     let count = 0;
-
     return inputLength === 0
       ? []
       : this.state.possibleLoginNames.filter(suggestion => {
           const keep =
             count < 5 &&
             suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
-
           if (keep) {
             count += 1;
           }
-
           return keep;
         });
   };
 
-  //TODO: clean this with proper function and value from state
   getSuggestionValue = suggestion => {
-    globalActions.setCurrentUser(suggestion.label, suggestion.type);
     return suggestion.label;
+  };
+
+  onSuggestionSelected = (event, { suggestion }) => {
+    globalActions.setCurrentUser(suggestion.label, suggestion.type);
+    scheduleActions.getSchedule(
+      suggestion.type,
+      suggestion.label,
+      scheduleStore.displayDay
+    );
   };
 
   render() {
@@ -102,18 +104,18 @@ class LoginSearch extends Component {
       <div className="LoginSearch">
         {!this.state.loadingPossibleNames && (
           <Autosuggest
-            renderInputComponent={renderInput}
+            renderInputComponent={Input}
             suggestions={this.state.suggestions}
             onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-            renderSuggestionsContainer={renderSuggestionsContainer}
+            renderSuggestionsContainer={SuggestionsContainer}
+            renderSuggestion={Suggestion}
             getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={renderSuggestion}
+            onSuggestionSelected={this.onSuggestionSelected}
             inputProps={{
               placeholder: 'Nach Kürzel suchen',
               value: this.state.value,
-              onChange: this.handleChange,
-              setCurrentUser: this.setCurrentUser
+              onChange: this.handleChange
             }}
           />
         )}
@@ -131,9 +133,8 @@ class LoginSearch extends Component {
 
 export default LoginSearch;
 
-function renderInput(inputProps) {
-  const { ref, setCurrentUser, ...other } = inputProps;
-
+const Input = inputProps => {
+  const { ref, ...other } = inputProps;
   return (
     <TextField
       fullWidth
@@ -143,12 +144,11 @@ function renderInput(inputProps) {
       }}
     />
   );
-}
+};
 
-function renderSuggestion(suggestion, { query, isHighlighted }) {
+const Suggestion = (suggestion, { query, isHighlighted }) => {
   const matches = match(suggestion.label, query);
   const parts = parse(suggestion.label, matches);
-
   return (
     <MenuItem selected={isHighlighted} component="div">
       <div>
@@ -166,14 +166,13 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
       </div>
     </MenuItem>
   );
-}
+};
 
-function renderSuggestionsContainer(options) {
+const SuggestionsContainer = options => {
   const { containerProps, children } = options;
-
   return (
     <Paper {...containerProps} square>
       {children}
     </Paper>
   );
-}
+};
