@@ -14,8 +14,3 @@ jest.mock('../../../../actions/ScheduleActions');
 it('renders without crashing', () => {
   shallow(<NavigationWeek />);
 });
-
-it('should render one root element with className NavigationWeek', () => {
-  const wrapper = shallow(<NavigationWeek />);
-  expect(wrapper.find('.NavigationWeek')).toHaveLength(1);
-});

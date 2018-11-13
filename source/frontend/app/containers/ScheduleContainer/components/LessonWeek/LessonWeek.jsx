@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
-import './LessonDay.sass';
+import './LessonWeek.sass';
 
 import * as globalActions from '../../../../actions/GlobalActions';
 import globalStore from '../../../../stores/GlobalStore.js';
@@ -8,10 +8,10 @@ import globalStore from '../../../../stores/GlobalStore.js';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
-class LessonDay extends Component {
+class LessonWeek extends Component {
   state = {
     slots: scheduleStore.slots,
-    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+    scheduleForDisplayWeek: scheduleStore.scheduleForDisplayWeek
   };
 
   componentWillMount() {
@@ -23,13 +23,16 @@ class LessonDay extends Component {
   }
 
   refreshSchedule = () => {
+    console.log(scheduleStore.scheduleForDisplayWeek);
     this.setState({
       slots: scheduleStore.slots,
-      scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+      scheduleForDisplayWeek: scheduleStore.scheduleForDisplayWeek
     });
   };
 
   render() {
+    var dayCount = 1;
+
     return (
       <Fragment>
         {this.state.slots &&
@@ -45,28 +48,33 @@ class LessonDay extends Component {
               </div>
             </Fragment>
           ))}
-        {this.state.scheduleForDisplayDay &&
-          this.state.scheduleForDisplayDay.events.map(event => (
-            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
-              <div
-                className="LessonDayEvent"
-                style={{
-                  gridRowStart: event.startSlot + 3,
-                  gridRowEnd: event.endSlot + 3
-                }}
+        {this.state.scheduleForDisplayWeek &&
+          this.state.scheduleForDisplayWeek.map(day =>
+            day.events.map(event => (
+              <Fragment
+                key={format(event.startTime, 'HH:mm').concat(event.name)}
               >
-                <div className="EventInfo">{event.name}</div>
-                <div className="EventRoom">
-                  {event.eventRealizations[0] &&
-                    event.eventRealizations[0].room &&
-                    event.eventRealizations[0].room.name}
+                <div
+                  className="LessonWeekEvent"
+                  style={{
+                    gridColumnStart: event.day + 1,
+                    gridRowStart: event.startSlot + 3,
+                    gridRowEnd: event.endSlot + 3
+                  }}
+                >
+                  <div className="EventInfo">{event.name}</div>
+                  <div className="EventRoom">
+                    {event.eventRealizations[0] &&
+                      event.eventRealizations[0].room &&
+                      event.eventRealizations[0].room.name}
+                  </div>
                 </div>
-              </div>
-            </Fragment>
-          ))}
+              </Fragment>
+            ))
+          )}
       </Fragment>
     );
   }
 }
 
-export default LessonDay;
+export default LessonWeek;

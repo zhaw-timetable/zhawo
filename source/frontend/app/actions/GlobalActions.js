@@ -39,3 +39,10 @@ export const changeTheme = value => {
     payload: value
   });
 };
+
+export const setDayView = value => {
+  dispatcher.dispatch({
+    type: 'SET_DAYVIEW',
+    payload: value
+  });
+};
