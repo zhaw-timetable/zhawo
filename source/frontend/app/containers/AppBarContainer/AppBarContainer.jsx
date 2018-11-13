@@ -1,80 +1,22 @@
 import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Clear';
-import TodayIcon from '@material-ui/icons/Today';
 
 import './AppBarContainer.sass';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
 import * as scheduleActions from '../../actions/ScheduleActions';
-
-import ScheduleSearch from './components/ScheduleSearch/ScheduleSearch';
-
-import Dialog from '@material-ui/core/Dialog';
-
-import Slide from '@material-ui/core/Slide';
 import scheduleStore from '../../stores/ScheduleStore';
 
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore.js';
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />;
-}
+import ScheduleSearch from './components/ScheduleSearch/ScheduleSearch';
 
 class AppBarContainer extends Component {
-  state = {
-    isScheduleSearchOpen: false,
-    showInput: false,
-    currentSearch: scheduleStore.currentSearch
-  };
-
-  componentWillMount() {
-    scheduleStore.on('schedule_changed', this.refreshState);
-  }
-
-  componentWillUnmount() {
-    scheduleStore.removeListener('schedule_changed', this.refreshState);
-  }
-
-  refreshState = () => {
-    this.setState({
-      currentSearch: scheduleStore.currentSearch
-    });
-  };
-
-  handleGoToTodayClick = e => {
-    e.preventDefault();
-    const currentDate = new Date();
-    scheduleActions.gotoDay(currentDate);
-  };
-
-  toggleShowInput = () => {
-    this.setState({ isScheduleSearchOpen: true });
-  };
-
-  handleClickOpen = () => {
-    this.setState({ isScheduleSearchOpen: true });
-  };
-
-  handleClose = () => {
-    this.setState({ isScheduleSearchOpen: false });
-  };
-
-  handleClearSearch = e => {
-    scheduleActions.clearSearch();
-  };
-
-  toggleDrawer = value => {
-    globalActions.toggleDrawer();
-  };
-
   render() {
     return (
       <div className="AppBarContainer">
@@ -91,49 +33,8 @@ class AppBarContainer extends Component {
             <Typography variant="h6" color="inherit" className="flex">
               ZHAWO
             </Typography>
-            <IconButton
-              aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
-              aria-haspopup="true"
-              onClick={this.handleGoToTodayClick}
-              color="inherit"
-            >
-              <TodayIcon />
-            </IconButton>
-            {!this.state.currentSearch && (
-              <IconButton
-                aria-owns={
-                  this.state.isScheduleSearchOpen ? 'menu-appbar' : null
-                }
-                aria-haspopup="true"
-                onClick={this.toggleShowInput}
-                color="inherit"
-              >
-                <SearchIcon />
-              </IconButton>
-            )}
-            {this.state.currentSearch && (
-              <Button
-                onClick={this.handleClearSearch}
-                color="inherit"
-                variant="text"
-                fontSize="small"
-                className="SearchClearButton"
-              >
-                {scheduleStore.currentSearch}
-                <ClearIcon id="SearchClearIcon" />
-              </Button>
-            )}
+            <ScheduleSearch />
           </Toolbar>
-          <Dialog
-            open={this.state.isScheduleSearchOpen}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={this.handleClose}
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <ScheduleSearch handleClose={this.handleClose} />
-          </Dialog>
         </AppBar>
       </div>
     );

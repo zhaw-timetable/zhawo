@@ -14,8 +14,3 @@ jest.mock('../../../../actions/ScheduleActions');
 it('renders without crashing', () => {
   shallow(<ScheduleSearch />);
 });
-
-it('should render one root element with className ScheduleSearch', () => {
-  const wrapper = shallow(<ScheduleSearch />);
-  expect(wrapper.find('.ScheduleSearch')).toHaveLength(1);
-});

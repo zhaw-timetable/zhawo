@@ -14,9 +14,19 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import DialogContent from '@material-ui/core/DialogContent';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import TodayIcon from '@material-ui/icons/Today';
+import ClearIcon from '@material-ui/icons/Clear';
+import Dialog from '@material-ui/core/Dialog';
+import Slide from '@material-ui/core/Slide';
 
 class ScheduleSearch extends Component {
   state = {
+    isScheduleSearchOpen: false,
+    showInput: false,
+    currentSearch: scheduleStore.currentSearch,
     value: '',
     suggestions: [],
     possibleNames: globalStore.possibleNames
@@ -24,6 +34,7 @@ class ScheduleSearch extends Component {
 
   componentWillMount() {
     globalStore.on('possible_names_changed', this.refreshPossibleNames);
+    scheduleStore.on('schedule_changed', this.refreshState);
   }
 
   componentWillUnmount() {
@@ -31,7 +42,36 @@ class ScheduleSearch extends Component {
       'possible_names_changed',
       this.refreshPossibleNames
     );
+    scheduleStore.removeListener('schedule_changed', this.refreshState);
   }
+
+  refreshState = () => {
+    this.setState({
+      currentSearch: scheduleStore.currentSearch
+    });
+  };
+
+  handleGoToTodayClick = e => {
+    e.preventDefault();
+    const currentDate = new Date();
+    scheduleActions.gotoDay(currentDate);
+  };
+
+  toggleShowInput = () => {
+    this.setState({ isScheduleSearchOpen: true });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ isScheduleSearchOpen: true });
+  };
+
+  handleClose = () => {
+    this.setState({ isScheduleSearchOpen: false });
+  };
+
+  handleClearSearch = e => {
+    scheduleActions.clearSearch();
+  };
 
   refreshPossibleNames = () => {
     this.setState({
@@ -79,7 +119,7 @@ class ScheduleSearch extends Component {
 
   onSuggestionSelected = (event, { suggestion }) => {
     event.preventDefault();
-    this.props.handleClose();
+    this.handleClose();
     scheduleActions.getSchedule(
       suggestion.type,
       suggestion.label,
@@ -88,25 +128,65 @@ class ScheduleSearch extends Component {
   };
 
   render() {
-    const { handleClose } = this.props;
     return (
-      <DialogContent className="ScheduleSearch">
-        <Autosuggest
-          renderInputComponent={Input}
-          suggestions={this.state.suggestions}
-          onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-          renderSuggestionsContainer={SuggestionsContainer}
-          renderSuggestion={Suggestion}
-          getSuggestionValue={this.getSuggestionValue}
-          onSuggestionSelected={this.onSuggestionSelected}
-          inputProps={{
-            placeholder: 'Nach Kürzel suchen',
-            value: this.state.value,
-            onChange: this.handleChange
-          }}
-        />
-      </DialogContent>
+      <Fragment>
+        <IconButton
+          aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
+          aria-haspopup="true"
+          onClick={this.handleGoToTodayClick}
+          color="inherit"
+        >
+          <TodayIcon />
+        </IconButton>
+        {!this.state.currentSearch && (
+          <IconButton
+            aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
+            aria-haspopup="true"
+            onClick={this.toggleShowInput}
+            color="inherit"
+          >
+            <SearchIcon />
+          </IconButton>
+        )}
+        {this.state.currentSearch && (
+          <Button
+            onClick={this.handleClearSearch}
+            color="inherit"
+            variant="text"
+            fontSize="small"
+            className="SearchClearButton"
+          >
+            {scheduleStore.currentSearch}
+            <ClearIcon id="SearchClearIcon" />
+          </Button>
+        )}
+        <Dialog
+          open={this.state.isScheduleSearchOpen}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogContent className="ScheduleSearch">
+            <Autosuggest
+              renderInputComponent={Input}
+              suggestions={this.state.suggestions}
+              onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+              renderSuggestionsContainer={SuggestionsContainer}
+              renderSuggestion={Suggestion}
+              getSuggestionValue={this.getSuggestionValue}
+              onSuggestionSelected={this.onSuggestionSelected}
+              inputProps={{
+                placeholder: 'Nach Kürzel suchen',
+                value: this.state.value,
+                onChange: this.handleChange
+              }}
+            />
+          </DialogContent>
+        </Dialog>
+      </Fragment>
     );
   }
 }
@@ -155,4 +235,8 @@ const SuggestionsContainer = options => {
       {children}
     </Paper>
   );
+};
+
+const Transition = props => {
+  return <Slide direction="down" {...props} />;
 };
