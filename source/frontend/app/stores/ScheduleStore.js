@@ -8,14 +8,15 @@ import {
   startOfDay,
   startOfMonth,
   getHours,
-  getMinutes
+  getMinutes,
+  format
 } from 'date-fns';
 
 class ScheduleStore extends EventEmitter {
   constructor() {
     super();
     // general properties
-    this.currentDate = new Date();
+    this.currentDate = this.getCurrentDate();
     this.slots = defaultSlots;
     // properties for display
     this.displayDay = this.currentDate;
@@ -28,6 +29,16 @@ class ScheduleStore extends EventEmitter {
     this.schedule = null;
     this.scheduleForCurrentUser = null;
     this.scheduleForSearchUser = null;
+  }
+
+  getCurrentDate() {
+    const currentDate = new Date('11/11/2018');
+    // if currentDate is Sunday, set store currentDate to the Monday after
+    if (format(currentDate, 'd') == 0) {
+      return addDays(currentDate, 1);
+    } else {
+      return currentDate;
+    }
   }
 
   getSearchUsername() {
