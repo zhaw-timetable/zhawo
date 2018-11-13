@@ -12,6 +12,8 @@ import {
   getDay
 } from 'date-fns';
 
+// TODO: clean up after new schedule
+
 class ScheduleStore extends EventEmitter {
   constructor() {
     super();
@@ -56,7 +58,8 @@ class ScheduleStore extends EventEmitter {
         if (action.payload && action.payload.days) {
           this.slots = action.payload.days[0].slots || defaultSlots;
         }
-        this.schedule = this.addSlotInfoToEvents(action.payload);
+        // this.schedule = this.addSlotInfoToEvents(action.payload);
+        this.schedule = action.payload;
         this.scheduleForCurrentUser = this.schedule;
         this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
         this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
