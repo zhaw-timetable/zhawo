@@ -4,7 +4,7 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import ScheduleContextMenu from './ScheduleContextMenu.test';
+import ScheduleContextMenu from './ScheduleContextMenu';
 
 jest.mock('../../../../stores/GlobalStore');
 jest.mock('../../../../actions/GlobalActions');
