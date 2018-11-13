@@ -8,10 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
+import * as globalActions from '../../actions/GlobalActions';
 
 class AppBarContainer extends Component {
+  toggleDrawer = value => {
+    globalActions.toggleDrawer();
+  };
+
   render() {
+    const { children } = this.props;
     return (
       <div className="AppBarContainer">
         <AppBar position="static" color="inherit">
@@ -27,7 +32,7 @@ class AppBarContainer extends Component {
             <Typography variant="h6" color="inherit" className="flex">
               ZHAWO
             </Typography>
-            <ScheduleContextMenu />
+            {children}
           </Toolbar>
         </AppBar>
       </div>

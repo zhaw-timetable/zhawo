@@ -61,7 +61,6 @@ class App extends Component {
         render={props =>
           globalStore.currentUser != '' ? (
             <div className={'App ' + this.state.theme}>
-              <AppBarContainer />
               <DrawerContainer className={this.state.theme} />
               <Component {...props} />
               <BottomNavContainer />

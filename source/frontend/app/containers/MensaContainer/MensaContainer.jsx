@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import './MensaContainer.sass';
+
+import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 class MensaContainer extends Component {
   render() {
     return (
-      <div className="MensaContainer">
-        <h1>MensaContainer - work in progress</h1>
-      </div>
+      <Fragment>
+        <AppBarContainer />
+        <div className="MensaContainer">
+          <h1>MensaContainer - work in progress</h1>
+        </div>
+      </Fragment>
     );
   }
 }

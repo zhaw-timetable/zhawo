@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
 import './RoomSearchContainer.sass';
+
+import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 class RoomSearchContainer extends Component {
   render() {
     return (
-      <div className="RoomSearchContainer">
-        <h1>RoomSearchContainer - work in progress</h1>
-      </div>
+      <Fragment>
+        <AppBarContainer />
+        <div className="RoomSearchContainer">
+          <h1>RoomSearchContainer - work in progress</h1>
+        </div>
+      </Fragment>
     );
   }
 }
