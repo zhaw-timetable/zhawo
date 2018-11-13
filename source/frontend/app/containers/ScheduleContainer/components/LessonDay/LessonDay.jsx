@@ -10,8 +10,6 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 class LessonDay extends Component {
   state = {
-    // Todo: bigger interval and set activeSlot on Mount and Fix seTState before mount
-    timer: setInterval(this.timer.bind(this), 1000),
     activeSlot: '',
     slots: scheduleStore.slots,
     scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
@@ -23,6 +21,16 @@ class LessonDay extends Component {
 
   componentWillUnmount() {
     scheduleStore.removeListener('schedule_changed', this.refreshSchedule);
+    this.stopTimer();
+  }
+
+  componentDidMount() {
+    // Check every x seconds if active slot is still active
+    this.startTimer();
+    // Set initial active slot once
+    this.setState({
+      activeSlot: this.getTimeSlot(this.state.slots)
+    });
   }
 
   refreshSchedule = () => {
@@ -32,22 +40,29 @@ class LessonDay extends Component {
     });
   };
 
-  getTimeSlot(slots) {
+  getTimeSlot = slots => {
     const now = format(new Date(), 'HH:mm');
-
     for (var slot in slots) {
       if (format(slots[slot].endTime, 'HH:mm') > now) {
         return format(slots[slot].endTime, 'HH:mm');
       }
     }
-
     return null;
+  };
+
+  startTimer() {
+    if (!this.timerId) {
+      this.timerId = setInterval(() => {
+        console.log('timer');
+        this.setState({
+          activeSlot: this.getTimeSlot(this.state.slots)
+        });
+      }, 60000);
+    }
   }
 
-  timer() {
-    this.setState({
-      activeSlot: this.getTimeSlot(this.state.slots)
-    });
+  stopTimer() {
+    clearInterval(this.timerId);
   }
 
   render() {
