@@ -65,9 +65,7 @@ class ScheduleSearch extends Component {
       ? []
       : this.state.possibleNames.filter(suggestion => {
           const keep =
-            count < 5 &&
-            suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
-
+            count < 5 && suggestion.label.toLowerCase().includes(inputValue);
           if (keep) {
             count += 1;
           }
