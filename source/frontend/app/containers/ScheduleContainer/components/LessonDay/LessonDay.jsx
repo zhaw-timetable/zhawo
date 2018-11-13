@@ -8,11 +8,14 @@ import globalStore from '../../../../stores/GlobalStore.js';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+//TODO: clean this up after adding new schedule
+
 class LessonDay extends Component {
   state = {
     activeSlot: '',
     slots: scheduleStore.slots,
-    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay,
+    schedule: scheduleStore.schedule
   };
 
   componentWillMount() {
@@ -36,7 +39,8 @@ class LessonDay extends Component {
   refreshSchedule = () => {
     this.setState({
       slots: scheduleStore.slots,
-      scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+      scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay,
+      schedule: scheduleStore.schedule
     });
   };
 
@@ -53,7 +57,6 @@ class LessonDay extends Component {
   startTimer() {
     if (!this.timerId) {
       this.timerId = setInterval(() => {
-        console.log('timer');
         this.setState({
           activeSlot: this.getTimeSlot(this.state.slots)
         });
@@ -68,43 +71,59 @@ class LessonDay extends Component {
   render() {
     return (
       <Fragment>
-        {this.state.slots &&
-          this.state.slots.map(slot => (
-            <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div
-                className={
-                  'SlotTime ' +
-                  (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
-                }
-              >
-                <div className="SlotStartTime">
-                  {format(slot.startTime, 'HH:mm')}
+        {this.state.schedule &&
+          this.state.schedule.weeks['2018-11-12']['2018-11-13'].slots.map(
+            (slot, i) => (
+              <Fragment key={format(slot.startTime, 'HH:mm')}>
+                <div
+                  className={
+                    'SlotTime ' +
+                    (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
+                  }
+                >
+                  <div className="SlotStartTime">
+                    {format(slot.startTime, 'HH:mm')}
+                  </div>
+                  <div className="SlotEndTime">
+                    {format(slot.endTime, 'HH:mm')}
+                  </div>
                 </div>
-                <div className="SlotEndTime">
-                  {format(slot.endTime, 'HH:mm')}
+                <div
+                  className="EventFlexBox"
+                  style={{
+                    gridRow: `${i + 3} / ${i + 3 + slot.longestEvent}`
+                  }}
+                >
+                  {slot.events &&
+                    slot.events.map((event, j) => {
+                      return (
+                        <Fragment
+                          key={format(event.startTime, 'HH:mm').concat(
+                            event.name
+                          )}
+                        >
+                          <div
+                            className="LessonDayEvent"
+                            style={{
+                              gridRow: `${i + 3} / ${i +
+                                3 +
+                                event.slots.length}`
+                            }}
+                          >
+                            <div className="EventInfo">{event.name}</div>
+                            <div className="EventRoom">
+                              {event.eventRealizations[0] &&
+                                event.eventRealizations[0].room &&
+                                event.eventRealizations[0].room.name}
+                            </div>
+                          </div>
+                        </Fragment>
+                      );
+                    })}
                 </div>
-              </div>
-            </Fragment>
-          ))}
-        {this.state.scheduleForDisplayDay &&
-          this.state.scheduleForDisplayDay.events.map(event => (
-            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
-              <div
-                className="LessonDayEvent"
-                style={{
-                  gridRowStart: event.startSlot + 3,
-                  gridRowEnd: event.endSlot + 3
-                }}
-              >
-                <div className="EventInfo">{event.name}</div>
-                <div className="EventRoom">
-                  {event.eventRealizations[0] &&
-                    event.eventRealizations[0].room &&
-                    event.eventRealizations[0].room.name}
-                </div>
-              </div>
-            </Fragment>
-          ))}
+              </Fragment>
+            )
+          )}
       </Fragment>
     );
   }
