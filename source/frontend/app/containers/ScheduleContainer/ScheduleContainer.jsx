@@ -15,7 +15,6 @@ import LessonDay from './components/LessonDay/LessonDay';
 import LessonWeek from './components/LessonWeek/LessonWeek';
 import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
 
-
 class Schedule extends Component {
   state = {
     isOpen: false,
@@ -34,10 +33,12 @@ class Schedule extends Component {
 
   componentWillMount() {
     globalStore.on('isDayView_changed', this.handleView);
+    globalStore.on('current_user_loggedout', this.handleLogout);
   }
 
   componentWillUnmount() {
     globalStore.removeListener('isDayView_changed', this.handleView);
+    globalStore.removeListener('current_user_loggedout', this.handleView);
   }
 
   toggleMonthView = () => {
@@ -48,6 +49,10 @@ class Schedule extends Component {
 
   handleView = () => {
     this.setState({ isDayView: globalStore.isDayView });
+  };
+
+  handleLogout = () => {
+    this.forceUpdate();
   };
 
   render() {
@@ -65,7 +70,6 @@ class Schedule extends Component {
           {!this.state.isDayView && <LessonWeek />}
         </div>
       </Fragment>
-
     );
   }
 }

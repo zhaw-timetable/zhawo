@@ -15,6 +15,10 @@ import {
 class ScheduleStore extends EventEmitter {
   constructor() {
     super();
+    this.initializeStore();
+  }
+
+  initializeStore() {
     // general properties
     this.currentDate = this.getCurrentDate();
     this.slots = defaultSlots;
@@ -22,7 +26,6 @@ class ScheduleStore extends EventEmitter {
     this.displayDay = this.currentDate;
     this.displayWeek = this.createDisplayWeek(this.displayDay);
     this.displayMonth = this.createDisplayMonth(this.displayDay);
-
     this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
     this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
     this.currentSearch = '';
@@ -123,8 +126,13 @@ class ScheduleStore extends EventEmitter {
   }
 
   clearStore() {
-    //TODO: delete everything that is saved in this store
-    console.log('should clear scheduleStore now');
+    this.schedule = null;
+    this.scheduleForCurrentUser = null;
+    this.scheduleForSearchUser = null;
+    this.displayDay = this.currentDate;
+    this.scheduleForDisplayDay = null;
+    this.scheduleForDisplayWeek = null;
+    this.currentSearch = '';
   }
 
   addSlotInfoToEvents(schedule) {
