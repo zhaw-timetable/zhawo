@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   format,
   isToday,
@@ -84,7 +84,7 @@ class NavigationMonth extends Component {
 
   render() {
     return (
-      <div className="NavigationMonth">
+      <Fragment>
         <div className="arrow">
           <IconButton
             onClick={this.handleMonthBackClick}
@@ -125,7 +125,7 @@ class NavigationMonth extends Component {
             <KeyboardArrowRightIcon />
           </IconButton>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

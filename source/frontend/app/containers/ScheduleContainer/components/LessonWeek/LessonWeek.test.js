@@ -4,12 +4,12 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import LessonDay from './LessonDay';
+import LessonWeek from './LessonWeek';
 
 beforeEach(() => {
   console.log = jest.fn();
 });
 
 it('renders without crashing', () => {
-  shallow(<LessonDay />);
+  shallow(<LessonWeek />);
 });

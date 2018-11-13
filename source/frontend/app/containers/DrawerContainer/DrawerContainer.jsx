@@ -20,16 +20,19 @@ import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
 class DrawerContainer extends Component {
   state = {
     drawerOpen: globalStore.drawerOpen,
-    themeSwitch: globalStore.theme == 'darkTheme'
+    themeSwitch: globalStore.theme == 'darkTheme',
+    viewSwitch: globalStore.isDayView
   };
 
   componentWillMount() {
     globalStore.on('drawerOpen_changed', this.handleDrawer);
+    globalStore.on('isDayView_changed', this.handleViewChanged);
     globalStore.on('theme_changed', this.handleThemeChanged);
   }
 
   componentWillUnmount() {
     globalStore.removeListener('drawerOpen_changed', this.handleDrawer);
+    globalStore.removeListener('isDayView_changed', this.handleViewChanged);
     globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
@@ -45,7 +48,7 @@ class DrawerContainer extends Component {
     globalActions.logout();
   };
 
-  handleSwitchChange = event => {
+  handleThemeSwitchChange = event => {
     globalActions.changeTheme(event.target.checked);
   };
 
@@ -53,6 +56,16 @@ class DrawerContainer extends Component {
     if (globalStore.drawerOpen) {
       this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
     }
+  };
+
+  handleViewChanged = () => {
+    if (globalStore.drawerOpen) {
+      this.setState({ viewSwitch: globalStore.isDayView });
+    }
+  };
+
+  handleViewSwitchChange = event => {
+    globalActions.setDayView(event.target.checked);
   };
 
   render() {
@@ -85,13 +98,28 @@ class DrawerContainer extends Component {
             </IconButton>
           </div>
           <Divider />
-          <Switch
-            checked={this.state.themeSwitch}
-            onChange={this.handleSwitchChange}
-            value="themeSwitch"
-          />
-          {!this.state.themeSwitch && 'Dark Mode'}
-          {this.state.themeSwitch && 'Light Mode'}
+          <div className="switchContainer">
+            {' '}
+            <Switch
+              checked={this.state.themeSwitch}
+              onChange={this.handleThemeSwitchChange}
+              value="themeSwitch"
+            />
+            {!this.state.themeSwitch && 'Dark Mode'}
+            {this.state.themeSwitch && 'Light Mode'}
+          </div>
+
+          <div className="switchContainer">
+            {' '}
+            <Switch
+              checked={this.state.viewSwitch}
+              onChange={this.handleViewSwitchChange}
+              value="themeSwitch"
+            />
+            {!this.state.viewSwitch && 'Day View'}
+            {this.state.viewSwitch && 'Week View'}
+          </div>
+
           <Button className="LogoutBtn" onClick={this.logout} color="inherit">
             Logout
           </Button>

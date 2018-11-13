@@ -1,45 +1,32 @@
 @import '../../../../assets/sass/vars'
 
-.NavigationWeek
-  text-align: center
-  border-color: var(--secondary-color)
+
+.arrow
+  display: flex
+  align-items: center
+
+.day
+  display: flex
+  flex-direction: column
+  align-content: center
+  justify-content: center
   box-sizing: border-box
-  max-width: 100vw
-  padding-bottom: 5px
+  border-bottom: solid 5px transparent
 
-  .week
-    box-sizing: border-box
-    display: grid
-    grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
-    width: 100%
-    height: 60px
+.name
+  font-weight: bold
+  font-family: Roboto Light
+  font-size: 14px
 
-    .arrow
-      display: flex
-      align-items: center
+.date
+  font-family: Roboto Light
+  font-size: 14px
 
-    .day
-      display: flex
-      flex-direction: column
-      align-content: center
-      justify-content: center
-      box-sizing: border-box
-      border-bottom: solid 5px transparent
+.today
+  font-weight: bolder
+  border-bottom: solid 5px var(--secondary-color)
 
-      .name
-        font-weight: bold
-        font-family: Roboto Light
-        font-size: 14px
-
-      .date
-        font-family: Roboto Light
-        font-size: 14px
-
-    .today
-      font-weight: bolder
-      border-bottom: solid 5px var(--secondary-color)
-
-    .active
-      border-bottom: solid 5px var(--accent-color)
+.active
+  border-bottom: solid 5px var(--accent-color)
 
   .MonthButton

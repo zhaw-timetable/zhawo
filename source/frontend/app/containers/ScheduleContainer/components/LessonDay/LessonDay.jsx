@@ -10,6 +10,9 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 class LessonDay extends Component {
   state = {
+    // Todo: bigger interval and set activeSlot on Mount and Fix seTState before mount
+    timer: setInterval(this.timer.bind(this), 1000),
+    activeSlot: '',
     slots: scheduleStore.slots,
     scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
   };
@@ -29,13 +32,36 @@ class LessonDay extends Component {
     });
   };
 
+  getTimeSlot(slots) {
+    const now = format(new Date(), 'HH:mm');
+
+    for (var slot in slots) {
+      if (format(slots[slot].endTime, 'HH:mm') > now) {
+        return format(slots[slot].endTime, 'HH:mm');
+      }
+    }
+
+    return null;
+  }
+
+  timer() {
+    this.setState({
+      activeSlot: this.getTimeSlot(this.state.slots)
+    });
+  }
+
   render() {
     return (
-      <div className="LessonDay">
+      <Fragment>
         {this.state.slots &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div className="SlotTime">
+              <div
+                className={
+                  'SlotTime ' +
+                  (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
+                }
+              >
                 <div className="SlotStartTime">
                   {format(slot.startTime, 'HH:mm')}
                 </div>
@@ -49,10 +75,10 @@ class LessonDay extends Component {
           this.state.scheduleForDisplayDay.events.map(event => (
             <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
               <div
-                className="Event"
+                className="LessonDayEvent"
                 style={{
-                  gridRowStart: event.startSlot + 1,
-                  gridRowEnd: event.endSlot + 1
+                  gridRowStart: event.startSlot + 3,
+                  gridRowEnd: event.endSlot + 3
                 }}
               >
                 <div className="EventInfo">{event.name}</div>
@@ -64,7 +90,7 @@ class LessonDay extends Component {
               </div>
             </Fragment>
           ))}
-      </div>
+      </Fragment>
     );
   }
 }

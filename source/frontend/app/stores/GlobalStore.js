@@ -14,6 +14,7 @@ class GlobalStore extends EventEmitter {
     this.possibleNames = [];
     this.possibleLoginNames = [];
     this.drawerOpen = false;
+    this.isDayView = true;
     this.getUsernameFromDB();
     this.getThemeFromDB();
   }
@@ -56,6 +57,11 @@ class GlobalStore extends EventEmitter {
       case 'CHANGE_THEME':
         this.setTheme(action.payload);
         this.emit('theme_changed');
+        break;
+
+      case 'SET_DAYVIEW':
+        this.isDayView = action.payload;
+        this.emit('isDayView_changed');
         break;
     }
   }
