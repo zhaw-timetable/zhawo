@@ -11,6 +11,7 @@ import {
 import dispatcher from '../dispatcher';
 
 import * as api from '../adapters/ZhawoAdapter';
+import globalStore from './GlobalStore';
 
 class ScheduleStore extends EventEmitter {
   constructor() {
@@ -78,7 +79,7 @@ class ScheduleStore extends EventEmitter {
       case 'GET_SCHEDULE_FOR_SEARCH':
       case 'GET_SCHEDULE_FOR_USER':
         let { route, name, startDate } = action.payload;
-        const isForCurrentUser = this.currentUser === name;
+        const isForCurrentUser = globalStore.currentUser === name;
         // If this action is already running, don't run it again
         if (this.currentAction === action.type) break;
         this.currentAction = action.type;
@@ -91,6 +92,7 @@ class ScheduleStore extends EventEmitter {
           this.scheduleForCurrentUser = fetchedSchedule;
           this.schedule = this.scheduleForCurrentUser;
         } else {
+          this.currentSearch = name;
           this.scheduleForSearchUser = fetchedSchedule;
           this.schedule = this.scheduleForSearchUser;
         }
@@ -143,52 +145,6 @@ class ScheduleStore extends EventEmitter {
         this.currentAction = '';
         break;
 
-      // case 'GET_SCHEDULE_PRELOAD_OK_FOR_CU':
-      //   if (action.payload.days) {
-      //     this.slots = action.payload.days[0].slots || defaultSlots;
-      //   }
-      //   let extendedScheduleForCurrentUser = this.addSlotInfoToEvents(
-      //     action.payload
-      //   );
-      //   this.schedule.days = [
-      //     ...this.schedule.days,
-      //     ...extendedScheduleForCurrentUser.days
-      //   ];
-      //   this.scheduleForCurrentUser = this.schedule;
-      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-      //   this.emit('schedule_changed');
-      //   break;
-
-      // case 'GET_SCHEDULE_OK_FOR_SEARCH':
-      //   if (action.payload && action.payload.days) {
-      //     this.slots = action.payload.days[0].slots || defaultSlots;
-      //   }
-      //   this.schedule = this.addSlotInfoToEvents(action.payload);
-      //   this.scheduleForSearchUser = this.schedule;
-      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-      //   this.currentSearch = action.name;
-      //   this.emit('schedule_changed');
-      //   break;
-
-      // case 'GET_SCHEDULE_PRELOAD_OK_FOR_SEARCH':
-      //   if (action.payload.days) {
-      //     this.slots = action.payload.days[0].slots || defaultSlots;
-      //   }
-      //   let extendedScheduleForSearchUser = this.addSlotInfoToEvents(
-      //     action.payload
-      //   );
-      //   this.schedule.days = [
-      //     ...this.schedule.days,
-      //     ...extendedScheduleForSearchUser.days
-      //   ];
-      //   this.scheduleForSearchUser = this.schedule;
-      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-      //   this.emit('schedule_changed');
-      //   break;
-
       case 'GOTO_DAY':
         this.displayDay = action.payload;
         this.displayWeek = this.createDisplayWeek(this.displayDay);
@@ -198,7 +154,6 @@ class ScheduleStore extends EventEmitter {
 
       case 'CLEAR_SEARCH':
         this.schedule = this.scheduleForCurrentUser;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
         this.currentSearch = '';
         this.emit('schedule_changed');
         break;
