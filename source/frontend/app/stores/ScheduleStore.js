@@ -162,19 +162,6 @@ class ScheduleStore extends EventEmitter {
         break;
     }
   }
-
-  findScheduleForWeek(date) {
-    if (this.schedule && this.schedule.days) {
-      const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
-      var foundDays = [];
-      for (var i = 0; i < 6; i++) {
-        foundDays[i] = this.findScheduleForDay(addDays(weekStartDate, i));
-      }
-      return foundDays;
-    } else {
-      return null;
-    }
-  }
 }
 
 const defaultSlots = [
