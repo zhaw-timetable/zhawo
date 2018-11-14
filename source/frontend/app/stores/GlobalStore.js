@@ -1,7 +1,8 @@
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
-
 import idb from 'idb';
+
+import * as api from '../adapters/ZhawoAdapter';
 
 class GlobalStore extends EventEmitter {
   constructor() {
@@ -19,7 +20,7 @@ class GlobalStore extends EventEmitter {
     this.getThemeFromDB();
   }
 
-  handleActions(action) {
+  async handleActions(action) {
     switch (action.type) {
       case 'SET_CURRENT_USER':
         this.currentUser = action.payload.name;
@@ -31,17 +32,20 @@ class GlobalStore extends EventEmitter {
         this.drawerOpen = !this.drawerOpen;
         this.emit('drawerOpen_changed');
         break;
-      case 'GET_POSSIBLE_NAMES_OK':
+      case 'GET_POSSIBLE_NAMES':
+        const possibleNames = await api.getPossibleNames().catch(err => {
+          console.error(err);
+        });
         this.possibleNames = [
-          ...action.payload.students,
-          ...action.payload.lecturers,
-          ...action.payload.classes,
-          ...action.payload.courses,
-          ...action.payload.rooms
+          ...possibleNames.students,
+          ...possibleNames.lecturers,
+          ...possibleNames.classes,
+          ...possibleNames.courses,
+          ...possibleNames.rooms
         ];
         this.possibleLoginNames = [
-          ...action.payload.students,
-          ...action.payload.lecturers
+          ...possibleNames.students,
+          ...possibleNames.lecturers
         ];
         this.emit('possible_names_changed');
         break;
@@ -99,7 +103,6 @@ class GlobalStore extends EventEmitter {
     // add, clear, count, delete, get, getAll, getAllKeys, getKey, put
     let user = await store.get('username');
 
-    if (user) console.log(user.username, user.type);
     this.currentUser = user.username;
     this.currentUserType = user.type;
 
@@ -133,7 +136,6 @@ class GlobalStore extends EventEmitter {
     await store.put({ id: 'theme', theme: theme });
 
     await tx.complete;
-    console.log(theme, ' saved to indexedDB');
     dbInstance.close();
   }
 
@@ -146,7 +148,6 @@ class GlobalStore extends EventEmitter {
     await store.put({ id: 'username', username: name, type: type });
 
     await tx.complete;
-    console.log(name, type, ' saved to indexedDB');
     dbInstance.close();
   }
 
@@ -155,7 +156,6 @@ class GlobalStore extends EventEmitter {
   }
 
   async removeCurrentUser() {
-    console.log('Removing user from indexedDB');
     let dbInstance = await this.getDBInstance();
 
     let tx = dbInstance.transaction('info', 'readwrite');
@@ -166,7 +166,6 @@ class GlobalStore extends EventEmitter {
     await store.delete('username');
 
     await tx.complete;
-    console.log('Removed user from indexedDB');
     dbInstance.close();
   }
 }
