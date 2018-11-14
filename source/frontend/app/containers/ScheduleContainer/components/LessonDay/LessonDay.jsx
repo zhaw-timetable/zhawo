@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { format } from 'date-fns';
+import { format, startOfWeek } from 'date-fns';
+
 import './LessonDay.sass';
 
 import * as globalActions from '../../../../actions/GlobalActions';
@@ -12,7 +13,8 @@ class LessonDay extends Component {
   state = {
     activeSlot: '',
     slots: scheduleStore.slots,
-    scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+    displayDay: scheduleStore.displayDay,
+    schedule: scheduleStore.schedule
   };
 
   componentWillMount() {
@@ -35,8 +37,8 @@ class LessonDay extends Component {
 
   refreshSchedule = () => {
     this.setState({
-      slots: scheduleStore.slots,
-      scheduleForDisplayDay: scheduleStore.scheduleForDisplayDay
+      displayDay: scheduleStore.displayDay,
+      schedule: scheduleStore.schedule
     });
   };
 
@@ -53,7 +55,6 @@ class LessonDay extends Component {
   startTimer() {
     if (!this.timerId) {
       this.timerId = setInterval(() => {
-        console.log('timer');
         this.setState({
           activeSlot: this.getTimeSlot(this.state.slots)
         });
@@ -66,9 +67,19 @@ class LessonDay extends Component {
   }
 
   render() {
+    const weekKey = format(
+      startOfWeek(this.state.displayDay, { weekStartsOn: 1 }),
+      'YYYY-MM-DD'
+    );
+    const dayKey = format(this.state.displayDay, 'YYYY-MM-DD');
+    const isThereData =
+      this.state.schedule !== null &&
+      this.state.schedule.weeks !== undefined &&
+      this.state.schedule.weeks[weekKey] !== undefined &&
+      this.state.schedule.weeks[weekKey][dayKey] !== undefined;
     return (
       <Fragment>
-        {this.state.slots &&
+        {!isThereData &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
               <div
@@ -86,22 +97,52 @@ class LessonDay extends Component {
               </div>
             </Fragment>
           ))}
-        {this.state.scheduleForDisplayDay &&
-          this.state.scheduleForDisplayDay.events.map(event => (
-            <Fragment key={format(event.startTime, 'HH:mm').concat(event.name)}>
+        {isThereData &&
+          this.state.schedule.weeks[weekKey][dayKey].slots.map((slot, i) => (
+            <Fragment key={format(slot.startTime, 'HH:mm')}>
               <div
-                className="LessonDayEvent"
+                className={
+                  'SlotTime ' +
+                  (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
+                }
+              >
+                <div className="SlotStartTime">
+                  {format(slot.startTime, 'HH:mm')}
+                </div>
+                <div className="SlotEndTime">
+                  {format(slot.endTime, 'HH:mm')}
+                </div>
+              </div>
+              <div
+                className="EventFlexBox"
                 style={{
-                  gridRowStart: event.startSlot + 3,
-                  gridRowEnd: event.endSlot + 3
+                  gridRow: `${i + 3} / ${i + 3 + slot.longestEvent}`
                 }}
               >
-                <div className="EventInfo">{event.name}</div>
-                <div className="EventRoom">
-                  {event.eventRealizations[0] &&
-                    event.eventRealizations[0].room &&
-                    event.eventRealizations[0].room.name}
-                </div>
+                {slot.events &&
+                  slot.events.map((event, j) => {
+                    return (
+                      <Fragment
+                        key={format(event.startTime, 'HH:mm').concat(
+                          event.name
+                        )}
+                      >
+                        <div
+                          className="LessonDayEvent"
+                          style={{
+                            gridRow: `${i + 3} / ${i + 3 + event.slots.length}`
+                          }}
+                        >
+                          <div className="EventInfo">{event.name}</div>
+                          <div className="EventRoom">
+                            {event.eventRealizations[0] &&
+                              event.eventRealizations[0].room &&
+                              event.eventRealizations[0].room.name}
+                          </div>
+                        </div>
+                      </Fragment>
+                    );
+                  })}
               </div>
             </Fragment>
           ))}

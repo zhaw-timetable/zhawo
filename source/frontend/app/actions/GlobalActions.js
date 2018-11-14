@@ -1,5 +1,4 @@
 import dispatcher from '../dispatcher';
-import * as api from '../adapters/ZhawoAdapter';
 
 export const setCurrentUser = (name, type) => {
   dispatcher.dispatch({
@@ -9,16 +8,7 @@ export const setCurrentUser = (name, type) => {
 };
 
 export const getPossibleNames = async () => {
-  dispatcher.dispatch({ type: 'GET_POSSIBLE_NAMES_START' });
-  console.log('GET_POSSIBLE_NAMES_START');
-  const possibleNames = await api.getPossibleNames().catch(err => {
-    console.error(err);
-  });
-  dispatcher.dispatch({
-    type: 'GET_POSSIBLE_NAMES_OK',
-    payload: possibleNames
-  });
-  console.log('GET_POSSIBLE_NAMES_OK');
+  dispatcher.dispatch({ type: 'GET_POSSIBLE_NAMES' });
 };
 
 export const toggleDrawer = () => {

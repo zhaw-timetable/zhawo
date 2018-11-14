@@ -1,13 +1,11 @@
 import * as scheduleActions from './ScheduleActions';
 import dispatcher from '../dispatcher.js';
-import * as api from '../adapters/ZhawoAdapter';
 
 jest.mock('../adapters/ZhawoAdapter');
 
 const ROUTE = 'route';
 const NAME = 'foobar';
 const STARTDATE = '2018-10-15';
-const PAYLOAD = 'payload';
 const DATE = new Date();
 
 beforeEach(() => {
@@ -24,11 +22,9 @@ it('all actions should be defined', () => {
   expect(scheduleActions.clearSearch).toBeDefined();
 });
 
-it('getSchedule should dispatch correct type with payload when getting response', async () => {
-  api.getScheduleResource = jest.fn(() => Promise.resolve(PAYLOAD));
-  await scheduleActions.getSchedule(ROUTE, NAME, STARTDATE);
+it('getSchedule should dispatch correct type', () => {
+  scheduleActions.getSchedule(ROUTE, NAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
-  expect(api.getScheduleResource).toHaveBeenCalled();
 });
 
 it('gotoDay should dispatch correct type with payload', () => {
