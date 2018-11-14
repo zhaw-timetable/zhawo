@@ -118,7 +118,6 @@ class ScheduleStore extends EventEmitter {
             };
             this.schedule = this.scheduleForSearchUser;
           }
-          this.emit('schedule_changed');
         }
         for (let i = 1; i < 14; i++) {
           let newDate = format(subWeeks(new Date(startDate), i), 'YYYY-MM-DD');
@@ -140,8 +139,8 @@ class ScheduleStore extends EventEmitter {
             };
             this.schedule = this.scheduleForSearchUser;
           }
-          this.emit('schedule_changed');
         }
+        this.emit('schedule_changed');
         this.currentAction = '';
         break;
 
