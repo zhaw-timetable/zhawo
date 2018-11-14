@@ -11,7 +11,6 @@ import './EventDetailDialog.sass';
 class EventDetailDialog extends Component {
   render() {
     const { open, event, handleClose } = this.props;
-    console.log(event);
     return (
       <div>
         <Dialog
@@ -51,7 +50,7 @@ class EventDetailDialog extends Component {
             </DialogContentText>
             <br />
             <br />
-            {/* TODO: add floorplan here with room highlighted? */}
+            {/* maybe add floorplan here with room highlighted? */}
             <svg className="placeholder" width="300px" height="200px" />
           </DialogContent>
         </Dialog>
