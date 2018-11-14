@@ -47,7 +47,7 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
           : null;
       }
     }
-    schedule ? resolve(convertSchedule(schedule)) : reject({ status: 404 });
+    schedule ? resolve(convertSchedule(schedule)) : resolve({ weeks: {} });
   });
 }
 
@@ -70,7 +70,7 @@ function convertSchedule(schedule) {
     if (!getDay(day.date) == 0) {
       // Days within a week will again be identified by their shortened date
       const dayKey = format(day.date, 'YYYY-MM-DD');
-      // Events will be added to slots dynamically, to make it easier, initialize array
+      // Events will be added to slots dynamically, to make that easier, initialize array
       day.slots.forEach(slot => {
         slot.events = [];
         slot.longestEvent = 0;
@@ -95,7 +95,6 @@ function convertSchedule(schedule) {
       superiorSchedule.weeks[weekKey][dayKey].slots = day.slots;
     }
   });
-  console.log(superiorSchedule);
   return superiorSchedule;
 }
 

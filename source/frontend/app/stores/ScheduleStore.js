@@ -1,18 +1,16 @@
 import { EventEmitter } from 'events';
-import dispatcher from '../dispatcher';
-
 import {
+  format,
   startOfWeek,
   addDays,
-  isSameDay,
-  startOfDay,
+  addWeeks,
+  subWeeks,
   startOfMonth,
-  getHours,
-  getMinutes,
   getDay
 } from 'date-fns';
+import dispatcher from '../dispatcher';
 
-// TODO: clean up after new schedule
+import * as api from '../adapters/ZhawoAdapter';
 
 class ScheduleStore extends EventEmitter {
   constructor() {
@@ -21,6 +19,7 @@ class ScheduleStore extends EventEmitter {
   }
 
   initializeStore() {
+    this.currentAction = '';
     // general properties
     this.currentDate = this.getCurrentDate();
     this.slots = defaultSlots;
@@ -28,8 +27,6 @@ class ScheduleStore extends EventEmitter {
     this.displayDay = this.currentDate;
     this.displayWeek = this.createDisplayWeek(this.displayDay);
     this.displayMonth = this.createDisplayMonth(this.displayDay);
-    this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-    this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
     this.currentSearch = '';
     // properties for data management
     this.schedule = null;
@@ -37,124 +34,12 @@ class ScheduleStore extends EventEmitter {
     this.scheduleForSearchUser = null;
   }
 
-  getCurrentDate() {
-    const currentDate = new Date();
-    // if currentDate is Sunday, set store currentDate to the Monday after
-    if (getDay(currentDate) == 0) {
-      return addDays(currentDate, 1);
-    } else {
-      return currentDate;
-    }
-  }
-
-  getSearchUsername() {
-    return this.searchUsername;
-  }
-
-  handleActions(action) {
-    // Todo: change so that it doesnt get scheduleForDisplayDay and scheduleForDisplayWeek every time
-    switch (action.type) {
-      case 'GET_SCHEDULE_OK_FOR_CU':
-        if (action.payload && action.payload.days) {
-          this.slots = action.payload.days[0].slots || defaultSlots;
-        }
-        // this.schedule = this.addSlotInfoToEvents(action.payload);
-        this.schedule = action.payload;
-        this.scheduleForCurrentUser = this.schedule;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-        this.emit('schedule_changed');
-        break;
-      case 'GET_SCHEDULE_PRELOAD_OK_FOR_CU':
-        if (action.payload.days) {
-          this.slots = action.payload.days[0].slots || defaultSlots;
-        }
-        let extendedScheduleForCurrentUser = this.addSlotInfoToEvents(
-          action.payload
-        );
-        this.schedule.days = [
-          ...this.schedule.days,
-          ...extendedScheduleForCurrentUser.days
-        ];
-        this.scheduleForCurrentUser = this.schedule;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-        this.emit('schedule_changed');
-        break;
-      case 'GET_SCHEDULE_OK_FOR_SEARCH':
-        if (action.payload && action.payload.days) {
-          this.slots = action.payload.days[0].slots || defaultSlots;
-        }
-        this.schedule = this.addSlotInfoToEvents(action.payload);
-        this.scheduleForSearchUser = this.schedule;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-        this.currentSearch = action.name;
-        this.emit('schedule_changed');
-        break;
-      case 'GET_SCHEDULE_PRELOAD_OK_FOR_SEARCH':
-        if (action.payload.days) {
-          this.slots = action.payload.days[0].slots || defaultSlots;
-        }
-        let extendedScheduleForSearchUser = this.addSlotInfoToEvents(
-          action.payload
-        );
-        this.schedule.days = [
-          ...this.schedule.days,
-          ...extendedScheduleForSearchUser.days
-        ];
-        this.scheduleForSearchUser = this.schedule;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-        this.emit('schedule_changed');
-        break;
-      case 'GOTO_DAY':
-        this.displayDay = action.payload;
-        this.displayWeek = this.createDisplayWeek(this.displayDay);
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
-        this.displayMonth = this.createDisplayMonth(this.displayDay);
-        this.emit('schedule_changed');
-        break;
-      case 'CLEAR_SEARCH':
-        this.schedule = this.scheduleForCurrentUser;
-        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
-        this.currentSearch = '';
-        this.emit('schedule_changed');
-        break;
-      case 'LOGOUT':
-        this.clearStore();
-        break;
-    }
-  }
-
   clearStore() {
     this.schedule = null;
     this.scheduleForCurrentUser = null;
     this.scheduleForSearchUser = null;
     this.displayDay = this.currentDate;
-    this.scheduleForDisplayDay = null;
-    this.scheduleForDisplayWeek = null;
     this.currentSearch = '';
-  }
-
-  addSlotInfoToEvents(schedule) {
-    if (schedule.days) {
-      schedule.days.forEach(day => {
-        day.events.forEach(event => {
-          event.startSlot = this.slots.findIndex(slot => {
-            return (
-              getHours(slot.startTime) === getHours(event.slots[0].startTime) &&
-              getMinutes(slot.startTime) ===
-                getMinutes(event.slots[0].startTime)
-            );
-          });
-          event.endSlot = event.startSlot + event.slots.length;
-          event.day = getDay(event.startTime);
-        });
-      });
-    }
-    return schedule;
   }
 
   createDisplayWeek(date) {
@@ -174,14 +59,153 @@ class ScheduleStore extends EventEmitter {
     return monthArray;
   }
 
-  findScheduleForDay(date) {
-    if (this.schedule && this.schedule.days) {
-      const foundDay = this.schedule.days.find(day => {
-        return isSameDay(startOfDay(day.date), startOfDay(date));
-      });
-      return foundDay;
+  getCurrentDate() {
+    const currentDate = new Date();
+    // if currentDate is Sunday, set store currentDate to the Monday after
+    if (getDay(currentDate) == 0) {
+      return addDays(currentDate, 1);
     } else {
-      return null;
+      return currentDate;
+    }
+  }
+
+  getSearchUsername() {
+    return this.searchUsername;
+  }
+
+  async handleActions(action) {
+    switch (action.type) {
+      case 'GET_SCHEDULE_FOR_SEARCH':
+      case 'GET_SCHEDULE_FOR_USER':
+        let { route, name, startDate } = action.payload;
+        const isForCurrentUser = this.currentUser === name;
+        // If this action is already running, don't run it again
+        if (this.currentAction === action.type) break;
+        this.currentAction = action.type;
+        let fetchedSchedule = await api
+          .getScheduleResource(route, name, startDate, 0)
+          .catch(err => {
+            console.error(err);
+          });
+        if (isForCurrentUser) {
+          this.scheduleForCurrentUser = fetchedSchedule;
+          this.schedule = this.scheduleForCurrentUser;
+        } else {
+          this.scheduleForSearchUser = fetchedSchedule;
+          this.schedule = this.scheduleForSearchUser;
+        }
+        this.emit('schedule_changed');
+        // Lazy load other weeks
+        for (let i = 1; i < 14; i++) {
+          let newDate = format(addWeeks(new Date(startDate), i), 'YYYY-MM-DD');
+          let fetchedSchedule = await api
+            .getScheduleResource(route, name, newDate, 0)
+            .catch(err => {
+              console.error(err);
+            });
+          if (isForCurrentUser) {
+            this.scheduleForCurrentUser.weeks = {
+              ...this.scheduleForCurrentUser.weeks,
+              ...fetchedSchedule.weeks
+            };
+            this.schedule = this.scheduleForCurrentUser;
+          } else {
+            this.scheduleForSearchUser.weeks = {
+              ...this.scheduleForSearchUser.weeks,
+              ...fetchedSchedule.weeks
+            };
+            this.schedule = this.scheduleForSearchUser;
+          }
+          this.emit('schedule_changed');
+        }
+        for (let i = 1; i < 14; i++) {
+          let newDate = format(subWeeks(new Date(startDate), i), 'YYYY-MM-DD');
+          let fetchedSchedule = await api
+            .getScheduleResource(route, name, newDate, 0)
+            .catch(err => {
+              console.error(err);
+            });
+          if (isForCurrentUser) {
+            this.scheduleForCurrentUser.weeks = {
+              ...this.scheduleForCurrentUser.weeks,
+              ...fetchedSchedule.weeks
+            };
+            this.schedule = this.scheduleForCurrentUser;
+          } else {
+            this.scheduleForSearchUser.weeks = {
+              ...this.scheduleForSearchUser.weeks,
+              ...fetchedSchedule.weeks
+            };
+            this.schedule = this.scheduleForSearchUser;
+          }
+          this.emit('schedule_changed');
+        }
+        this.currentAction = '';
+        break;
+
+      // case 'GET_SCHEDULE_PRELOAD_OK_FOR_CU':
+      //   if (action.payload.days) {
+      //     this.slots = action.payload.days[0].slots || defaultSlots;
+      //   }
+      //   let extendedScheduleForCurrentUser = this.addSlotInfoToEvents(
+      //     action.payload
+      //   );
+      //   this.schedule.days = [
+      //     ...this.schedule.days,
+      //     ...extendedScheduleForCurrentUser.days
+      //   ];
+      //   this.scheduleForCurrentUser = this.schedule;
+      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
+      //   this.emit('schedule_changed');
+      //   break;
+
+      // case 'GET_SCHEDULE_OK_FOR_SEARCH':
+      //   if (action.payload && action.payload.days) {
+      //     this.slots = action.payload.days[0].slots || defaultSlots;
+      //   }
+      //   this.schedule = this.addSlotInfoToEvents(action.payload);
+      //   this.scheduleForSearchUser = this.schedule;
+      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
+      //   this.currentSearch = action.name;
+      //   this.emit('schedule_changed');
+      //   break;
+
+      // case 'GET_SCHEDULE_PRELOAD_OK_FOR_SEARCH':
+      //   if (action.payload.days) {
+      //     this.slots = action.payload.days[0].slots || defaultSlots;
+      //   }
+      //   let extendedScheduleForSearchUser = this.addSlotInfoToEvents(
+      //     action.payload
+      //   );
+      //   this.schedule.days = [
+      //     ...this.schedule.days,
+      //     ...extendedScheduleForSearchUser.days
+      //   ];
+      //   this.scheduleForSearchUser = this.schedule;
+      //   this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+      //   this.scheduleForDisplayWeek = this.findScheduleForWeek(this.displayDay);
+      //   this.emit('schedule_changed');
+      //   break;
+
+      case 'GOTO_DAY':
+        this.displayDay = action.payload;
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        this.displayMonth = this.createDisplayMonth(this.displayDay);
+        this.emit('schedule_changed');
+        break;
+
+      case 'CLEAR_SEARCH':
+        this.schedule = this.scheduleForCurrentUser;
+        this.scheduleForDisplayDay = this.findScheduleForDay(this.displayDay);
+        this.currentSearch = '';
+        this.emit('schedule_changed');
+        break;
+
+      case 'LOGOUT':
+        this.clearStore();
+        break;
     }
   }
 
