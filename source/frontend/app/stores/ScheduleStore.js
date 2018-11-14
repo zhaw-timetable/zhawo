@@ -118,7 +118,6 @@ class ScheduleStore extends EventEmitter {
             };
             this.schedule = this.scheduleForSearchUser;
           }
-          this.emit('schedule_changed');
         }
         for (let i = 1; i < 14; i++) {
           let newDate = format(subWeeks(new Date(startDate), i), 'YYYY-MM-DD');
@@ -140,8 +139,8 @@ class ScheduleStore extends EventEmitter {
             };
             this.schedule = this.scheduleForSearchUser;
           }
-          this.emit('schedule_changed');
         }
+        this.emit('schedule_changed');
         this.currentAction = '';
         break;
 
@@ -161,19 +160,6 @@ class ScheduleStore extends EventEmitter {
       case 'LOGOUT':
         this.clearStore();
         break;
-    }
-  }
-
-  findScheduleForWeek(date) {
-    if (this.schedule && this.schedule.days) {
-      const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
-      var foundDays = [];
-      for (var i = 0; i < 6; i++) {
-        foundDays[i] = this.findScheduleForDay(addDays(weekStartDate, i));
-      }
-      return foundDays;
-    } else {
-      return null;
     }
   }
 }

@@ -4,11 +4,15 @@
   grid-column: 2 / 9
 
 .LessonDayEvent
+  z-index: 1
   display: grid
-  align-content: start
-  grid-template-columns: 4fr 1fr
+  grid-template-columns: 1fr 1fr
+  grid-template-rows: 1fr
   width: 100%
+  height: inherit
   padding: 5px
+  padding-right: 15px
+  padding-left: 15px
   margin: 2px
   overflow: hidden
   align-items: center
@@ -16,10 +20,13 @@
   border: solid 1px
   border-color: var(--secondary-color)
 
+  &:hover
+    cursor: pointer
+
   .EventInfo
     grid-column-start: 1
 
   .EventRoom
-    width: 100%
+    font-weight: bold
     text-align: end
     grid-column-start: 2

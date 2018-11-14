@@ -9,11 +9,15 @@ import globalStore from '../../../../stores/GlobalStore.js';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+import EventDetailDialog from '../EventDetailDialog/EventDetailDialog';
+
 class LessonWeek extends Component {
   state = {
     slots: scheduleStore.slots,
     displayDay: scheduleStore.displayDay,
-    schedule: scheduleStore.schedule
+    schedule: scheduleStore.schedule,
+    eventDetailsOpen: false,
+    eventForDetails: null
   };
 
   componentWillMount() {
@@ -32,6 +36,14 @@ class LessonWeek extends Component {
     });
   };
 
+  handleEventClick = param => e => {
+    this.setState({ eventDetailsOpen: true, eventForDetails: param });
+  };
+
+  handleCloseEventDetails = () => {
+    this.setState({ eventDetailsOpen: false, eventForDetails: null });
+  };
+
   render() {
     const weekKey = format(
       startOfWeek(this.state.displayDay, { weekStartsOn: 1 }),
@@ -44,6 +56,13 @@ class LessonWeek extends Component {
       this.state.schedule.weeks[weekKey] !== undefined;
     return (
       <Fragment>
+        {this.state.eventDetailsOpen && (
+          <EventDetailDialog
+            open={true}
+            event={this.state.eventForDetails}
+            handleClose={this.handleCloseEventDetails}
+          />
+        )}
         {this.state.slots.map(slot => (
           <Fragment key={format(slot.startTime, 'HH:mm')}>
             <div className="SlotTime">
@@ -66,6 +85,7 @@ class LessonWeek extends Component {
                     >
                       <div
                         className="LessonWeekEvent"
+                        onClick={this.handleEventClick(event)}
                         style={{
                           gridColumnStart: 1 + getDay(new Date(key)),
                           gridRow: `${i + 3} / ${i + 3 + event.slots.length}`

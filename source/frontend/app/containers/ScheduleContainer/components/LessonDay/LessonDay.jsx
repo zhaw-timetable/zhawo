@@ -9,12 +9,16 @@ import globalStore from '../../../../stores/GlobalStore.js';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+import EventDetailDialog from '../EventDetailDialog/EventDetailDialog';
+
 class LessonDay extends Component {
   state = {
     activeSlot: '',
     slots: scheduleStore.slots,
     displayDay: scheduleStore.displayDay,
-    schedule: scheduleStore.schedule
+    schedule: scheduleStore.schedule,
+    eventDetailsOpen: false,
+    eventForDetails: null
   };
 
   componentWillMount() {
@@ -66,6 +70,14 @@ class LessonDay extends Component {
     clearInterval(this.timerId);
   }
 
+  handleEventClick = param => e => {
+    this.setState({ eventDetailsOpen: true, eventForDetails: param });
+  };
+
+  handleCloseEventDetails = () => {
+    this.setState({ eventDetailsOpen: false, eventForDetails: null });
+  };
+
   render() {
     const weekKey = format(
       startOfWeek(this.state.displayDay, { weekStartsOn: 1 }),
@@ -79,6 +91,13 @@ class LessonDay extends Component {
       this.state.schedule.weeks[weekKey][dayKey] !== undefined;
     return (
       <Fragment>
+        {this.state.eventDetailsOpen && (
+          <EventDetailDialog
+            open={true}
+            event={this.state.eventForDetails}
+            handleClose={this.handleCloseEventDetails}
+          />
+        )}
         {!isThereData &&
           this.state.slots.map(slot => (
             <Fragment key={format(slot.startTime, 'HH:mm')}>
@@ -122,25 +141,23 @@ class LessonDay extends Component {
                 {slot.events &&
                   slot.events.map((event, j) => {
                     return (
-                      <Fragment
+                      <div
                         key={format(event.startTime, 'HH:mm').concat(
                           event.name
                         )}
+                        onClick={this.handleEventClick(event)}
+                        className="LessonDayEvent"
+                        style={{
+                          gridRow: `${i + 3} / ${i + 3 + event.slots.length}`
+                        }}
                       >
-                        <div
-                          className="LessonDayEvent"
-                          style={{
-                            gridRow: `${i + 3} / ${i + 3 + event.slots.length}`
-                          }}
-                        >
-                          <div className="EventInfo">{event.name}</div>
-                          <div className="EventRoom">
-                            {event.eventRealizations[0] &&
-                              event.eventRealizations[0].room &&
-                              event.eventRealizations[0].room.name}
-                          </div>
+                        <div className="EventInfo">{event.name}</div>
+                        <div className="EventRoom">
+                          {event.eventRealizations[0] &&
+                            event.eventRealizations[0].room &&
+                            event.eventRealizations[0].room.name}
                         </div>
-                      </Fragment>
+                      </div>
                     );
                   })}
               </div>

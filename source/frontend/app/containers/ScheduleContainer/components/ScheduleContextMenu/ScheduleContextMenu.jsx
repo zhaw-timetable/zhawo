@@ -66,7 +66,7 @@ class ScheduleContextMenu extends Component {
   };
 
   handleClose = () => {
-    this.setState({ isScheduleSearchOpen: false });
+    this.setState({ isScheduleSearchOpen: false, value: '' });
   };
 
   handleClearSearch = e => {
@@ -163,7 +163,6 @@ class ScheduleContextMenu extends Component {
         <Dialog
           open={this.state.isScheduleSearchOpen}
           TransitionComponent={Transition}
-          keepMounted
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
