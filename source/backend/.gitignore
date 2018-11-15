@@ -13,4 +13,4 @@
 npm-debug.log*
 
 dist
-data
+/data/*.json
