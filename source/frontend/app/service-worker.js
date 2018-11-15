@@ -3,7 +3,7 @@
 workbox.skipWaiting();
 workbox.clientsClaim();
 
-const bgSyncPlugin = new workbox.backgroundSync.Plugin('zhwoQueue', {
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('zhawoQueue', {
   maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
 });
 
