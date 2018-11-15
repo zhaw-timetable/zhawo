@@ -15,7 +15,7 @@ export default ({ config, db }) => {
   router.post('/', async (req, res) => {
     const name = req.body.name;
     const startDate = req.body.startDate;
-    const resource = await api.getScheduleResource('rooms', name, startDate);
+    const resource = await api.getScheduleResource('rooms', name, startDate, 7);
     res.json(resource);
   });
 

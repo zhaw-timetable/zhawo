@@ -18,7 +18,8 @@ export default ({ config, db }) => {
     const resource = await api.getScheduleResource(
       'lecturers',
       name,
-      startDate
+      startDate,
+      7
     );
     res.json(resource);
   });
