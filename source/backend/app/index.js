@@ -19,23 +19,21 @@ app.server.listen(process.env.PORT || config.port, () => {
 //TODO: everything below is just experimental
 
 // run every 24hrs
-// setInterval(createFreeRoomsJson, 1000*60*60*24);
-let count = 0;
-setInterval(createFreeRoomsJson, 1000);
+setInterval(createFreeRoomsJson, 1000 * 60 * 60 * 24);
+// let count = 0;
+// setInterval(createFreeRoomsJson, 1000);
 
 createFreeRoomsJson();
 
 async function createFreeRoomsJson() {
   try {
-    const myObj = { seconds: count++ };
+    const myObj = await createFreeRoomsObject();
     await fs.writeFile('./data/room_search_data.json', JSON.stringify(myObj));
     // logger.log('Created room_search_data.json');
   } catch (err) {
     logger.error(err);
   }
 }
-
-createFreeRoomsObject();
 
 async function createFreeRoomsObject() {
   try {
@@ -48,7 +46,6 @@ async function createFreeRoomsObject() {
     });
     let allSchedules = [];
     await asyncForEach(allRooms, async room => {
-      if (fetches > 50) return;
       let schedule = await api.getScheduleResource(
         'rooms',
         room,
@@ -80,7 +77,7 @@ async function createFreeRoomsObject() {
 
     for (var room of allSchedules) {
       freeRoomsBySlotCount = 0;
-      console.log(room.room.name);
+      //console.log(room.room.name);
       if (room.days[0].events.length != 0) {
         for (var event of room.days[0].events) {
           for (var slot of event.slots) {
@@ -94,7 +91,7 @@ async function createFreeRoomsObject() {
                 slot.endTime >
                 freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime
               ) {
-                console.log('Found Free Slot', slot.startTime, slot.endTime);
+                // Found free Slot
                 freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
                   room.room.name
                 );
@@ -107,8 +104,7 @@ async function createFreeRoomsObject() {
                   slotFound = true;
                   freeRoomsBySlotCount++;
                 } else {
-                  console.log('Empty Events so adding room to remaining slots');
-
+                  //Empty Event so adding room to remaining slots
                   // skip all the slots that are in last event
                   if (!lastSlotFound) {
                     freeRoomsBySlotCount += event.slots.length;
@@ -130,7 +126,6 @@ async function createFreeRoomsObject() {
         }
       } else {
         // No events mean free all day
-        console.log('Empty Events so adding room to every slot');
         for (var freeSlot in freeRoomsBySlot) {
           freeRoomsBySlot[freeSlot].rooms.push(room.room.name);
         }
@@ -139,11 +134,13 @@ async function createFreeRoomsObject() {
 
     logger.log(`FreeRoom List Created`);
 
-    console.log(freeRoomsBySlot);
+    return freeRoomsBySlot;
 
-    // Used to test
-    console.log(allSchedules[3].room.name);
-    console.log(allSchedules[3].days[0].events);
+    // console.log(freeRoomsBySlot);
+    //
+    // // Used to test
+    // console.log(allSchedules[3].room.name);
+    // console.log(allSchedules[3].days[0].events);
   } catch (err) {
     logger.error(err);
   }
