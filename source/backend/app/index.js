@@ -60,11 +60,12 @@ async function createFreeRoomsObject() {
         allSchedules.push(schedule);
       }
     });
-    //console.log(allSchedules[0]);
-    //console.log(allSchedules.length);
-    logger.log(`${fetches} of ${allRooms.length} timetables fetched / tried`);
-    let freeRoomsBySlot = [];
 
+    logger.log(`${fetches} of ${allRooms.length} timetables fetched / tried`);
+
+    // Makes the basic structure of freeRoomsBySlot
+    // an Object for each slot is made and pushed
+    let freeRoomsBySlot = [];
     for (slot in allSchedules[0].days[0].slots) {
       let temp = {
         name: slot,
@@ -74,51 +75,45 @@ async function createFreeRoomsObject() {
       freeRoomsBySlot.push(temp);
     }
 
-    //console.log(freeRoomsBySlot);
-
     let slotFound;
-    let freeRoomsBySlotCount;
+    let freeRoomsBySlotCount; // so that each slot is only checked once
 
     for (var room of allSchedules) {
-      //console.log(room.room.name);
       freeRoomsBySlotCount = 0;
-      console.log(room.days[0].events);
+      console.log(room.room.name);
       if (room.days[0].events.length != 0) {
         for (var event of room.days[0].events) {
-          //console.log(event);
-
-          //console.log(event.slots);
           for (var slot of event.slots) {
-            //console.log(slot);
             slotFound = false;
-
             while (
               !slotFound &&
               freeRoomsBySlotCount < freeRoomsBySlot.length - 1
             ) {
-              // console.log(
-              //   slot.endTime,
-              //   'and',
-              //   freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime
-              // );
               if (
                 slot.endTime >
                 freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime
               ) {
-                console.log('Found Free');
+                console.log('Found Free Slot', slot.startTime, slot.endTime);
                 freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
                   room.room.name
                 );
                 freeRoomsBySlotCount++;
               } else {
-                if (slot != event.slots[event.slots.length - 1]) {
+                // Don't set slotFound to true if it is the last event
+                //console.log(event.slots);
+                console.log(
+                  room.days[0].events[room.days[0].events.length - 1]
+                );
+                console.log(slot);
+                if (
+                  event != room.days[0].events[room.days[0].events.length - 1]
+                ) {
                   slotFound = true;
-                } else {
-                  console.log('Filling after last slot in events');
                   freeRoomsBySlotCount++;
-                  // console.log(
-                  //   freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime
-                  // );
+                } else {
+                  console.log('Empty Events so adding room to remaining slots');
+
+                  freeRoomsBySlotCount++; // because current slot is not free
                   freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
                     room.room.name
                   );
@@ -129,15 +124,16 @@ async function createFreeRoomsObject() {
         }
       } else {
         // No events mean free all day
-        console.log('Empty Events so just fulling up');
+        console.log('Empty Events so adding room to every slot');
         for (var freeSlot in freeRoomsBySlot) {
-          //console.log('adding', room.room.name, 'to slot: ', freeSlot);
           freeRoomsBySlot[freeSlot].rooms.push(room.room.name);
         }
       }
     }
 
     console.log(freeRoomsBySlot);
+    console.log(allSchedules[1].room.name);
+    console.log(allSchedules[1].days[0].events);
   } catch (err) {
     logger.error(err);
   }
