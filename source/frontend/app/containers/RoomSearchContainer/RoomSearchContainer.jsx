@@ -8,8 +8,17 @@ import * as roomSearchActions from '../../actions/RoomSearchActions';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 class RoomSearchContainer extends Component {
-  state = { freeRooms: null };
+  state = {
+    freeRooms: null,
+    expanded: '2018-11-16T08:00:00+01:00'
+  };
 
   componentDidMount() {
     roomSearchActions.getFreeRoomsJson();
@@ -26,6 +35,13 @@ class RoomSearchContainer extends Component {
   setFreeRooms = () => {
     this.setState({ freeRooms: roomSearchStore.freeRooms });
   };
+
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false
+    });
+  };
+
   render() {
     const isThereData = this.state.freeRooms !== null;
     return (
@@ -35,16 +51,27 @@ class RoomSearchContainer extends Component {
           {isThereData &&
             this.state.freeRooms.map(slot => (
               <div key={slot.slot.startTime}>
-                <h1>
-                  Free Roooms from:
-                  {slot.slot.startTime} until:
-                  {slot.slot.endTime}{' '}
-                </h1>
-                <div className="roomContainer">
-                  {slot.rooms.map(room => (
-                    <p key={(slot.slot.startTime, room)}>{room}</p>
-                  ))}
-                </div>
+                <ExpansionPanel
+                  expanded={this.state.expanded === slot.slot.startTime}
+                  onChange={this.handleChange(slot.slot.startTime)}
+                >
+                  <ExpansionPanelSummary>
+                    Free Roooms from:
+                    {slot.slot.startTime} until:
+                    {slot.slot.endTime}{' '}
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <div className="roomContainer">
+                      <List>
+                        {slot.rooms.map(room => (
+                          <ListItem key={(slot.slot.startTime, room)}>
+                            {room}
+                          </ListItem>
+                        ))}
+                      </List>
+                    </div>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
               </div>
             ))}
           <h1>{isThereData}</h1>
