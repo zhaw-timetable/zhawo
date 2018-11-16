@@ -24,13 +24,10 @@ class RoomSearchContainer extends Component {
   }
 
   setFreeRooms = () => {
-    console.log('Rooms found');
-    console.log(roomSearchStore.freeRooms);
     this.setState({ freeRooms: roomSearchStore.freeRooms });
   };
   render() {
     const isThereData = this.state.freeRooms !== null;
-    console.log(this.state.freeRooms !== null);
     return (
       <Fragment>
         <AppBarContainer />
@@ -38,10 +35,16 @@ class RoomSearchContainer extends Component {
           {isThereData &&
             this.state.freeRooms.map(slot => (
               <div key={slot.slot.startTime}>
-                <h1>{slot.slot.startTime}</h1>
-                {slot.rooms.map(room => (
-                  <p key={(slot.slot.startTime, room)}>{room}</p>
-                ))}
+                <h1>
+                  Free Roooms from:
+                  {slot.slot.startTime} until:
+                  {slot.slot.endTime}{' '}
+                </h1>
+                <div className="roomContainer">
+                  {slot.rooms.map(room => (
+                    <p key={(slot.slot.startTime, room)}>{room}</p>
+                  ))}
+                </div>
               </div>
             ))}
           <h1>{isThereData}</h1>

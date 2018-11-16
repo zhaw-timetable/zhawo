@@ -17,7 +17,6 @@ class RoomSearchStore extends EventEmitter {
         this.freeRooms = await api.getFreeRoomsJson().catch(err => {
           console.error(err);
         });
-        console.log(this.freeRooms);
         this.emit('got_FreeRooms');
         break;
     }

@@ -170,7 +170,6 @@ export function getFreeRoomsJson() {
 }
 
 function convertFreeRooms(freeRooms) {
-  console.log(freeRooms);
   var array = Object.keys(freeRooms).map(function(index) {
     return freeRooms[index];
   });
