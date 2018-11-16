@@ -147,6 +147,36 @@ export function getPossibleNames() {
   });
 }
 
+export function getFreeRoomsJson() {
+  return new Promise(async (resolve, reject) => {
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    let freeRooms;
+
+    const url = `${apiUrl}/roomsearch`;
+    const response = await fetch(url, config).catch(err =>
+      handleError(err, url)
+    );
+    let freeRoomsChunk = await response
+      .json()
+      .catch(err => handleError(err, url));
+    if (freeRoomsChunk && !freeRoomsChunk.status) {
+      freeRooms = { ...freeRooms, ...freeRoomsChunk };
+    }
+
+    freeRooms ? resolve(convertFreeRooms(freeRooms)) : reject({ status: 404 });
+  });
+}
+
+function convertFreeRooms(freeRooms) {
+  console.log(freeRooms);
+  var array = Object.keys(freeRooms).map(function(index) {
+    return freeRooms[index];
+  });
+  return array;
+}
+
 function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }
