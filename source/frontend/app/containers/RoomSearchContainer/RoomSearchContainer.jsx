@@ -5,19 +5,20 @@ import './RoomSearchContainer.sass';
 
 import roomSearchStore from '../../stores/RoomSearchStore';
 import * as roomSearchActions from '../../actions/RoomSearchActions';
+import scheduleStore from '../../stores/ScheduleStore';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 class RoomSearchContainer extends Component {
   state = {
     freeRooms: null,
-    expanded: '2018-11-16T08:00:00+01:00'
+    timeSlots: scheduleStore.slots,
+    currentTimeSlot: roomSearchStore.currentTimeSlot
   };
 
   componentDidMount() {
@@ -25,21 +26,22 @@ class RoomSearchContainer extends Component {
   }
 
   componentWillMount() {
-    roomSearchStore.on('got_FreeRooms', this.setFreeRooms);
+    roomSearchStore.on('got_currentFreeRooms', this.setFreeRooms);
   }
 
   componentWillUnmount() {
-    roomSearchStore.removeListener('got_FreeRooms', this.setFreeRooms);
+    roomSearchStore.removeListener('got_currentFreeRooms', this.setFreeRooms);
   }
 
   setFreeRooms = () => {
-    this.setState({ freeRooms: roomSearchStore.freeRooms });
+    this.setState({
+      freeRooms: roomSearchStore.currentfreeRooms,
+      currentTimeSlot: roomSearchStore.currentTimeSlot
+    });
   };
 
-  handleChange = panel => (event, expanded) => {
-    this.setState({
-      expanded: expanded ? panel : false
-    });
+  handleChange = event => {
+    roomSearchActions.getFreeRoomsByTime(event.target.value);
   };
 
   render() {
@@ -48,33 +50,23 @@ class RoomSearchContainer extends Component {
       <Fragment>
         <AppBarContainer />
         <div className="RoomSearchContainer">
-          {isThereData &&
-            this.state.freeRooms.map(slot => (
-              <div key={slot.slot.startTime}>
-                <ExpansionPanel
-                  expanded={this.state.expanded === slot.slot.startTime}
-                  onChange={this.handleChange(slot.slot.startTime)}
-                >
-                  <ExpansionPanelSummary>
-                    Free Roooms from:
-                    {slot.slot.startTime} until:
-                    {slot.slot.endTime}{' '}
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div className="roomContainer">
-                      <List>
-                        {slot.rooms.map(room => (
-                          <ListItem key={(slot.slot.startTime, room)}>
-                            {room}
-                          </ListItem>
-                        ))}
-                      </List>
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-              </div>
+          <Select
+            value={this.state.currentTimeSlot}
+            onChange={this.handleChange}
+          >
+            {this.state.timeSlots.map(slot => (
+              <MenuItem value={slot.startTime} key={slot.startTime}>
+                {slot.startTime}
+              </MenuItem>
             ))}
-          <h1>{isThereData}</h1>
+          </Select>
+
+          <List>
+            {isThereData &&
+              this.state.freeRooms.map(room => (
+                <ListItem key={room}>{room}</ListItem>
+              ))}
+          </List>
         </div>
       </Fragment>
     );

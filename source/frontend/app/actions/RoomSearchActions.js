@@ -5,3 +5,10 @@ export const getFreeRoomsJson = async () => {
     type: 'GET_FREEROOMJSON'
   });
 };
+
+export const getFreeRoomsByTime = value => {
+  dispatcher.dispatch({
+    type: 'GET_FREEROOMBYTIME',
+    payload: value
+  });
+};
