@@ -12,9 +12,11 @@ module.exports = {
   entry: ['@babel/polyfill', './main.js'],
   output: {
     path: path.join(__dirname, '../backend/dist/bundle'),
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/'
   },
   devServer: {
+    historyApiFallback: true,
     inline: true,
     port: 8080
   },
