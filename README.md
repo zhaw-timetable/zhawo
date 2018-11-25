@@ -16,6 +16,7 @@
 - [Development](#development)
 - [Workflow](#workflow)
 - [Sprint Planning](#sprint-planning)
+  - [Sprint 4](#sprint-4)
   - [Sprint 3](#sprint-3)
   - [Sprint 2](#sprint-2)
   - [Sprint 1](#sprint-1)
@@ -82,6 +83,30 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 <hr>
 
+### Sprint 4
+__(Thu 15 Nov - Thu 29 Nov 2018)__
+
+#### Goals
+Finish PWA offline features, fix bugs, implement room search functionality and start mensa functionality
+
+#### User stories
+- [x] __3 SP__ US02 - As a user I want the app to work even when I dont have network connection
+- [ ] __3 SP__ US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
+- [ ] __1 SP__ US56 - As a user I want to see prices for all menus
+- [ ] __4 SP__ US58 - As a user I want to view a specific mensas menu plan
+- [ ] __8 SP__ US30 - As a user I want to find currently unoccupied rooms
+
+#### Decisions
+...
+
+#### Review
+...
+
+#### Burndown
+<img src="docs/burndown/burndown_sprint_4-001.jpg?raw=true" height=400 />
+
+<hr>
+
 ### Sprint 3
 __(Thu 1 Nov - Thu 15 Nov 2018)__
 
@@ -90,16 +115,16 @@ Finish and improve timetable features, start implementing room search functional
 
 #### User stories
 - [ ] __3 SP__ US02 - As a user I want the app to work even when I dont have network connection
-- [ ] __5 SP__ US11 - As a user I want to view my timetable for a week
-- [ ] __3 SP__ US15 - As a user I want to navigate to a specific date in the month view
-- [ ] __1 SP__ US20 - As a user I want to have a detailed view of my events
+- [x] __5 SP__ US11 - As a user I want to view my timetable for a week
+- [x] __3 SP__ US15 - As a user I want to navigate to a specific date in the month view
+- [x] __1 SP__ US20 - As a user I want to have a detailed view of my events
 - [ ] __4 SP__ US30 - As a user I want to find currently unoccupied rooms
 
 #### Decisions
-- ...
+- Swipe User Interactions will have lower priority than getting planned functionality implemented as least as prototype
 
 #### Review
-...
+The velocity suffered a bit toward the end of the sprint. From the two user stories that could not get finished, US02 is 80% done. US30 was underestimated and has been adjusted to 8 SP in the next sprint. Other than that, no major changes are needed.
 
 #### Burndown
 <img src="docs/burndown/burndown_sprint_3-001.jpg?raw=true" height=400 />
