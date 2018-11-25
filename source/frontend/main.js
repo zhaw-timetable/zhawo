@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import registerServiceWorker from './app/registerServiceWorker';
-
 import App from './app/App.jsx';
 
 const theme = createMuiTheme({
@@ -24,4 +22,15 @@ const Root = () => {
 
 ReactDOM.render(<Root />, document.getElementById('app'));
 
-registerServiceWorker();
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./service-worker.js')
+      .then(registration => {
+        console.log('SW registered: ', registration);
+      })
+      .catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
