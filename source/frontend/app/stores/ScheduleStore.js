@@ -61,12 +61,15 @@ class ScheduleStore extends EventEmitter {
   }
 
   getCurrentDate() {
-    const currentDate = new Date();
+    return this.convertSunday(new Date());
+  }
+
+  convertSunday(date) {
     // if currentDate is Sunday, set store currentDate to the Monday after
-    if (getDay(currentDate) == 0) {
-      return addDays(currentDate, 1);
+    if (getDay(date) == 0) {
+      return addDays(date, 1);
     } else {
-      return currentDate;
+      return date;
     }
   }
 
@@ -145,7 +148,7 @@ class ScheduleStore extends EventEmitter {
         break;
 
       case 'GOTO_DAY':
-        this.displayDay = action.payload;
+        this.displayDay = this.convertSunday(action.payload);
         this.displayWeek = this.createDisplayWeek(this.displayDay);
         this.displayMonth = this.createDisplayMonth(this.displayDay);
         this.emit('schedule_changed');
