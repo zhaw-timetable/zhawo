@@ -16,7 +16,7 @@ export default ({ config, db }) => {
     const name = req.params.name;
     const startDate = req.query.startDate;
     const resource = await api
-      .getScheduleResource('students', name, startDate)
+      .getScheduleResource('students', name, startDate, 7)
       .catch(err => console.error(err));
     res.json(resource);
   });

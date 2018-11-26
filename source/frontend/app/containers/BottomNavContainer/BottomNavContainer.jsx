@@ -43,22 +43,34 @@ class BottomNavContainer extends Component {
         className="BottomNavContainer"
       >
         <BottomNavigationAction
-          className="BottomNavigationAction"
+          classes={{
+            root: 'BottomNavigationAction',
+            selected: 'BottomNavigationAction-selected'
+          }}
           label="Stundenplan"
           icon={<RestoreIcon />}
         />
         <BottomNavigationAction
-          className="BottomNavigationAction"
+          classes={{
+            root: 'BottomNavigationAction',
+            selected: 'BottomNavigationAction-selected'
+          }}
           label="Mensa"
           icon={<FavoriteIcon />}
         />
         <BottomNavigationAction
-          className="BottomNavigationAction"
+          classes={{
+            root: 'BottomNavigationAction',
+            selected: 'BottomNavigationAction-selected'
+          }}
           label="Raumsuche"
           icon={<LocationOnIcon />}
         />
         <BottomNavigationAction
-          className="BottomNavigationAction"
+          classes={{
+            root: 'BottomNavigationAction',
+            selected: 'BottomNavigationAction-selected'
+          }}
           label="VsZHAW"
           icon={<LocationOnIcon />}
         />

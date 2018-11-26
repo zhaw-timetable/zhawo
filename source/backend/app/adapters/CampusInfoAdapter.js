@@ -11,13 +11,13 @@ const HEADERS = {
 const apiUrl = 'https://api.apps.engineering.zhaw.ch/v1';
 
 // f.ex. route = students, name = bachmdo2, startDate = date
-export function getScheduleResource(route, name, startDate) {
+export function getScheduleResource(route, name, startDate, days) {
   return new Promise(async (resolve, reject) => {
     const dateString = format(new Date(startDate), 'YYYY-MM-DD');
     const method = GET;
     const headers = HEADERS;
     const config = { method, headers };
-    const url = `${apiUrl}/schedules/${route}/${name}?startingAt=${dateString}`;
+    const url = `${apiUrl}/schedules/${route}/${name}?startingAt=${dateString}&days=${days}`;
     const response = await fetch(url, config).catch(err => logger.error(err));
     if (response.status === 200) {
       const json = await response.json().catch(err => logger.error(err));
