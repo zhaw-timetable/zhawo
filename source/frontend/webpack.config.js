@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ManifestPlugin = require('webpack-manifest-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
 
@@ -12,9 +12,11 @@ module.exports = {
   entry: ['@babel/polyfill', './main.js'],
   output: {
     path: path.join(__dirname, '../backend/dist/bundle'),
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/'
   },
   devServer: {
+    historyApiFallback: true,
     inline: true,
     port: 8080
   },
@@ -100,27 +102,13 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json' // Not to confuse with manifest.json
     }),
-    new SWPrecacheWebpackPlugin({
-      // By default, a cache-busting query parameter is appended to requests
-      // used to populate the caches, to ensure the responses are fresh.
-      // If a URL is already hashed by Webpack, then there is no concern
-      // about it being stale, and the cache-busting can be skipped.
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      logger(message) {
-        if (message.indexOf('Total precache size is') === 0) {
-          // This message occurs for every build and is a bit too noisy.
-          return;
-        }
-        console.log(message);
-      },
-      minify: true, // minify and uglify the script
-      navigateFallback: '/index.html',
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-    }),
     new CopyWebpackPlugin([
       { from: 'app/pwa' } // define the path of the files to be copied
-    ])
+    ]),
+    new WorkboxPlugin.InjectManifest({
+      swDest: './service-worker.js',
+      swSrc: './app/service-worker.js'
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx']

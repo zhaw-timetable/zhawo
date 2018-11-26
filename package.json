@@ -17,6 +17,7 @@
     "build-backend": "cd source/backend && npm install && npm run build",
     "build": "npm run build-backend && npm run build-frontend",
     "serve": "cd source/backend && npm run serve",
+    "local-serve": "npm run build && npm run serve",
     "heroku-postbuild": "npm run build"
   },
   "repository": {

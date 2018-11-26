@@ -12,9 +12,9 @@ export default ({ config, db }) => {
     res.json(resource);
   });
 
-  router.post('/', async (req, res) => {
-    const name = req.body.name;
-    const startDate = req.body.startDate;
+  router.get('/:name', async (req, res) => {
+    const name = req.params.name;
+    const startDate = req.query.startDate;
     const resource = await api
       .getScheduleResource('students', name, startDate, 7)
       .catch(err => console.error(err));

@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import path from 'path';
 
 import fs from 'fs-extra';
 import logger from './logger';
@@ -7,6 +8,11 @@ import * as api from './adapters/CampusInfoAdapter';
 
 import app from './app';
 import config from './config.json';
+
+// send index.html as route handler on unhandled get requests
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/bundle/index.html'));
+});
 
 app.server.listen(process.env.PORT || config.port, () => {
   let host = app.server.address().address;

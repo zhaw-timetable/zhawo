@@ -19,7 +19,6 @@ const apiUrl = `${address}/api/v1`;
 export function getScheduleResource(route, name, startDate, rangeAroundDate) {
   return new Promise(async (resolve, reject) => {
     let schedule;
-    const url = `${apiUrl}/schedules/${route}`;
     const loopStartDate = subWeeks(
       startOfWeek(startDate, { weekStartsOn: 1 }),
       rangeAroundDate
@@ -27,13 +26,10 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
     for (let i = 0; i < rangeAroundDate * 2 + 1; i++) {
       let loadDate = addWeeks(loopStartDate, i);
       let loadDateString = format(loadDate, 'YYYY-MM-DD');
-      const body = JSON.stringify({
-        name,
-        startDate: loadDateString
-      });
-      const method = POST;
+      const url = `${apiUrl}/schedules/${route}/${name}?startDate=${loadDateString}`;
+      const method = GET;
       const headers = HEADERS;
-      const config = { method, body, headers };
+      const config = { method, headers };
       const response = await fetch(url, config).catch(err =>
         handleError(err, url)
       );
