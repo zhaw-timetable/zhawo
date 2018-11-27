@@ -18,7 +18,7 @@ class RoomSearchContainer extends Component {
   state = {
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    currentTimeSlot: roomSearchStore.currentTimeSlot
+    currentTimeSlot: ''
   };
 
   componentDidMount() {
@@ -50,23 +50,28 @@ class RoomSearchContainer extends Component {
       <Fragment>
         <AppBarContainer />
         <div className="RoomSearchContainer">
+          <h2>Select a timeslot start time</h2>
           <Select
             value={this.state.currentTimeSlot}
             onChange={this.handleChange}
           >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {this.state.timeSlots.map(slot => (
               <MenuItem value={slot.startTime} key={slot.startTime}>
-                {slot.startTime}
+                {format(slot.startTime, 'HH:mm')}
               </MenuItem>
             ))}
           </Select>
-
-          <List>
-            {isThereData &&
-              this.state.freeRooms.map(room => (
-                <ListItem key={room}>{room}</ListItem>
-              ))}
-          </List>
+          <div className="listContainer">
+            <List>
+              {isThereData &&
+                this.state.freeRooms.map(room => (
+                  <ListItem key={room}>{room}</ListItem>
+                ))}
+            </List>
+          </div>
         </div>
       </Fragment>
     );

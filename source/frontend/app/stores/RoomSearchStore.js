@@ -9,7 +9,7 @@ import * as api from '../adapters/ZhawoAdapter';
 class RoomSearchStore extends EventEmitter {
   constructor() {
     super();
-    this.currentTimeSlot = '2018-11-19T08:00:00+01:00';
+    this.currentTimeSlot = '';
     this.freeRooms = [];
     this.currentfreeRooms = [];
   }
@@ -22,16 +22,13 @@ class RoomSearchStore extends EventEmitter {
         this.freeRooms = await api.getFreeRoomsJson().catch(err => {
           console.error(err);
         });
-        // First timeslot
-        this.currentTimeSlot = this.freeRooms[0].slot.startTime;
+        console.log(this.freeRooms);
         this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
         this.emit('got_currentFreeRooms');
         break;
       case 'GET_FREEROOMBYTIME':
-        console.log(action.payload);
         this.currentTimeSlot = action.payload;
         this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
-        console.log(this.currentfreeRooms);
         this.emit('got_currentFreeRooms');
         break;
     }
@@ -39,21 +36,28 @@ class RoomSearchStore extends EventEmitter {
 
   getSortedByTimeSlot(value) {
     // Find timeslot
-    let found = false;
-    let count = 0;
-    // Todo: and smaller the slots count
-    while (!found) {
-      if (
-        format(this.freeRooms[count].slot.startTime, 'HH:mm') ===
-        format(value, 'HH:mm')
-      ) {
-        found = true;
-      } else {
-        count++;
+
+    if (value) {
+      console.log('looking for:', value);
+      let found = false;
+      let count = 0;
+      // Todo: and smaller the slots count
+      while (!found) {
+        console.log(count);
+        console.log(this.freeRooms[count].slot.startTime);
+        if (
+          format(this.freeRooms[count].slot.startTime, 'HH:mm') ===
+          format(value, 'HH:mm')
+        ) {
+          found = true;
+        } else {
+          count++;
+        }
       }
+      return this.freeRooms[count].rooms;
     }
-    console.log(this.freeRooms[count].rooms);
-    return this.freeRooms[count].rooms;
+
+    return [];
   }
 }
 

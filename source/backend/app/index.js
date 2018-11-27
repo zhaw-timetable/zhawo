@@ -69,6 +69,9 @@ async function createFreeRoomsObject() {
     // Makes the basic structure of freeRoomsBySlot
     // an Object for each slot is made and pushed
     let freeRoomsBySlot = [];
+
+    // TODO: find wrong timeSlots
+
     for (slot of allSchedules[0].days[0].slots) {
       let temp = {
         slot: slot,
