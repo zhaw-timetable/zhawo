@@ -24,14 +24,7 @@ app.server.listen(process.env.PORT || config.port, () => {
 
 //TODO: everything below is just experimental
 
-// run every 24hrs
-setInterval(createFreeRoomsJson, 1000 * 60 * 60 * 24);
-// let count = 0;
-// setInterval(createFreeRoomsJson, 1000);
-
-createFreeRoomsJson();
-
-async function createFreeRoomsJson() {
+const createFreeRoomsJson = async () => {
   try {
     const myObj = await createFreeRoomsObject();
     await fs.writeFile('./data/room_search_data.json', JSON.stringify(myObj));
@@ -39,9 +32,9 @@ async function createFreeRoomsJson() {
   } catch (err) {
     logger.error(err);
   }
-}
+};
 
-async function createFreeRoomsObject() {
+const createFreeRoomsObject = async () => {
   try {
     let fetches = 0;
     let allRooms = await api.getPossibleNames('rooms');
@@ -153,10 +146,17 @@ async function createFreeRoomsObject() {
   } catch (err) {
     logger.error(err);
   }
-}
+};
 
-async function asyncForEach(array, callback) {
+const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
   }
-}
+};
+
+// run every 24hrs
+setInterval(createFreeRoomsJson, 1000 * 60 * 60 * 24);
+// let count = 0;
+// setInterval(createFreeRoomsJson, 1000);
+
+createFreeRoomsJson();
