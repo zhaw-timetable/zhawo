@@ -4,7 +4,7 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import MensaContextMenu from './MensaContextMenu.test';
+import MensaContextMenu from './MensaContextMenu';
 
 jest.mock('../../../../stores/MensaStore');
 jest.mock('../../../../actions/MensaActions');
