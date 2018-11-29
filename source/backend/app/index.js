@@ -159,4 +159,4 @@ setInterval(createFreeRoomsJson, 1000 * 60 * 60 * 24);
 // let count = 0;
 // setInterval(createFreeRoomsJson, 1000);
 
-createFreeRoomsJson();
+// createFreeRoomsJson();

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { format } from 'date-fns';
+import { format, getYear, getISOWeek } from 'date-fns';
 
 import logger from '../logger';
 
@@ -41,4 +41,42 @@ export function getPossibleNames(route) {
     json ? resolve(json) : reject();
     logger.log(`Fetched from ${url}`);
   });
+}
+
+export function getFacilities() {
+  return new Promise(async (resolve, reject) => {
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const url = `${apiUrl}/catering/facilities/`;
+    const response = await fetch(url, config).catch(err => logger.error(err));
+    const json = await response.json();
+    json ? resolve(json.gastronomicFacilities) : reject();
+    logger.log(`Fetched from ${url}`);
+  });
+}
+
+export function getMensaResource(facilityId, date) {
+  return new Promise(async (resolve, reject) => {
+    const dateObj = new Date(date);
+    const year = getYear(dateObj);
+    const week = getISOWeek(dateObj);
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const url = `${apiUrl}/catering/menuplans/years/${year}/weeks/${week}`;
+    const response = await fetch(url, config).catch(err => logger.error(err));
+    const json = await response.json();
+    json
+      ? resolve(filterMenuPlansByFacilityId(json.menuPlans, facilityId))
+      : reject();
+    logger.log(`Fetched from ${url}`);
+  });
+}
+
+function filterMenuPlansByFacilityId(menuPlans, facilityId) {
+  let filteredMenuPlans = menuPlans.filter(menuPlan =>
+    menuPlan.gastronomicFacilityIds.includes(Number(facilityId))
+  );
+  return filteredMenuPlans;
 }
