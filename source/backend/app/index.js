@@ -24,6 +24,8 @@ app.server.listen(process.env.PORT || config.port, () => {
 
 //TODO: everything below is just experimental
 
+// JSON
+
 const createFreeRoomsJson = async () => {
   try {
     const myObj = await createFreeRoomsObject();
