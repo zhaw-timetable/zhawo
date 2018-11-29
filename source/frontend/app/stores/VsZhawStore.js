@@ -18,8 +18,6 @@ class VszhawStore extends EventEmitter {
         this.feed = await api.getVszhawFeed().catch(err => {
           console.error(err);
         });
-
-        console.log(this.feed);
         this.emit('got_vszhaw_feed');
         break;
     }
