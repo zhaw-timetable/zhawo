@@ -22,7 +22,6 @@ class RoomSearchStore extends EventEmitter {
         this.freeRooms = await api.getFreeRoomsJson().catch(err => {
           console.error(err);
         });
-        console.log(this.freeRooms);
         this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
         this.emit('got_currentFreeRooms');
         break;
@@ -38,13 +37,10 @@ class RoomSearchStore extends EventEmitter {
     // Find timeslot
 
     if (value) {
-      console.log('looking for:', value);
       let found = false;
       let count = 0;
-      // Todo: and smaller the slots count
+      // Todo: and smaller than slots count
       while (!found) {
-        console.log(count);
-        console.log(this.freeRooms[count].slot.startTime);
         if (
           format(this.freeRooms[count].slot.startTime, 'HH:mm') ===
           format(value, 'HH:mm')

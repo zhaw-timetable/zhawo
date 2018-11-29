@@ -62,10 +62,7 @@ const createFreeRoomsObject = async () => {
     // Makes the basic structure of freeRoomsBySlot
     // an Object for each slot is made and pushed
     let freeRoomsBySlot = [];
-
-    // TODO: find wrong timeSlots
-
-    for (slot of allSchedules[0].days[0].slots) {
+    for (slot of defaultSlots) {
       let temp = {
         slot: slot,
         rooms: []
@@ -75,11 +72,11 @@ const createFreeRoomsObject = async () => {
 
     let slotFound;
     let lastSlotFound;
-    let freeRoomsBySlotCount; // so that each slot is only checked once
+    // so that each slot is only checked once
+    let freeRoomsBySlotCount;
 
     for (var room of allSchedules) {
       freeRoomsBySlotCount = 0;
-      //console.log(room.room.name);
       if (room.days[0].events.length != 0) {
         for (var event of room.days[0].events) {
           for (var slot of event.slots) {
@@ -114,8 +111,6 @@ const createFreeRoomsObject = async () => {
                   } else {
                     freeRoomsBySlotCount++;
                   }
-                  // TODO: figure out why sometime undefined
-                  //       event in last slot maybe?
                   if (freeRoomsBySlot[freeRoomsBySlotCount]) {
                     freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
                       room.room.name
@@ -137,12 +132,6 @@ const createFreeRoomsObject = async () => {
     logger.log(`FreeRoom List Created`);
 
     return freeRoomsBySlot;
-
-    // console.log(freeRoomsBySlot);
-    //
-    // // Used to test
-    // console.log(allSchedules[3].room.name);
-    // console.log(allSchedules[3].days[0].events);
   } catch (err) {
     logger.error(err);
   }
@@ -153,6 +142,70 @@ const asyncForEach = async (array, callback) => {
     await callback(array[index], index, array);
   }
 };
+
+// Todo: find a way to not use ... some rooms have other time slots in the evening
+const defaultSlots = [
+  {
+    endTime: '2018-10-29T08:45:00+01:00',
+    startTime: '2018-10-29T08:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T09:35:00+01:00',
+    startTime: '2018-10-29T08:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T10:45:00+01:00',
+    startTime: '2018-10-29T10:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T11:35:00+01:00',
+    startTime: '2018-10-29T10:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T12:45:00+01:00',
+    startTime: '2018-10-29T12:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T13:35:00+01:00',
+    startTime: '2018-10-29T12:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T14:45:00+01:00',
+    startTime: '2018-10-29T14:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T15:35:00+01:00',
+    startTime: '2018-10-29T14:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T16:45:00+01:00',
+    startTime: '2018-10-29T16:00:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T17:35:00+01:00',
+    startTime: '2018-10-29T16:50:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T18:30:00+01:00',
+    startTime: '2018-10-29T17:45:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T19:25:00+01:00',
+    startTime: '2018-10-29T18:40:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T20:10:00+01:00',
+    startTime: '2018-10-29T19:25:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T21:05:00+01:00',
+    startTime: '2018-10-29T20:20:00+01:00'
+  },
+  {
+    endTime: '2018-10-29T21:50:00+01:00',
+    startTime: '2018-10-29T21:05:00+01:00'
+  }
+];
 
 // run every 24hrs
 setInterval(createFreeRoomsJson, 1000 * 60 * 60 * 24);

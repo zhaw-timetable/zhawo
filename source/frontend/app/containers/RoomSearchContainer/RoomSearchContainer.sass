@@ -1,9 +1,13 @@
 @import '../../assets/sass/vars'
 
 .RoomSearchContainer
-  height: auto
+  height: 100%
   padding: 20px
-  overflow: scroll
-
+  display: flex
+  flex-direction: column
   h1
     font-weight: bold
+
+  .listContainer
+    height: 80vh
+    overflow: auto
