@@ -133,7 +133,7 @@ Finish PWA offline features, fix bugs, implement room search functionality and s
 
 #### Review
 
-The goal of finishing PWA offline features and implementing a prototypical version of the roomsearch were met. Mensa functionality is done and only has to be extended by navigation and better presentation in the UI. The user story that could not be implemented in this sprint is also due to the fact that we have postponed refining the user interface for the room search and put focus on background functionality first. The velocity will be reduced in Sprint 6 to put some more focus on reviewing design choices, increasing stability and increasing test coverage, since it will be the final Sprint of this stage of the project.
+The goal of finishing PWA offline features and implementing a prototypical version of the roomsearch were met. Mensa functionality is done and only has to be extended by navigation and better presentation in the UI. The user story that could not be implemented in this sprint is also due to the fact that we have postponed refining the user interface for the room search and put focus on background functionality first. The velocity will be reduced in Sprint 5 to put some more focus on reviewing design choices, increasing stability and increasing test coverage, since it will be the final Sprint of this stage of the project.
 
 #### Burndown
 
