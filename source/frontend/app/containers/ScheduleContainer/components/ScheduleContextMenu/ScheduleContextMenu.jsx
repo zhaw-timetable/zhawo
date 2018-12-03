@@ -154,7 +154,6 @@ class ScheduleContextMenu extends Component {
             color="inherit"
             variant="text"
             fontSize="small"
-            className="SearchClearButton"
           >
             {scheduleStore.currentSearch}
             <ClearIcon id="SearchClearIcon" />

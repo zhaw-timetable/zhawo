@@ -205,6 +205,25 @@ function convertFreeRooms(freeRooms) {
   return array;
 }
 
+export function getVszhawFeed() {
+  return new Promise(async (resolve, reject) => {
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    let feed;
+
+    const url = `${apiUrl}/vszhaw/`;
+    const response = await fetch(url, config).catch(err =>
+      handleError(err, url)
+    );
+    let feedTemp = await response.json().catch(err => handleError(err, url));
+    if (!feedTemp.status) {
+      feed = feedTemp;
+    }
+    feed ? resolve(feed) : reject({ status: 404 });
+  });
+}
+
 function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }

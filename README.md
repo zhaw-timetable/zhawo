@@ -16,6 +16,7 @@
 - [Development](#development)
 - [Workflow](#workflow)
 - [Sprint Planning](#sprint-planning)
+  - [Sprint 5](#sprint-5)
   - [Sprint 4](#sprint-4)
   - [Sprint 3](#sprint-3)
   - [Sprint 2](#sprint-2)
@@ -81,6 +82,33 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 ## Sprint Planning
 
+### Sprint 5
+
+**(Thu 29 Nov - Thu 13 Nov 2018)**
+
+#### Goals
+
+Finish Menuplan Navigation, clean up code, increase test coverage
+
+#### User stories
+
+- [ ] **3 SP** US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
+- [ ] **1 SP** US52 - As a user I want to navigate to the mensa menu of the current day
+- [ ] **2 SP** US53 - As a user I want to navigate between days when using the mensa menu day view
+- [ ] **2 SP** US57 - As a user I want to navigate between menus of different days
+
+#### Decisions
+
+...
+
+#### Review
+
+...
+
+#### Burndown
+
+...
+
 <hr>
 
 ### Sprint 4
@@ -95,17 +123,17 @@ Finish PWA offline features, fix bugs, implement room search functionality and s
 
 - [x] **3 SP** US02 - As a user I want the app to work even when I dont have network connection
 - [ ] **3 SP** US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
-- [ ] **1 SP** US56 - As a user I want to see prices for all menus
-- [ ] **4 SP** US58 - As a user I want to view a specific mensas menu plan
-- [ ] **8 SP** US30 - As a user I want to find currently unoccupied rooms
+- [x] **1 SP** US56 - As a user I want to see prices for all menus
+- [x] **4 SP** US58 - As a user I want to view a specific mensas menu plan
+- [x] **8 SP** US30 - As a user I want to find currently unoccupied rooms
 
 #### Decisions
 
-...
+- Due to the many asynchronous calls that are required for getting list of unoccupied rooms, it will be done in an interval and the results will be cached. Instead of creating list of free rooms directly after user request.
 
 #### Review
 
-...
+The goal of finishing PWA offline features and implementing a prototypical version of the roomsearch were met. Mensa functionality is done and only has to be extended by navigation and better presentation in the UI. The user story that could not be implemented in this sprint is also due to the fact that we have postponed refining the user interface for the room search and put focus on background functionality first. The velocity will be reduced in Sprint 5 to put some more focus on reviewing design choices, increasing stability and increasing test coverage, since it will be the final Sprint of this stage of the project.
 
 #### Burndown
 
