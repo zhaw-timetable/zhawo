@@ -107,7 +107,7 @@ Finish Menuplan Navigation, clean up code, increase test coverage
 
 #### Burndown
 
-...
+<img src="docs/burndown/burndown_sprint_5-001.jpg?raw=true" height=400 />
 
 <hr>
 
