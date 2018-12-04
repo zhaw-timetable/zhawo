@@ -12,36 +12,7 @@ npm-debug.log*
 /source/build
 
 
-#--------------------- Latex ---------------------
-# LaTeX temporary files
-*.aux
-*.log
-*.toc
-*.bib
-*.lof
-*.lot
-*.run.xml
-
-
-# Latexmk
-*.fdb_latexmk
-
-# SyncTeX
-*.synctex.gz
-
-# LaTeX Beamer
-*.snm
-*.vrb
-*.nav
-*.out
-
-# BibTeX
-*.bbl
-*.blg
-
-
 .vscode
 reports/test-report.xml
 
 node_modules
-
