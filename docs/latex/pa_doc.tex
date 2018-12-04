@@ -1,0 +1,82 @@
+\documentclass[english, a4paper,12pt]{article}
+\usepackage{blindtext}
+% Packages
+\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
+\bibliography{source.bib} % add sources to source.bib file
+% https://www.latex-tutorial.com/tutorials/bibtex/
+
+\usepackage{titling} % So you can use theauthor
+
+%Bild
+\graphicspath{{img/}}
+\usepackage{float} % Allows putting an [H] (wenn gross H dann bild genau dort)
+
+\usepackage{fancyhdr} % Header & Footer
+
+% Für Deutsch
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[ngerman]{babel} --- für deutsh
+
+\usepackage{siunitx} % Required for alignment
+\sisetup{
+	round-mode          = places, % Rounds numbers
+	round-precision     = 2, % to 2 places
+}
+\usepackage{booktabs} % For prettier tables
+
+% TODO: better Title page
+% Document information
+\title{ZHAWo - Platform Independent Timetable App}
+\author{Bachmann Dominik, Visser Julian}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{PA - 2018}
+\chead{ZHAWo}
+\rhead{\theauthor}
+\cfoot{\thepage}
+
+\begin{document}
+
+	\pagenumbering{gobble}
+	\begin{titlepage}
+		\maketitle
+	\end{titlepage}
+
+
+	%Index
+	\newpage
+	\pagenumbering{roman}
+	\tableofcontents
+	\newpage
+	%Abstract
+	\renewcommand{\abstractname}{Abstract}
+	\begin{abstract}
+		Your abstract goes here...
+	\end{abstract}
+
+	% Main body of your document
+	\newpage
+	\pagenumbering{arabic}
+	\section{Title 1}
+	\blindtext
+	\cite{DUMMY}
+
+	\newpage
+
+	\section{Appendix}
+
+	\listoffigures
+	\listoftables
+	%\renewcommand\refname{Literaturverzeichnis}% rename --- für deutsh
+	\printbibliography  % Uses source.bib to make ref table
+
+\end{document}
