@@ -6,6 +6,7 @@
 *.lof
 *.lot
 *.run.xml
+*.fls
 
 # PDF output - usually a bad idea to keep this in Git
 *.pdf
@@ -23,5 +24,6 @@
 *.out
 
 # BibTeX
+*-blx.bib
 *.bbl
 *.blg
