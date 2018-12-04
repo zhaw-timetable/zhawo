@@ -15,6 +15,39 @@ let address = 'http://localhost:4000';
 if (process.env.NODE_ENV === 'production') address = window.location.origin;
 const apiUrl = `${address}/api/v1`;
 
+export function getMensaResource(facilityId, date) {
+  return new Promise(async (resolve, reject) => {
+    const dateString = format(new Date(date), 'YYYY-MM-DD');
+    const url = `${apiUrl}/mensa/menus/${facilityId}?startDate=${dateString}`;
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const response = await fetch(url, config).catch(err =>
+      handleError(err, url)
+    );
+    const menuPlan = await response.json().catch(err => {
+      handleError(err, url);
+    });
+    menuPlan && menuPlan[0] ? resolve(menuPlan[0]) : reject();
+  });
+}
+
+export function getAllMensas() {
+  return new Promise(async (resolve, reject) => {
+    const url = `${apiUrl}/mensa`;
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const response = await fetch(url, config).catch(err =>
+      handleError(err, url)
+    );
+    const mensas = await response.json().catch(err => {
+      handleError(err, url);
+    });
+    mensas ? resolve(mensas) : reject();
+  });
+}
+
 // f.ex. route = students, name = bachmdo2, startDate = date
 export function getScheduleResource(route, name, startDate, rangeAroundDate) {
   return new Promise(async (resolve, reject) => {
