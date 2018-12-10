@@ -73,8 +73,9 @@ change in Main File:
 ```
 
 Sources are added to source.bib using the BibTeX Format:
+**Book**:
 
-```bibtex
+```
 @BOOK{DUMMY,
 AUTHOR="John Doe",
 TITLE="The Book without Title",
@@ -83,8 +84,21 @@ YEAR="2100",
 }
 ```
 
+**Website** and **multiple authors**:
+
+```
+@online{OurReadme,
+  author = {Bachmann, Dominik and Visser, Julian},
+  title = {{Readme}},
+  year = 2018,
+  url = {https://github.com/zhaw-timetable/zhawo},
+  urldate = {2018-12-10}
+}
+```
+
 Reference the source:
 
 ```latex
 \cite{DUMMY}
+\cite{OurReadme}
 ```
