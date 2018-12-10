@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - pdflatex
+  - --shell-escape
 - markdown package (https://www.overleaf.com/learn/latex/Articles/How_to_write_in_Markdown_on_Overleaf)
 
 ## Set Up
