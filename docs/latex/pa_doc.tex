@@ -13,6 +13,10 @@
 
 \usepackage{titling} % So you can use theauthor
 
+\usepackage[hybrid]{markdown} % Used to convert markdown
+% pdflatex --shell-escape
+%https://www.overleaf.com/learn/latex/Articles/How_to_write_in_Markdown_on_Overleaf
+
 %Bild
 \graphicspath{{img/}}
 \usepackage{float} % Allows putting an [H] (wenn gross H dann bild genau dort)
@@ -57,17 +61,17 @@
 	\tableofcontents
 	\newpage
 	%Abstract
-	\renewcommand{\abstractname}{Abstract}
-	\begin{abstract}
-		Your abstract goes here...
-	\end{abstract}
+	\include{abstract}
 
 	% Main body of your document
 	\newpage
 	\pagenumbering{arabic}
-	\section{Title 1}
-	\blindtext
-	\cite{DUMMY}
+
+	%\markdownInput{example.md}
+
+	%Test Section
+	\include{test}
+
 
 	\newpage
 

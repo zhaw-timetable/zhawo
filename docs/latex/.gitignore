@@ -27,3 +27,7 @@
 *-blx.bib
 *.bbl
 *.blg
+
+# Markdown
+_markdown_pa_doc
+*.markdown*
