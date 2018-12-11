@@ -39,9 +39,11 @@ In Main File:
 ### Sections
 
 A new .tex file is created for each section.
+Added the root file to each section so that build on save works from the sections.
 Example Code -> test.tex:
 
 ```latex
+% !TEX root = pa_doc.tex
 \begin{markdown}
 
 # Test title
