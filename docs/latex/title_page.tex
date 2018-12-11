@@ -1,10 +1,8 @@
-% Original author:
-% WikiBooks (LaTeX - Title Creation) with modifications by:
-% Vel (vel@latextemplates.com)
+% !TEX root = pa_doc.tex
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
 \begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
 	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
 
@@ -14,25 +12,31 @@
 	%	Headings
 	%------------------------------------------------
 
-	\textsc{\LARGE ZHAW - School of Engineering}\\[1.5cm] % Main heading such as the name of your university/college
+	\includegraphics[width=0.3\textwidth, left]{./assets/zhawLogo.jpeg}\\[1cm]
 
-	\textsc{\Large PA}\\[0.5cm] % Major heading such as course name
+	\textsc{\Large Prijekt Arbeit}\\[0.5cm] % Major heading such as course name
 
-	\textsc{\large 2018}\\[0.5cm] % Minor heading such as course title
+	\textsc{\large HS 2018}\\[0.5cm] % Minor heading such as course title
 
 	%------------------------------------------------
 	%	Title
 	%------------------------------------------------
 
-	\HRule\\[0.4cm]
+	\HRule\\[0.5cm]
 
-	{\huge\bfseries ZHAWo \\
-									--- \\}
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+
+	\includegraphics[width=0.4\textwidth]{./assets/zhawoLogo.png}\\[0.5cm]
+
+	\textsc{\large \textbf{ZHAWo} \\[0.2cm]
+									--- \\[0.3cm]}
 	% Title of your document
 	\textsc{\large Platform Independent Timetable App}\\[0.5cm]
 
 
-	\HRule\\[1.5cm]
+	\HRule\\[1cm]
 
 	%------------------------------------------------
 	%	Author(s)
@@ -55,25 +59,12 @@
 		\end{flushright}
 	\end{minipage}
 
-
-
-	%------------------------------------------------
-	%	Logo
-	%------------------------------------------------
-
-	\vfill\vfill\vfill % Position 3/4 down the remaining page
-	\includegraphics[width=0.4\textwidth]{logo.png}\\[1cm]
-
 	%----------------------------------------------------------------------------------------
 
 	%------------------------------------------------
 	%	Date
 	%------------------------------------------------
-
-	\vfill\vfill
-
+	\vfill
 	{\large\today} % Date, change the \today to a set date if you want to be precise
-
-	\vfill % Push the date up 1/4 of the remaining page
 
 \end{titlepage}
