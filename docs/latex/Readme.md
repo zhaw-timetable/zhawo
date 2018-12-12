@@ -71,6 +71,21 @@ If needed MD files can be included.
 \markdownInput{example.md}
 ```
 
+## Images
+
+Images are placed in the _assets_ folder.
+
+```latex
+% Added as is and placed by latex
+\includegraphics{./assets/zhawoLogo.png}
+
+% width/height
+\includegraphics[width=0.4cm]{./assets/zhawoLogo.png}
+
+% float --> left/right (\usepackage[export]{adjustbox})
+\includegraphics[left]{./assets/zhawoLogo.png}
+```
+
 ## Bibliography
 
 Current Cition Style: ieee
