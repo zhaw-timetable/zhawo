@@ -1,10 +1,11 @@
-\documentclass[english, a4paper,12pt]{article}
+\documentclass[english,12pt]{article}
 \usepackage{blindtext} % Lorem ipsum
 % Packages
 \usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe
 \usepackage{caption}
 \usepackage[hidelinks]{hyperref} %links within the document and for clickable URLs
 \usepackage{graphicx}
+\usepackage[export]{adjustbox} % to beable to position images
 \usepackage{amsmath} % equations
 
 \usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
@@ -42,9 +43,9 @@
 % Header & Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{PA - 2018}
-\chead{ZHAWo}
-\rhead{\theauthor}
+\lhead{PA - HS 2018}
+\chead{}
+\rhead{ZHAWo}
 \lfoot{}
 \cfoot{\thepage}
 \rfoot{}
@@ -70,8 +71,14 @@
 
 	%\markdownInput{example.md}
 
-	%Test Section
-	\include{test}
+	%Introduction
+	\include{introduction}
+
+	%Architecture
+	\include{architecture}
+
+	%Discussion & Prospects
+	\include{architecture}
 
 
 	\newpage
