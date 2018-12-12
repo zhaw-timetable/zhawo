@@ -1,32 +1,30 @@
 \documentclass[english,12pt]{article}
+% Für Deutsch
+%\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
 \usepackage{blindtext} % Lorem ipsum
 % Packages
-\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe
+\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe --> to see border
 \usepackage{caption}
 \usepackage[hidelinks]{hyperref} %links within the document and for clickable URLs
 \usepackage{graphicx}
 \usepackage[export]{adjustbox} % to beable to position images
 \usepackage{amsmath} % equations
+\usepackage{listings} % codeblocks
 
 \usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
 \bibliography{source.bib} % add sources to source.bib file
-% https://www.latex-tutorial.com/tutorials/bibtex/
 
 \usepackage{titling} % So you can use theauthor
 
 \usepackage[hybrid]{markdown} % Used to convert markdown
-% pdflatex --shell-escape
-%https://www.overleaf.com/learn/latex/Articles/How_to_write_in_Markdown_on_Overleaf
 
-%Bild
+% Image
 \graphicspath{{img/}}
 \usepackage{float} % Allows putting an [H] (place HERE & not where LaTeX wants to put)
 
-\usepackage{fancyhdr} % Header & Footer
-
-% Für Deutsch
-%\usepackage[utf8]{inputenc}
-%\usepackage[ngerman]{babel} --- für deutsh
+% Header & Footer
+\usepackage{fancyhdr}
 
 \usepackage{siunitx} % Required for alignment
 \sisetup{
@@ -51,6 +49,8 @@
 \rfoot{}
 
 \begin{document}
+	\setlength{\parindent}{0in} % removes default indent of new paragraph
+
 
 	\include{title_page}
 
@@ -72,6 +72,9 @@
 	%\markdownInput{example.md}
 
 	\include{pa_introduction}
+  \newpage
+
+	\include{pa_architecture}
   \newpage
 
   \include{pa_technologies}
