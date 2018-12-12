@@ -80,11 +80,19 @@ Images are placed in the _assets_ folder.
 \includegraphics{./assets/zhawoLogo.png}
 
 % width/height
-\includegraphics[width=0.4cm]{./assets/zhawoLogo.png}
+\includegraphics[width=4cm]{./assets/zhawoLogo.png}
 
-% float --> left/right (\usepackage[export]{adjustbox})
+% float --> left/right/center (\usepackage[export]{adjustbox})
 \includegraphics[left]{./assets/zhawoLogo.png}
+
+% image with citation
+\begin{figure}[H]
+  \includegraphics[width=4cm, center]{./assets/zhawoLogo.png}
+  \caption{Our Logo{\cite{OurReadme}}}
+\end{figure}
 ```
+
+https://www.overleaf.com/learn/latex/Inserting_Images
 
 ## Bibliography
 
@@ -125,3 +133,5 @@ Reference the source:
 \cite{DUMMY}
 \cite{OurReadme}
 ```
+
+https://www.latex-tutorial.com/tutorials/bibtex/
