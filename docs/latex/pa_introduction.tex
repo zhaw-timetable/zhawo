@@ -3,36 +3,33 @@
 
 # Introduction
 
-Students of the Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) visit mutliple websites daily in order to get the information they need.
+## Goals
+
+Students of the Zurich University of Applied Sciences (ZHAW) have to visit multiple websites or use different applications on a daily basis in order to get information about their schedule, the offered menus in their campus mensa and events organized by the Verein Studierende ZHAW (vszhaw).
+
+For their schedule, a student can either visit the official site \cite{DUMMY} or use the official application for either Android \cite{DUMMY} or iOS \cite{DUMMY}. The official site was designed for use on desktop browsers and is not optimized for responsiveness and display on phones. And while the official Android application is well maintained and offers a lot of additional features - such as direct access to public transport timetables and mensa menu plans - its iOS counterpart lacks many of these additional features and looks and feels rather unpolished in comparison. This difference in quality and features is a common occurence because the development of native applications requires two seperate code bases for Android and iOS \cite{DUMMY}. The most glaring issue with the iOS application is the lack of offline functionality. When a user network cuts out, even schedule information that is previously loaded can no longer be access after navigating away.
+
+When students want to check the mensa menus of their campus, they have the option of visiting the SV groups site or use the official Android or iOS application. These options suffer from the same issues as previously explained for the schedule.
+
+With ZHAWo, our goal is to provide students with an improved application to have access to their schedule and mensa menus in one single cross-platform application. Additionally, with ZHAWo students can search for unoccupied rooms. This functionality was - until about two years ago - provided by an Android application that was no longer maintained and eventually disappeared from the Google Play Store. While the study rooms at for example the Technikum campus offer a space for both quiet work as well as group projects, in our experience as students it was very convenient to have a service to quickly look up free rooms without having to walk from room to room. Another feature ZHAWo provides is the integration of news and events of the vszhaw directly into the application. We aim to reduce the effort that is needed to stay up to date with the vszhaw and hope that both students and the vszhaw can profit from this.
+
+By using Progressive Web Application (PWA) technologies \cite{DUMMY} in combination with JavaScript frameworks for both front- and backend, we achieve a consistent user experience throughout desktop devices and both Android and iOS applications. We eliminate the issue of having to maintain seperate code bases for different platforms while still being able to provide a native feel and functionality. PWA features such as offline caching of HTTP requests allow us to overcome previously mentioned issues with reliability on spotty networks.
+
+An additional advantage we gain by using PWA technologies and the same programming language across the full stack is fast prototyping in an agile development process. Development of additional features and functionality can be achieved at a much faster rate with a single code base across all platforms.
+
+\newpage
+
+## Primary Functions
+
+While our goal is to develop a feature rich application tailored to students of the ZHAW, we established the following four primary functions ZHAWo should provide in its prototype. Using an agile development approach, the scope of this project was to implement these primary functions in a prototype and adjust them to student feedback.
 
 \begin{itemize}
-  \item \textbf{School Scedule}: http://stundenplan.zhaw.ch/
-  \item \textbf{Menu plan}: http://technikum.sv-restaurant.ch/de/menuplan/: Menu plan
-  \item \textbf{School events}: https://www.vszhaw.ch/events/
-  \item \textbf{Find free Rooms}: Go from room to room
+  \item \textbf{Timetable}: A user can access their schedule and look up schedules of lecturers, classes, courses and rooms.
+  \item \textbf{Menu plans}: A user can access menu plans of the different campus mensas across the ZHAW.
+  \item \textbf{Room search}: A user can look for and find free rooms for a specified time-frame and location.
+  \item \textbf{Student events}: A user can access vszhaw news and events to bring more attention to student parties and events.
 \end{itemize}
 
-% TODO change this sentence below -> less complicated
-% bitz en ahgriff nid?
-
-However, apart from the official Android application \cite{DUMMY}, they are either not well suited for use on mobile devices in the case of the official schedule site \cite{DUMMY} or feel outdated.
-
-% TODO write something about issue of maintaining code for both Android and Iphone
-
-
-By using progressive web application (PWA) technologies \cite{OurReadme} we were able to build a Cross-Platform application
-
-We want to provide our Users a fast, Reliable and Engaging experience across all Platforms. That is why we have chosen to develop zhawo as a Progressive Web App. Progressive Web Apps are web apps that behave like native apps. That means the application can be accessed by any device that has a browser, whilst still gives the user the look and feel of a native app.
-
-
-
-## Goals \& Primary Functions
-
-\begin{itemize}
-  \item \textbf{Timetable}: students often need to quickly check what courses they have next and where they need to go. The availability of this feature is very important and has been noted as being an issue with the "official" timetable app. Using intelligent caching and a modern user interface, we aim to improve this aspect.
-  \item \textbf{Room search}: when we first started there was an application, that allowed students to search for free rooms all over their campus. This was very useful as study programmes at the ZHAW put a huge focus on group projects, but with limited quiet public working spaces, finding a free room was often vital. The app that only ever existed for Android devices has since completely disappeared.
-  \item \textbf{Menu plans}: There are menu plans on the official provider of the mensa food's website. However, this site is rather unknown and we plan to include an easy way to check today's and upcoming menus and prices.
-  \item \textbf{Student events}: We plan to work with vszhaw to bring more attention to student parties and events, by integrating their event feed into zhawo.
-\end{itemize}
+After having established the core functionalities and a prototypical version of ZHAWo in the scope of this project, the features will be iteratively expanded and improved to end up with a production-ready application.
 
 \end{markdown}
