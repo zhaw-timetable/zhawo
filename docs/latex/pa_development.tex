@@ -3,12 +3,14 @@
 
 # Development
 
-Explain how agile development was used, Github Projects, Travis, Codecov, Heroku
+## Agile Approach
 
-## Agile
+For development of the ZHAWo prototype we used an iterative agile approach. The code base was managed on a single GitHub repository \cite{DUMMY} for both front- and backend. User stories were tracked using GitHub issues and the sprints were organized using GitHub project boards. Over the course of the project, we structured the development into six sprints of 2 weeks. We regularly considered feedback of other students and our own review of our practices and used technologies in our planning. The flexibility of using only JavaScript and PWA technologies enabled us to rapidly prototype new ideas without the hassle of having to maintain two different code bases.
+User stories were implemented and tested in feature branches and merged into the master branch as part of the sprint reviews. This practice ensured that we had - for the most part - stable new iterations of the application to deploy for user feedback.
 
 ## Continuous Integration \& Deployment
-A multi-branch system on Jenkins [14] is used to continuously build every open branch and pull request with each commit. This approach ensures that failing tests, builds or merges are detected as early as possible. After a successful build on Jenkins the front end gets deployed on an apache server and the back end on an apache tomcat server on the local cloudlab virtual machine from ZHAW. The web application is accessible on http://client101.cloudlab.zhaw.ch/ via the ZHAW network (and VPN). The continuous integration and deployment run fully automatically via Jenkins.
-To meet the definition of done the quality of the develop-branch is summarized on a SonarQube [15] server running on the cloudlab virtual machine from ZHAW. With this approach the quality of the application was assessed continuously according to preset quality gates.
+
+For continuous integration we used Travis CI \cite{DUMMY} in combination with Codecov \cite{DUMMY} to track test coverage. With good integration of both these tools into GitHub - for example reporting of build status and test coverage changes in GitHub comments on each pull request - we achieved good code and test quality across feature implemenations and sprints.
+While the goal is to eventually host our application on a ZHAW server, in the scope of this project the prototype was deployed to Heroku \cite{DUMMY} and shared amongst students for quick feedback on new features.
 
 \end{markdown}
