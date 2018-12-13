@@ -94,6 +94,17 @@ Images are placed in the _assets_ folder.
 
 https://www.overleaf.com/learn/latex/Inserting_Images
 
+## Quotes
+
+Typing quotations with this package is quite easy:
+
+```latex
+\say{Here, a quotation is written and even some \say{nested} quotations
+are possible}
+```
+
+https://www.overleaf.com/learn/latex/Typesetting_quotations
+
 ## Bibliography
 
 Current Cition Style: ieee
