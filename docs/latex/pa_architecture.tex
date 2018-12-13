@@ -4,16 +4,27 @@
 % TODO: rename file
 
 # Architecture Technologies
+
+*add image*
+
+## Frontend
+For the presentation of the web application to the user, several frameworks were considered. The most suitable framework candidates were React\cite{React}, VueJS\cite{VueJS}, AngularJS\cite{AngularJS} and RiotJS\cite{RiotJS}. Since both VueJS and RiotJS are relatively new frameworks with small communities and few established patterns or even testing practices, they were not further considered. While both AngularJS and React would be suitable frameworks, it was decided to use React, mainly because of its potential to write cleaner code with component based modularity.
+
+The data for the front end is provided by the back end RESTful API service and retrievable through HTTP calls. Each fetch request is cached using a service worker. This eliminates the dependence on the network, ensuring an instant and reliable experience for our users.
+
+
+
+
 frontend
 - runs on user device
 - gui
+- mockups
 
 backend
 - runs on server
 
-mock ups?
-
 % TODO: add image front-back api calls and stuff
+
 
 
 \end{markdown}

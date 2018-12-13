@@ -4,5 +4,11 @@
 # Development
 
 Explain how agile development was used, Github Projects, Travis, Codecov, Heroku
-    
+
+## Agile
+
+## Continuous Integration \& Deployment
+A multi-branch system on Jenkins [14] is used to continuously build every open branch and pull request with each commit. This approach ensures that failing tests, builds or merges are detected as early as possible. After a successful build on Jenkins the front end gets deployed on an apache server and the back end on an apache tomcat server on the local cloudlab virtual machine from ZHAW. The web application is accessible on http://client101.cloudlab.zhaw.ch/ via the ZHAW network (and VPN). The continuous integration and deployment run fully automatically via Jenkins.
+To meet the definition of done the quality of the develop-branch is summarized on a SonarQube [15] server running on the cloudlab virtual machine from ZHAW. With this approach the quality of the application was assessed continuously according to preset quality gates.
+
 \end{markdown}
