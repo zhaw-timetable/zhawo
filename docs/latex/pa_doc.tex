@@ -53,7 +53,7 @@
 
 	\setlength{\parindent}{0in} % removes default indent of new paragraph
 
-	\include{sections/title}
+	\include{title_page}
 
 	\pagenumbering{gobble}
 
@@ -62,27 +62,21 @@
 	\pagenumbering{roman}
 	\tableofcontents
   \newpage
-  
-	%Abstract
-	\include{sections/abstract}
+  \pagenumbering{arabic}
 
-	% Main body of your document
+	\include{pa_0_abstract}	
 	\newpage
-	\pagenumbering{arabic}
 
-	\include{sections/introduction}
+	\include{pa_1_introduction}
   \newpage
 
-	\include{sections/architecture}
+  \include{pa_2_development}
   \newpage
 
-  \include{sections/technologies}
+	\include{pa_3_implementation}
   \newpage
 
-  \include{sections/development}
-  \newpage
-
-  \include{sections/discussion}
+  \include{pa_4_discussion}
   \newpage
 
 	%\markdownInput{example.md}
