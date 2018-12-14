@@ -1,24 +1,25 @@
 \documentclass[english,12pt]{article}
+
 % Für Deutsch
 %\usepackage[utf8]{inputenc}
 %\usepackage[ngerman]{babel}
-\usepackage{blindtext} % Lorem ipsum
+
 % Packages
-\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe --> to see border
+\usepackage{blindtext} % Lorem ipsum
+\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout, showframe --> to see border
 \usepackage{caption}
-\usepackage[hidelinks]{hyperref} %links within the document and for clickable URLs
+\usepackage[hidelinks]{hyperref} % links within the document and for clickable URLs
 \usepackage{graphicx}
 \usepackage[export]{adjustbox} % to beable to position images
 \usepackage{amsmath} % equations
 \usepackage{listings} % codeblocks
 \usepackage{dirtytalk} % use quotations
+\usepackage{titling} % So you can use theauthor
+\usepackage[hybrid]{markdown} % Used to convert markdown
 
 \usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
+
 \bibliography{source.bib} % add sources to source.bib file
-
-\usepackage{titling} % So you can use theauthor
-
-\usepackage[hybrid]{markdown} % Used to convert markdown
 
 % Image
 \graphicspath{{img/}}
@@ -34,7 +35,6 @@
 }
 \usepackage{booktabs} % For prettier tables
 
-% TODO: better Title page
 % Document information
 \title{ZHAWo - Platform Independent Timetable App}
 \author{Bachmann Dominik, Visser Julian}
@@ -50,48 +50,49 @@
 \rfoot{}
 
 \begin{document}
+
 	\setlength{\parindent}{0in} % removes default indent of new paragraph
 
-
-	\include{title_page}
+	\include{sections/title}
 
 	\pagenumbering{gobble}
-
 
 	%Index
 	\newpage
 	\pagenumbering{roman}
 	\tableofcontents
-	\newpage
+  \newpage
+  
 	%Abstract
-	\include{abstract}
+	\include{sections/abstract}
 
 	% Main body of your document
 	\newpage
 	\pagenumbering{arabic}
 
+	\include{sections/introduction}
+  \newpage
+
+	\include{sections/architecture}
+  \newpage
+
+  \include{sections/technologies}
+  \newpage
+
+  \include{sections/development}
+  \newpage
+
+  \include{sections/discussion}
+  \newpage
+
 	%\markdownInput{example.md}
-
-	\include{pa_introduction}
-  \newpage
-
-	\include{pa_architecture}
-  \newpage
-
-  \include{pa_technologies}
-  \newpage
-
-  \include{pa_development}
-  \newpage
-
-  \include{pa_discussion}
-  \newpage
 
 	\section{Appendix}
 
 	\listoffigures
-	\listoftables
-	%\renewcommand\refname{Literaturverzeichnis}% rename --- für deutsh
-	\printbibliography  % Uses source.bib to make ref table
+  \listoftables
+  
+	%\renewcommand\refname{Literaturverzeichnis} % rename --- für Deutsch
+	\printbibliography % Uses source.bib to make ref table
 
 \end{document}
