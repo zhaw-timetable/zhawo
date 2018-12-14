@@ -3,49 +3,84 @@
 
 # Implementation
 
-## Frontend
-For the presentation of the web application to the user, we used React\cite{React}. We decided to use React because of its potential to write cleaner code with component based modularity. To minimise potential problems and to insure a a unidirectional data flow we chose to incorporate  the flux pattern into the architecture design, instead of using the typical Model View Controller (MVC) architecture.
+## Architecture
 
-The data for the front end is provided by the back end RESTful API service and retrievable through HTTP calls. Each fetch request is cached using a service worker. We built the service worker using Workbox\cite{Workbox}. Workbox is a library that implements in a set of service worker best practices and helps you get the most out of your service workers.
+ZHAWo consists of a frontend React \cite{React} web application and a backend server based on the Node.js \cite{Node} package Express \cite{Express}. The frontend communicates with the backend through a REST API. The backend server itself - apart from providing the API for the frontend - communicates with the CampusInfo REST API provided by the ZHAW and the RSS feed of the vszhaw homepage. The CampusInfo API provides timetable and menu plan information.
 
-### PWA
-\say{Progressive Web Apps (PWA) are experiences that combine the best of the web and the best of apps.}\cite{WhatIsPWA}
+\bigskip
 
-Google and other companies have developed a new, modern web application standard. PWAs implement said standard and receive additional permission as a rewarded for doing so. This allows PWA to behave and feel like native apps. They live can on the user's home screen, offer a full screen experience, access device hardware (camera, GPS, etc) and can even re-engage users with push notifications\cite{PWA}.  When launched from the user’s home screen a Progressive Web App can load instantly, regardless of the network state. This is done by with the help of service workers.
+TODO: diagram of application architecture (with adapters)
 
-#### Service Workers
-A service worker is like a client-side proxy and that allows control of the cache. You can improve the loading speed of your page by pre-caching key resources. Using cache also eliminates the dependence on the network, ensuring a reliable offline experience for your users.\cite{ServiceWorker}
-
-### React
-React\cite{React} was originaly developed by Facebook and is one of the most popular UI librarys. It allows you to create reusable Compents using JSX, a syntax extension to JavaScript.
-The idea behind React is to design simple views for each state of the application. Doing so allows it to only update and render components that need to be changed, thereby improving performance immensely.
-
-#### Flux
-Flux\cite{OurReadme} is a application pattern developed by Facebook. It's goal is to insure a a unidirectional data flow in React apps. The use of this practice enhances the quality and performance of the code by improving the data consistency. It is the optimal architecture for the use of React.
-
-\begin{figure}[H]
-  \includegraphics[width=10cm, center]{./assets/flux.png}
-  \caption{Flux Model{\cite{FluxModel}}}
-\end{figure}
-
-
-
-% TODO: bild ref https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png
-
-In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behaviour. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly.
-
+\bigskip
 
 ## Backend
-The Sever-side of ZHAWo is implemented in NodeJS\cite{Node}. We use the ExpressJS Server to handle all the API calls.
 
-### NodeJS
-Node.js is a JavaScript runtime environment, designed to build scalable network applications\cite{Node}.
-*öpis vo da https://nodejs.org/en/about/* blocking and so on
-#### Express
-Express\cite{Express} is a minimal and flexible web application framework for Node.js. It provides HTTP utility methods and allows you to create a robust API.
+The backend consists of the following modules:
 
-% TODO: add image front-back api calls and stuff
+\begin{itemize}
+  \item \textbf{Express server application}: Handles HTTP requests from frontend and redirection to persistance layer or third-party adapters.
+  \item \textbf{Persistance layer}: Handles caching of more resource intensive requests such as room search. Implemented with basic file system using JSON file in the prototype. Can be extended by database if functionality requires.
+  \item \textbf{REST API adapter}: Handles HTTP fetch requests to the CampusInfo API.
+  \item \textbf{RSS feed adapter}: Handles fetching of RSS feed from vszhaw.
+\end{itemize}
 
-% TODO: expand this, explain CampusInfo -> why we needed our own backend blabla
+### Express server application
+
+TODO:
+
+### Persistance layer
+
+TODO:
+
+### REST API adapter
+
+TODO:
+
+### RSS feed adapter
+
+TODO:
+
+\newpage
+
+## Frontend
+
+The frontend is made up of three main parts:
+
+\begin{itemize}
+  \item \textbf{React web application}: Handles presentation of data and user interaction.
+  \item \textbf{REST API adapter}: Handles HTTP fetch requests to the backend.
+  \item \textbf{Service worker}: Handles PWA functionality such as caching of data for offline use and installation to desktop or phone homescreen.
+\end{itemize}
+
+### React web application
+
+For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaniously with little interference. 
+
+To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behaviour. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
+
+\bigskip
+
+TODO: Make our own Flux diagram maybe with the 4 action handlers and 4 stores in same design as architecture diagram
+
+\bigskip
+
+### REST API adapter
+
+The data such as timetables, menu plans or lists of free rooms are provided by the backend REST API. To ensure modularity between front- and backend, we implemented an adapter module that handles all data requests to the backend. This practice allows easier adaptations to changes in API, as only the adapter would have to be changed, while the other parts such as the React application and service worker do not need to change.
+
+The modularity this design choice provides - similarly to the modularity of React - goes well with the agile principle of fast prototyping of new ideas and features.
+
+### Service worker
+
+The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to for example a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
+
+In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
+
+These two features enables us to offer the experience of a native application while we avoid having to maintain seperate code bases for each platform.
+
+% ### PWA
+% \say{Progressive Web Apps (PWA) are experiences that combine the best of the web and the best of apps.}\cite{WhatIsPWA}
+
+% Google and other companies have developed a new, modern web application standard. PWAs implement said standard and receive additional permission as a rewarded for doing so. This allows PWA to behave and feel like native apps. They live can on the user's home screen, offer a full screen experience, access device hardware (camera, GPS, etc) and can even re-engage users with push notifications\cite{PWA}.  When launched from the user’s home screen a Progressive Web App can load instantly, regardless of the network state. This is done by with the help of service workers.
 
 \end{markdown}
