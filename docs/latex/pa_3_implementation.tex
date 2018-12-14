@@ -19,26 +19,30 @@ The backend consists of the following modules:
 
 \begin{itemize}
   \item \textbf{Express server application}: Handles HTTP requests from frontend and redirection to persistance layer or third-party adapters.
-  \item \textbf{Persistance layer}: Handles caching of more resource intensive requests such as room search. Implemented with basic file system using JSON file in the prototype. Can be extended by database if functionality requires.
+  \item \textbf{Persistence layer}: Handles caching of more resource intensive requests such as room search. Implemented with basic file system using JSON file in the prototype. Can be extended by database if functionality requires.
   \item \textbf{REST API adapter}: Handles HTTP fetch requests to the CampusInfo API.
   \item \textbf{RSS feed adapter}: Handles fetching of RSS feed from vszhaw.
 \end{itemize}
 
+TODO: detailed diagram of backend architecture
+
 ### Express server application
 
-TODO:
+For the backend server application, we have chosen to use the framework Express \cite{Express} based on the Node.js \cite{Node} technology. The server provides access to the React web application and also offers a REST API. The primary responsability of the server is to redirect user request from the frontend to either persistence layer or the different API adapters and then serve the data. We have chosen to implement the backend with a JavaScript based framework so there is no technology difference between front- and backend. In the context of agile development in a small team, this allows for a fast implementation of features. A new feature often requires changes to both front- and backend, and by removing the need to switch context between different programming languages, we were able to maintain a good velocity throughout our sprints.
 
-### Persistance layer
+### Persistence layer
 
-TODO:
+In the scope of developing this prototype, there was no need to implement a full database for data persistence. The data for more resource intensive requests such as the search for free rooms is currently stored in JSON format directly in the servers file system. Less intensive requests such as timetables are delivered from CampusInfo in a format that only needs minimal modifications and are directly sent to the frontend without persistence.
+
+However, should the need for a database later arise through new functionality, integration into the Express server application is already prepared.
 
 ### REST API adapter
 
-TODO:
+Most of the application data for ZHAWo is provided by the CampusInfo API. Since this is a third-party API provided by the ZHAW, we decided to implement an additional layer between our backend application core and the API. This insures that we are flexible to changes to CampusInfo.
 
 ### RSS feed adapter
 
-TODO:
+Similarly to the CampusInfo API adapter, the RSS feed adapter provides an additional layer between our application and the RSS feed of the vszhaw. This ensures that should the data received by this third-party feed change, the changes needed to our application will be isolated to the adapter.
 
 \newpage
 
@@ -51,6 +55,8 @@ The frontend is made up of three main parts:
   \item \textbf{REST API adapter}: Handles HTTP fetch requests to the backend.
   \item \textbf{Service worker}: Handles PWA functionality such as caching of data for offline use and installation to desktop or phone homescreen.
 \end{itemize}
+
+TODO: detailed diagram of frontend architecture
 
 ### React web application
 
@@ -77,10 +83,5 @@ The data for the frontend is provided by the backend REST API. All data received
 In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
 
 These two features enables us to offer the experience of a native application while we avoid having to maintain seperate code bases for each platform.
-
-% ### PWA
-% \say{Progressive Web Apps (PWA) are experiences that combine the best of the web and the best of apps.}\cite{WhatIsPWA}
-
-% Google and other companies have developed a new, modern web application standard. PWAs implement said standard and receive additional permission as a rewarded for doing so. This allows PWA to behave and feel like native apps. They live can on the user's home screen, offer a full screen experience, access device hardware (camera, GPS, etc) and can even re-engage users with push notifications\cite{PWA}.  When launched from the user’s home screen a Progressive Web App can load instantly, regardless of the network state. This is done by with the help of service workers.
 
 \end{markdown}
