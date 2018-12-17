@@ -9,7 +9,10 @@ ZHAWo consists of a frontend React \cite{React} web application and a backend se
 
 \bigskip
 
-TODO: diagram of application architecture (with adapters)
+\begin{figure}[H]
+  \includegraphics[width=4cm, center]{./diagrams/applicationArchitecture.xml}
+  \caption{Application Architecture Diagram}
+\end{figure}
 
 \bigskip
 
@@ -23,8 +26,6 @@ The backend consists of the following modules:
   \item \textbf{REST API adapter}: Handles HTTP fetch requests to the CampusInfo API.
   \item \textbf{RSS feed adapter}: Handles fetching of RSS feed from vszhaw.
 \end{itemize}
-
-TODO: detailed diagram of backend architecture
 
 ### Express server application
 
@@ -56,11 +57,9 @@ The frontend is made up of three main parts:
   \item \textbf{Service worker}: Handles PWA functionality such as caching of data for offline use and installation to desktop or phone homescreen.
 \end{itemize}
 
-TODO: detailed diagram of frontend architecture
-
 ### React web application
 
-For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaniously with little interference. 
+For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaniously with little interference.
 
 To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behaviour. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
 
