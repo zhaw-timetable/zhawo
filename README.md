@@ -5,7 +5,7 @@
 </p>
     <hr>
   <p align="center">
-  <img src="docs/assets/logo_readme.png?raw=true" height="200" width="200" />
+  <img src="docs/assets/zhawoLogo.png?raw=true" height="200" width="200" />
 </p>
 
 <hr>
