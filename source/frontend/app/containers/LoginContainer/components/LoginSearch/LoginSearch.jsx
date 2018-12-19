@@ -63,7 +63,7 @@ class LoginSearch extends Component {
     });
   };
 
-  handleChange = (event, { newValue }) => {
+  handleChange = ({ newValue }) => {
     this.setState({
       value: newValue
     });
@@ -90,7 +90,7 @@ class LoginSearch extends Component {
     return suggestion.label;
   };
 
-  onSuggestionSelected = (event, { suggestion }) => {
+  onSuggestionSelected = ({ suggestion }) => {
     globalActions.setCurrentUser(suggestion.label, suggestion.type);
     scheduleActions.getSchedule(
       suggestion.type,

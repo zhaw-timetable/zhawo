@@ -6,16 +6,19 @@ configure({ adapter: new Adapter() });
 
 import AppBarContainer from './AppBarContainer';
 
-jest.mock('../../stores/GlobalStore');
-jest.mock('../../actions/GlobalActions');
-jest.mock('../../stores/ScheduleStore');
-jest.mock('../../actions/ScheduleActions');
+import * as globalActions from '../../actions/GlobalActions';
 
-it('renders without crashing', () => {
-  shallow(<AppBarContainer />);
-});
+const wrapper = shallow(<AppBarContainer />);
+const instance = wrapper.instance();
+
+it('renders without crashing', () => {});
 
 it('should render one root element with className AppBarContainer', () => {
-  const wrapper = shallow(<AppBarContainer />);
   expect(wrapper.find('.AppBarContainer')).toHaveLength(1);
+});
+
+it('should call globalActions.toggleDrawer once ', () => {
+  globalActions.toggleDrawer = jest.fn();
+  instance.toggleDrawer();
+  expect(globalActions.toggleDrawer).toHaveBeenCalled();
 });

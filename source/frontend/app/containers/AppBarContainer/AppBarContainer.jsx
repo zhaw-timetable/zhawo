@@ -11,7 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import * as globalActions from '../../actions/GlobalActions';
 
 class AppBarContainer extends Component {
-  toggleDrawer = value => {
+  toggleDrawer = () => {
     globalActions.toggleDrawer();
   };
 

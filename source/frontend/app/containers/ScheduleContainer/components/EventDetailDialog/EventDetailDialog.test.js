@@ -8,8 +8,25 @@ import EventDetailDialog from './EventDetailDialog';
 
 beforeEach(() => {
   console.log = jest.fn();
+  let event = {
+    name: 'test',
+    eventRealizations: [
+      {
+        room: { name: 'testRoom' },
+        lecturers: [
+          {
+            firstName: 'Julian',
+            lastName: 'Visser',
+            shortName: 'vissejul'
+          }
+        ]
+      }
+    ],
+    startTime: '00:00',
+    endTime: '01:00'
+  };
+  const wrapper = shallow(<EventDetailDialog event={event} />);
+  const instance = wrapper.instance();
 });
 
-xit('renders without crashing', () => {
-  shallow(<EventDetailDialog />);
-});
+it('renders without crashing', () => {});

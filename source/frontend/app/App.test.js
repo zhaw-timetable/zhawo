@@ -6,11 +6,16 @@ configure({ adapter: new Adapter() });
 
 import App from './App';
 
-jest.mock('./stores/GlobalStore');
-jest.mock('./actions/GlobalActions');
-jest.mock('./stores/ScheduleStore');
-jest.mock('./actions/ScheduleActions');
+const wrapper = shallow(<App />);
+const instance = wrapper.instance();
 
-it('renders without crashing', () => {
-  shallow(<App />);
+it('renders without crashing', () => {});
+
+it('should call setState with the correct value via handleThemeChanged', () => {
+  instance.setState = jest.fn();
+
+  instance.handleThemeChanged();
+  expect(instance.setState).toHaveBeenCalledWith({
+    theme: 'lightTheme'
+  });
 });

@@ -6,16 +6,36 @@ configure({ adapter: new Adapter() });
 
 import BottomNavContainer from './BottomNavContainer';
 
-jest.mock('../../stores/GlobalStore');
-jest.mock('../../actions/GlobalActions');
-jest.mock('../../stores/ScheduleStore');
-jest.mock('../../actions/ScheduleActions');
+import history from '../../history';
 
-it('renders without crashing', () => {
-  shallow(<BottomNavContainer />);
-});
+const wrapper = shallow(<BottomNavContainer />);
+const instance = wrapper.instance();
+
+it('renders without crashing', () => {});
 
 it('should render one root element with className BottomNavContainer', () => {
-  const wrapper = shallow(<BottomNavContainer />);
   expect(wrapper.find('.BottomNavContainer')).toHaveLength(1);
+});
+
+it('should call handleChange with the correct value', () => {
+  history.push = jest.fn();
+
+  instance.handleChange(null, 0);
+  expect(history.push).toHaveBeenCalledWith('/');
+
+  instance.handleChange(null, 1);
+  expect(history.push).toHaveBeenCalledWith('/mensa');
+
+  instance.handleChange(null, 2);
+  expect(history.push).toHaveBeenCalledWith('/zhawo');
+
+  instance.handleChange(null, 3);
+  expect(history.push).toHaveBeenCalledWith('/vszhaw');
+});
+
+it('should call setState with the correct value via handleChange', () => {
+  instance.setState = jest.fn();
+  instance.handleChange(null, 0);
+  let temp = { value: 0 };
+  expect(instance.setState).toHaveBeenCalledWith(temp);
 });

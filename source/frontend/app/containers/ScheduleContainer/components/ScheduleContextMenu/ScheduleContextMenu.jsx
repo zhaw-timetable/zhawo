@@ -57,6 +57,7 @@ class ScheduleContextMenu extends Component {
     scheduleActions.gotoDay(currentDate);
   };
 
+  // TODO: two functions that do the same thing
   toggleShowInput = () => {
     this.setState({ isScheduleSearchOpen: true });
   };

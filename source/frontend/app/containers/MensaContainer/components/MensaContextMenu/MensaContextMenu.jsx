@@ -17,14 +17,6 @@ class MensaContextMenu extends Component {
     anchorEl: null
   };
 
-  handleClick = e => {
-    this.setState({ anchorEl: e.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
   componentDidMount() {
     mensaActions.getAllMensas();
     mensaActions.getMenuPlan(1, 'Technikum', this.state.currentDate);
@@ -37,6 +29,14 @@ class MensaContextMenu extends Component {
   componentWillUnmount() {
     mensaStore.removeListener('mensas_loaded', this.handleMensasLoaded);
   }
+
+  handleClick = e => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   handleMensasLoaded = () => {
     this.setState({
