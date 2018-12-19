@@ -88,9 +88,11 @@ Images are placed in the _assets_ folder.
 % image with citation
 \begin{figure}[H]
   \includegraphics[width=4cm, center]{./assets/zhawoLogo.png}
-  \caption{Our Logo{\cite{OurReadme}}}
+  \caption{\textsf{Our Logo{\cite{OurReadme}}}}
 \end{figure}
 ```
+
+Use textsf so label use san serif font
 
 https://www.overleaf.com/learn/latex/Inserting_Images
 
@@ -146,3 +148,15 @@ Reference the source:
 ```
 
 https://www.latex-tutorial.com/tutorials/bibtex/
+
+## Font
+
+Chnage Font default = Computer Modern
+
+```latex
+\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' = base font, fallback
+\usepackage[T1]{fontenc}
+```
+
+Find supported fonts:
+http://www.tug.dk/FontCatalogue/
