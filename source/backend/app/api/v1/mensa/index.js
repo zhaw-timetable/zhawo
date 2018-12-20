@@ -8,9 +8,6 @@ export default ({ config, db }) => {
   router.get('/', async (req, res) => {
     const resource = await api.getFacilities().catch(err => console.error(err));
     res.json(resource);
-    resource.forEach(facility => {
-      console.log(facility.id, facility.name);
-    });
   });
 
   router.get('/menus/:facilityId', async (req, res) => {

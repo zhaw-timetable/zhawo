@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import fs from 'fs-extra';
-// import roomSearchData from '../../../../data/room_search_data.json';
 
 export default ({ config, db }) => {
   let router = Router();

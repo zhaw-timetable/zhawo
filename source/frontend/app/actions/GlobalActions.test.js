@@ -1,11 +1,11 @@
 import * as globalActions from './GlobalActions';
 import dispatcher from '../dispatcher.js';
 
-jest.mock('../adapters/ZhawoAdapter');
 jest.mock('../stores/GlobalStore');
 
 const NAME = 'foo';
 const TYPE = 'bar';
+const VALUE = 'dark';
 
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
@@ -26,5 +26,39 @@ it('setUsername should dispatch correct type with payload', () => {
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'SET_CURRENT_USER',
     payload: { name: NAME, type: TYPE }
+  });
+});
+
+it('toggleDrawer should dispatch correct type', () => {
+  globalActions.toggleDrawer();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'TOGGLE_DRAWER'
+  });
+});
+
+it('logout should dispatch correct type', () => {
+  globalActions.logout();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'LOGOUT'
+  });
+});
+
+it('changeTheme should dispatch correct type with payload', () => {
+  globalActions.changeTheme(VALUE);
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'CHANGE_THEME',
+    payload: VALUE
+  });
+});
+
+it('setDayView should dispatch correct type with payload', () => {
+  globalActions.setDayView(VALUE);
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'SET_DAYVIEW',
+    payload: VALUE
   });
 });

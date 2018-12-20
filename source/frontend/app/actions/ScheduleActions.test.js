@@ -1,6 +1,8 @@
 import * as scheduleActions from './ScheduleActions';
 import dispatcher from '../dispatcher.js';
 
+import globalStore from '../stores/GlobalStore';
+
 jest.mock('../adapters/ZhawoAdapter');
 
 const ROUTE = 'route';
@@ -22,9 +24,24 @@ it('all actions should be defined', () => {
   expect(scheduleActions.clearSearch).toBeDefined();
 });
 
-it('getSchedule should dispatch correct type', () => {
+it('getSchedule should dispatch correct type for same user as in store', () => {
+  globalStore.currentUser = NAME;
   scheduleActions.getSchedule(ROUTE, NAME, STARTDATE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'GET_SCHEDULE_FOR_USER',
+    payload: { route: ROUTE, name: NAME, startDate: STARTDATE }
+  });
+});
+
+it('getSchedule should dispatch correct type for different user as in store', () => {
+  globalStore.currentUser = 'some other name';
+  scheduleActions.getSchedule(ROUTE, NAME, STARTDATE);
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'GET_SCHEDULE_FOR_SEARCH',
+    payload: { route: ROUTE, name: NAME, startDate: STARTDATE }
+  });
 });
 
 it('gotoDay should dispatch correct type with payload', () => {
@@ -33,5 +50,13 @@ it('gotoDay should dispatch correct type with payload', () => {
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'GOTO_DAY',
     payload: DATE
+  });
+});
+
+it('clearSearch should dispatch correct type', () => {
+  scheduleActions.clearSearch();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'CLEAR_SEARCH'
   });
 });
