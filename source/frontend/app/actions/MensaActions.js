@@ -8,7 +8,7 @@ export const getAllMensas = function() {
 
 export const getMenuPlan = function(facilityId, facilityName, date) {
   dispatcher.dispatch({
-    type: `GET_MENUPLAN`,
+    type: 'GET_MENUPLAN',
     payload: { facilityId, facilityName, date }
   });
 };

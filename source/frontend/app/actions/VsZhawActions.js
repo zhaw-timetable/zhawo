@@ -1,6 +1,6 @@
 import dispatcher from '../dispatcher';
 
-export const getVszhawFeed = async () => {
+export const getVszhawFeed = () => {
   dispatcher.dispatch({
     type: 'GET_VSZHAWFEED'
   });
