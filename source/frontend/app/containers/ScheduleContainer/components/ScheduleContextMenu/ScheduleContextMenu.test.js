@@ -32,19 +32,9 @@ it('should call setState with the correct value via refreshState', () => {
   });
 });
 
-it('should call setState with the correct value via toggleShowInput', () => {
+it('should call setState with the correct value via handleOpen', () => {
   instance.setState = jest.fn();
-
-  instance.toggleShowInput();
-  expect(instance.setState).toHaveBeenCalledWith({
-    isScheduleSearchOpen: true
-  });
-});
-
-it('should call setState with the correct value via handleClickOpen', () => {
-  instance.setState = jest.fn();
-
-  instance.handleClickOpen();
+  instance.handleOpen();
   expect(instance.setState).toHaveBeenCalledWith({
     isScheduleSearchOpen: true
   });
