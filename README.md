@@ -88,14 +88,9 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 #### Goals
 
-Finish Menuplan Navigation, clean up code, increase test coverage
+Write Documentation, Refactoring, Improve Test Coverage
 
 #### User stories
-
-- [ ] **3 SP** US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
-- [ ] **1 SP** US52 - As a user I want to navigate to the mensa menu of the current day
-- [ ] **2 SP** US53 - As a user I want to navigate between days when using the mensa menu day view
-- [ ] **2 SP** US57 - As a user I want to navigate between menus of different days
 
 #### Decisions
 
