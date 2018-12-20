@@ -15,18 +15,53 @@ it('All functions should be exported', () => {
   expect(api.getPossibleNames).toBeDefined();
 });
 
-xit('Mocking of fetch calls should work', async () => {
-  fetch.once(JSON.stringify(FETCH_RESPONSE));
+it('getScheduleResource should call fetch give default value on empty', async () => {
+  fetch.once(JSON.stringify(false));
   const response = await api.getScheduleResource(ROUTE, NAME, STARTDATE, 0);
+  expect(fetch).toHaveBeenCalled();
   expect(response).toBeDefined();
-  expect(response).toEqual(FETCH_RESPONSE);
+  expect(response).toEqual({ weeks: {} });
 });
 
-xit('getScheduleResource should call correct api endpoint', async () => {
-  fetch.once(JSON.stringify(FETCH_RESPONSE));
+it('getScheduleResource should call correct api endpoint', async () => {
+  fetch.once(JSON.stringify(false));
   const response = await api.getScheduleResource(ROUTE, NAME, STARTDATE, 0);
   expect(fetch).toHaveBeenCalled();
   expect(fetch.mock.calls[0][0]).toContain(`api/v1/schedules/${ROUTE}`);
   expect(response).toBeDefined();
+  expect(response).toEqual({ weeks: {} });
+});
+
+it('getMensaResource should call correct api endpoint', async () => {
+  const fetchResponse = ['value'];
+  fetch.once(JSON.stringify(fetchResponse));
+  const response = await api.getMensaResource('1', STARTDATE);
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/mensa/menus/1?`);
+  expect(response).toBeDefined();
+  expect(response).toEqual('value');
+});
+
+it('getAllMensas should call correct api endpoint', async () => {
+  fetch.once(JSON.stringify(FETCH_RESPONSE));
+  const response = await api.getAllMensas();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/mensa`);
+  expect(response).toBeDefined();
   expect(response).toEqual(FETCH_RESPONSE);
+});
+
+it('getVszhawFeed should call correct api endpoint', async () => {
+  fetch.once(JSON.stringify(FETCH_RESPONSE));
+  const response = await api.getVszhawFeed();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/vszhaw`);
+  expect(response).toBeDefined();
+  expect(response).toEqual(FETCH_RESPONSE);
+});
+
+it('handleError should log error information', () => {
+  api.handleError('error', 'url');
+  expect(console.log).toHaveBeenCalled();
+  expect(console.log.mock.calls[0][0]).toContain(`error`);
 });

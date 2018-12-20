@@ -86,7 +86,7 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
 
 // Receives schedule for exactly one week
 
-function convertSchedule(schedule) {
+export function convertSchedule(schedule) {
   // Initialize converted schedule with weeks as empty object
   const superiorSchedule = { weeks: {} };
   // Weeks will be added by the shortened date of the weeks Monday
@@ -198,7 +198,7 @@ export function getFreeRoomsJson() {
   });
 }
 
-function convertFreeRooms(freeRooms) {
+export function convertFreeRooms(freeRooms) {
   var array = Object.keys(freeRooms).map(function(index) {
     return freeRooms[index];
   });
@@ -224,6 +224,6 @@ export function getVszhawFeed() {
   });
 }
 
-function handleError(err, url) {
+export function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }
