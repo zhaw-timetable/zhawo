@@ -1,7 +1,7 @@
 import * as mensaActions from './MensaActions';
 import dispatcher from '../dispatcher.js';
 
-jest.mock('../stores/mensaStore');
+jest.mock('../stores/MensaStore');
 
 const FACILITY_ID = '1';
 const FACILITY_NAME = 'technikum';
