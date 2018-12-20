@@ -8,7 +8,7 @@ import dispatcher from '../dispatcher';
 
 configure({ adapter: new Adapter() });
 
-import vszhawStore from './VszhawStore';
+import vszhawStore from './VsZhawStore';
 
 it('handleActions should be defined', () => {
   expect(vszhawStore).toBeDefined();
