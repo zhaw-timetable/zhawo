@@ -7,13 +7,12 @@ export const createFreeRoomsJson = async () => {
   try {
     const myObj = await createFreeRoomsObject();
     await fs.writeFile('./data/room_search_data.json', JSON.stringify(myObj));
-    // logger.log('Created room_search_data.json');
   } catch (err) {
     logger.error(err);
   }
 };
 
-export const createFreeRoomsObject = async () => {
+const createFreeRoomsObject = async () => {
   try {
     let fetches = 0;
     let allRooms = await api.getPossibleNames('rooms');
