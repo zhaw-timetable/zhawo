@@ -160,3 +160,33 @@ Chnage Font default = Computer Modern
 
 Find supported fonts:
 http://www.tug.dk/FontCatalogue/
+
+## Include pdfpages
+
+```latex
+\usepackage{pdfpages}
+```
+
+This will insert the first page of external.pdf without numbering the inserted page.
+
+```latex
+\includepdf{external.pdf}
+```
+
+If you want to the inserted page to have a page number add the option pagecommand={}. With this option, the command will be:
+
+```latex
+\includepdf[pagecommand={}]{external.pdf}
+```
+
+To insert specific pages, say pages 2, 4, and 7, use:
+
+```latex
+\includepdf[pages={2, 4, 7}, pagecommand={}]{external.pdf}
+```
+
+To insert a range of pages, say pages 9 through 13, use:
+
+```latex
+\includepdf[pages={9-13}, pagecommand={}]{external.pdf}
+```
