@@ -9,9 +9,9 @@ class MensaStore extends EventEmitter {
   constructor() {
     super();
     this.allMensas = [];
-    this.selectedMensaName = ' ';
+    this.selectedMensaName = '';
     this.currentMenuPlan = {};
-    this.currentMenuday;
+    this.currentMenuday = '';
     this.currentDate = new Date();
   }
 
