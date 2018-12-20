@@ -9,7 +9,7 @@ import * as api from '../adapters/ZhawoAdapter';
 class VszhawStore extends EventEmitter {
   constructor() {
     super();
-    this.feed;
+    this.feed = '';
   }
 
   async handleActions(action) {

@@ -63,14 +63,16 @@ class LoginSearch extends Component {
     });
   };
 
-  handleChange = ({ newValue }) => {
+  handleChange = (event, { newValue }) => {
     this.setState({
       value: newValue
     });
   };
 
   getSuggestions = value => {
+    console.log(value);
     const inputValue = value.trim().toLowerCase();
+    console.log(inputValue);
     const inputLength = inputValue.length;
     let count = 0;
     return inputLength === 0
@@ -90,7 +92,7 @@ class LoginSearch extends Component {
     return suggestion.label;
   };
 
-  onSuggestionSelected = ({ suggestion }) => {
+  onSuggestionSelected = (event, { suggestion }) => {
     globalActions.setCurrentUser(suggestion.label, suggestion.type);
     scheduleActions.getSchedule(
       suggestion.type,

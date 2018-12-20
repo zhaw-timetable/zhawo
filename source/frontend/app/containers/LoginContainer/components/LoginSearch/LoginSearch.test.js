@@ -78,7 +78,7 @@ it('should call onSuggestionSelected with correct values and return correct valu
   scheduleStore.displayDay = '17.07.1994';
   globalActions.setCurrentUser = jest.fn();
   scheduleActions.getSchedule = jest.fn();
-  instance.onSuggestionSelected({ suggestion });
+  instance.onSuggestionSelected(null, { suggestion });
   expect(globalActions.setCurrentUser).toHaveBeenCalledWith(
     suggestion.label,
     suggestion.type

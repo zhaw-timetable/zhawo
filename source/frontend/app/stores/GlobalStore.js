@@ -151,10 +151,6 @@ class GlobalStore extends EventEmitter {
     dbInstance.close();
   }
 
-  handleIdbError(err) {
-    // do something
-  }
-
   async removeCurrentUser() {
     let dbInstance = await this.getDBInstance();
 
