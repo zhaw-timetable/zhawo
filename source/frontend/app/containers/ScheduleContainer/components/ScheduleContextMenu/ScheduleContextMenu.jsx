@@ -57,12 +57,7 @@ class ScheduleContextMenu extends Component {
     scheduleActions.gotoDay(currentDate);
   };
 
-  // TODO: two functions that do the same thing
-  toggleShowInput = () => {
-    this.setState({ isScheduleSearchOpen: true });
-  };
-
-  handleClickOpen = () => {
+  handleOpen = () => {
     this.setState({ isScheduleSearchOpen: true });
   };
 
@@ -143,7 +138,7 @@ class ScheduleContextMenu extends Component {
           <IconButton
             aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
             aria-haspopup="true"
-            onClick={this.toggleShowInput}
+            onClick={this.handleOpen}
             color="inherit"
           >
             <SearchIcon />

@@ -24,8 +24,6 @@ import './NavigationMonth.sass';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
-//TODO: display current month somewhere
-
 class NavigationMonth extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
@@ -53,36 +51,24 @@ class NavigationMonth extends Component {
     scheduleActions.gotoDay(newDate);
   };
 
-  // TODO: Move next 2 functions to Store
   // Goes to first monday of last month
   handleMonthBackClick = e => {
     const nextDate = subMonths(this.state.displayDay, 1);
-    console.log('newDate', nextDate);
     const firstOfMonth = startOfMonth(nextDate);
-    console.log('firstOfMonth', firstOfMonth);
     var firstOfWeek = startOfWeek(firstOfMonth, { weekStartsOn: 1 });
     if (!isSameMonth(firstOfMonth, firstOfWeek))
       firstOfWeek = addWeeks(firstOfWeek, 1);
-    console.log('First of week', firstOfWeek);
-
     scheduleActions.gotoDay(firstOfWeek);
   };
+
   // Goes to first monday of next month
   handleMonthForwardClick = e => {
     const nextDate = addMonths(this.state.displayDay, 1);
-    console.log('newDate', nextDate);
     const firstOfMonth = startOfMonth(nextDate);
-    console.log('firstOfMonth', firstOfMonth);
     var firstOfWeek = startOfWeek(firstOfMonth, { weekStartsOn: 1 });
     if (!isSameMonth(firstOfMonth, firstOfWeek))
       firstOfWeek = addWeeks(firstOfWeek, 1);
-    console.log('First of week', firstOfWeek);
-
     scheduleActions.gotoDay(firstOfWeek);
-  };
-
-  handleMonthClick = e => {
-    console.log('TODO: integrate month navigation here');
   };
 
   render() {

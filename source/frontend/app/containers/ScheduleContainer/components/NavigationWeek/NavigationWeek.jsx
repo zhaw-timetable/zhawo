@@ -19,8 +19,6 @@ import './NavigationWeek.sass';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
-//TODO: display current month somewhere
-
 class NavigationWeek extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
@@ -54,10 +52,6 @@ class NavigationWeek extends Component {
   handleWeekForwardClick = e => {
     const newDate = addWeeks(this.state.displayDay, 1);
     scheduleActions.gotoDay(newDate);
-  };
-
-  handleMonthClick = e => {
-    console.log('TODO: integrate month navigation here');
   };
 
   render() {
@@ -100,14 +94,6 @@ class NavigationWeek extends Component {
             <KeyboardArrowRightIcon />
           </IconButton>
         </div>
-        {/* <Button
-          onClick={this.handleMonthClick}
-          className="MonthButton"
-          variant="outlined"
-        >
-          {format(this.state.displayDay, 'MMMM', { locale: deLocale })} / Woche{' '}
-          {getISOWeek(this.state.displayDay)}
-        </Button> */}
       </Fragment>
     );
   }
