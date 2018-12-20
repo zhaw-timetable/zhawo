@@ -24,7 +24,7 @@ class VsZhawContainer extends Component {
   }
 
   setFeed = () => {
-    console.log(vszhawStore.feed);
+    //console.log(vszhawStore.feed);
     this.setState({
       feed: vszhawStore.feed
     });

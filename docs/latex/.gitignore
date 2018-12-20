@@ -15,7 +15,7 @@
 *.fdb_latexmk
 
 # SyncTeX
-*.synctex.gz
+*.synctex*
 
 # LaTeX Beamer
 *.snm
@@ -27,3 +27,7 @@
 *-blx.bib
 *.bbl
 *.blg
+
+# Markdown
+_markdown_pa_doc
+*.markdown*

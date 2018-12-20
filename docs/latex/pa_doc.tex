@@ -1,28 +1,34 @@
-\documentclass[english, a4paper,12pt]{article}
-\usepackage{blindtext}
-% Packages
-\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout ,showframe
-\usepackage{caption}
-\usepackage[hidelinks]{hyperref}
-\usepackage{graphicx}
-\usepackage{amsmath}
+% Main document
 
-\usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
-\bibliography{source.bib} % add sources to source.bib file
-% https://www.latex-tutorial.com/tutorials/bibtex/
-
-\usepackage{titling} % So you can use theauthor
-
-%Bild
-\graphicspath{{img/}}
-\usepackage{float} % Allows putting an [H] (wenn gross H dann bild genau dort)
-
-\usepackage{fancyhdr} % Header & Footer
+\documentclass[english,12pt]{article}
 
 % Für Deutsch
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-%\usepackage[ngerman]{babel} --- für deutsh
+%\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+
+% Packages
+\usepackage{blindtext} % Lorem ipsum
+\usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout, showframe --> to see border
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref} % links within the document and for clickable URLs
+\usepackage{graphicx}
+\usepackage[export]{adjustbox} % to beable to position images
+\usepackage{amsmath} % equations
+\usepackage{listings} % codeblocks
+\usepackage{dirtytalk} % use quotations
+\usepackage{titling} % So you can use theauthor
+\usepackage[hybrid]{markdown} % Used to convert markdown
+
+\usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
+
+\bibliography{source.bib} % add sources to source.bib file
+
+% Image
+\graphicspath{{img/}}
+\usepackage{float} % Allows putting an [H] (place HERE & not where LaTeX wants to put)
+
+% Header & Footer
+\usepackage{fancyhdr}
 
 \usepackage{siunitx} % Required for alignment
 \sisetup{
@@ -31,7 +37,6 @@
 }
 \usepackage{booktabs} % For prettier tables
 
-% TODO: better Title page
 % Document information
 \title{ZHAWo - Platform Independent Timetable App}
 \author{Bachmann Dominik, Visser Julian}
@@ -39,44 +44,51 @@
 % Header & Footer
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{PA - 2018}
-\chead{ZHAWo}
-\rhead{\theauthor}
+\lhead{PA - HS 2018}
+\chead{}
+\rhead{ZHAWo}
+\lfoot{}
 \cfoot{\thepage}
+\rfoot{}
 
 \begin{document}
 
-	\pagenumbering{gobble}
-	\begin{titlepage}
-		\maketitle
-	\end{titlepage}
+	\setlength{\parindent}{0in} % removes default indent of new paragraph
 
+	\include{pa_title_page}
+
+	\pagenumbering{gobble}
 
 	%Index
 	\newpage
 	\pagenumbering{roman}
 	\tableofcontents
-	\newpage
-	%Abstract
-	\renewcommand{\abstractname}{Abstract}
-	\begin{abstract}
-		Your abstract goes here...
-	\end{abstract}
+  \newpage
+  \pagenumbering{arabic}
 
-	% Main body of your document
+	\include{pa_0_abstract}
 	\newpage
-	\pagenumbering{arabic}
-	\section{Title 1}
-	\blindtext
-	\cite{DUMMY}
 
-	\newpage
+	\include{pa_1_introduction}
+  \newpage
+
+  \include{pa_2_development}
+  \newpage
+
+	\include{pa_3_implementation}
+  \newpage
+
+  \include{pa_4_discussion}
+  \newpage
+
+	%\markdownInput{example.md}
 
 	\section{Appendix}
 
 	\listoffigures
-	\listoftables
-	%\renewcommand\refname{Literaturverzeichnis}% rename --- für deutsh
-	\printbibliography  % Uses source.bib to make ref table
+  % \listoftables
+
+	%\renewcommand\refname{Literaturverzeichnis} % rename --- für Deutsch
+	\printbibliography % Uses source.bib to make ref table
 
 \end{document}

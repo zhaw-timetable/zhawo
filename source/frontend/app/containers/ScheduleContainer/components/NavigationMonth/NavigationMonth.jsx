@@ -52,6 +52,8 @@ class NavigationMonth extends Component {
   handleDateClick = newDate => e => {
     scheduleActions.gotoDay(newDate);
   };
+
+  // TODO: Move next 2 functions to Store
   // Goes to first monday of last month
   handleMonthBackClick = e => {
     const nextDate = subMonths(this.state.displayDay, 1);
@@ -75,6 +77,7 @@ class NavigationMonth extends Component {
     if (!isSameMonth(firstOfMonth, firstOfWeek))
       firstOfWeek = addWeeks(firstOfWeek, 1);
     console.log('First of week', firstOfWeek);
+
     scheduleActions.gotoDay(firstOfWeek);
   };
 
