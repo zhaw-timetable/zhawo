@@ -29,7 +29,7 @@ The backend consists of the following modules:
 
 ### Express server application
 
-For the backend server application, we have chosen to use the framework Express \cite{Express} based on the Node.js \cite{Node} technology. The server provides access to the React web application and also offers a REST API. The primary responsability of the server is to redirect user request from the frontend to either persistence layer or the different API adapters and then serve the data. We have chosen to implement the backend with a JavaScript based framework so there is no technology difference between front- and backend. In the context of agile development in a small team, this allows for a fast implementation of features. A new feature often requires changes to both front- and backend, and by removing the need to switch context between different programming languages, we were able to maintain a good velocity throughout our sprints.
+For the backend server application, we have chosen to use the framework Express \cite{Express} based on the Node.js \cite{Node} technology. The server provides access to the React web application and also offers a REST API. The primary responsibility of the server is to redirect user request from the frontend to either persistence layer or the different API adapters and then serve the data. We have chosen to implement the backend with a JavaScript based framework so there is no technology difference between front- and backend. In the context of agile development in a small team, this allows for a fast implementation of features. A new feature often requires changes to both front- and backend, and by removing the need to switch context between different programming languages, we were able to maintain a good velocity throughout our sprints.
 
 ### Persistence layer
 
@@ -80,17 +80,17 @@ The modularity this design choice provides - similarly to the modularity of Reac
 
 ### Service worker
 
-The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to for example a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
+The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to ,for example, a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
 
 In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
 
-These two features enables us to offer the experience of a native application while we avoid having to maintain seperate code bases for each platform.
+These two features enables us to offer the experience of a native application while we avoid having to maintain separate code bases for each platform.
 
 \newpage
 
 ## Design
 
-We put alot of time and effort into the design. We wanted to ensure that we leave a great first impression.
+We put a lot of time and effort into the design. We wanted to ensure that we leave a great first impression.
 ZHAWo is simple and easy to use. The Logo was designed with that in mind.
 The Mockups were made so that both of us could work independently and no design decisions had to be made on the go. It is important to have a consistent design throughout the application.
 
