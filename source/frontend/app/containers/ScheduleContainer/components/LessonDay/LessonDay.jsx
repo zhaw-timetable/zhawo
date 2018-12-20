@@ -48,7 +48,7 @@ class LessonDay extends Component {
 
   // returns the current TimeSlot
   getTimeSlot = slots => {
-    let now = format(new Date(), 'HH:mm');
+    const now = format(new Date(), 'HH:mm');
     for (var slot in slots) {
       if (format(slots[slot].endTime, 'HH:mm') > now) {
         return format(slots[slot].endTime, 'HH:mm');
