@@ -46,6 +46,8 @@ A few features that we are planning to implement:
 
 ## Development
 
+The latest working version of this project can be found here: [Latest release](https://github.com/zhaw-timetable/zhawo/releases/tag/v1)
+
 This project is split up into a backend Node service (`./source/backend`) and a frontend progressive web app built with React (`./source/frontend`). For development, please refer to the respective readmes.
 
 There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all root dependencies have been installed.
