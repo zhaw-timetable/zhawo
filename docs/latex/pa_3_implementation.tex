@@ -86,6 +86,14 @@ In addition to offline caching, the service worker also allows users to install 
 
 These two features enables us to offer the experience of a native application while we avoid having to maintain separate code bases for each platform.
 
+Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Lighthouse various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a score of 92 out of 100. A detailed report can be found on the Github Repository \cite{OurGithub}.
+
+## Test Coverage
+
+For testing we used the framework Jest \cite{Jest} for both front- and backend. To test functionality and output of React components, we used the GUI testing framework \cite{Enzyme} in addition to Jest.
+
+For the express server application, we achieved a test coverage of 62\%. For the frontend React application 53\% of the code was covered, resulting in an overall project test coverage of about 55\% \cite{OurCoverage}. The coverage is lower than we had planned and is something we aim to improve when going from application prototype to production ready application. This can be in part attributed to the prototypical implementation of the primary functions menu plan, room search and student events. Another aspect is that the current JavaScript framework environment is very dynamic and fast paced, which on one hand offers many advantages, on the other hand, best testing practices have not been established. For example, it was challenging to isolate and test the different components of the Flux architecture in the frontend. Therefore, we decided to put a lot of focus on establishing better testing practices in the next stage of this project.
+
 \newpage
 
 ## Design
