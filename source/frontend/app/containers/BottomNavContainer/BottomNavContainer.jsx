@@ -5,6 +5,11 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import CalendarSVG from '../../assets/img//CalendarSVG/CalendarSVG';
+import MenuSVG from '../../assets/img/MenuSVG/MenuSVG';
+import VsZHAWSVG from '../../assets/img/VsZHAWSVG/VsZHAWSVG';
+import ZHAWOSVG from '../../assets/img/ZHAWOSVG/ZHAWOSVG';
+
 import './BottomNavContainer.sass';
 
 import history from '../../history';
@@ -48,7 +53,7 @@ class BottomNavContainer extends Component {
             selected: 'BottomNavigationAction-selected'
           }}
           label="Stundenplan"
-          icon={<RestoreIcon />}
+          icon={<CalendarSVG />}
         />
         <BottomNavigationAction
           classes={{
@@ -56,7 +61,7 @@ class BottomNavContainer extends Component {
             selected: 'BottomNavigationAction-selected'
           }}
           label="Mensa"
-          icon={<FavoriteIcon />}
+          icon={<MenuSVG />}
         />
         <BottomNavigationAction
           classes={{
@@ -64,7 +69,7 @@ class BottomNavContainer extends Component {
             selected: 'BottomNavigationAction-selected'
           }}
           label="Raumsuche"
-          icon={<LocationOnIcon />}
+          icon={<ZHAWOSVG />}
         />
         <BottomNavigationAction
           classes={{
@@ -72,7 +77,7 @@ class BottomNavContainer extends Component {
             selected: 'BottomNavigationAction-selected'
           }}
           label="VsZHAW"
-          icon={<LocationOnIcon />}
+          icon={<VsZHAWSVG />}
         />
       </BottomNavigation>
     );
