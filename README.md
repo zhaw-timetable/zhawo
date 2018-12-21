@@ -95,6 +95,7 @@ Write Documentation, Refactoring, Improve Test Coverage
 #### Decisions
 
 - Decided to not implement any more features in this final sprint, instead focusing on writing documentation (Projektarbeit Bericht), refactoring and test coverage improvements
+- Sprint is extended by one week because of end of semester milestone
 
 <hr>
 
