@@ -90,20 +90,6 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 Write Documentation, Refactoring, Improve Test Coverage
 
-#### User stories
-
-#### Decisions
-
-...
-
-#### Review
-
-...
-
-#### Burndown
-
-<img src="docs/burndown/burndown_sprint_5-001.jpg?raw=true" height=400 />
-
 <hr>
 
 ### Sprint 4
