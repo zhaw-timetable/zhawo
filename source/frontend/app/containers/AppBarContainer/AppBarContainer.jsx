@@ -30,7 +30,7 @@ class AppBarContainer extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className="flex">
-              ZHAWO
+              ZHAWo
             </Typography>
             {children}
           </Toolbar>
