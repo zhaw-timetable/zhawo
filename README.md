@@ -46,6 +46,8 @@ A few features that we are planning to implement:
 
 ## Development
 
+The latest release version of this project can be found here: [Latest release](https://github.com/zhaw-timetable/zhawo/releases/tag/v1)
+
 This project is split up into a backend Node service (`./source/backend`) and a frontend progressive web app built with React (`./source/frontend`). For development, please refer to the respective readmes.
 
 There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all root dependencies have been installed.
@@ -84,11 +86,16 @@ When working on a feature/user story, the developer assigns himself to the issue
 
 ### Sprint 5
 
-**(Thu 29 Nov - Thu 13 Nov 2018)**
+**(Thu 29 Nov - Thu 20 Dec 2018)**
 
 #### Goals
 
 Write Documentation, Refactoring, Improve Test Coverage
+
+#### Decisions
+
+- Decided to not implement any more features in this final sprint, instead focusing on writing documentation (Projektarbeit Bericht), refactoring and test coverage improvements
+- Sprint is extended by one week because of end of semester milestone
 
 <hr>
 
