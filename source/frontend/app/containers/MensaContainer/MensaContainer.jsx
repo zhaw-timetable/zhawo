@@ -22,6 +22,11 @@ class MensaContainer extends Component {
     mensaStore.removeListener('menuplan_changed', this.handleMenuPlanChanged);
   }
 
+  componentDidUpdate() {
+    console.log('Menuplan changed');
+    console.log('Current menuplan:', this.state.currentMenuDay);
+  }
+
   handleMenuPlanChanged = () => {
     this.setState({ currentMenuDay: mensaStore.currentMenuDay });
   };

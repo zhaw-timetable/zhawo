@@ -70,9 +70,7 @@ class LoginSearch extends Component {
   };
 
   getSuggestions = value => {
-    console.log(value);
     const inputValue = value.trim().toLowerCase();
-    console.log(inputValue);
     const inputLength = inputValue.length;
     let count = 0;
     return inputLength === 0

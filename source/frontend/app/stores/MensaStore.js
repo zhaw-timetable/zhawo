@@ -11,7 +11,7 @@ class MensaStore extends EventEmitter {
     this.allMensas = [];
     this.selectedMensaName = '';
     this.currentMenuPlan = {};
-    this.currentMenuday = '';
+    this.currentMenuDay = '';
     this.currentDate = new Date();
   }
 
@@ -23,12 +23,11 @@ class MensaStore extends EventEmitter {
         this.emit('mensas_loaded');
         break;
       case 'GET_MENUPLAN':
-        this.currentMenuPlan = await api.getMensaResource(
-          action.payload.facilityId,
-          action.payload.date
-        );
+        this.currentMenuPlan = await api
+          .getMensaResource(action.payload.facilityId, action.payload.date)
+          .catch(err => console.log(err));
         this.currentMenuDay = this.currentMenuPlan.menus[
-          getISODay(this.currentDate)
+          getISODay(this.currentDate) - 1
         ];
         this.selectedMensaName = action.payload.facilityName;
         this.emit('menuplan_changed');
