@@ -19,7 +19,7 @@ it('should have the initial values', () => {
   expect(mensaStore.allMensas).toEqual([]);
   expect(mensaStore.selectedMensaName).toEqual('');
   expect(mensaStore.currentMenuPlan).toEqual({});
-  expect(mensaStore.currentMenuday).toEqual('');
+  expect(mensaStore.currentMenuDay).toEqual('');
   expect(format(mensaStore.currentDate, 'HH:MM DD')).toEqual(
     format(new Date(), 'HH:MM DD')
   );
