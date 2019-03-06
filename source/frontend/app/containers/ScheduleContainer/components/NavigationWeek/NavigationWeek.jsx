@@ -80,8 +80,7 @@ class NavigationWeek extends Component {
               {format(date, 'dd', { locale: deLocale })}
             </div>
             <div className="date">
-              {format(date, 'D')}.
-              {format(this.state.displayDay, 'M', { locale: deLocale })}
+              {format(date, 'D')}.{format(date, 'M', { locale: deLocale })}
             </div>
           </ButtonBase>
         ))}

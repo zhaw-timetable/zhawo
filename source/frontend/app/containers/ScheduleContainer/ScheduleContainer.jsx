@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import { addDays, getDay } from 'date-fns';
+import Swipe from 'react-easy-swipe';
 import './ScheduleContainer.sass';
 
 import globalStore from '../../stores/GlobalStore';
@@ -18,7 +20,8 @@ import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContex
 class Schedule extends Component {
   state = {
     isOpen: false,
-    isDayView: globalStore.isDayView
+    isDayView: globalStore.isDayView,
+    swipeInX: 0
   };
 
   componentDidMount() {
@@ -55,20 +58,47 @@ class Schedule extends Component {
     this.forceUpdate();
   };
 
+  onSwipeStart = event => {
+    this.setState({ swipeInX: 0 });
+  };
+
+  onSwipeMove = (position, event) => {
+    this.setState({ swipeInX: position.x });
+  };
+
+  onSwipeEnd = event => {
+    //TODO: adjust behaviour for WeekView
+    let { swipeInX } = this.state;
+    if (swipeInX > 160) {
+      //THis is because ScheduleStore goes to Monday when Sunday is the day
+      //TODO: make this cleaner, move logic to Store by creating function
+      // to go ahead or back one day
+      if (getDay(scheduleStore.displayDay) == 1) {
+        scheduleActions.gotoDay(addDays(scheduleStore.displayDay, -2));
+      } else {
+        scheduleActions.gotoDay(addDays(scheduleStore.displayDay, -1));
+      }
+    } else if (swipeInX < -160) {
+      scheduleActions.gotoDay(addDays(scheduleStore.displayDay, 1));
+    }
+  };
+
   render() {
     return (
       <Fragment>
         <AppBarContainer>
           <ScheduleContextMenu />
         </AppBarContainer>
-        <div className="ScheduleContainer">
-          {!this.state.isOpen && <NavigationWeek />}
-          {this.state.isOpen && <NavigationMonth />}
-          {/* Todo remove gripper in week view and change function of arrows*/}
-          <div id="Gripper" onClick={this.toggleMonthView} />
-          {this.state.isDayView && <LessonDay />}
-          {!this.state.isDayView && <LessonWeek />}
-        </div>
+        <Swipe onSwipeMove={this.onSwipeMove} onSwipeEnd={this.onSwipeEnd}>
+          <div className="ScheduleContainer">
+            {!this.state.isOpen && <NavigationWeek />}
+            {this.state.isOpen && <NavigationMonth />}
+            {/* Todo remove gripper in week view and change function of arrows*/}
+            <div id="Gripper" onClick={this.toggleMonthView} />
+            {this.state.isDayView && <LessonDay />}
+            {!this.state.isDayView && <LessonWeek />}
+          </div>
+        </Swipe>
       </Fragment>
     );
   }
