@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon -w app --exec babel-node app",
-    "build": "./node_modules/.bin/babel app -d dist --copy-files --presets env,es2015,stage-2",
+    "build": "babel app -d dist --copy-files",
     "serve": "node dist",
     "test": "jest --coverage",
     "test-only": "jest",
@@ -36,6 +36,7 @@
     "signale": "^1.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
