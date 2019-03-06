@@ -94,6 +94,19 @@ Images are placed in the _assets_ folder.
 
 Use textsf so label use san serif font
 
+cross-references
+
+```latex
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh}
+    \caption{a nice plot}
+    \label{fig:mesh1}
+\end{figure}
+
+As you can see in the figure \ref{fig:mesh1} % adds figure number
+```
+
 https://www.overleaf.com/learn/latex/Inserting_Images
 
 ## Quotes
