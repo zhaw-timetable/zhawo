@@ -20,8 +20,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-import ReactSVG from 'react-svg';
-
 class RoomSearchContainer extends Component {
   state = {
     room: 'SOE',
