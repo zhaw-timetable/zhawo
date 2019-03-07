@@ -16,6 +16,9 @@
 - [Development](#development)
 - [Workflow](#workflow)
 
+- [Sprint Planning BA](docs/Sprint-Planning-BA.md)
+- [Sprint Planning PA](docs/Sprint-Planning-PA.md)
+
 <hr>
 
 ## About
