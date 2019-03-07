@@ -34,7 +34,7 @@ Todo
 
 #### Burndown
 
-<img src="burndown/burndown_sprint_1_ba-001.jpg?raw=true" height=400 />
+<img src="burndown/burndown_sprint_1_ba_001.jpg?raw=true" height=400 />
 
 <hr>
 
