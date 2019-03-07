@@ -1,4 +1,4 @@
-# Sprint Planning
+# Sprint Planning PA
 
 ## Content
 
@@ -54,7 +54,7 @@ The goal of finishing PWA offline features and implementing a prototypical versi
 
 #### Burndown
 
-<img src="docs/burndown/burndown_sprint_4-001.jpg?raw=true" height=400 />
+<img src="burndown/burndown_sprint_4-001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -84,7 +84,7 @@ The velocity suffered a bit toward the end of the sprint. From the two user stor
 
 #### Burndown
 
-<img src="docs/burndown/burndown_sprint_3-001.jpg?raw=true" height=400 />
+<img src="burndown/burndown_sprint_3-001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -120,7 +120,7 @@ The main goals were achieved. We went from 12 story points in sprint 1 to 20 in 
 
 #### Burndown
 
-<img src="docs/burndown/burndown_sprint_2-001.jpg?raw=true" height=400 />
+<img src="burndown/burndown_sprint_2-001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -152,7 +152,7 @@ All goals were met in this sprint. We don't need to change anything. We managed 
 
 #### Burndown
 
-<img src="docs/burndown/burndown_sprint_1-001.jpg?raw=true" height=400 />
+<img src="burndown/burndown_sprint_1-001.jpg?raw=true" height=400 />
 
 <hr>
 
