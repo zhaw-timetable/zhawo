@@ -73,6 +73,9 @@ class RoomSearchContainer extends Component {
       <Fragment>
         <AppBarContainer />
         <div className="floorSelector">
+          <div id="SOE" onClick={this.handleClick}>
+            SOE
+          </div>
           <div id="TB2" onClick={this.handleClick}>
             2
           </div>
