@@ -2,7 +2,7 @@ import React from 'react';
 
 const TB3 = props => (
   <svg
-    viewBox="0 0 1384 901"
+    viewBox="0 0 1700 600"
     fillRule="evenodd"
     clipRule="evenodd"
     strokeLinecap="round"
