@@ -18,8 +18,8 @@ it('handleActions should be defined', () => {
 it('should have the initial values', () => {
   expect(mensaStore.allMensas).toEqual([]);
   expect(mensaStore.selectedMensaName).toEqual('');
-  expect(mensaStore.currentMenuPlan).toEqual({});
-  expect(mensaStore.currentMenuDay).toEqual('');
+  expect(mensaStore.currentMenuPlan).toEqual(null);
+  expect(mensaStore.currentMenuDay).toEqual(null);
   expect(format(mensaStore.currentDate, 'HH:MM DD')).toEqual(
     format(new Date(), 'HH:MM DD')
   );

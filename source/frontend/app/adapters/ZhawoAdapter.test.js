@@ -43,12 +43,12 @@ it('getMensaResource should call correct api endpoint', async () => {
 });
 
 it('getAllMensas should call correct api endpoint', async () => {
-  fetch.once(JSON.stringify(FETCH_RESPONSE));
+  fetch.once(JSON.stringify([1, 2, 3, 4]));
   const response = await api.getAllMensas();
   expect(fetch).toHaveBeenCalled();
   expect(fetch.mock.calls[0][0]).toContain(`api/v1/mensa`);
   expect(response).toBeDefined();
-  expect(response).toEqual(FETCH_RESPONSE);
+  expect(response).toEqual([3, 4]);
 });
 
 it('getVszhawFeed should call correct api endpoint', async () => {

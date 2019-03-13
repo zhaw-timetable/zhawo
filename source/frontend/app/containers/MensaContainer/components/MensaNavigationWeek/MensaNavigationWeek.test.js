@@ -4,9 +4,9 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import NavigationWeek from './NavigationWeek';
+import MensaNavigationWeek from './MensaNavigationWeek';
 
-const wrapper = shallow(<NavigationWeek />);
+const wrapper = shallow(<MensaNavigationWeek />);
 const instance = wrapper.instance();
 
 beforeEach(() => {

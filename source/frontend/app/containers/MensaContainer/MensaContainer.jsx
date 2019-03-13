@@ -2,53 +2,56 @@ import React, { Component, Fragment } from 'react';
 
 import './MensaContainer.sass';
 
+import Swipe from 'react-easy-swipe';
+
 import mensaStore from '../../stores/MensaStore';
 import * as mensaActions from '../../actions/MensaActions';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 import MensaContextMenu from './components/MensaContextMenu/MensaContextMenu';
-import NavigationWeek from './components/NavigationWeek/NavigationWeek';
+import MensaNavigationWeek from './components/MensaNavigationWeek/MensaNavigationWeek';
+import MenuPlan from './components/MenuPlan/MenuPlan';
+
 class MensaContainer extends Component {
   state = {
-    currentMenuDay: null,
-    currentDate: mensaStore.currentDate
+    swipeInX: 0
   };
 
-  componentWillMount() {
-    mensaStore.on('menuplan_changed', this.handleMenuPlanChanged);
-  }
+  onSwipeStart = event => {
+    this.setState({ swipeInX: 0 });
+  };
 
-  componentWillUnmount() {
-    mensaStore.removeListener('menuplan_changed', this.handleMenuPlanChanged);
-  }
+  onSwipeMove = (position, event) => {
+    this.setState({ swipeInX: position.x });
+  };
 
-  componentDidUpdate() {
-    console.log('Menuplan changed');
-    console.log('Current menuplan:', this.state.currentMenuDay);
-  }
-
-  handleMenuPlanChanged = () => {
-    this.setState({ currentMenuDay: mensaStore.currentMenuDay });
+  onSwipeEnd = event => {
+    let { swipeInX } = this.state;
+    if (swipeInX > window.innerWidth / 4) {
+      mensaActions.swipeLeft();
+    } else if (swipeInX < -window.innerWidth / 4) {
+      mensaActions.swipeRight();
+    }
   };
 
   render() {
-    const { currentMenuDay } = this.state;
     return (
       <Fragment>
         <AppBarContainer>
           <MensaContextMenu />
         </AppBarContainer>
-        <div className="MensaContainer">
-          <NavigationWeek />
-          {currentMenuDay &&
-            currentMenuDay.dishes.map(dish => {
-              return (
-                <div className="DishContainer" key={dish.id}>
-                  {dish.name} {dish.internalPrice} CHF
-                </div>
-              );
-            })}
-        </div>
+        <Swipe
+          onSwipeMove={this.onSwipeMove}
+          onSwipeEnd={this.onSwipeEnd}
+          onSwipeStart={this.onSwipeStart}
+        >
+          <div className="MensaContainer">
+            <MensaNavigationWeek />
+            <div className="MensaContent">
+              <MenuPlan />
+            </div>
+          </div>
+        </Swipe>
       </Fragment>
     );
   }

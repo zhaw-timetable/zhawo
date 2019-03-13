@@ -14,12 +14,12 @@ import IconButton from '@material-ui/core/IconButton';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 
-import './NavigationWeek.sass';
+import './MensaNavigationWeek.sass';
 
 import mensaStore from '../../../../stores/MensaStore';
 import * as mensaActions from '../../../../actions/MensaActions';
 
-class NavigationWeek extends Component {
+class MensaNavigationWeek extends Component {
   state = {
     displayDay: mensaStore.displayDay,
     displayWeek: mensaStore.displayWeek
@@ -56,7 +56,7 @@ class NavigationWeek extends Component {
 
   render() {
     return (
-      <div className="MensaNavigation">
+      <Fragment>
         <div className="arrow">
           <IconButton
             onClick={this.handleWeekBackClick}
@@ -93,9 +93,9 @@ class NavigationWeek extends Component {
             <KeyboardArrowRightIcon />
           </IconButton>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default NavigationWeek;
+export default MensaNavigationWeek;

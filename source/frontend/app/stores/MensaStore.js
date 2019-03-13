@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
-import { format, startOfWeek, getISODay, addDays } from 'date-fns';
+import { startOfWeek, addDays, getDay, isSameDay } from 'date-fns';
 
 import * as api from '../adapters/ZhawoAdapter';
 
@@ -9,12 +9,15 @@ class MensaStore extends EventEmitter {
   constructor() {
     super();
     this.allMensas = [];
+    this.selectedMensaId = '';
     this.selectedMensaName = '';
-    this.currentMenuPlan = {};
-    this.currentMenuDay = '';
+    this.currentMenuPlan = null;
+    this.currentMenuDay = null;
     this.currentDate = new Date();
     this.displayDay = this.currentDate;
+    this.displayStartOfWeek = startOfWeek(this.displayDay);
     this.displayWeek = this.createDisplayWeek(this.displayDay);
+    this.emptyMenuMessage = '';
   }
 
   createDisplayWeek(date) {
@@ -23,21 +26,86 @@ class MensaStore extends EventEmitter {
     return weekArray.map((value, index) => addDays(weekStartDate, index));
   }
 
+  convertSunday(date) {
+    // if currentDate is Sunday, set store currentDate to the Monday after
+    if (getDay(date) == 0) {
+      return addDays(date, 1);
+    } else {
+      return date;
+    }
+  }
+
+  async updateMenu(isNewFacility) {
+    if (
+      isNewFacility ||
+      !this.currentMenuPlan ||
+      !isSameDay(startOfWeek(this.displayDay), this.displayStartOfWeek)
+    ) {
+      this.displayStartOfWeek = startOfWeek(this.displayDay);
+      this.currentMenuPlan = await api
+        .getMensaResource(this.selectedMensaId, this.displayDay)
+        .catch(err => {
+          this.currentMenuDay = null;
+          this.emptyMenuMessage = 'Keine Menüs gefunden';
+        });
+    }
+    if (this.currentMenuPlan) {
+      this.emptyMenuMessage = '';
+      this.currentMenuDay = this.findCurrentMenuDay();
+    }
+    if (!this.currentMenuPlan || !this.currentMenuDay) {
+      this.currentMenuDay = null;
+      this.emptyMenuMessage = 'Keine Menüs gefunden';
+    }
+  }
+
+  findCurrentMenuDay() {
+    return this.currentMenuPlan.menus.find(menu => {
+      return isSameDay(new Date(menu.offeredOn), this.displayDay);
+    });
+  }
+
   async handleActions(action) {
     switch (action.type) {
       case 'GET_ALL_MENSAS':
         this.allMensas = await api.getAllMensas();
-        console.log(this.allMensas);
         this.emit('mensas_loaded');
         break;
+
       case 'GET_MENUPLAN':
-        this.currentMenuPlan = await api
-          .getMensaResource(action.payload.facilityId, action.payload.date)
-          .catch(err => console.log(err));
-        this.currentMenuDay = this.currentMenuPlan.menus[
-          getISODay(this.currentDate) - 1
-        ];
+        this.selectedMensaId = action.payload.facilityId;
         this.selectedMensaName = action.payload.facilityName;
+        await this.updateMenu(true);
+        this.emit('menuplan_changed');
+        break;
+
+      case 'MENU_GOTO_DAY':
+        this.displayDay = this.convertSunday(action.payload);
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        await this.updateMenu(false);
+        this.emit('menuplan_changed');
+        break;
+
+      case 'MENU_SWIPE_RIGHT':
+        this.displayDay = this.convertSunday(addDays(this.displayDay, 1));
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        await this.updateMenu(false);
+        this.emit('menuplan_changed');
+        break;
+
+      case 'MENU_SWIPE_LEFT':
+        // If going back from Monday, need to subtract 2 days since Sundays are not displayed
+        let daysToSubtract;
+        if (getDay(this.displayDay) == 1) {
+          daysToSubtract = 2;
+        } else {
+          daysToSubtract = 1;
+        }
+        this.displayDay = this.convertSunday(
+          addDays(this.displayDay, -daysToSubtract)
+        );
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        await this.updateMenu(false);
         this.emit('menuplan_changed');
         break;
     }
