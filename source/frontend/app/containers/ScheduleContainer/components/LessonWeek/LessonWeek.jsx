@@ -94,7 +94,8 @@ class LessonWeek extends Component {
                         <div className="EventInfo">{event.name}</div>
                         <br />
                         <div className="EventRoom">
-                          {event.eventRealizations[0] &&
+                          {event.eventRealizations &&
+                            event.eventRealizations[0] &&
                             event.eventRealizations[0].room &&
                             event.eventRealizations[0].room.name}
                         </div>
