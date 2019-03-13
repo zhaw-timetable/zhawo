@@ -1,0 +1,33 @@
+@import '../../../../assets/sass/vars'
+ 
+.MensaNavigation
+  display: grid
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
+
+  .arrow
+    display: flex
+    align-items: center
+
+  .day
+    display: flex
+    flex-direction: column
+    align-content: center
+    justify-content: center
+    box-sizing: border-box
+    border-bottom: solid 5px transparent
+
+  .name
+    font-weight: bold
+    font-family: Roboto Light
+
+  .date
+    font-family: Roboto Light
+
+  .today
+    font-weight: bolder !important
+    color: var(--text-color) !important
+
+  .active
+    font-size: 14px !important
+    color: var(--accent-color) !important
+

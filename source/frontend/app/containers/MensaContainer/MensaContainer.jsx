@@ -7,7 +7,7 @@ import * as mensaActions from '../../actions/MensaActions';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 import MensaContextMenu from './components/MensaContextMenu/MensaContextMenu';
-
+import NavigationWeek from './components/NavigationWeek/NavigationWeek';
 class MensaContainer extends Component {
   state = {
     currentMenuDay: null,
@@ -32,14 +32,16 @@ class MensaContainer extends Component {
   };
 
   render() {
+    const { currentMenuDay } = this.state;
     return (
       <Fragment>
         <AppBarContainer>
           <MensaContextMenu />
         </AppBarContainer>
         <div className="MensaContainer">
-          {this.state.currentMenuDay &&
-            this.state.currentMenuDay.dishes.map(dish => {
+          <NavigationWeek />
+          {currentMenuDay &&
+            currentMenuDay.dishes.map(dish => {
               return (
                 <div className="DishContainer" key={dish.id}>
                   {dish.name} {dish.internalPrice} CHF

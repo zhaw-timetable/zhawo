@@ -52,12 +52,10 @@ class MensaContextMenu extends Component {
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { anchorEl, selectedMensaName } = this.state;
     return (
       <Fragment>
-        <Button onClick={this.handleClick}>
-          {this.state.selectedMensaName}
-        </Button>
+        <Button onClick={this.handleClick}>{selectedMensaName}</Button>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}

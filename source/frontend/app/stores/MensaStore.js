@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
-import { format, getISODay } from 'date-fns';
+import { format, startOfWeek, getISODay, addDays } from 'date-fns';
 
 import * as api from '../adapters/ZhawoAdapter';
 
@@ -13,13 +13,21 @@ class MensaStore extends EventEmitter {
     this.currentMenuPlan = {};
     this.currentMenuDay = '';
     this.currentDate = new Date();
+    this.displayDay = this.currentDate;
+    this.displayWeek = this.createDisplayWeek(this.displayDay);
+  }
+
+  createDisplayWeek(date) {
+    const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
+    const weekArray = Array.apply(null, Array(6));
+    return weekArray.map((value, index) => addDays(weekStartDate, index));
   }
 
   async handleActions(action) {
     switch (action.type) {
       case 'GET_ALL_MENSAS':
-        //TODO: filter out stupid entries in zhawoAdapter
         this.allMensas = await api.getAllMensas();
+        console.log(this.allMensas);
         this.emit('mensas_loaded');
         break;
       case 'GET_MENUPLAN':
