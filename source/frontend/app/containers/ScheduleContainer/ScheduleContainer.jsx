@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { addDays, getDay } from 'date-fns';
-import Swipe from 'react-easy-swipe';
 import './ScheduleContainer.sass';
 
+import Swipe from 'react-easy-swipe';
+
 import globalStore from '../../stores/GlobalStore';
-import * as globalActions from '../../actions/GlobalActions';
 
 import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
@@ -67,19 +66,11 @@ class Schedule extends Component {
   };
 
   onSwipeEnd = event => {
-    //TODO: adjust behaviour for WeekView
     let { swipeInX } = this.state;
-    if (swipeInX > 160) {
-      //THis is because ScheduleStore goes to Monday when Sunday is the day
-      //TODO: make this cleaner, move logic to Store by creating function
-      // to go ahead or back one day
-      if (getDay(scheduleStore.displayDay) == 1) {
-        scheduleActions.gotoDay(addDays(scheduleStore.displayDay, -2));
-      } else {
-        scheduleActions.gotoDay(addDays(scheduleStore.displayDay, -1));
-      }
-    } else if (swipeInX < -160) {
-      scheduleActions.gotoDay(addDays(scheduleStore.displayDay, 1));
+    if (swipeInX > window.innerWidth / 4) {
+      scheduleActions.swipeLeft();
+    } else if (swipeInX < -window.innerWidth / 4) {
+      scheduleActions.swipeRight();
     }
   };
 
@@ -89,7 +80,11 @@ class Schedule extends Component {
         <AppBarContainer>
           <ScheduleContextMenu />
         </AppBarContainer>
-        <Swipe onSwipeMove={this.onSwipeMove} onSwipeEnd={this.onSwipeEnd}>
+        <Swipe
+          onSwipeMove={this.onSwipeMove}
+          onSwipeEnd={this.onSwipeEnd}
+          onSwipeStart={this.onSwipeStart}
+        >
           <div className="ScheduleContainer">
             {!this.state.isOpen && <NavigationWeek />}
             {this.state.isOpen && <NavigationMonth />}
