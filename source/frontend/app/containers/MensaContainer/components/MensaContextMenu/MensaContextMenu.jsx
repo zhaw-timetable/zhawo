@@ -4,8 +4,9 @@ import './MensaContextMenu.sass';
 import mensaStore from '../../../../stores/MensaStore';
 import * as mensaActions from '../../../../actions/MensaActions';
 
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
+import IconButton from '@material-ui/core/IconButton';
+import TodayIcon from '@material-ui/icons/Today';
+import MensaIcon from '@material-ui/icons/Fastfood';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -18,8 +19,9 @@ class MensaContextMenu extends Component {
   };
 
   componentDidMount() {
+    const { currentDate } = this.state;
     mensaActions.getAllMensas();
-    mensaActions.getMenuPlan(1, 'Technikum', this.state.currentDate);
+    mensaActions.getMenuPlan(1, 'Technikum', currentDate);
   }
 
   componentWillMount() {
@@ -46,16 +48,39 @@ class MensaContextMenu extends Component {
   };
 
   getMenuPlan = params => e => {
+    const { currentDate } = this.state;
+    const { id, name } = params;
     e.preventDefault();
-    mensaActions.getMenuPlan(params.id, params.name, this.state.currentDate);
-    this.setState({ selectedMensaName: params.name, anchorEl: null });
+    mensaActions.getMenuPlan(id, name, currentDate);
+    this.setState({ selectedMensaName: name, anchorEl: null });
+  };
+
+  handleGoToTodayClick = e => {
+    e.preventDefault();
+    const currentDate = new Date();
+    mensaActions.gotoDay(currentDate);
   };
 
   render() {
     const { anchorEl, selectedMensaName } = this.state;
     return (
       <Fragment>
-        <Button onClick={this.handleClick}>{selectedMensaName}</Button>
+        <IconButton
+          aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
+          aria-haspopup="true"
+          onClick={this.handleGoToTodayClick}
+          color="inherit"
+        >
+          <TodayIcon />
+        </IconButton>
+        <IconButton
+          aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+          color="inherit"
+        >
+          <MensaIcon />
+        </IconButton>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
