@@ -46,7 +46,7 @@ class MensaStore extends EventEmitter {
         .getMensaResource(this.selectedMensaId, this.displayDay)
         .catch(err => {
           this.currentMenuDay = null;
-          this.emptyMenuMessage = 'Keine Menüs gefunden';
+          this.emptyMenuMessage = 'Keine Menüs für dieses Datum gefunden';
         });
     }
     if (this.currentMenuPlan) {
@@ -55,7 +55,7 @@ class MensaStore extends EventEmitter {
     }
     if (!this.currentMenuPlan || !this.currentMenuDay) {
       this.currentMenuDay = null;
-      this.emptyMenuMessage = 'Keine Menüs gefunden';
+      this.emptyMenuMessage = 'Keine Menüs für dieses Datum gefunden';
     }
   }
 
