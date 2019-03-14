@@ -13,7 +13,6 @@ import Menu from '@material-ui/core/Menu';
 class MensaContextMenu extends Component {
   state = {
     allMensas: [],
-    selectedMensaName: mensaStore.selectedMensaName,
     currentDate: mensaStore.currentDate,
     anchorEl: null
   };
@@ -32,19 +31,19 @@ class MensaContextMenu extends Component {
     mensaStore.removeListener('mensas_loaded', this.handleMensasLoaded);
   }
 
+  handleMensasLoaded = () => {
+    this.setState({
+      allMensas: mensaStore.allMensas,
+      selectedMensaName: mensaStore.selectedMensaName
+    });
+  };
+
   handleClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
 
   handleClose = () => {
     this.setState({ anchorEl: null });
-  };
-
-  handleMensasLoaded = () => {
-    this.setState({
-      allMensas: mensaStore.allMensas,
-      selectedMensaName: mensaStore.selectedMensaName
-    });
   };
 
   getMenuPlan = params => e => {
@@ -62,11 +61,10 @@ class MensaContextMenu extends Component {
   };
 
   render() {
-    const { anchorEl, selectedMensaName } = this.state;
+    const { anchorEl, allMensas } = this.state;
     return (
       <Fragment>
         <IconButton
-          aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
           aria-haspopup="true"
           onClick={this.handleGoToTodayClick}
           color="inherit"
@@ -74,7 +72,6 @@ class MensaContextMenu extends Component {
           <TodayIcon />
         </IconButton>
         <IconButton
-          aria-owns={this.state.isScheduleSearchOpen ? 'menu-appbar' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
           color="inherit"
@@ -86,7 +83,7 @@ class MensaContextMenu extends Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          {this.state.allMensas.map(mensa => {
+          {allMensas.map(mensa => {
             return (
               <MenuItem
                 key={mensa.id}
