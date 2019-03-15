@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
+import './App.sass';
+
 import './assets/sass/main.sass';
 import './assets/font/font.scss';
 

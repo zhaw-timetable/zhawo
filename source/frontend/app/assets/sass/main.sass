@@ -1,7 +1,11 @@
 @import 'reset'
-// //https://css-tricks.com/snippets/css/complete-guide-grid/
 
-// CSS Vars
+body
+  font-family: Roboto
+
+  --appbar-height: 56px
+  --bottomnav-height: 56px
+
 .darkTheme
   --primary-color: #0F0E0F
   --secondary-color: #8F8E94
@@ -20,16 +24,3 @@
 
   --text-color: #0F0E0F
   --accent-color: #0076FF
-
-body
-  font-family: Roboto
-  font-display: swap
-  font-size: 14px
-
-.App
-  background-color: var(--primary-color)
-  color: var(--text-color)
-
-  height: 100vh
-  display: grid
-  grid-template-rows: 64px 1fr 56px

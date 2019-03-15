@@ -160,6 +160,37 @@ class ScheduleStore extends EventEmitter {
         this.emit('schedule_changed');
         break;
 
+      case 'SWIPE_RIGHT':
+        if (globalStore.isDayView) {
+          this.displayDay = this.convertSunday(addDays(this.displayDay, 1));
+        } else {
+          this.displayDay = this.convertSunday(addDays(this.displayDay, 7));
+        }
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        this.displayMonth = this.createDisplayMonth(this.displayDay);
+        this.emit('schedule_changed');
+        break;
+
+      case 'SWIPE_LEFT':
+        if (globalStore.isDayView) {
+          // If going back from Monday, need to subtract 2 days since Sundays are not displayed
+          let daysToSubtract;
+          if (getDay(scheduleStore.displayDay) == 1) {
+            daysToSubtract = 2;
+          } else {
+            daysToSubtract = 1;
+          }
+          this.displayDay = this.convertSunday(
+            addDays(this.displayDay, -daysToSubtract)
+          );
+        } else {
+          this.displayDay = this.convertSunday(addDays(this.displayDay, -7));
+        }
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        this.displayMonth = this.createDisplayMonth(this.displayDay);
+        this.emit('schedule_changed');
+        break;
+
       case 'LOGOUT':
         this.clearStore();
         break;

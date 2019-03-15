@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './ScheduleContainer.sass';
 
+import Swipe from 'react-easy-swipe';
+
 import globalStore from '../../stores/GlobalStore';
-import * as globalActions from '../../actions/GlobalActions';
 
 import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
@@ -18,7 +19,8 @@ import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContex
 class Schedule extends Component {
   state = {
     isOpen: false,
-    isDayView: globalStore.isDayView
+    isDayView: globalStore.isDayView,
+    swipeInX: 0
   };
 
   componentDidMount() {
@@ -55,20 +57,43 @@ class Schedule extends Component {
     this.forceUpdate();
   };
 
+  onSwipeStart = event => {
+    this.setState({ swipeInX: 0 });
+  };
+
+  onSwipeMove = (position, event) => {
+    this.setState({ swipeInX: position.x });
+  };
+
+  onSwipeEnd = event => {
+    let { swipeInX } = this.state;
+    if (swipeInX > window.innerWidth / 4) {
+      scheduleActions.swipeLeft();
+    } else if (swipeInX < -window.innerWidth / 4) {
+      scheduleActions.swipeRight();
+    }
+  };
+
   render() {
     return (
       <Fragment>
         <AppBarContainer>
           <ScheduleContextMenu />
         </AppBarContainer>
-        <div className="ScheduleContainer">
-          {!this.state.isOpen && <NavigationWeek />}
-          {this.state.isOpen && <NavigationMonth />}
-          {/* Todo remove gripper in week view and change function of arrows*/}
-          <div id="Gripper" onClick={this.toggleMonthView} />
-          {this.state.isDayView && <LessonDay />}
-          {!this.state.isDayView && <LessonWeek />}
-        </div>
+        <Swipe
+          onSwipeMove={this.onSwipeMove}
+          onSwipeEnd={this.onSwipeEnd}
+          onSwipeStart={this.onSwipeStart}
+        >
+          <div className="ScheduleContainer">
+            {!this.state.isOpen && <NavigationWeek />}
+            {this.state.isOpen && <NavigationMonth />}
+            {/* Todo remove gripper in week view and change function of arrows*/}
+            <div id="Gripper" onClick={this.toggleMonthView} />
+            {this.state.isDayView && <LessonDay />}
+            {!this.state.isDayView && <LessonWeek />}
+          </div>
+        </Swipe>
       </Fragment>
     );
   }
