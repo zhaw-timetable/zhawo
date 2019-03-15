@@ -89,7 +89,7 @@ class Schedule extends Component {
             {!this.state.isOpen && <NavigationWeek />}
             {this.state.isOpen && <NavigationMonth />}
             {/* Todo remove gripper in week view and change function of arrows*/}
-            <div id="Gripper" onClick={this.toggleMonthView} />
+            {/* <div id="Gripper" onClick={this.toggleMonthView} /> */}
             {this.state.isDayView && <LessonDay />}
             {!this.state.isDayView && <LessonWeek />}
           </div>

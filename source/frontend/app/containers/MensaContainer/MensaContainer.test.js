@@ -21,13 +21,3 @@ it('renders without crashing', () => {});
 it('should render one root element with className MensaContainer', () => {
   expect(wrapper.find('.MensaContainer')).toHaveLength(1);
 });
-
-it('should call setState via handleMenuPlanChanged with correct values ', () => {
-  mensaStore.currentMenuDay = '17.07.1994';
-  instance.setState = jest.fn();
-
-  instance.handleMenuPlanChanged();
-  expect(instance.setState).toHaveBeenCalledWith({
-    currentMenuDay: '17.07.1994'
-  });
-});

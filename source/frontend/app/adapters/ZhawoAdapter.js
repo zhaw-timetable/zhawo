@@ -44,7 +44,8 @@ export function getAllMensas() {
     const mensas = await response.json().catch(err => {
       handleError(err, url);
     });
-    mensas ? resolve(mensas) : reject();
+    // Return only useful mensas, filter with slice
+    mensas ? resolve(mensas.slice(2, mensas.length)) : reject();
   });
 }
 

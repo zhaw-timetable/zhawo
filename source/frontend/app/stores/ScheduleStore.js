@@ -175,7 +175,7 @@ class ScheduleStore extends EventEmitter {
         if (globalStore.isDayView) {
           // If going back from Monday, need to subtract 2 days since Sundays are not displayed
           let daysToSubtract;
-          if (getDay(scheduleStore.displayDay) == 1) {
+          if (getDay(this.displayDay) == 1) {
             daysToSubtract = 2;
           } else {
             daysToSubtract = 1;
