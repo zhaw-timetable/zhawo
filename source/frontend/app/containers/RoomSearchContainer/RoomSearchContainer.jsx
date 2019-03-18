@@ -12,6 +12,14 @@ import SOE from '../../assets/img/FloorPlans/SOE';
 import TB2 from '../../assets/img/FloorPlans/TB/TB2';
 import TB3 from '../../assets/img/FloorPlans/TB/TB3';
 import TB4 from '../../assets/img/FloorPlans/TB/TB4';
+import TB5 from '../../assets/img/FloorPlans/TB/TB5';
+import TB6 from '../../assets/img/FloorPlans/TB/TB6';
+
+import TE2 from '../../assets/img/FloorPlans/TE/TE2';
+import TE3 from '../../assets/img/FloorPlans/TE/TE3';
+import TE4 from '../../assets/img/FloorPlans/TE/TE4';
+import TE5 from '../../assets/img/FloorPlans/TE/TE5';
+import TE6 from '../../assets/img/FloorPlans/TE/TE6';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
@@ -24,10 +32,19 @@ class RoomSearchContainer extends Component {
   state = {
     room: 'SOE',
     rooms: {
+      SOE: SOE,
+
       TB2: TB2,
       TB3: TB3,
       TB4: TB4,
-      SOE: SOE
+      TB5: TB5,
+      TB6: TB6,
+
+      TE2: TE2,
+      TE3: TE3,
+      TE4: TE4,
+      TE5: TE5,
+      TE6: TE6
     },
     freeRooms: null,
     timeSlots: scheduleStore.slots,
@@ -72,21 +89,21 @@ class RoomSearchContainer extends Component {
     return (
       <Fragment>
         <AppBarContainer />
-        <div className="floorSelector">
-          <div id="SOE" onClick={this.handleClick}>
-            SOE
-          </div>
-          <div id="TB2" onClick={this.handleClick}>
-            2
-          </div>
-          <div id="TB3" onClick={this.handleClick}>
-            3
-          </div>
-          <div id="TB4" onClick={this.handleClick}>
-            4
-          </div>
-        </div>
         <div className="RoomSearchContainer">
+          <div className="floorSelector">
+            <div id="SOE" onClick={this.handleClick}>
+              SOE
+            </div>
+            <div id="TB2" onClick={this.handleClick}>
+              2
+            </div>
+            <div id="TB3" onClick={this.handleClick}>
+              3
+            </div>
+            <div id="TB4" onClick={this.handleClick}>
+              4
+            </div>
+          </div>
           <Room clickhandler={this.handleClick} />
         </div>
       </Fragment>
