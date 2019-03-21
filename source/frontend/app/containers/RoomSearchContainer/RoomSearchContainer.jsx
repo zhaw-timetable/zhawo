@@ -34,8 +34,8 @@ import ListItem from '@material-ui/core/ListItem';
 
 class RoomSearchContainer extends Component {
   state = {
-    room: 'SOE',
-    rooms: {
+    floor: 'SOE',
+    floors: {
       SOE: SOE,
 
       TB2: TB2,
@@ -53,6 +53,7 @@ class RoomSearchContainer extends Component {
       TH2: TH2,
       TL2: TL2
     },
+    currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
     currentTimeSlot: ''
@@ -83,16 +84,32 @@ class RoomSearchContainer extends Component {
 
   handleClick = event => {
     console.log('Click happened, should change to TB2');
-    console.log(this.state.room);
+    console.log(this.state.floor);
     console.log(event.target.id);
+    let nextFloor = event.target.id;
+    let tempFloors = [];
+
+    if (nextFloor != 'SOE') {
+      let building = nextFloor.substring(0, 2);
+      console.log('building: ', building);
+
+      for (let tempFloor in this.state.floors) {
+        if (tempFloor.substring(0, 2) === building) {
+          console.log(tempFloor);
+          tempFloors.push(tempFloor);
+        }
+      }
+    }
+
     this.setState({
-      room: event.target.id
+      floor: nextFloor,
+      currentFloors: tempFloors
     });
   };
 
   render() {
     const isThereData = this.state.freeRooms !== null;
-    const Room = this.state.rooms[this.state.room];
+    const Room = this.state.floors[this.state.floor];
     return (
       <Fragment>
         <AppBarContainer />
@@ -101,15 +118,11 @@ class RoomSearchContainer extends Component {
             <div id="SOE" onClick={this.handleClick}>
               SOE
             </div>
-            <div id="TB2" onClick={this.handleClick}>
-              2
-            </div>
-            <div id="TB3" onClick={this.handleClick}>
-              3
-            </div>
-            <div id="TB4" onClick={this.handleClick}>
-              4
-            </div>
+            {this.state.currentFloors.map(floor => (
+              <div key={floor} id={floor} onClick={this.handleClick}>
+                {floor}
+              </div>
+            ))}
           </div>
           <Room clickhandler={this.handleClick} />
         </div>
