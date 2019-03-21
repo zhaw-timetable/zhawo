@@ -21,6 +21,10 @@ import TE4 from '../../assets/img/FloorPlans/TE/TE4';
 import TE5 from '../../assets/img/FloorPlans/TE/TE5';
 import TE6 from '../../assets/img/FloorPlans/TE/TE6';
 
+import TL2 from '../../assets/img/FloorPlans/TL/TL2';
+
+import TH2 from '../../assets/img/FloorPlans/TH/TH2';
+
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import Select from '@material-ui/core/Select';
@@ -44,7 +48,10 @@ class RoomSearchContainer extends Component {
       TE3: TE3,
       TE4: TE4,
       TE5: TE5,
-      TE6: TE6
+      TE6: TE6,
+
+      TH2: TH2,
+      TL2: TL2
     },
     freeRooms: null,
     timeSlots: scheduleStore.slots,
