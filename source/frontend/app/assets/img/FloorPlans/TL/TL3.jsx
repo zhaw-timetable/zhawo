@@ -8,7 +8,6 @@ const TL3 = props => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
-    {...props}
   >
     <g fill="none" stroke="#f0f" strokeWidth={4.17}>
       <path d="M2.083 865.23l1364.984.82-2.68-856.593L2.435 2.084 2.083 865.23M1015.227 476.992l116.64.934" />

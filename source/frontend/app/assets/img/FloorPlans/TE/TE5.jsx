@@ -8,7 +8,6 @@ const TE5 = props => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
-    {...props}
   >
     <g fill="#f5f5f5">
       <path d="M864.824 221.905h145.071V113.183H864.824" />
