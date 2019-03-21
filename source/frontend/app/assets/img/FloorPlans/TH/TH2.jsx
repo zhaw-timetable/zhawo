@@ -8,7 +8,6 @@ const TH2 = props => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
-    {...props}
   >
     <path
       d="M793.83 302.709l1.36 169.056 219.46 6.367 9.36-175.423H793.83z"

@@ -8,7 +8,6 @@ const SOE = props => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
-    {...props}
   >
     <path
       d="M771.6,512.139L781.145,594.123L900.113,577.209L891.549,498.35L771.6,512.139Z"
