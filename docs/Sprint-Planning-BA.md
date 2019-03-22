@@ -3,9 +3,40 @@
 ## Content
 
 - [Sprint Planning](#sprint-planning)
+  - [Sprint 2](#sprint-2)
   - [Sprint 1](#sprint-1)
   - [Sprint 0](#sprint-0)
 - [Product Backlog](#product-backlog)
+
+<hr>
+
+### Sprint 2
+
+**(Thu 21 Mar - Thu 4 Apr 2019)**
+
+#### Goals
+
+Create floor plan SVGs and basic interaction with campus and building floor plans. Add swipe gesture navigations.
+
+#### User stories
+
+- [ ] **3 SP** Task - Improve front end testing
+- [ ] **1 SP** Task - Save view state to indexed db
+- [ ] **1 SP** Task - ScheduleSearch: Filter out own name (login name) from suggestions
+- [ ] **6 SP** US31 - As a user I want a floor plan of each floor per building with highlighted unoccupied rooms
+- [ ] **10 SP** US32 - As a user I want an overview of my campus with highlighted buildings where there are unoccupied rooms
+
+#### Decisions
+
+- ...
+
+#### Review
+
+...
+
+#### Burndown
+
+<img src="burndown/burndown_sprint_2_ba_001.jpg?raw=true" height=400 />
 
 <hr>
 
@@ -15,22 +46,25 @@
 
 #### Goals
 
-Todo
+Create floor plan SVGs and basic interaction with campus and building floor plans. Add swipe gesture navigations.
 
 #### User stories
 
-- [ ] **3 SP** Task - Add swipe gestures to Schedule
-- [ ] **2 SP** US57 - As a user I want to navigate between menus of different days
-- [ ] **1 SP** US52 - As a user I want to navigate to the mensa menu of the current day
-- [ ] **10 SP** US32 - As a user I want a floor plan of each floor per building with highlighted unoccupied rooms
+- [x] **3 SP** Task - Add swipe gestures to Schedule
+- [x] **2 SP** US57 - As a user I want to navigate between menus of different days
+- [x] **1 SP** US52 - As a user I want to navigate to the mensa menu of the current day
+- [x] **4 SP** US33 - As a user I want to navigate between buildings from the overview of my campus
+- [x] **4 SP** US34 - As a user I want to navigate between floor plans of a building
 
 #### Decisions
 
-- ...
+- No animations when navigating through swipe
+- For vszhaw news feed, only a content snipped is enough, click on story redirects to article on vszhaw.ch
+- When switching back, view state should stay on f. ex. vszhaw and not go back to the default schedule view (Added task in next sprint)
 
 #### Review
 
-...
+Planned user stories could be implemented. Some time was also used for design reworks not reflected in story points. Nothing needs to be changed.
 
 #### Burndown
 
