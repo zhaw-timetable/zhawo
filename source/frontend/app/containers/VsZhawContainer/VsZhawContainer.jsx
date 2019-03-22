@@ -24,10 +24,6 @@ class VsZhawContainer extends Component {
     vszhawStore.removeListener('got_vszhaw_feed', this.setFeed);
   }
 
-  componentDidUpdate() {
-    console.log(this.state.feed);
-  }
-
   setFeed = () => {
     this.setState({
       feed: vszhawStore.feed
@@ -45,7 +41,6 @@ class VsZhawContainer extends Component {
         <AppBarContainer />
         <div className="ContentWrapper">
           <div className="VsZhawContainer">
-            <h1>vszhaw News</h1>
             {this.state.feed &&
               this.state.feed.map(post => (
                 <div
