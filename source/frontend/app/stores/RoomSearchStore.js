@@ -81,22 +81,29 @@ class RoomSearchStore extends EventEmitter {
         this.emit('got_currentFreeRooms');
         break;
       case 'GET_FREEROOMBYTIME':
+        console.log('action.payload: ', action.payload);
+
         this.currentTimeSlot = action.payload;
         this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
         this.emit('got_currentFreeRooms');
         break;
       case 'CHANGE_FLOOR':
         this.setFloor(action.payload);
+        this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
         this.emit('newFloor');
         break;
     }
   }
 
   getSortedByTimeSlot(value) {
+    console.log('value: ', value);
+    let tempRooms = [];
+
     // Find timeslot
     if (value) {
       let found = false;
       let count = 0;
+      let tempRoom;
       // Todo: and smaller than slots count
       while (!found) {
         if (
@@ -108,10 +115,24 @@ class RoomSearchStore extends EventEmitter {
           count++;
         }
       }
-      return this.freeRooms[count].rooms;
+
+      if (this.currentFloor != 'SOE') {
+        // Only add free rooms of same building
+        for (let room in this.freeRooms[count].rooms) {
+          tempRoom = this.freeRooms[count].rooms[room];
+          // Check if same level
+          if (this.currentFloor.substring(0, 2) === tempRoom.substring(0, 2)) {
+            tempRooms.push(tempRoom);
+          }
+        }
+      } else {
+        // if not in building return all the free rooms
+        tempRooms = this.freeRooms[count].rooms;
+      }
     }
 
-    return [];
+    console.log('tempRooms: ', tempRooms);
+    return tempRooms;
   }
 
   setFloor(value) {
@@ -129,6 +150,7 @@ class RoomSearchStore extends EventEmitter {
         }
       }
     }
+
     this.currentFloor = nextFloor;
     this.currentFloors = tempFloors;
   }

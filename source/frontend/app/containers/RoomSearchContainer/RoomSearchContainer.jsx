@@ -47,6 +47,7 @@ class RoomSearchContainer extends Component {
 
   setFloor = () => {
     this.setState({
+      freeRooms: roomSearchStore.currentfreeRooms,
       floor: roomSearchStore.currentFloor,
       currentFloors: roomSearchStore.currentFloors
     });
@@ -57,8 +58,6 @@ class RoomSearchContainer extends Component {
   };
 
   handleClick = event => {
-    console.log('Click happened, should change to TB2');
-    console.log(event.target.id);
     roomSearchActions.changeFloor(event.target.id);
   };
 
@@ -73,6 +72,19 @@ class RoomSearchContainer extends Component {
         <AppBarContainer />
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
+            <Select
+              value={this.state.currentTimeSlot}
+              onChange={this.handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {this.state.timeSlots.map(slot => (
+                <MenuItem value={slot.startTime} key={slot.startTime}>
+                  {format(slot.startTime, 'HH:mm')}
+                </MenuItem>
+              ))}
+            </Select>
             <div className="floorSelector">
               <div id="SOE" onClick={this.handleClick}>
                 SOE
