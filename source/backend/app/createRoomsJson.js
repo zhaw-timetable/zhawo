@@ -70,7 +70,7 @@ const createFreeRoomsObject = async () => {
               ) {
                 // Found free Slot
                 freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
-                  room.room.name
+                  room.room.name.replace(/\s/g, '').toUpperCase()
                 );
                 freeRoomsBySlotCount++;
               } else {
@@ -91,7 +91,7 @@ const createFreeRoomsObject = async () => {
                   }
                   if (freeRoomsBySlot[freeRoomsBySlotCount]) {
                     freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
-                      room.room.name
+                      room.room.name.replace(/\s/g, '').toUpperCase()
                     );
                   }
                 }
@@ -102,7 +102,9 @@ const createFreeRoomsObject = async () => {
       } else {
         // No events mean free all day
         for (var freeSlot in freeRoomsBySlot) {
-          freeRoomsBySlot[freeSlot].rooms.push(room.room.name);
+          freeRoomsBySlot[freeSlot].rooms.push(
+            room.room.name.replace(/\s/g, '').toUpperCase()
+          );
         }
       }
     }
