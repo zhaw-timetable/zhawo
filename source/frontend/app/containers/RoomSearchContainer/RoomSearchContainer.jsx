@@ -22,8 +22,16 @@ import TE5 from '../../assets/img/FloorPlans/TE/TE5';
 import TE6 from '../../assets/img/FloorPlans/TE/TE6';
 
 import TL2 from '../../assets/img/FloorPlans/TL/TL2';
+import TL3 from '../../assets/img/FloorPlans/TL/TL3';
+import TL4 from '../../assets/img/FloorPlans/TL/TL4';
 
 import TH2 from '../../assets/img/FloorPlans/TH/TH2';
+import TH3 from '../../assets/img/FloorPlans/TH/TH3';
+import TH4 from '../../assets/img/FloorPlans/TH/TH4';
+import TH5 from '../../assets/img/FloorPlans/TH/TH5';
+
+import TP2 from '../../assets/img/FloorPlans/TP/TP2';
+import TP4 from '../../assets/img/FloorPlans/TP/TP4';
 
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
@@ -51,7 +59,16 @@ class RoomSearchContainer extends Component {
       TE6: TE6,
 
       TH2: TH2,
-      TL2: TL2
+      TH3: TH3,
+      TH4: TH4,
+      TH5: TH5,
+
+      TL2: TL2,
+      TL3: TL3,
+      TL4: TL4,
+
+      TP2: TP2,
+      TP4: TP4
     },
     currentFloors: [],
     freeRooms: null,
@@ -83,6 +100,8 @@ class RoomSearchContainer extends Component {
   };
 
   handleClick = event => {
+    // Todo : move to store
+
     console.log('Click happened, should change to TB2');
     console.log(this.state.floor);
     console.log(event.target.id);
