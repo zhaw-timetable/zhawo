@@ -8,7 +8,6 @@ const TB5 = props => (
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
-    {...props}
   >
     <g stroke="#f0f" strokeWidth={4.17}>
       <path
