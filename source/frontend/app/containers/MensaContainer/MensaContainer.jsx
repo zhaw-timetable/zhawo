@@ -44,10 +44,13 @@ class MensaContainer extends Component {
           onSwipeMove={this.onSwipeMove}
           onSwipeEnd={this.onSwipeEnd}
           onSwipeStart={this.onSwipeStart}
+          className="ContentWrapper"
         >
           <div className="MensaContainer">
-            <MensaNavigationWeek />
-            <div className="MensaContent">
+            <div className="NavigationContainer">
+              <MensaNavigationWeek />
+            </div>
+            <div className="MenusContainer">
               <MenuPlan />
             </div>
           </div>

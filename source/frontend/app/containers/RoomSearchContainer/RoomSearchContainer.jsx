@@ -132,18 +132,20 @@ class RoomSearchContainer extends Component {
     return (
       <Fragment>
         <AppBarContainer />
-        <div className="RoomSearchContainer">
-          <div className="floorSelector">
-            <div id="SOE" onClick={this.handleClick}>
-              SOE
-            </div>
-            {this.state.currentFloors.map(floor => (
-              <div key={floor} id={floor} onClick={this.handleClick}>
-                {floor}
+        <div className="ContentWrapper">
+          <div className="RoomSearchContainer">
+            <div className="floorSelector">
+              <div id="SOE" onClick={this.handleClick}>
+                SOE
               </div>
-            ))}
+              {this.state.currentFloors.map(floor => (
+                <div key={floor} id={floor} onClick={this.handleClick}>
+                  {floor}
+                </div>
+              ))}
+            </div>
+            <Room clickhandler={this.handleClick} />
           </div>
-          <Room clickhandler={this.handleClick} />
         </div>
       </Fragment>
     );

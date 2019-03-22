@@ -1,13 +1,19 @@
 @import '../../assets/sass/vars'
 
 .ScheduleContainer
-  height: 98%
-  width: 100vw
-  max-width: 100vw
+  height: 100%
   display: grid
-  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr 1fr 0.25fr
   grid-template-rows: 48px auto
-  overflow: scroll
+
+  .NavigationContainer
+    display: grid
+    grid-template-columns: 48px 1fr 1fr 1fr 1fr 1fr 1fr 48px
+
+  .TimetableContainer
+    display: grid
+    grid-template-columns: 48px 1fr 1fr 1fr 1fr 1fr 1fr 48px
+    max-height: 100%
+    overflow: auto
 
   #Gripper
     grid-column: 1 / 9
@@ -33,4 +39,3 @@
   .true
     border-right: solid 2px
     border-color: var(--accent-color)
-    @import '../../assets/sass/vars'

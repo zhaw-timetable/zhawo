@@ -84,14 +84,19 @@ class Schedule extends Component {
           onSwipeMove={this.onSwipeMove}
           onSwipeEnd={this.onSwipeEnd}
           onSwipeStart={this.onSwipeStart}
+          className="ContentWrapper"
         >
           <div className="ScheduleContainer">
-            {!this.state.isOpen && <NavigationWeek />}
-            {this.state.isOpen && <NavigationMonth />}
+            <div className="NavigationContainer">
+              {!this.state.isOpen && <NavigationWeek />}
+              {this.state.isOpen && <NavigationMonth />}
+            </div>
             {/* Todo remove gripper in week view and change function of arrows*/}
             {/* <div id="Gripper" onClick={this.toggleMonthView} /> */}
-            {this.state.isDayView && <LessonDay />}
-            {!this.state.isDayView && <LessonWeek />}
+            <div className="TimetableContainer">
+              {this.state.isDayView && <LessonDay />}
+              {!this.state.isDayView && <LessonWeek />}
+            </div>
           </div>
         </Swipe>
       </Fragment>
