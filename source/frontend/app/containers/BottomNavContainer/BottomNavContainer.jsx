@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
+
+import './BottomNavContainer.sass';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import CalendarSVG from '../../assets/img//CalendarSVG/CalendarSVG';
 import MenuSVG from '../../assets/img/MenuSVG/MenuSVG';
 import VsZHAWSVG from '../../assets/img/VsZHAWSVG/VsZHAWSVG';
 import ZHAWOSVG from '../../assets/img/ZHAWOSVG/ZHAWOSVG';
-
-import './BottomNavContainer.sass';
 
 import history from '../../history';
 

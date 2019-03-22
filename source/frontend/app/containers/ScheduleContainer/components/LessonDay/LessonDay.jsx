@@ -136,7 +136,7 @@ class LessonDay extends Component {
               <div
                 className="EventFlexBox"
                 style={{
-                  gridRow: `${i + 3} / ${i + 3 + slot.longestEvent}`
+                  gridRow: `${i + 1} / ${i + 1 + slot.longestEvent}`
                 }}
               >
                 {slot.events &&

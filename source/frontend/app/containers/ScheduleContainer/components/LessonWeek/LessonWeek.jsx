@@ -88,7 +88,7 @@ class LessonWeek extends Component {
                         onClick={this.handleEventClick(event)}
                         style={{
                           gridColumnStart: 1 + getDay(new Date(key)),
-                          gridRow: `${i + 3} / ${i + 3 + event.slots.length}`
+                          gridRow: `${i + 1} / ${i + 1 + event.slots.length}`
                         }}
                       >
                         <div className="EventInfo">{event.name}</div>
