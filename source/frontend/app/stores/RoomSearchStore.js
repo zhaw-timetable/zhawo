@@ -37,7 +37,8 @@ class RoomSearchStore extends EventEmitter {
     super();
     this.currentTimeSlot = '';
     this.freeRooms = [];
-    (this.currentFloor = 'SOE'), (this.currentfreeRooms = []);
+    this.currentFloor = 'SOE';
+    this.currentfreeRooms = [];
     this.currentFloors = [];
     this.floors = {
       SOE: SOE,

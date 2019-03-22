@@ -46,13 +46,6 @@ class RoomSearchContainer extends Component {
   };
 
   setFloor = () => {
-    console.log('roomSearchStore.currentFloor: ', roomSearchStore.currentFloor);
-    console.log(
-      'roomSearchStore.currentFloors: ',
-      roomSearchStore.currentFloors
-    );
-    console.log('this.state.floors: ', this.state.floors);
-
     this.setState({
       floor: roomSearchStore.currentFloor,
       currentFloors: roomSearchStore.currentFloors
@@ -71,7 +64,9 @@ class RoomSearchContainer extends Component {
 
   render() {
     const isThereData = this.state.freeRooms !== null;
-    const Room = this.state.floors[this.state.floor];
+
+    // sets current floor to floor component
+    const Floor = this.state.floors[this.state.floor];
 
     return (
       <Fragment>
@@ -88,7 +83,7 @@ class RoomSearchContainer extends Component {
                 </div>
               ))}
             </div>
-            <Room clickhandler={this.handleClick} />
+            <Floor clickhandler={this.handleClick} />
           </div>
         </div>
       </Fragment>
