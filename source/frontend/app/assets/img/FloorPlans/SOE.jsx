@@ -25,7 +25,7 @@ const SOE = props => (
           d="M962.736,549.258L973.565,624.43L1015.94,619.5L1014.54,609.158L1122.66,594.123L1124.06,604.307L1165.95,598.248L1154.89,521.2L1122.91,523.348L1122.91,530.547L995.239,549.258L993.692,542.325L962.736,549.258Z"
           fill="#ececec"
           stroke="#f0f"
-          id="TB2"
+          id="TH2"
           strokeWidth={4.17}
           onClick={props.clickhandler}
         />
@@ -35,7 +35,7 @@ const SOE = props => (
           d="M962.736,699.971L962.736,719.23L981.226,715.082L987.809,761.087L1106.66,745.93L1107.07,756.617L1101.52,758.059L1106.69,800.277L1207.23,785.386L1200.6,745.313L1188.02,744.527L1186.71,736.191L1195.61,733.843L1188.7,673.757L962.736,699.971Z"
           fill="#ececec"
           stroke="#f0f"
-          id="TH2"
+          id="TB2"
           strokeWidth={4.17}
           onClick={props.clickhandler}
         />
@@ -63,11 +63,9 @@ const SOE = props => (
       <g transform="matrix(1,0,0,1,-229.563,-134.746)">
         <path
           d="M1062.03,602.437L1073.36,686.603"
-          fill="#ececec"
+          fill="none"
           stroke="#f0f"
           strokeWidth={4.17}
-          id="TE2"
-          onClick={props.clickhandler}
         />
       </g>
       <g transform="matrix(1,0,0,1,-229.563,-134.746)">
