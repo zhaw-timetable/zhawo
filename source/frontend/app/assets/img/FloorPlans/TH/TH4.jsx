@@ -10,33 +10,21 @@ const TH4 = props => (
     strokeMiterlimit={1.5}
   >
     <g transform="matrix(1,0,0,1,-29.9534,-213.285)">
-      <path
-        d="M1347.61,402.424L1347.42,344.389"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-        id="TH444"
-      />
+      <path d="M1347.61,402.424L1347.42,344.389" fill="none" id="TH444" />
       <g>
         <path
           d="M510.032,215.368L510.032,392.147L776.532,394.628L772.869,216.894"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH431"
         />
         <path
           d="M46.998,544.179L46.998,684.936L205.473,684.936L205.473,544.179"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH433"
         />
         <path
           d="M205.473,544.179L205.473,684.936L368.455,684.936L368.455,544.179"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
         />
         <text x="530" y="330">
           TH 444
@@ -51,283 +39,65 @@ const TH4 = props => (
       <path
         d="M1239.44,653.145L1518.13,660.9L1534.63,717.558L1719.21,717.162L1719.21,221.519L1451.15,215.368L1453.61,276.865"
         fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
       />
-      <path
-        d="M1039.69,396.671L1040.45,378.141"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1193.58,398.101L1195.72,376.666"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1070.75,396.671L1164.66,396.671"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1238.19,654.691L1235.09,481.504L1398.59,480.314"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1427.25,481.587L1532.31,483.959"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1559.39,480.314L1532.31,483.959L1519.29,660.346"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1581.65,480.314L1583.68,403.373"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1559.39,403.373L1459.96,403.373L1453.73,275.807"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M510.377,539.19L452.303,541.912"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M424.426,543.14L328.072,541.912"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M302.212,541.912L108.733,541.912"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M84.026,543.14L36.629,542.526"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M46.413,543.14L46.998,686.986"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M205.473,543.14L205.473,686.565"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M368.455,544.179L368.633,684.936"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1000.73,653.156L1000.73,473.929L972.896,473.929"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M943.274,473.929L925.158,473.929"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M773.629,473.929L925.158,473.929L925.158,653.156"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M746.816,477.346L706.333,477.346L703.388,653.156"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M510.124,687.813L510.124,538.057L636.652,538.057"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M661.006,538.057L703.388,538.057"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M513.043,395.832L644.303,395.832"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M668.762,395.832L776.687,395.832L776.687,273.029"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M794.115,395.832L816.46,395.832"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M839.529,395.832L856.601,395.832L856.601,275.754"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M887.451,402.424L887.091,344.389"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M914.161,344.389L1001.63,348.363"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M914.161,396.671L1000.96,395.832"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M913.763,318.129L1000.61,320.375"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
+      <path d="M1039.69,396.671L1040.45,378.141" fill="none" />
+      <path d="M1193.58,398.101L1195.72,376.666" fill="none" />
+      <path d="M1070.75,396.671L1164.66,396.671" fill="none" />
+      <path d="M1238.19,654.691L1235.09,481.504L1398.59,480.314" fill="none" />
+      <path d="M1427.25,481.587L1532.31,483.959" fill="none" />
+      <path d="M1559.39,480.314L1532.31,483.959L1519.29,660.346" fill="none" />
+      <path d="M1581.65,480.314L1583.68,403.373" fill="none" />
+      <path d="M1559.39,403.373L1459.96,403.373L1453.73,275.807" fill="none" />
+      <path d="M510.377,539.19L452.303,541.912" fill="none" />
+      <path d="M424.426,543.14L328.072,541.912" fill="none" />
+      <path d="M302.212,541.912L108.733,541.912" fill="none" />
+      <path d="M84.026,543.14L36.629,542.526" fill="none" />
+      <path d="M46.413,543.14L46.998,686.986" fill="none" />
+      <path d="M205.473,543.14L205.473,686.565" fill="none" />
+      <path d="M368.455,544.179L368.633,684.936" fill="none" />
+      <path d="M1000.73,653.156L1000.73,473.929L972.896,473.929" fill="none" />
+      <path d="M943.274,473.929L925.158,473.929" fill="none" />
+      <path d="M773.629,473.929L925.158,473.929L925.158,653.156" fill="none" />
+      <path d="M746.816,477.346L706.333,477.346L703.388,653.156" fill="none" />
+      <path d="M510.124,687.813L510.124,538.057L636.652,538.057" fill="none" />
+      <path d="M661.006,538.057L703.388,538.057" fill="none" />
+      <path d="M513.043,395.832L644.303,395.832" fill="none" />
+      <path d="M668.762,395.832L776.687,395.832L776.687,273.029" fill="none" />
+      <path d="M794.115,395.832L816.46,395.832" fill="none" />
+      <path d="M839.529,395.832L856.601,395.832L856.601,275.754" fill="none" />
+      <path d="M887.451,402.424L887.091,344.389" fill="none" />
+      <path d="M914.161,344.389L1001.63,348.363" fill="none" />
+      <path d="M914.161,396.671L1000.96,395.832" fill="none" />
+      <path d="M913.763,318.129L1000.61,320.375" fill="none" />
       <path
         d="M1453.22,273.31L777.698,273.386L774.56,215.368L510.382,215.368"
         fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
       />
-      <path
-        d="M703.26,654.356L980.021,653.156"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
+      <path d="M703.26,654.356L980.021,653.156" fill="none" />
       <g transform="matrix(1.33093,0,0,1,-463.027,0)">
-        <path
-          d="M1410.66,403.373L1422.85,403.373"
-          fill="none"
-          stroke="#f0f"
-          strokeWidth={4.17}
-        />
+        <path d="M1410.66,403.373L1422.85,403.373" fill="none" />
       </g>
-      <path
-        d="M1442.51,403.373L1459.85,403.373"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
+      <path d="M1442.51,403.373L1459.85,403.373" fill="none" />
       <g transform="matrix(1,0,0,1,15.8975,-0.949106)">
-        <path
-          d="M1380.99,403.373L1347.46,403.373"
-          fill="none"
-          stroke="#f0f"
-          strokeWidth={4.17}
-        />
+        <path d="M1380.99,403.373L1347.46,403.373" fill="none" />
       </g>
       <path
         d="M1225.41,396.671L1322.01,396.671L1322.01,344.389L1229.11,344.389L1225.41,396.671"
         fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
       />
-      <path
-        d="M1000.96,349.864L1000.96,395.832"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M914.161,344.389L914.161,396.252"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1229.11,319.252L1322.01,318.129"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M510.522,216.707L512.429,466.809L32.037,463.168"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
+      <path d="M1000.96,349.864L1000.96,395.832" fill="none" />
+      <path d="M914.161,344.389L914.161,396.252" fill="none" />
+      <path d="M1229.11,319.252L1322.01,318.129" fill="none" />
+      <path d="M510.522,216.707L512.429,466.809L32.037,463.168" fill="none" />
       <path
         d="M48.027,686.34L510.522,686.34L510.522,718.449L702.355,718.449L703.26,655.555"
         fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
       />
-      <path
-        d="M980.055,653.668L1239.44,655.471"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1239.44,481.442L1208.11,482.587"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1183.55,482.587L1129.04,482.587"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1155.47,482.587L1155.56,653.668"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
-      <path
-        d="M1001.63,474.407L1104.57,481.442"
-        fill="none"
-        stroke="#f0f"
-        strokeWidth={4.17}
-      />
+      <path d="M980.055,653.668L1239.44,655.471" fill="none" />
+      <path d="M1239.44,481.442L1208.11,482.587" fill="none" />
+      <path d="M1183.55,482.587L1129.04,482.587" fill="none" />
+      <path d="M1155.47,482.587L1155.56,653.668" fill="none" />
+      <path d="M1001.63,474.407L1104.57,481.442" fill="none" />
     </g>
   </svg>
 );

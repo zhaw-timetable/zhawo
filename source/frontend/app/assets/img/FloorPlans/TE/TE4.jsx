@@ -9,11 +9,7 @@ const TE4 = props => (
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
   >
-    <g
-      transform="matrix(1,0,0,1,-48.7598,-250.818)"
-      stroke="#f0f"
-      stroke-width="4.17"
-    >
+    <g transform="matrix(1,0,0,1,-48.7598,-250.818)" stroke-width="4.17">
       <path
         d="M51.688,1002.18L1104.09,1012.71L1112.42,816.365L1347.45,813.19"
         fill="none"
@@ -38,19 +34,19 @@ const TE4 = props => (
       />
       <path
         d="M373.413,863.299L515.952,863.299L515.952,1005.28L319.065,1003.53L320.702,863.299L354.883,863.299"
-        fill="#ececec"
+        className="Room"
         id="TE407"
       />
       <path
         d="M210.378,811.684L210.882,783.345L51.688,782.515L51.688,927.642L209.706,923.342L211.749,833.679"
-        fill="#ececec"
+        className="Room"
         id="TE402"
       />
       <path d="M930.409,813.19L990.093,813.19" fill="none" />
       <path d="M930.665,763.829L988.898,764.707" fill="none" />
       <path
         d="M601.571,863.839L560.05,863.328L556.054,1008.9L719.473,1008.9L715.79,873.782"
-        fill="#ececec"
+        className="Room"
         id="TE414"
       />
       <path d="M715.79,873.782L622.644,869.999" fill="none" />
@@ -63,7 +59,7 @@ const TE4 = props => (
       </g>
       <path
         d="M1038.68,569.256L1038.68,595.934L914.507,590.917L914.507,428.46L1038.68,428.907L1038.68,544.97"
-        fill="#ececec"
+        className="Room"
         id="TE423"
       />
       <path d="M496.302,812.823L630.953,812.823" fill="none" />
@@ -75,7 +71,7 @@ const TE4 = props => (
       />
       <path
         d="M1072.31,869.999L1110.44,869.999L1104.46,1012.36L946.419,1008.9L942.34,873.753L1051.73,869.999"
-        fill="#ececec"
+        className="Room"
         id="TE419"
       />
     </g>

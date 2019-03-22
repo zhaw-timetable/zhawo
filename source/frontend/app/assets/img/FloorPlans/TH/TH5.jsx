@@ -13,51 +13,37 @@ const TH5 = props => (
       <g>
         <path
           d="M510.032,215.368L510.032,392.147L776.532,394.628L772.869,216.894"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH544"
         />
         <path
           d="M1238.72,653.981L1001.22,655.961L1001.22,473.641L1234.73,483.466"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH553"
         />
         <path
           d="M1717.63,476.4L1717.63,717.264L1536.67,713.319L1520.56,660.471L1535.59,483.466"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH567"
         />
         <path
           d="M505.641,464.734L680.748,464.734L703.326,655.961L693.376,713.319L499.264,711.613"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH541"
         />
         <path
           d="M1001.22,476.4L1001.22,655.961L703.326,653.61L683.471,464.734"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH547"
         />
         <path
           d="M1531.72,483.466L1519.19,660.471L1238.72,651.308L1238.72,484.093"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH561"
         />
         <path
           d="M1452.3,217.247L1460.8,402.017L1560.36,402.125L1717.63,385.344L1717.63,224.741"
-          fill="#ececec"
-          stroke="#f0f"
-          strokeWidth={4.17}
+          className="Room"
           id="TH568"
         />
         <text x="1470" y="330">
@@ -188,12 +174,7 @@ const TH5 = props => (
         strokeWidth={4.17}
       />
       <g transform="matrix(1.04786,0,0,1,-30.834,0)">
-        <path
-          d="M513.043,395.832L644.303,395.832"
-          fill="none"
-          stroke="#f0f"
-          strokeWidth={4.17}
-        />
+        <path d="M513.043,395.832L644.303,395.832" fill="none" />
       </g>
       <path
         d="M505.641,464.734L635.167,464.734"
@@ -286,12 +267,7 @@ const TH5 = props => (
         strokeWidth={4.17}
       />
       <g transform="matrix(1.33093,0,0,1,-463.027,0)">
-        <path
-          d="M1410.66,403.373L1422.85,403.373"
-          fill="none"
-          stroke="#f0f"
-          strokeWidth={4.17}
-        />
+        <path d="M1410.66,403.373L1422.85,403.373" fill="none" />
       </g>
       <path
         d="M1442.51,403.373L1459.85,403.373"
@@ -300,12 +276,7 @@ const TH5 = props => (
         strokeWidth={4.17}
       />
       <g transform="matrix(1,0,0,1,15.8975,-0.949106)">
-        <path
-          d="M1380.99,403.373L1347.46,403.373"
-          fill="none"
-          stroke="#f0f"
-          strokeWidth={4.17}
-        />
+        <path d="M1380.99,403.373L1347.46,403.373" fill="none" />
       </g>
       <path
         d="M1225.41,396.671L1322.01,396.671L1322.01,344.389L1229.11,344.389L1225.41,396.671"

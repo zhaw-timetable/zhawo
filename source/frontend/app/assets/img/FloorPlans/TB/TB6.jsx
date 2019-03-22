@@ -9,11 +9,7 @@ const TB6 = props => (
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
   >
-    <g
-      transform="matrix(1,0,0,1,-111.573,-213.249)"
-      stroke="#fc00ff"
-      strokeWidth={4.17}
-    >
+    <g transform="matrix(1,0,0,1,-111.573,-213.249)" stroke="#fc00ff">
       <path
         d="M113.854,595.914L1641.11,598.644L1637.75,215.332L113.656,217.335L113.854,595.914Z"
         fill="none"
@@ -24,12 +20,12 @@ const TB6 = props => (
       <path d="M602.081,363.911L602.081,598.644L602.081,363.911Z" fill="none" />
       <path
         d="M602.081,322.903L602.081,315.253L236.577,315.615L238.963,593.578L602.081,598.644"
-        fill="#ececec"
+        className="Room"
         id="TB630"
       />
       <path
         d="M1150.63,298.194L1561.42,298.245L1564.86,598.644L1148.7,598.644"
-        fill="#ececec"
+        className="Room"
         id="TB610"
       />
       <path
