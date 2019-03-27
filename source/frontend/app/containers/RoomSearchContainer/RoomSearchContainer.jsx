@@ -60,7 +60,7 @@ class RoomSearchContainer extends Component {
     let tempRoomState = {};
     roomSearchStore.currentfreeRooms.map(room => {
       // console.log('room: ', room);
-      // console.log('currentFloor: ', roomSearchStore.currentFloor);
+
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
         console.log('room: ', room);
         tempRoomState[room] = 'free';

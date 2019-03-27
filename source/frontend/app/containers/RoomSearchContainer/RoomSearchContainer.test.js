@@ -29,6 +29,8 @@ it('should call setState via setFreeRooms with correct values ', () => {
   roomSearchStore.currentTimeSlot = '00:00';
   instance.setState = jest.fn();
 
+  instance.setRoomBackground = jest.fn();
+
   instance.setFreeRooms();
   expect(instance.setState).toHaveBeenCalledWith({
     freeRooms: [1, 2, 3],
