@@ -1,11 +1,6 @@
-import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, shallow } from 'enzyme';
+jest.mock('idb');
 
 import dispatcher from '../dispatcher';
-
-configure({ adapter: new Adapter() });
-
 import globalStore from './GlobalStore';
 
 it('handleActions should be defined', () => {

@@ -7,7 +7,6 @@ import * as api from '../adapters/ZhawoAdapter';
 class GlobalStore extends EventEmitter {
   constructor() {
     super();
-
     this.theme = 'lightTheme';
 
     this.currentUser = '';
