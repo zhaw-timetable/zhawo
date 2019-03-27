@@ -26,22 +26,22 @@ const TE2 = props => (
       />
       <path
         d="M1045.5,382.922L1040.52,252.902L915.686,252.902L916.593,417.918L1042.52,418.779L1042.52,401.717"
-        className="Room"
+        className={'Room ' + props.roomStates.TE225}
         id="TE225"
       />
       <path
         d="M1045.5,542.753L1042.52,418.779L915.686,418.779L915.686,573.791L1045.5,573.791L1045.5,561.856"
-        className="Room"
+        className={'Room ' + props.roomStates.TE220}
         id="TE220"
       />
       <path
         d="M696.015,872.461L715.79,873.291L718.52,1008.9L554.196,1006.05L555.641,874.615L674.883,869.999"
-        className="Room"
+        className={'Room ' + props.roomStates.TE214}
         id="TE214"
       />
       <path
         d="M778.466,872.503L715.79,873.291L718.52,1008.9L882.042,1008.9L884.388,869.999L800.057,869.999"
-        className="Room"
+        className={'Room ' + props.roomStates.TE216}
         id="TE216"
       />
       <path d="M636.358,869.999L636.358,815.51L668.103,813.369" fill="none" />

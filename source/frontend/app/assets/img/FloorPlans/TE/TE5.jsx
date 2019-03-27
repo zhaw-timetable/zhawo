@@ -13,27 +13,33 @@ const TE5 = props => (
       <g>
         <path
           d="M914.429,472.723L1059.5,472.723L1059.5,364.001L914.429,364.001"
-          className="Room"
+          className={'Room ' + props.roomStates.TE524}
+          id="TE524"
         />
         <path
           d="M1072.31,869.999L1110.44,869.999L1104.46,1012.36L946.419,1008.9L942.34,873.753L1051.73,869.999"
-          className="Room"
+          className={'Room ' + props.roomStates.TE519}
+          id="TE519"
         />
         <path
           d="M915.446,254.979L1095.32,256.325L1096.22,363.689L914.429,364.001"
-          className="Room"
+          className={'Room ' + props.roomStates.TE528}
+          id="TE528"
         />
         <path
           d="M51.62,999.908L193.337,1002.22L193.337,801.681L52.121,802.974"
-          className="Room"
+          className={'Room ' + props.roomStates.TE502}
+          id="TE502"
         />
         <path
           d="M915.769,472.723L1059.5,473.118L1058.98,647.674L914.429,646.278"
-          className="Room"
+          className={'Room ' + props.roomStates.TE523}
+          id="TE523"
         />
         <path
           d="M195.779,875.775L412.219,875.775L412.615,1005.4L193.337,1002.22"
-          className="Room"
+          className={'Room ' + props.roomStates.TE507}
+          id="TE507"
         />
         <path
           d="M471.642,875.203L566.891,875.775L565.815,1005.4L472.223,1004.4"
@@ -41,11 +47,13 @@ const TE5 = props => (
         />
         <path
           d="M566.891,875.775L734.341,876.665L734.106,1010.25L565.815,1005.84"
-          className="Room"
+          className={'Room ' + props.roomStates.TE514}
+          id="TE514"
         />
         <path
           d="M825.491,875.203L895.725,875.203L896.009,1010.25L734.106,1008.23L734.341,876.665L825.491,875.203"
-          className="Room"
+          className={'Room ' + props.roomStates.TE516}
+          id="TE516"
         />
       </g>
       <path

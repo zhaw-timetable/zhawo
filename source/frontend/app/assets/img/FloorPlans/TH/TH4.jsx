@@ -14,17 +14,18 @@ const TH4 = props => (
       <g>
         <path
           d="M510.032,215.368L510.032,392.147L776.532,394.628L772.869,216.894"
-          className="Room"
+          className={'Room ' + props.roomStates.TH431}
           id="TH431"
         />
         <path
           d="M46.998,544.179L46.998,684.936L205.473,684.936L205.473,544.179"
-          className="Room"
+          className={'Room ' + props.roomStates.TH433}
           id="TH433"
         />
         <path
           d="M205.473,544.179L205.473,684.936L368.455,684.936L368.455,544.179"
-          className="Room"
+          className={'Room ' + props.roomStates.TH444}
+          id="TH444"
         />
         <text x="530" y="330">
           TH 444

@@ -16,12 +16,12 @@ const TP2 = props => (
       />
       <path
         d="M1099.51,1052.51L1099.39,806.364L1493.77,807.768L1493.77,1050.13"
-        className="Room"
+        className={'Room ' + props.roomStates.TP212}
         id="TP212"
       />
       <path
         d="M1102.71,435.83L1100.31,187.274L1493.77,190.691L1493.77,435.83"
-        className="Room"
+        className={'Room ' + props.roomStates.TP208}
         id="TP208"
       />
       <path

@@ -20,12 +20,12 @@ const TB6 = props => (
       <path d="M602.081,363.911L602.081,598.644L602.081,363.911Z" fill="none" />
       <path
         d="M602.081,322.903L602.081,315.253L236.577,315.615L238.963,593.578L602.081,598.644"
-        className="Room"
+        className={'Room ' + props.roomStates.TB630}
         id="TB630"
       />
       <path
         d="M1150.63,298.194L1561.42,298.245L1564.86,598.644L1148.7,598.644"
-        className="Room"
+        className={'Room ' + props.roomStates.TB610}
         id="TB610"
       />
       <path

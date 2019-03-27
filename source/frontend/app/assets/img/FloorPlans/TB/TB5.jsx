@@ -28,27 +28,27 @@ const TB5 = props => (
       />
       <path
         d="M1516.7,390.252L1517.24,682.018L1716.75,682.018L1716.75,344.241L1514.91,344.241"
-        className="Room"
+        className={'Room ' + props.roomStates.TB504}
         id="TB504"
       />
       <path
         d="M1242.99,425.576L1514.91,425.576L1514.91,682.018L1240.65,682.018L1239.91,456.747"
-        className="Room"
+        className={'Room ' + props.roomStates.TB510}
         id="TB510"
       />
       <path
         d="M1216.43,476.109L1239.98,476.109L1239.91,682.018L877.383,682.018L877.383,476.109L1186.57,476.109"
-        className="Room"
+        className={'Room ' + props.roomStates.TB514}
         id="TB514"
       />
       <path
         d="M532.687,476.109L508.356,476.109L511.998,682.018L877,682.018L877,476.109L561.801,476.109"
-        className="Room"
+        className={'Room ' + props.roomStates.TB526}
         id="TB526"
       />
       <path
         d="M299.057,425.576L508.356,425.576L508.356,682.018L236.223,682.018L235.527,425.576L257.457,425.576"
-        className="Room"
+        className={'Room ' + props.roomStates.TB532}
         id="TB532"
       />
       <path

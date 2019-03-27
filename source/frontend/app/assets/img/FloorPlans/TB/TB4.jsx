@@ -18,7 +18,7 @@ const TB4 = props => (
       </g>
       <path
         d="M235.527,410.34L235.527,682.018L38.292,682.018L36.47,344.241L235.527,344.241"
-        className="Room"
+        className={'Room ' + props.roomStates.TB434}
         id="TB434"
       />
       <path
@@ -35,32 +35,32 @@ const TB4 = props => (
       />
       <path
         d="M1516.7,390.252L1517.24,682.018L1716.75,682.018L1716.75,344.241L1514.91,344.241"
-        className="Room"
+        className={'Room ' + props.roomStates.TB404}
         id="TB404"
       />
       <path
         d="M1242.99,425.576L1514.91,425.576L1514.91,682.018L1240.65,682.018L1239.91,456.747"
-        className="Room"
-      />
-      <path
-        d="M1216.43,476.109L1239.98,476.109L1239.91,682.018L877.383,682.018L877.383,476.109L1186.57,476.109"
-        className="Room"
+        className={'Room ' + props.roomStates.TB410}
         id="TB410"
       />
       <path
+        d="M1216.43,476.109L1239.98,476.109L1239.91,682.018L877.383,682.018L877.383,476.109L1186.57,476.109"
+        className={'Room ' + props.roomStates.TB426}
+        id="TB426"
+      />
+      <path
         d="M532.687,476.109L508.356,476.109L511.998,682.018L877,682.018L877,476.109L561.801,476.109"
-        className="Room"
-        id="TB414"
+        className={'Room ' + props.roomStates.TB432}
+        id="TB432"
       />
       <path
         d="M299.057,425.576L508.356,425.576L508.356,682.018L236.223,682.018L235.527,425.576L257.457,425.576"
-        className="Room"
-        id="TB426"
+        className={'Room ' + props.roomStates.TB434}
+        id="TB434"
       />
       <path
         d="M778.122,309.606L962.004,311.406L961.704,247.823L777.931,247.84"
         fill="none"
-        id="TB432"
       />
     </g>
     <text y="400" x="220">

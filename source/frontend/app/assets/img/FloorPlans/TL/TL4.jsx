@@ -12,22 +12,22 @@ const TL4 = props => (
     <g transform="matrix(1,0,0,1,-36.9929,-183.98)">
       <path
         d="M1185.55,487.869L1188.28,193.815L1400.49,195.711L1400.49,487.869"
-        className="Room"
+        className={'Room ' + props.roomStates.TL412}
         id="TL412"
       />
       <path
         d="M975.069,487.643L976.027,190.754L1185.55,193.815L1185.55,487.416"
-        className="Room"
+        className={'Room ' + props.roomStates.TL418}
         id="TL418"
       />
       <path
         d="M895.572,193.815L897.257,487.869L685.149,487.416L684.728,190.754"
-        className="Room"
+        className={'Room ' + props.roomStates.TL424}
         id="TL424"
       />
       <path
         d="M472.653,190.754L684.728,190.754L684.728,487.416L470.795,487.869"
-        className="Room"
+        className={'Room ' + props.roomStates.TL430}
         id="TL430"
       />
       <text x="1250" y="330">

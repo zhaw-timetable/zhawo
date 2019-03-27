@@ -13,37 +13,37 @@ const TP4 = props => (
       <g>
         <path
           d="M930.947,804.699L929.416,742.154L870.158,735.494L870.158,502.614L924.677,502.735L933.319,461.636L930.847,436.117L1330.99,437.709L1362.92,555.957L1360.82,686.719L1331.89,804.699"
-          className="Room"
+          className={'Room ' + props.roomStates.TP406}
           id="TP406"
         />
         <path
           d="M77.337,1053.65L471.269,1053.65L471.269,804.699L74.321,804.699"
-          className="Room"
+          className={'Room ' + props.roomStates.TP410}
           id="TP410"
         />
         <path
           d="M864.555,1053.65L864.555,806.474L471.269,804.699L471.635,1052.2"
-          className="Room"
+          className={'Room ' + props.roomStates.TP408}
           id="TP408"
         />
         <path
           d="M996.859,804.699L996.859,1050.92L1388.3,1056.73L1389.38,809.378"
-          className="Room"
+          className={'Room ' + props.roomStates.TP407}
           id="TP407"
         />
         <path
           d="M996.859,434.765L996.859,190.542L1392.54,190.542L1392.54,433.508"
-          className="Room"
+          className={'Room ' + props.roomStates.TP405}
           id="TP405"
         />
         <path
           d="M862.778,433.508L864.555,190.542L471.635,187.035L471.635,434.765"
-          className="Room"
+          className={'Room ' + props.roomStates.TP404}
           id="TP404"
         />
         <path
           d="M75.433,433.508L78.867,187.035L471.269,187.035L471.269,433.508"
-          className="Room"
+          className={'Room ' + props.roomStates.TP402}
           id="TP402"
         />
         <text x="1000" y="650">

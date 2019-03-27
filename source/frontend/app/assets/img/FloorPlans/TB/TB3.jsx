@@ -30,7 +30,7 @@ const TB3 = props => (
       <path d="M1019.39,389.566L1015.59,496.892L949.464,497.791" fill="none" />
       <path
         d="M946.374,560.054L950.101,682.018L769.989,682.018L769.989,497.791L949.464,497.791"
-        className="Room"
+        className={'Room ' + props.roomStates.TB320}
         id="TB320"
       />
       <text x="800" y="620">
@@ -39,7 +39,7 @@ const TB3 = props => (
 
       <path
         d="M582.298,334.86L582.298,301.96L377.348,301.174L380.138,185.393L36.582,185.393L34.755,682.018L579.904,682.018L582.675,371.118"
-        className="Room"
+        className={'Room ' + props.roomStates.TB330}
         id="TB330"
       />
       <text x="200" y="500">

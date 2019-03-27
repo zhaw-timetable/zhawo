@@ -13,30 +13,35 @@ const TE6 = props => (
       <g>
         <path
           d="M915.138,299.817L915.138,461.485L1039.18,464.732L1036.9,299.817"
-          className="Room"
+          className={'Room ' + props.roomStates.TE626}
+          id="TE626"
         />
         <path
           d="M915.138,464.732L915.138,645.41L1039.18,644.844L1039.18,465.974"
-          className="Room"
+          className={'Room ' + props.roomStates.TE622}
+          id="TE622"
         />
         <path
           d="M270.793,873.84L259.772,873.867L261.618,1001.3L548.883,1007.17L545.672,859.584L274.395,858.448"
-          className="Room"
+          className={'Room ' + props.roomStates.TE606}
+          id="TE606"
         />
         <path
           d="M625.575,859.035L625.804,1007.18L886.224,1010.47L881.742,858.448"
-          className="Room"
+          className={'Room ' + props.roomStates.TE616}
+          id="TE616"
         />
         <path
           d="M51.465,1000.49L177.807,1001.3L176.586,733.868L53.957,732.093"
-          className="Room"
+          className={'Room ' + props.roomStates.TE602}
+          id="TE602"
         />
       </g>
       <path
         d="M51.688,1002.18L1104.09,1012.71L1112.42,816.365L1347.45,813.19"
         fill="none"
       />
-      <path d="M545.161,857.303L585.661,857.303" className="Room" />
+      <path d="M545.161,857.303L585.661,857.303" />
       <path d="M607.316,857.303L624.839,857.303" fill="none" />
       <path d="M677.717,857.303L624.839,857.303L625.985,1007.76" fill="none" />
       <path d="M699.568,857.303L811.877,857.303" fill="none" />
@@ -53,10 +58,10 @@ const TE6 = props => (
       <path d="M915.138,301.097L1047.64,299.817" fill="none" />
       <path d="M1039.18,299.899L1039.18,309.699" fill="none" />
       <path d="M1064.08,299.817L1095.88,299.817" fill="none" />
-      <path d="M177.682,733.074L178.933,822.44" className="Room" />
-      <path d="M178.933,854.977L179.747,908.952" className="Room" />
-      <path d="M178.933,926.712L178.308,1003.77" className="Room" />
-      <path d="M179.34,870.279L240.857,870.707" className="Room" />
+      <path d="M177.682,733.074L178.933,822.44" />
+      <path d="M178.933,854.977L179.747,908.952" />
+      <path d="M178.933,926.712L178.308,1003.77" />
+      <path d="M179.34,870.279L240.857,870.707" />
       <path
         d="M295.676,857.448L272.174,857.303L271.557,872.692L259.52,872.439L261.901,1003.77"
         fill="none"

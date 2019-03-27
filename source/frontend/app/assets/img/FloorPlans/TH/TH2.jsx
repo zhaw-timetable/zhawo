@@ -11,7 +11,7 @@ const TH2 = props => (
   >
     <path
       d="M793.83 302.709l1.36 169.056 219.46 6.367 9.36-175.423H793.83z"
-      className="Room"
+      className={'Room ' + props.roomStates.TH263}
       id="TH263"
     />
     <text x="850" y="375">
