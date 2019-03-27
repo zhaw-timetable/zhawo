@@ -21,7 +21,8 @@ class RoomSearchContainer extends Component {
     currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    currentTimeSlot: ''
+    currentTimeSlot: '',
+    roomState: {}
   };
 
   componentDidMount() {
@@ -39,6 +40,7 @@ class RoomSearchContainer extends Component {
   }
 
   setFreeRooms = () => {
+    this.setRoomBackground();
     this.setState({
       freeRooms: roomSearchStore.currentfreeRooms,
       currentTimeSlot: roomSearchStore.currentTimeSlot
@@ -46,10 +48,32 @@ class RoomSearchContainer extends Component {
   };
 
   setFloor = () => {
+    this.setRoomBackground();
     this.setState({
       freeRooms: roomSearchStore.currentfreeRooms,
       floor: roomSearchStore.currentFloor,
       currentFloors: roomSearchStore.currentFloors
+    });
+  };
+
+  setRoomBackground = () => {
+    let tempRoomState = {};
+    roomSearchStore.currentfreeRooms.map(room => {
+      // console.log('room: ', room);
+      // console.log('currentFloor: ', roomSearchStore.currentFloor);
+      if (roomSearchStore.currentFloor === room.substring(0, 3)) {
+        console.log('room: ', room);
+        tempRoomState[room] = 'free';
+      } else {
+        tempRoomState[room] = 'booked';
+        // Todo: set brackground of free levels
+        console.log('Levels with free rooms: ', room.substring(0, 3));
+      }
+    });
+    console.log(tempRoomState);
+
+    this.setState({
+      roomStates: tempRoomState
     });
   };
 
@@ -95,7 +119,10 @@ class RoomSearchContainer extends Component {
                 </div>
               ))}
             </div>
-            <Floor clickhandler={this.handleClick} />
+            <Floor
+              clickhandler={this.handleClick}
+              roomStates={this.state.roomStates}
+            />
           </div>
         </div>
       </Fragment>
