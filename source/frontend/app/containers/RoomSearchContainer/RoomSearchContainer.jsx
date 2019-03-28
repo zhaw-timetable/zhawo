@@ -22,7 +22,7 @@ class RoomSearchContainer extends Component {
     freeRooms: null,
     timeSlots: scheduleStore.slots,
     currentTimeSlot: '',
-    roomState: {}
+    roomStates: {}
   };
 
   componentDidMount() {
@@ -63,11 +63,14 @@ class RoomSearchContainer extends Component {
 
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
         console.log('room: ', room);
-        tempRoomState[room.substring(0, 2))] = 'free';
+        tempRoomState[room.substring(0, 2)] = 'free';
         tempRoomState[room] = 'free';
       } else {
         console.log('Levels with free rooms: ', room.substring(0, 3));
-
+        // Sets buildings that have free rooms
+        tempRoomState[room.substring(0, 2)] = 'free';
+        // Sets floors that have free rooms
+        tempRoomState[room.substring(0, 3)] = 'free';
       }
     });
     console.log(tempRoomState);
@@ -110,7 +113,11 @@ class RoomSearchContainer extends Component {
               ))}
             </Select>
             <div className="floorSelector">
-              <div id="SOE" onClick={this.handleClick} roomStates={this.state.roomStates}>
+              <div
+                id="SOE"
+                onClick={this.handleClick}
+                roomStates={this.state.roomStates}
+              >
                 SOE
               </div>
               {this.state.currentFloors.map(floor => (
