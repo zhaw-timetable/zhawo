@@ -32,31 +32,28 @@ class GlobalStore extends EventEmitter {
         const possibleNames = await api.getPossibleNames().catch(err => {
           console.error(err);
         });
-        this.possibleNames = [
-          ...possibleNames.students,
-          ...possibleNames.lecturers,
-          ...possibleNames.classes,
-          ...possibleNames.courses,
-          ...possibleNames.rooms
-        ];
-        this.possibleLoginNames = [
-          ...possibleNames.students,
-          ...possibleNames.lecturers
-        ];
-        this.emit('possible_names_changed');
+        if (possibleNames) {
+          this.possibleNames = [
+            ...possibleNames.students,
+            ...possibleNames.lecturers,
+            ...possibleNames.classes,
+            ...possibleNames.courses,
+            ...possibleNames.rooms
+          ];
+          this.possibleLoginNames = [
+            ...possibleNames.students,
+            ...possibleNames.lecturers
+          ];
+          this.emit('possible_names_changed');
+        }
         break;
 
       case 'LOGOUT':
-        this.drawerOpen = false;
-        this.currentUser = '';
-        this.currentUserType = '';
         this.removeCurrentUser();
-        this.emit('current_user_loggedout');
         break;
 
       case 'CHANGE_THEME':
         this.setTheme(action.payload);
-        this.emit('theme_changed');
         break;
 
       case 'SET_DAYVIEW':
@@ -73,6 +70,7 @@ class GlobalStore extends EventEmitter {
       this.theme = 'lightTheme';
     }
     this.setThemeInDB(this.theme);
+    this.emit('theme_changed');
   }
 
   async getUsernameFromDB() {
@@ -99,7 +97,11 @@ class GlobalStore extends EventEmitter {
   }
 
   async removeCurrentUser() {
+    this.drawerOpen = false;
+    this.currentUser = '';
+    this.currentUserType = '';
     await idbAdapter.removeUser();
+    this.emit('current_user_loggedout');
   }
 }
 
