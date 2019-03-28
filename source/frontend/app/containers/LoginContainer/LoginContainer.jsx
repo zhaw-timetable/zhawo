@@ -15,11 +15,11 @@ class LoginContainer extends Component {
   };
 
   componentWillMount() {
-    globalStore.on('current_user_changed', this.login);
+    globalStore.on('current_user_login', this.login);
   }
 
   componentWillUnmount() {
-    globalStore.removeListener('current_user_changed', this.login);
+    globalStore.removeListener('current_user_login', this.login);
   }
 
   handleUsernameInputChange = e => {
