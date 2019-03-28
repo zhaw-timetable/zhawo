@@ -58,9 +58,12 @@ class RoomSearchContainer extends Component {
 
   setRoomBackground = () => {
     let tempRoomState = {};
+    // If there is a room then free room in soe
+    if (roomSearchStore.currentfreeRooms[0]) {
+      tempRoomState['SOE'] = 'free';
+    }
     roomSearchStore.currentfreeRooms.map(room => {
       // console.log('room: ', room);
-
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
         console.log('room: ', room);
         tempRoomState[room.substring(0, 2)] = 'free';
@@ -116,12 +119,17 @@ class RoomSearchContainer extends Component {
               <div
                 id="SOE"
                 onClick={this.handleClick}
-                roomStates={this.state.roomStates}
+                className={this.state.roomStates['SOE']}
               >
                 SOE
               </div>
               {this.state.currentFloors.map(floor => (
-                <div key={floor} id={floor} onClick={this.handleClick}>
+                <div
+                  key={floor}
+                  id={floor}
+                  className={this.state.roomStates[floor]}
+                  onClick={this.handleClick}
+                >
                   {floor}
                 </div>
               ))}
