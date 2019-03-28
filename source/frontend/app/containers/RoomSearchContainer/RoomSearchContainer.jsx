@@ -63,11 +63,11 @@ class RoomSearchContainer extends Component {
 
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
         console.log('room: ', room);
+        tempRoomState[room.substring(0, 2))] = 'free';
         tempRoomState[room] = 'free';
       } else {
-        tempRoomState[room] = 'booked';
-        // Todo: set brackground of free levels
         console.log('Levels with free rooms: ', room.substring(0, 3));
+
       }
     });
     console.log(tempRoomState);
@@ -110,7 +110,7 @@ class RoomSearchContainer extends Component {
               ))}
             </Select>
             <div className="floorSelector">
-              <div id="SOE" onClick={this.handleClick}>
+              <div id="SOE" onClick={this.handleClick} roomStates={this.state.roomStates}>
                 SOE
               </div>
               {this.state.currentFloors.map(floor => (

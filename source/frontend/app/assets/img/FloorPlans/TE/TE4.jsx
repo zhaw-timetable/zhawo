@@ -34,12 +34,12 @@ const TE4 = props => (
       />
       <path
         d="M373.413,863.299L515.952,863.299L515.952,1005.28L319.065,1003.53L320.702,863.299L354.883,863.299"
-        className={'Room ' + props.roomStates.TE225}
+        className={'Room ' + props.roomStates.TE407}
         id="TE407"
       />
       <path
         d="M210.378,811.684L210.882,783.345L51.688,782.515L51.688,927.642L209.706,923.342L211.749,833.679"
-        className={'Room ' + props.roomStates.TE225}
+        className={'Room ' + props.roomStates.TE402}
         id="TE402"
       />
       <path d="M930.409,813.19L990.093,813.19" fill="none" />
