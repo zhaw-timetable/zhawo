@@ -39,12 +39,3 @@ it('should call setState with the correct value via handleView', () => {
   instance.handleView();
   expect(instance.setState).toHaveBeenCalledWith({ isDayView: true });
 });
-
-it('should forceUpdate on handleLogout', () => {
-  globalStore.isDayView = true;
-  instance.forceUpdate = jest.fn();
-  instance.setState = jest.fn();
-
-  instance.handleLogout();
-  expect(instance.forceUpdate).toHaveBeenCalled();
-});
