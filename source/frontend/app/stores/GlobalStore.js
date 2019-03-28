@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
 import * as api from '../adapters/ZhawoAdapter';
-import * as idbAdapter from '../adapters/IdbAdapter';
+import idbAdapter from '../adapters/IdbAdapter';
 
 class GlobalStore extends EventEmitter {
   constructor() {
@@ -75,9 +75,11 @@ class GlobalStore extends EventEmitter {
 
   async getUsernameFromDB() {
     let user = await idbAdapter.getUsername();
-    this.currentUser = user.username;
-    this.currentUserType = user.type;
-    this.emit('current_user_changed');
+    if (user) {
+      this.currentUser = user.username;
+      this.currentUserType = user.type;
+    }
+    this.emit('current_user_login');
   }
 
   async getThemeFromDB() {
@@ -93,6 +95,7 @@ class GlobalStore extends EventEmitter {
   async setCurrentUser(name, type) {
     this.currentUser = name;
     this.currentUserType = type;
+    this.emit('current_user_login');
     await idbAdapter.setUser(name, type);
   }
 
@@ -101,7 +104,7 @@ class GlobalStore extends EventEmitter {
     this.currentUser = '';
     this.currentUserType = '';
     await idbAdapter.removeUser();
-    this.emit('current_user_loggedout');
+    this.emit('current_user_logout');
   }
 }
 

@@ -1,7 +1,7 @@
 import globalStore from './GlobalStore';
 
 import * as api from '../adapters/ZhawoAdapter';
-import * as idbAdapter from '../adapters/IdbAdapter';
+import idbAdapter from '../adapters/IdbAdapter';
 
 it('handleActions should be defined', () => {
   expect(globalStore).toBeDefined();
