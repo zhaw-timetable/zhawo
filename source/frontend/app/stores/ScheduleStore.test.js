@@ -149,7 +149,7 @@ it('handleActions with SWIPE_RIGHT should add 7 days to displayDay if globalStor
   scheduleStore.createDisplayMonth.mockRestore();
 });
 
-it('handleActions with SWIPE_RIGHT should subtract 1 day from displayDay if globalStore.isDayView is true', () => {
+it('handleActions with SWIPE_LEFT should subtract 1 day from displayDay if globalStore.isDayView is true', () => {
   const date = new Date(2019, 2, 28);
   const dateMinusOne = new Date(2019, 2, 27);
   globalStore.isDayView = true;
@@ -172,7 +172,7 @@ it('handleActions with SWIPE_RIGHT should subtract 1 day from displayDay if glob
   scheduleStore.createDisplayMonth.mockRestore();
 });
 
-it('handleActions with SWIPE_RIGHT should subtract 2 days from displayDay if globalStore.isDayView is true and displayDay is a monday', () => {
+it('handleActions with SWIPE_LEFT should subtract 2 days from displayDay if globalStore.isDayView is true and displayDay is a monday', () => {
   const date = new Date(2019, 2, 25);
   const dateMinusTwo = new Date(2019, 2, 23);
   globalStore.isDayView = true;
