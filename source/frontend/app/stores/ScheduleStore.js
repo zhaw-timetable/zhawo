@@ -41,6 +41,7 @@ class ScheduleStore extends EventEmitter {
     this.scheduleForSearchUser = null;
     this.displayDay = this.currentDate;
     this.currentSearch = '';
+    this.currentAction = '';
   }
 
   createDisplayWeek(date) {
@@ -71,10 +72,6 @@ class ScheduleStore extends EventEmitter {
     } else {
       return date;
     }
-  }
-
-  getSearchUsername() {
-    return this.searchUsername;
   }
 
   async handleActions(action) {
@@ -211,7 +208,6 @@ class ScheduleStore extends EventEmitter {
         break;
 
       case 'LOGOUT':
-        this.currentAction = '';
         this.clearStore();
         break;
     }
