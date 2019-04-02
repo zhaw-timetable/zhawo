@@ -12,3 +12,10 @@ export const getFreeRoomsByTime = value => {
     payload: value
   });
 };
+
+export const changeFloor = value => {
+  dispatcher.dispatch({
+    type: 'CHANGE_FLOOR',
+    payload: value
+  });
+};

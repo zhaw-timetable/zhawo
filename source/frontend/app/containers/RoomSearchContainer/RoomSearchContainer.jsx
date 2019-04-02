@@ -7,32 +7,6 @@ import roomSearchStore from '../../stores/RoomSearchStore';
 import * as roomSearchActions from '../../actions/RoomSearchActions';
 import scheduleStore from '../../stores/ScheduleStore';
 
-import SOE from '../../assets/img/FloorPlans/SOE';
-
-import TB2 from '../../assets/img/FloorPlans/TB/TB2';
-import TB3 from '../../assets/img/FloorPlans/TB/TB3';
-import TB4 from '../../assets/img/FloorPlans/TB/TB4';
-import TB5 from '../../assets/img/FloorPlans/TB/TB5';
-import TB6 from '../../assets/img/FloorPlans/TB/TB6';
-
-import TE2 from '../../assets/img/FloorPlans/TE/TE2';
-import TE3 from '../../assets/img/FloorPlans/TE/TE3';
-import TE4 from '../../assets/img/FloorPlans/TE/TE4';
-import TE5 from '../../assets/img/FloorPlans/TE/TE5';
-import TE6 from '../../assets/img/FloorPlans/TE/TE6';
-
-import TL2 from '../../assets/img/FloorPlans/TL/TL2';
-import TL3 from '../../assets/img/FloorPlans/TL/TL3';
-import TL4 from '../../assets/img/FloorPlans/TL/TL4';
-
-import TH2 from '../../assets/img/FloorPlans/TH/TH2';
-import TH3 from '../../assets/img/FloorPlans/TH/TH3';
-import TH4 from '../../assets/img/FloorPlans/TH/TH4';
-import TH5 from '../../assets/img/FloorPlans/TH/TH5';
-
-import TP2 from '../../assets/img/FloorPlans/TP/TP2';
-import TP4 from '../../assets/img/FloorPlans/TP/TP4';
-
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import Select from '@material-ui/core/Select';
@@ -42,38 +16,13 @@ import ListItem from '@material-ui/core/ListItem';
 
 class RoomSearchContainer extends Component {
   state = {
-    floor: 'SOE',
-    floors: {
-      SOE: SOE,
-
-      TB2: TB2,
-      TB3: TB3,
-      TB4: TB4,
-      TB5: TB5,
-      TB6: TB6,
-
-      TE2: TE2,
-      TE3: TE3,
-      TE4: TE4,
-      TE5: TE5,
-      TE6: TE6,
-
-      TH2: TH2,
-      TH3: TH3,
-      TH4: TH4,
-      TH5: TH5,
-
-      TL2: TL2,
-      TL3: TL3,
-      TL4: TL4,
-
-      TP2: TP2,
-      TP4: TP4
-    },
+    floor: roomSearchStore.currentFloor,
+    floors: roomSearchStore.floors,
     currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    currentTimeSlot: ''
+    currentTimeSlot: '',
+    roomStates: {}
   };
 
   componentDidMount() {
@@ -82,16 +31,55 @@ class RoomSearchContainer extends Component {
 
   componentWillMount() {
     roomSearchStore.on('got_currentFreeRooms', this.setFreeRooms);
+    roomSearchStore.on('newFloor', this.setFloor);
   }
 
   componentWillUnmount() {
     roomSearchStore.removeListener('got_currentFreeRooms', this.setFreeRooms);
+    roomSearchStore.removeListener('newFloor', this.setFloor);
   }
 
   setFreeRooms = () => {
+    this.setRoomBackground();
     this.setState({
       freeRooms: roomSearchStore.currentfreeRooms,
       currentTimeSlot: roomSearchStore.currentTimeSlot
+    });
+  };
+
+  setFloor = () => {
+    this.setRoomBackground();
+    this.setState({
+      freeRooms: roomSearchStore.currentfreeRooms,
+      floor: roomSearchStore.currentFloor,
+      currentFloors: roomSearchStore.currentFloors
+    });
+  };
+
+  setRoomBackground = () => {
+    let tempRoomState = {};
+    // If there is a room then free room in soe
+    if (roomSearchStore.currentfreeRooms[0]) {
+      tempRoomState['SOE'] = 'free';
+    }
+    roomSearchStore.currentfreeRooms.map(room => {
+      // console.log('room: ', room);
+      if (roomSearchStore.currentFloor === room.substring(0, 3)) {
+        console.log('room: ', room);
+        tempRoomState[room.substring(0, 2)] = 'free';
+        tempRoomState[room] = 'free';
+      } else {
+        console.log('Levels with free rooms: ', room.substring(0, 3));
+        // Sets buildings that have free rooms
+        tempRoomState[room.substring(0, 2)] = 'free';
+        // Sets floors that have free rooms
+        tempRoomState[room.substring(0, 3)] = 'free';
+      }
+    });
+    console.log(tempRoomState);
+
+    this.setState({
+      roomStates: tempRoomState
     });
   };
 
@@ -100,51 +88,56 @@ class RoomSearchContainer extends Component {
   };
 
   handleClick = event => {
-    // Todo : move to store
-
-    console.log('Click happened, should change to TB2');
-    console.log(this.state.floor);
-    console.log(event.target.id);
-    let nextFloor = event.target.id;
-    let tempFloors = [];
-
-    if (nextFloor != 'SOE') {
-      let building = nextFloor.substring(0, 2);
-      console.log('building: ', building);
-
-      for (let tempFloor in this.state.floors) {
-        if (tempFloor.substring(0, 2) === building) {
-          console.log(tempFloor);
-          tempFloors.push(tempFloor);
-        }
-      }
-    }
-
-    this.setState({
-      floor: nextFloor,
-      currentFloors: tempFloors
-    });
+    roomSearchActions.changeFloor(event.target.id);
   };
 
   render() {
     const isThereData = this.state.freeRooms !== null;
-    const Room = this.state.floors[this.state.floor];
+
+    // sets current floor to floor component
+    const Floor = this.state.floors[this.state.floor];
+
     return (
       <Fragment>
         <AppBarContainer />
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
+            <Select
+              value={this.state.currentTimeSlot}
+              onChange={this.handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {this.state.timeSlots.map(slot => (
+                <MenuItem value={slot.startTime} key={slot.startTime}>
+                  {format(slot.startTime, 'HH:mm')}
+                </MenuItem>
+              ))}
+            </Select>
             <div className="floorSelector">
-              <div id="SOE" onClick={this.handleClick}>
+              <div
+                id="SOE"
+                onClick={this.handleClick}
+                className={this.state.roomStates['SOE']}
+              >
                 SOE
               </div>
               {this.state.currentFloors.map(floor => (
-                <div key={floor} id={floor} onClick={this.handleClick}>
+                <div
+                  key={floor}
+                  id={floor}
+                  className={this.state.roomStates[floor]}
+                  onClick={this.handleClick}
+                >
                   {floor}
                 </div>
               ))}
             </div>
-            <Room clickhandler={this.handleClick} />
+            <Floor
+              clickhandler={this.handleClick}
+              roomStates={this.state.roomStates}
+            />
           </div>
         </div>
       </Fragment>

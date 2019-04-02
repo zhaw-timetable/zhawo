@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
 import logger from './logger';
+import { isAfter, format } from 'date-fns';
+import util from 'util';
 
 import * as api from './adapters/CampusInfoAdapter';
 
@@ -40,7 +42,7 @@ const createFreeRoomsObject = async () => {
     // Makes the basic structure of freeRoomsBySlot
     // an Object for each slot is made and pushed
     let freeRoomsBySlot = [];
-    for (slot of defaultSlots) {
+    for (let slot of defaultSlots) {
       let temp = {
         slot: slot,
         rooms: []
@@ -53,11 +55,11 @@ const createFreeRoomsObject = async () => {
     // so that each slot is only checked once
     let freeRoomsBySlotCount;
 
-    for (var room of allSchedules) {
+    for (let room of allSchedules) {
       freeRoomsBySlotCount = 0;
       if (room.days[0].events.length != 0) {
-        for (var event of room.days[0].events) {
-          for (var slot of event.slots) {
+        for (let event of room.days[0].events) {
+          for (let slot of event.slots) {
             slotFound = false;
             lastSlotFound = false;
             while (
@@ -65,12 +67,18 @@ const createFreeRoomsObject = async () => {
               freeRoomsBySlotCount < freeRoomsBySlot.length - 1
             ) {
               if (
-                slot.endTime >
-                freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime
+                // Check if first is after second
+                isAfter(
+                  format(slot.endTime, 'HHmm'),
+                  format(
+                    freeRoomsBySlot[freeRoomsBySlotCount].slot.endTime,
+                    'HHmm'
+                  )
+                )
               ) {
                 // Found free Slot
                 freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
-                  room.room.name
+                  room.room.name.replace(/\s/g, '').toUpperCase()
                 );
                 freeRoomsBySlotCount++;
               } else {
@@ -91,7 +99,7 @@ const createFreeRoomsObject = async () => {
                   }
                   if (freeRoomsBySlot[freeRoomsBySlotCount]) {
                     freeRoomsBySlot[freeRoomsBySlotCount].rooms.push(
-                      room.room.name
+                      room.room.name.replace(/\s/g, '').toUpperCase()
                     );
                   }
                 }
@@ -101,11 +109,15 @@ const createFreeRoomsObject = async () => {
         }
       } else {
         // No events mean free all day
-        for (var freeSlot in freeRoomsBySlot) {
-          freeRoomsBySlot[freeSlot].rooms.push(room.room.name);
+        for (let freeSlot in freeRoomsBySlot) {
+          freeRoomsBySlot[freeSlot].rooms.push(
+            room.room.name.replace(/\s/g, '').toUpperCase()
+          );
         }
       }
     }
+
+    console.log(util.inspect(freeRoomsBySlot));
 
     logger.log(`FreeRoom List Created`);
 
