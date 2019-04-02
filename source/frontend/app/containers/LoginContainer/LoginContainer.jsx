@@ -39,8 +39,10 @@ class LoginContainer extends Component {
     }
     return (
       <div className="LoginContainer">
-        <Splash />
-        <LoginSearch />
+        <div className="LoginBox">
+          <Splash />
+          <LoginSearch />
+        </div>
       </div>
     );
   }
