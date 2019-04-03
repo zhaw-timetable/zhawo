@@ -134,7 +134,7 @@ _we explain sudo ./startZhawo.sh later_
 Add the server repo as a remote called "deploy" in local git repo:
 
 ```
-git remote add deploy ssh://psituser@160.85.252.131/srv/git/zhawo.git/
+git remote add deploy ssh://<user-name>@<server-ip>/srv/git/zhawo.git/
 ```
 
 ### Making Node.js service always alive
@@ -147,7 +147,7 @@ Description=Node.js Server ZhaWo
 
 [Service]
 PIDFile=/tmp/zhawo-99.pid
-User=psituser
+User=<user-name>
 Group=users
 Restart=always
 KillSignal=SIGQUIT
