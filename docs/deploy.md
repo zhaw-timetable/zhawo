@@ -1,5 +1,7 @@
 # Deploy
 
+How to deploy?
+
 Add the server repo as a remote called "deploy"
 
 ```
@@ -13,6 +15,8 @@ git push deploy master
 ```
 
 ## Setup
+
+How to setup on new server?
 
 ### Git Hooks
 
