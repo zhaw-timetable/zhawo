@@ -29,7 +29,7 @@ it('getDBTransaction should return transaction from dbInstance', () => {
   expect(returnValue).toEqual('transactionContent');
 });
 
-it('getUsername should return username from DBTransaction', async () => {
+it('getUser should return username from DBTransaction', async () => {
   const restore = idbAdapter.getDBTransaction;
   idbAdapter.getDBTransaction = jest.fn().mockImplementation(() => ({
     objectStore: () => ({
@@ -40,8 +40,8 @@ it('getUsername should return username from DBTransaction', async () => {
       }
     })
   }));
-  const theme = await idbAdapter.getUsername();
-  expect(theme).toEqual('userNameInStore');
+  const user = await idbAdapter.getUser();
+  expect(user).toEqual('userNameInStore');
   idbAdapter.getDBTransaction = restore;
 });
 

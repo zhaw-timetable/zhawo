@@ -13,13 +13,26 @@ it('renders without crashing', () => {
   shallow(<App />);
 });
 
-it('should call setState with the correct value via handleThemeChanged', () => {
+it('handleThemeChanged should call forceUpdate', () => {
   const wrapper = shallow(<App />);
   const instance = wrapper.instance();
-  instance.setState = jest.fn();
 
+  instance.forceUpdate = jest.fn();
   instance.handleThemeChanged();
-  expect(instance.setState).toHaveBeenCalledWith({
-    theme: 'lightTheme'
-  });
+
+  expect(instance.forceUpdate).toHaveBeenCalled();
+
+  instance.forceUpdate.mockRestore();
+});
+
+it('handleUserChange should call forceUpdate', () => {
+  const wrapper = shallow(<App />);
+  const instance = wrapper.instance();
+
+  instance.forceUpdate = jest.fn();
+  instance.handleUserChange();
+
+  expect(instance.forceUpdate).toHaveBeenCalled();
+
+  instance.forceUpdate.mockRestore();
 });

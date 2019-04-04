@@ -22,29 +22,34 @@ it('should render one root element with className BottomNavContainer', () => {
   expect(wrapper.find('.BottomNavContainer')).toHaveLength(1);
 });
 
-it('should call handleChange with the correct value', () => {
+it('updateViewState should push to history with correct value', () => {
   const wrapper = shallow(<BottomNavContainer />);
   const instance = wrapper.instance();
+
   history.push = jest.fn();
 
-  instance.handleChange(null, 0);
+  instance.updateViewState(null, 0);
   expect(history.push).toHaveBeenCalledWith('/');
 
-  instance.handleChange(null, 1);
+  instance.updateViewState(null, 1);
   expect(history.push).toHaveBeenCalledWith('/mensa');
 
-  instance.handleChange(null, 2);
+  instance.updateViewState(null, 2);
   expect(history.push).toHaveBeenCalledWith('/zhawo');
 
-  instance.handleChange(null, 3);
+  instance.updateViewState(null, 3);
   expect(history.push).toHaveBeenCalledWith('/vszhaw');
+
+  history.push.mockRestore();
 });
 
-it('should call setState with the correct value via handleChange', () => {
+it('updateViewState should call setState with correct value', () => {
+  history.push = jest.fn();
   const wrapper = shallow(<BottomNavContainer />);
   const instance = wrapper.instance();
   instance.setState = jest.fn();
-  instance.handleChange(null, 0);
-  let temp = { value: 0 };
-  expect(instance.setState).toHaveBeenCalledWith(temp);
+  instance.updateViewState(null, 0);
+  let expectedArg = { value: 0 };
+  expect(instance.setState).toHaveBeenCalledWith(expectedArg);
+  history.push.mockRestore();
 });

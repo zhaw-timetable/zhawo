@@ -20,10 +20,6 @@ import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer'
 import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
 
 class App extends Component {
-  state = {
-    theme: globalStore.theme
-  };
-
   componentWillMount() {
     globalStore.on('current_user_logout', this.handleUserChange);
     globalStore.on('theme_changed', this.handleThemeChanged);
@@ -39,7 +35,7 @@ class App extends Component {
   };
 
   handleThemeChanged = () => {
-    this.setState({ theme: globalStore.theme });
+    this.forceUpdate();
   };
 
   render() {
@@ -48,8 +44,8 @@ class App extends Component {
         {...rest}
         render={props =>
           globalStore.currentUser != '' ? (
-            <div className={'App ' + this.state.theme}>
-              <DrawerContainer className={this.state.theme} />
+            <div className={'App ' + globalStore.theme}>
+              <DrawerContainer className={globalStore.theme} />
               <Component {...props} />
               <BottomNavContainer />
             </div>
