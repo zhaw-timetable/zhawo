@@ -1,3 +1,8 @@
+jest.mock('../../../../stores/GlobalStore');
+jest.mock('../../../../stores/ScheduleStore');
+jest.mock('../../../../adapters/IdbAdapter');
+jest.mock('../../../../adapters/ZhawoAdapter');
+
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
@@ -12,13 +17,15 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 const wrapper = shallow(<NavigationMonth />);
 const instance = wrapper.instance();
 
-beforeEach(() => {
-  console.log = jest.fn();
+beforeEach(() => {});
+
+it('renders without crashing', () => {
+  shallow(<NavigationMonth />);
 });
 
-it('renders without crashing', () => {});
-
 it('should call setState with the correct value via refreshNavigation', () => {
+  const wrapper = shallow(<NavigationMonth />);
+  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
   scheduleStore.displayMonth = true;

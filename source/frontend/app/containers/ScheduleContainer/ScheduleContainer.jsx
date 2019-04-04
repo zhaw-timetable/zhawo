@@ -35,12 +35,10 @@ class Schedule extends Component {
 
   componentWillMount() {
     globalStore.on('isDayView_changed', this.handleView);
-    globalStore.on('current_user_loggedout', this.handleLogout);
   }
 
   componentWillUnmount() {
     globalStore.removeListener('isDayView_changed', this.handleView);
-    globalStore.removeListener('current_user_loggedout', this.handleView);
   }
 
   toggleMonthView = () => {
@@ -51,10 +49,6 @@ class Schedule extends Component {
 
   handleView = () => {
     this.setState({ isDayView: globalStore.isDayView });
-  };
-
-  handleLogout = () => {
-    this.forceUpdate();
   };
 
   onSwipeStart = event => {
