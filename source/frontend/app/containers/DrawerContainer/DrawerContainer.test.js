@@ -23,11 +23,6 @@ it('renders without crashing', () => {
   shallow(<DrawerContainer />);
 });
 
-it('should render one root element with className DrawerContainer', () => {
-  const wrapper = shallow(<DrawerContainer />);
-  expect(wrapper.find('.DrawerContainer')).toHaveLength(1);
-});
-
 it('should call globalActions.toggleDrawer once ', () => {
   const wrapper = shallow(<DrawerContainer />);
   const instance = wrapper.instance();
