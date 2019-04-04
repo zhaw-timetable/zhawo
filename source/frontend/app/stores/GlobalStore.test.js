@@ -1,3 +1,5 @@
+jest.mock('../adapters/IdbAdapter');
+
 import globalStore from './GlobalStore';
 
 import * as api from '../adapters/ZhawoAdapter';
