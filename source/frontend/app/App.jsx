@@ -8,15 +8,15 @@ import './assets/font/font.scss';
 
 import history from './history';
 
-import globalStore from './stores/GlobalStore.js';
+import globalStore from './stores/GlobalStore';
 
 import LoginContainer from './containers/LoginContainer/LoginContainer';
 import BottomNavContainer from './containers/BottomNavContainer/BottomNavContainer';
 import ScheduleContainer from './containers/ScheduleContainer/ScheduleContainer';
 import MensaContainer from './containers/MensaContainer/MensaContainer';
-import RoomSearchContainer from './containers/RoomSearchContainer/RoomSearchContainer.jsx';
+import RoomSearchContainer from './containers/RoomSearchContainer/RoomSearchContainer';
 import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
-import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer.jsx';
+import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer';
 import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
 
 class App extends Component {

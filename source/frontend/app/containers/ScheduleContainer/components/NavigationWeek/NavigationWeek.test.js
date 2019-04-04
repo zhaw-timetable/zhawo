@@ -1,15 +1,11 @@
+jest.mock('../../../../stores/GlobalStore');
+jest.mock('../../../../stores/ScheduleStore');
+jest.mock('../../../../adapters/IdbAdapter');
+jest.mock('../../../../adapters/ZhawoAdapter');
+
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-
-import {
-  format,
-  isToday,
-  isSameDay,
-  addWeeks,
-  subWeeks,
-  getISOWeek
-} from 'date-fns';
 
 configure({ adapter: new Adapter() });
 
@@ -18,16 +14,17 @@ import NavigationWeek from './NavigationWeek';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
-const wrapper = shallow(<NavigationWeek />);
-const instance = wrapper.instance();
-
 beforeEach(() => {
-  console.log = jest.fn();
+  scheduleStore.displayWeek = [];
 });
 
-it('renders without crashing', () => {});
+it('renders without crashing', () => {
+  shallow(<NavigationWeek />);
+});
 
 it('should call setState with the correct value via refreshNavigation', () => {
+  const wrapper = shallow(<NavigationWeek />);
+  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 
@@ -41,6 +38,8 @@ it('should call setState with the correct value via refreshNavigation', () => {
 });
 
 it('should call scheduleActions.gotoDay with the correct value via handleWeekForwardClick', () => {
+  const wrapper = shallow(<NavigationWeek />);
+  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 
@@ -55,6 +54,8 @@ it('should call scheduleActions.gotoDay with the correct value via handleWeekFor
 });
 
 it('should call scheduleActions.gotoDay with the correct value via handleWeekBackClick', () => {
+  const wrapper = shallow(<NavigationWeek />);
+  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 

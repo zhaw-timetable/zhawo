@@ -1,3 +1,6 @@
+jest.mock('./adapters/IdbAdapter');
+jest.mock('./stores/GlobalStore');
+
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
@@ -6,12 +9,13 @@ configure({ adapter: new Adapter() });
 
 import App from './App';
 
-const wrapper = shallow(<App />);
-const instance = wrapper.instance();
-
-it('renders without crashing', () => {});
+it('renders without crashing', () => {
+  shallow(<App />);
+});
 
 it('should call setState with the correct value via handleThemeChanged', () => {
+  const wrapper = shallow(<App />);
+  const instance = wrapper.instance();
   instance.setState = jest.fn();
 
   instance.handleThemeChanged();
