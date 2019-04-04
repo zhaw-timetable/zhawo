@@ -9,7 +9,7 @@ const TB6 = props => (
     strokeLinejoin="round"
     strokeMiterlimit={1.5}
   >
-    <g transform="matrix(1,0,0,1,-111.573,-213.249)" stroke="#fc00ff">
+    <g transform="matrix(1,0,0,1,-111.573,-213.249)">
       <path
         d="M113.854,595.914L1641.11,598.644L1637.75,215.332L113.656,217.335L113.854,595.914Z"
         fill="none"
