@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
 
 import DrawerOptions from './DrawerOptions/DrawerOptions';
+import DrawerNav from './DrawerNav/DrawerNav';
 
 class DrawerContainer extends Component {
   state = {
@@ -80,6 +81,7 @@ class DrawerContainer extends Component {
               tabIndex={0}
               role="button"
             >
+              <DrawerNav />
               <DrawerOptions />
             </div>
           </Drawer>
