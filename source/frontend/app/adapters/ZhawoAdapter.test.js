@@ -61,7 +61,10 @@ it('getVszhawFeed should call correct api endpoint', async () => {
 });
 
 it('handleError should log error information', () => {
+  const restore = console.log;
+  console.log = jest.fn();
   api.handleError('error', 'url');
   expect(console.log).toHaveBeenCalled();
   expect(console.log.mock.calls[0][0]).toContain(`error`);
+  console.log = restore;
 });

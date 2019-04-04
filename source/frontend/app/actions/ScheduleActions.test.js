@@ -1,9 +1,11 @@
+jest.mock('../adapters/ZhawoAdapter');
+jest.mock('../adapters/IdbAdapter');
+jest.mock('../stores/GlobalStore');
+
 import * as scheduleActions from './ScheduleActions';
 import dispatcher from '../dispatcher.js';
 
 import globalStore from '../stores/GlobalStore';
-
-jest.mock('../adapters/ZhawoAdapter');
 
 const ROUTE = 'route';
 const NAME = 'foobar';

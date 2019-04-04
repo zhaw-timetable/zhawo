@@ -1,8 +1,11 @@
+jest.mock('../../../../stores/GlobalStore');
+jest.mock('../../../../stores/ScheduleStore');
+jest.mock('../../../../adapters/IdbAdapter');
+jest.mock('../../../../adapters/ZhawoAdapter');
+
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-
-import { format } from 'date-fns';
 
 configure({ adapter: new Adapter() });
 
@@ -14,13 +17,15 @@ import * as scheduleActions from '../../../../actions/ScheduleActions';
 const wrapper = shallow(<LessonDay />);
 const instance = wrapper.instance();
 
-beforeEach(() => {
-  console.log = jest.fn();
+beforeEach(() => {});
+
+it('renders without crashing', () => {
+  shallow(<LessonDay />);
 });
 
-it('renders without crashing', () => {});
-
 it('should call setState with the correct value via refreshSchedule', () => {
+  const wrapper = shallow(<LessonDay />);
+  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.schedule = [1, 2, 3];
 
@@ -34,6 +39,8 @@ it('should call setState with the correct value via refreshSchedule', () => {
 });
 
 it('should call setState with the correct value via handleCloseEventDetails', () => {
+  const wrapper = shallow(<LessonDay />);
+  const instance = wrapper.instance();
   instance.setState = jest.fn();
 
   instance.handleCloseEventDetails();

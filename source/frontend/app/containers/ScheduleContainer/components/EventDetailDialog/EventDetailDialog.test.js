@@ -6,8 +6,9 @@ configure({ adapter: new Adapter() });
 
 import EventDetailDialog from './EventDetailDialog';
 
-beforeEach(() => {
-  console.log = jest.fn();
+beforeEach(() => {});
+
+it('renders without crashing', () => {
   let event = {
     name: 'test',
     eventRealizations: [
@@ -25,8 +26,5 @@ beforeEach(() => {
     startTime: '00:00',
     endTime: '01:00'
   };
-  const wrapper = shallow(<EventDetailDialog event={event} />);
-  const instance = wrapper.instance();
+  shallow(<EventDetailDialog event={event} />);
 });
-
-it('renders without crashing', () => {});
