@@ -1,40 +1,39 @@
 @import '../../assets/sass/vars'
 
 .DrawerContainer
-  border-right: solid 1px
-  border-color: var(--secondary-color)
-  padding: 10px
   height: 100%
   width: 300px
-  background-color: var(--primary-color)
-  color: var(--text-color)
+  background-color: var(--background-color)
+  color: var(--primary-text-color) 
+  
 
   .InfoContainer
     display: flex
     justify-content: space-between
-    padding-bottom: 10px
+    padding: 20px
+    background-color: var(--primary-color)
+    color: var(--primary-color-text)
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)
 
     .TextContainer
       padding: 10px
-    h1
-      font-weight: bold
-      font-size: 16px
-      padding-bottom: 5px
-    p
-      font-size: 12px
+      h1
+        font-weight: bold
+        font-size: 16px
+        padding-bottom: 5px
+      p
+        font-size: 12px
 
   .LogoutBtn
     width: 100%
-    color: var(--text-color)
+    color: var(--primary-color-text)
     background-color: var(--primary-color)
-    border: solid 1px
-    border-color: var(--secondary-color)
   .LogoutBtn:hover
-    background-color: var(--secondary-color)
+    background-color: var(--accent-color)
 
 
   .LogoContainer
-    border-radius: 25px
+    border-radius: 2px
     width: 50px
     height: 50px
     overflow: hidden

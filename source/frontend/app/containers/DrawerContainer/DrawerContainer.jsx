@@ -97,7 +97,6 @@ class DrawerContainer extends Component {
               <CloseIcon />
             </IconButton>
           </div>
-          <Divider />
           <div className="switchContainer">
             {' '}
             <Switch
