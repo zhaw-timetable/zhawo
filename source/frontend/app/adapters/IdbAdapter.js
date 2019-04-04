@@ -22,7 +22,7 @@ class IdbAdapter {
     return dbInstance.transaction('info', accessMode);
   }
 
-  async getUsername() {
+  async getUser() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
       let transaction = this.getDBTransaction(dbInstance, 'readonly');
@@ -74,6 +74,41 @@ class IdbAdapter {
       let transaction = this.getDBTransaction(dbInstance, 'readwrite');
       let store = transaction.objectStore('info');
       await store.delete('username');
+      dbInstance.close();
+      resolve();
+    });
+  }
+
+  async setViewState(value) {
+    return new Promise(async resolve => {
+      let dbInstance = await this.getDBInstance();
+      let transaction = this.getDBTransaction(dbInstance, 'readwrite');
+      let store = transaction.objectStore('info');
+      await store.put({ id: 'viewState', value });
+      await transaction.complete;
+      dbInstance.close();
+      resolve();
+    });
+  }
+
+  async getViewState() {
+    return new Promise(async resolve => {
+      let dbInstance = await this.getDBInstance();
+      let transaction = this.getDBTransaction(dbInstance, 'readonly');
+      let store = transaction.objectStore('info');
+      let viewStateObject = await store.get('viewState');
+      let viewState = viewStateObject ? viewStateObject.value : 0;
+      dbInstance.close();
+      resolve(viewState);
+    });
+  }
+
+  async removeViewState() {
+    return new Promise(async resolve => {
+      let dbInstance = await this.getDBInstance();
+      let transaction = this.getDBTransaction(dbInstance, 'readwrite');
+      let store = transaction.objectStore('info');
+      await store.delete('viewState');
       dbInstance.close();
       resolve();
     });

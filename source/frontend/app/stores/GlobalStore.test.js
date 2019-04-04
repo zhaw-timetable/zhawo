@@ -139,16 +139,16 @@ it('setTheme should call setThemeInDB when called', () => {
   globalStore.setThemeInDB = restore;
 });
 
-it('getUserNameFromDB should call idbAdapter.getUsername()', async () => {
-  const restore = idbAdapter.getUsername;
-  idbAdapter.getUsername = jest.fn().mockImplementation(() => {
+it('getUserFromDB should call idbAdapter.getUser()', async () => {
+  const restore = idbAdapter.getUser;
+  idbAdapter.getUser = jest.fn().mockImplementation(() => {
     return new Promise(resolve => {
       resolve({ username: 'username', type: 'usertype' });
     });
   });
-  await globalStore.getUsernameFromDB();
-  expect(idbAdapter.getUsername).toHaveBeenCalled();
-  idbAdapter.getUsername = restore;
+  await globalStore.getUserFromDB();
+  expect(idbAdapter.getUser).toHaveBeenCalled();
+  idbAdapter.getUser = restore;
 });
 
 it('getThemeFromDB should call idbAdapter.getTheme() and update store', async () => {
