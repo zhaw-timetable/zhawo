@@ -1,3 +1,6 @@
+jest.mock('./adapters/IdbAdapter');
+jest.mock('./stores/GlobalStore');
+
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
@@ -6,16 +9,30 @@ configure({ adapter: new Adapter() });
 
 import App from './App';
 
-const wrapper = shallow(<App />);
-const instance = wrapper.instance();
+it('renders without crashing', () => {
+  shallow(<App />);
+});
 
-it('renders without crashing', () => {});
+it('handleThemeChanged should call forceUpdate', () => {
+  const wrapper = shallow(<App />);
+  const instance = wrapper.instance();
 
-it('should call setState with the correct value via handleThemeChanged', () => {
-  instance.setState = jest.fn();
-
+  instance.forceUpdate = jest.fn();
   instance.handleThemeChanged();
-  expect(instance.setState).toHaveBeenCalledWith({
-    theme: 'lightTheme'
-  });
+
+  expect(instance.forceUpdate).toHaveBeenCalled();
+
+  instance.forceUpdate.mockRestore();
+});
+
+it('handleUserChange should call forceUpdate', () => {
+  const wrapper = shallow(<App />);
+  const instance = wrapper.instance();
+
+  instance.forceUpdate = jest.fn();
+  instance.handleUserChange();
+
+  expect(instance.forceUpdate).toHaveBeenCalled();
+
+  instance.forceUpdate.mockRestore();
 });

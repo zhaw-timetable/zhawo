@@ -41,6 +41,7 @@ class ScheduleStore extends EventEmitter {
     this.scheduleForSearchUser = null;
     this.displayDay = this.currentDate;
     this.currentSearch = '';
+    this.currentAction = '';
   }
 
   createDisplayWeek(date) {
@@ -73,10 +74,6 @@ class ScheduleStore extends EventEmitter {
     }
   }
 
-  getSearchUsername() {
-    return this.searchUsername;
-  }
-
   async handleActions(action) {
     switch (action.type) {
       case 'GET_SCHEDULE_FOR_SEARCH':
@@ -102,45 +99,64 @@ class ScheduleStore extends EventEmitter {
         this.emit('schedule_changed');
         // Lazy load other weeks
         for (let i = 1; i < 14; i++) {
-          let newDate = format(addWeeks(new Date(startDate), i), 'YYYY-MM-DD');
-          let fetchedSchedule = await api
-            .getScheduleResource(route, name, newDate, 0)
-            .catch(err => {
-              console.error(err);
-            });
-          if (isForCurrentUser) {
-            this.scheduleForCurrentUser.weeks = {
-              ...this.scheduleForCurrentUser.weeks,
-              ...fetchedSchedule.weeks
-            };
-            this.schedule = this.scheduleForCurrentUser;
-          } else {
-            this.scheduleForSearchUser.weeks = {
-              ...this.scheduleForSearchUser.weeks,
-              ...fetchedSchedule.weeks
-            };
-            this.schedule = this.scheduleForSearchUser;
+          if (this.currentAction != '') {
+            try {
+              let newDate = format(
+                addWeeks(new Date(startDate), i),
+                'YYYY-MM-DD'
+              );
+              let fetchedSchedule = await api
+                .getScheduleResource(route, name, newDate, 0)
+                .catch(err => {
+                  console.error(err);
+                });
+              if (isForCurrentUser) {
+                this.scheduleForCurrentUser.weeks = {
+                  ...this.scheduleForCurrentUser.weeks,
+                  ...fetchedSchedule.weeks
+                };
+                this.schedule = this.scheduleForCurrentUser;
+              } else {
+                this.scheduleForSearchUser.weeks = {
+                  ...this.scheduleForSearchUser.weeks,
+                  ...fetchedSchedule.weeks
+                };
+                this.schedule = this.scheduleForSearchUser;
+              }
+            } catch (error) {
+              console.log(error);
+            }
           }
         }
         for (let i = 1; i < 14; i++) {
-          let newDate = format(subWeeks(new Date(startDate), i), 'YYYY-MM-DD');
-          let fetchedSchedule = await api
-            .getScheduleResource(route, name, newDate, 0)
-            .catch(err => {
-              console.error(err);
-            });
-          if (isForCurrentUser) {
-            this.scheduleForCurrentUser.weeks = {
-              ...this.scheduleForCurrentUser.weeks,
-              ...fetchedSchedule.weeks
-            };
-            this.schedule = this.scheduleForCurrentUser;
-          } else {
-            this.scheduleForSearchUser.weeks = {
-              ...this.scheduleForSearchUser.weeks,
-              ...fetchedSchedule.weeks
-            };
-            this.schedule = this.scheduleForSearchUser;
+          if (this.currentAction != '') {
+            try {
+              let newDate = format(
+                subWeeks(new Date(startDate), i),
+                'YYYY-MM-DD'
+              );
+              let fetchedSchedule = await api.getScheduleResource(
+                route,
+                name,
+                newDate,
+                0
+              );
+              if (isForCurrentUser) {
+                this.scheduleForCurrentUser.weeks = {
+                  ...this.scheduleForCurrentUser.weeks,
+                  ...fetchedSchedule.weeks
+                };
+                this.schedule = this.scheduleForCurrentUser;
+              } else {
+                this.scheduleForSearchUser.weeks = {
+                  ...this.scheduleForSearchUser.weeks,
+                  ...fetchedSchedule.weeks
+                };
+                this.schedule = this.scheduleForSearchUser;
+              }
+            } catch (error) {
+              console.log(error);
+            }
           }
         }
         this.emit('schedule_changed');

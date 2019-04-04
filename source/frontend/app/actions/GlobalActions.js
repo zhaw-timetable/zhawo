@@ -36,3 +36,16 @@ export const setDayView = value => {
     payload: value
   });
 };
+
+export const setViewState = value => {
+  dispatcher.dispatch({
+    type: 'SET_VIEWSTATE',
+    payload: value
+  });
+};
+
+export const getViewState = () => {
+  dispatcher.dispatch({
+    type: 'GET_VIEWSTATE'
+  });
+};

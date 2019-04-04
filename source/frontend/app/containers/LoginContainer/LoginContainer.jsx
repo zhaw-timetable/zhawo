@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import './LoginContainer.sass';
 
 import globalStore from '../../stores/GlobalStore';
-import * as globalActions from '../../actions/GlobalActions';
 
 import Splash from '../../assets/img/Splash/Splash';
 import LoginSearch from './components/LoginSearch/LoginSearch';
@@ -15,11 +14,11 @@ class LoginContainer extends Component {
   };
 
   componentWillMount() {
-    globalStore.on('current_user_changed', this.login);
+    globalStore.on('current_user_login', this.login);
   }
 
   componentWillUnmount() {
-    globalStore.removeListener('current_user_changed', this.login);
+    globalStore.removeListener('current_user_login', this.login);
   }
 
   handleUsernameInputChange = e => {
@@ -27,11 +26,30 @@ class LoginContainer extends Component {
   };
 
   login = () => {
-    this.setState({ redirectToPreviousRoute: true });
+    this.setState({
+      redirectToPreviousRoute: true
+    });
   };
 
   render() {
-    const from = { pathname: '/' };
+    let currentViewPath = '';
+    switch (globalStore.viewState) {
+      case 0:
+        currentViewPath = '/';
+        break;
+      case 1:
+        currentViewPath = '/mensa';
+        break;
+      case 2:
+        currentViewPath = '/zhawo';
+        break;
+      case 3:
+        currentViewPath = '/vszhaw';
+        break;
+      default:
+        currentViewPath = '/';
+    }
+    const from = { pathname: currentViewPath };
     const { redirectToPreviousRoute } = this.state;
 
     if (redirectToPreviousRoute) {

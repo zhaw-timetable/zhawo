@@ -100,8 +100,14 @@ class ScheduleContextMenu extends Component {
     return inputLength === 0
       ? []
       : this.state.possibleNames.filter(suggestion => {
-          const keep =
-            count < 5 && suggestion.label.toLowerCase().includes(inputValue);
+          const matchesSuggestion = suggestion.label
+            .toLowerCase()
+            .includes(inputValue);
+          const isNotCurrentUser = !(
+            suggestion.label.toLowerCase().valueOf() ==
+            globalStore.currentUser.toLowerCase().valueOf()
+          );
+          const keep = count < 5 && matchesSuggestion && isNotCurrentUser;
           if (keep) {
             count += 1;
           }

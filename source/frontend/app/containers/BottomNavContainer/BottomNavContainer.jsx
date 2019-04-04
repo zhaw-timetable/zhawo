@@ -11,13 +11,15 @@ import VsZHAWSVG from '../../assets/img/VsZHAWSVG/VsZHAWSVG';
 import ZHAWOSVG from '../../assets/img/ZHAWOSVG/ZHAWOSVG';
 
 import history from '../../history';
+import globalStore from '../../stores/GlobalStore';
+import * as globalActions from '../../actions/GlobalActions';
 
 class BottomNavContainer extends Component {
   state = {
-    value: 0
+    value: globalStore.viewState
   };
 
-  handleChange = (event, value) => {
+  updateViewState = (event, value) => {
     this.setState({ value });
     switch (value) {
       case 0:
@@ -33,6 +35,7 @@ class BottomNavContainer extends Component {
         history.push('/vszhaw');
         break;
     }
+    globalActions.setViewState(value);
   };
 
   render() {
@@ -41,7 +44,7 @@ class BottomNavContainer extends Component {
     return (
       <BottomNavigation
         value={value}
-        onChange={this.handleChange}
+        onChange={this.updateViewState}
         showLabels
         className="BottomNavContainer"
       >
