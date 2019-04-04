@@ -1,4 +1,5 @@
 @import 'reset'
+@import '../../assets/sass/vars'
 
 html
   height: 100%
@@ -11,9 +12,11 @@ body
 
   --appbar-height: 56px
   --bottomnav-height: 56px
+  --sidebar-width: 300px
 
 #app
   height: 100%
+  width: 100vw
 
 .darkTheme
   --primary-color-dark:   #000000
@@ -26,7 +29,7 @@ body
   --hint-text-color:      rgba(255,255,255, 0.5)
   --divider-color:        rgba(255,255,255, 0.12)
   
-  --background-color:   var(--primary-color)
+  --background-color:   var(--primary-color-light)
 
 
 .lightTheme
@@ -41,3 +44,12 @@ body
   --divider-color:          #BDBDBD
 
   --background-color:       #FFFFFF
+
+
+
+// Desktop
+@media (min-width: $media-min-width)
+  #app
+    display: grid
+    grid-template-columns: var(--sidebar-width) auto
+    // Todo: use vars

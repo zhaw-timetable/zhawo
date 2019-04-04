@@ -4,9 +4,16 @@
   background-color: var(--background-color)
   color: var(--primary-text-color)
   height: 100%
-  width: 100vw
   display: grid
   grid-template-rows: 64px auto 56px
 
   .ContentWrapper
     overflow: auto
+
+// Desktop
+@media (min-width: $media-min-width)
+  .App
+    grid-area: 1 / 2 / 3 / 3
+
+    grid-template-rows: 64px auto
+    

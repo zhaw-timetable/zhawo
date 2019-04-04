@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './DrawerContainer.sass';
 
 import * as globalActions from '../../actions/GlobalActions';
@@ -10,7 +10,7 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
-import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -70,60 +70,108 @@ class DrawerContainer extends Component {
 
   render() {
     return (
-      <Drawer
-        anchor="left"
-        open={this.state.drawerOpen}
-        onClose={this.toggleDrawer}
-      >
-        <div
-          className={'DrawerContainer ' + this.props.className}
-          tabIndex={0}
-          role="button"
-        >
-          <div className="InfoContainer">
-            <div className="LogoContainer">
-              <LogoSVG />
-            </div>
-            <div className="TextContainer">
-              <h1>Hello {globalStore.currentUser}</h1>
-              <p>Welcome to ZhaWo </p>
-            </div>
-            <IconButton
-              className="closeButton"
-              color="inherit"
-              aria-label="Close"
-              onClick={this.toggleDrawer}
+      <Fragment>
+        <Hidden mdUp>
+          <Drawer
+            anchor="left"
+            variant="temporary"
+            open={this.state.drawerOpen}
+            onClose={this.toggleDrawer}
+          >
+            <div
+              className={'DrawerContainer ' + this.props.className}
+              tabIndex={0}
+              role="button"
             >
-              <CloseIcon />
-            </IconButton>
-          </div>
-          <div className="switchContainer">
-            {' '}
-            <Switch
-              checked={this.state.themeSwitch}
-              onChange={this.handleThemeSwitchChange}
-              value="themeSwitch"
-            />
-            {!this.state.themeSwitch && 'Dark Mode'}
-            {this.state.themeSwitch && 'Light Mode'}
-          </div>
+              <div className="InfoContainer">
+                <div className="LogoContainer">
+                  <LogoSVG />
+                </div>
+                <div className="TextContainer">
+                  <h1>Hello {globalStore.currentUser}</h1>
+                  <p>Welcome to ZhaWo </p>
+                </div>
+                <IconButton
+                  className="closeButton"
+                  color="inherit"
+                  aria-label="Close"
+                  onClick={this.toggleDrawer}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <div className="switchContainer">
+                {' '}
+                <Switch
+                  checked={this.state.themeSwitch}
+                  onChange={this.handleThemeSwitchChange}
+                  value="themeSwitch"
+                />
+                {!this.state.themeSwitch && 'Dark Mode'}
+                {this.state.themeSwitch && 'Light Mode'}
+              </div>
 
-          <div className="switchContainer">
-            {' '}
-            <Switch
-              checked={this.state.viewSwitch}
-              onChange={this.handleViewSwitchChange}
-              value="themeSwitch"
-            />
-            {!this.state.viewSwitch && 'Day View'}
-            {this.state.viewSwitch && 'Week View'}
-          </div>
+              <div className="switchContainer">
+                {' '}
+                <Switch
+                  checked={this.state.viewSwitch}
+                  onChange={this.handleViewSwitchChange}
+                  value="themeSwitch"
+                />
+                {!this.state.viewSwitch && 'Day View'}
+                {this.state.viewSwitch && 'Week View'}
+              </div>
 
-          <Button className="LogoutBtn" onClick={this.logout} color="inherit">
-            Logout
-          </Button>
-        </div>
-      </Drawer>
+              <Button
+                className="LogoutBtn"
+                onClick={this.logout}
+                color="inherit"
+              >
+                Logout
+              </Button>
+            </div>
+          </Drawer>
+        </Hidden>
+        <Hidden smDown>
+          <Drawer variant="permanent" open>
+            <div
+              className={'DrawerContainer ' + this.props.className}
+              tabIndex={0}
+              role="button"
+            >
+              <div className="switchContainer">
+                {' '}
+                <Switch
+                  checked={this.state.themeSwitch}
+                  onChange={this.handleThemeSwitchChange}
+                  value="themeSwitch"
+                />
+                {!this.state.themeSwitch && 'Dark Mode'}
+                {this.state.themeSwitch && 'Light Mode'}
+              </div>
+
+              <div className="switchContainer">
+                {' '}
+                <Switch
+                  checked={this.state.viewSwitch}
+                  onChange={this.handleViewSwitchChange}
+                  value="themeSwitch"
+                />
+                {!this.state.viewSwitch && 'Day View'}
+                {this.state.viewSwitch && 'Week View'}
+              </div>
+
+              <Button
+                className="LogoutBtn"
+                onClick={this.logout}
+                color="inherit"
+              >
+                Logout
+              </Button>
+            </div>
+          </Drawer>
+        </Hidden>
+      </Fragment>
     );
   }
 }

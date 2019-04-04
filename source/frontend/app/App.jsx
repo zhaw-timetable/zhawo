@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
+
+import Hidden from '@material-ui/core/Hidden';
 
 import './App.sass';
 
@@ -62,11 +64,15 @@ class App extends Component {
         {...rest}
         render={props =>
           globalStore.currentUser != '' ? (
-            <div className={'App ' + this.state.theme}>
+            <Fragment>
               <DrawerContainer className={this.state.theme} />
-              <Component {...props} />
-              <BottomNavContainer />
-            </div>
+              <div className={'App ' + this.state.theme}>
+                <Component {...props} />
+                <Hidden mdUp>
+                  <BottomNavContainer />
+                </Hidden>
+              </div>
+            </Fragment>
           ) : window.location.pathname != '/login' ? (
             <Redirect to="/login" />
           ) : (
