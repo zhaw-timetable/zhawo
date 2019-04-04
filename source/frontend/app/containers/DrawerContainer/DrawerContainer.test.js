@@ -18,10 +18,6 @@ beforeEach(() => {
 
 it('renders without crashing', () => {});
 
-it('should render one root element with className DrawerContainer', () => {
-  expect(wrapper.find('.DrawerContainer')).toHaveLength(1);
-});
-
 it('should call globalActions.toggleDrawer once ', () => {
   globalActions.toggleDrawer = jest.fn();
   instance.toggleDrawer();
