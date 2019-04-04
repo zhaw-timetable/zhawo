@@ -118,3 +118,58 @@ it('removeUser should call DBStore delete with correct parameters', async () => 
   expect(deleteMock).toHaveBeenCalledWith('username');
   idbAdapter.getDBTransaction = restore;
 });
+
+it('setViewState should call DBStore put with correct parameters', async () => {
+  const restore = idbAdapter.getDBTransaction;
+  const putMock = jest.fn().mockImplementation(() => {
+    return new Promise(resolve => {
+      resolve();
+    });
+  });
+  idbAdapter.getDBTransaction = jest.fn().mockImplementation(() => ({
+    objectStore: () => ({
+      put: putMock
+    })
+  }));
+  await idbAdapter.setViewState(2);
+  expect(putMock).toHaveBeenCalled();
+  expect(putMock).toHaveBeenCalledWith({
+    id: 'viewState',
+    value: 2
+  });
+  idbAdapter.getDBTransaction = restore;
+});
+
+it('getViewState should return viewState from DBStore', async () => {
+  const restore = idbAdapter.getDBTransaction;
+  idbAdapter.getDBTransaction = jest.fn().mockImplementation(() => ({
+    objectStore: () => ({
+      get: () => {
+        return new Promise(resolve => {
+          resolve({ value: 'viewStateInStore' });
+        });
+      }
+    })
+  }));
+  const viewState = await idbAdapter.getViewState();
+  expect(viewState).toEqual('viewStateInStore');
+  idbAdapter.getDBTransaction = restore;
+});
+
+it('removeViewState should call DBStore delete with correct parameters', async () => {
+  const restore = idbAdapter.getDBTransaction;
+  const deleteMock = jest.fn().mockImplementation(() => {
+    return new Promise(resolve => {
+      resolve();
+    });
+  });
+  idbAdapter.getDBTransaction = jest.fn().mockImplementation(() => ({
+    objectStore: () => ({
+      delete: deleteMock
+    })
+  }));
+  await idbAdapter.removeViewState();
+  expect(deleteMock).toHaveBeenCalled();
+  expect(deleteMock).toHaveBeenCalledWith('viewState');
+  idbAdapter.getDBTransaction = restore;
+});
