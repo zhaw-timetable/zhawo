@@ -93,6 +93,21 @@ class ScheduleContextMenu extends Component {
     });
   };
 
+  handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      const { suggestions } = this.state;
+      if (suggestions.length === 1) {
+        this.handleSearch(suggestions[0]);
+      }
+    }
+  };
+
+  handleSearch = search => {
+    const { type, label } = search;
+    this.handleClose();
+    scheduleActions.getSchedule(type, label, scheduleStore.displayDay);
+  };
+
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -121,12 +136,7 @@ class ScheduleContextMenu extends Component {
 
   onSuggestionSelected = (event, { suggestion }) => {
     event.preventDefault();
-    this.handleClose();
-    scheduleActions.getSchedule(
-      suggestion.type,
-      suggestion.label,
-      scheduleStore.displayDay
-    );
+    this.handleSearch(suggestion);
   };
 
   render() {
@@ -181,7 +191,8 @@ class ScheduleContextMenu extends Component {
               inputProps={{
                 placeholder: 'Nach Kürzel suchen',
                 value: this.state.value,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                onKeyDown: this.handleKeyDown
               }}
             />
           </DialogContent>

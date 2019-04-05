@@ -63,10 +63,25 @@ class LoginSearch extends Component {
     });
   };
 
-  handleChange = (event, { newValue }) => {
+  handleChange = (event, { newValue, method }) => {
     this.setState({
       value: newValue
     });
+  };
+
+  handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      const { suggestions } = this.state;
+      if (suggestions.length === 1) {
+        this.loginUser(suggestions[0]);
+      }
+    }
+  };
+
+  loginUser = user => {
+    const { type, label } = user;
+    globalActions.setCurrentUser(label, type);
+    scheduleActions.getSchedule(type, label, scheduleStore.displayDay);
   };
 
   getSuggestions = value => {
@@ -91,12 +106,7 @@ class LoginSearch extends Component {
   };
 
   onSuggestionSelected = (event, { suggestion }) => {
-    globalActions.setCurrentUser(suggestion.label, suggestion.type);
-    scheduleActions.getSchedule(
-      suggestion.type,
-      suggestion.label,
-      scheduleStore.displayDay
-    );
+    this.loginUser(suggestion);
   };
 
   render() {
@@ -115,7 +125,8 @@ class LoginSearch extends Component {
             inputProps={{
               placeholder: 'Nach Kürzel suchen',
               value: this.state.value,
-              onChange: this.handleChange
+              onChange: this.handleChange,
+              onKeyDown: this.handleKeyDown
             }}
           />
         )}
