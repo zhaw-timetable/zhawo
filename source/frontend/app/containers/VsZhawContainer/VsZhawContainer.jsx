@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './VsZhawContainer.sass';
 
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
+
 import { format } from 'date-fns';
 import * as deLocale from 'date-fns/locale/de/index.js';
 import * as vszhawActions from '../../actions/VsZhawActions';
@@ -38,7 +41,13 @@ class VsZhawContainer extends Component {
   render() {
     return (
       <Fragment>
-        <AppBarContainer />
+        <AppBarContainer>
+          <Hidden mdUp>
+            <Typography variant="h6" color="inherit" className="flex">
+              ZHAWo
+            </Typography>
+          </Hidden>
+        </AppBarContainer>
         <div className="ContentWrapper">
           <div className="VsZhawContainer">
             {this.state.feed &&

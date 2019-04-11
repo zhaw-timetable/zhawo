@@ -4,8 +4,11 @@ import './DrawerContainer.sass';
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore.js';
 
+import AppBarContainer from '../AppBarContainer/AppBarContainer';
+
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
+import Typography from '@material-ui/core/Typography';
 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -43,6 +46,9 @@ class DrawerContainer extends Component {
       <Fragment>
         <Hidden mdUp>
           <Drawer
+            classes={{
+              modal: 'Drawer'
+            }}
             anchor="left"
             variant="temporary"
             open={this.state.drawerOpen}
@@ -58,8 +64,8 @@ class DrawerContainer extends Component {
                   <LogoSVG />
                 </div>
                 <div className="TextContainer">
-                  <h1>Hello {globalStore.currentUser}</h1>
-                  <p>Welcome to ZhaWo </p>
+                  <h1>Hoi {globalStore.currentUser}</h1>
+                  <p>Willkommen bei ZhaWo </p>
                 </div>
                 <IconButton
                   className="closeButton"
@@ -75,12 +81,23 @@ class DrawerContainer extends Component {
           </Drawer>
         </Hidden>
         <Hidden smDown>
-          <Drawer variant="permanent" open>
-            <div
-              className={'DrawerContainer ' + this.props.className}
-              tabIndex={0}
-              role="button"
-            >
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              docked: 'Drawer ' + this.props.className,
+              paperAnchorDockedLeft: 'Drawer-docked'
+            }}
+          >
+            <AppBarContainer>
+              <LogoSVG />
+            </AppBarContainer>
+
+            <div className="DrawerContainer ">
+              <div className="TextContainer">
+                <h1>Hoi {globalStore.currentUser}</h1>
+                <p>Willkommen bei ZhaWo </p>
+              </div>
               <DrawerNav />
               <DrawerOptions />
             </div>

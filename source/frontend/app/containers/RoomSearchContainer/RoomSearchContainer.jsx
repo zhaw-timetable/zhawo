@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
 
 import './RoomSearchContainer.sass';
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 
 import roomSearchStore from '../../stores/RoomSearchStore';
 import * as roomSearchActions from '../../actions/RoomSearchActions';
@@ -99,7 +101,13 @@ class RoomSearchContainer extends Component {
 
     return (
       <Fragment>
-        <AppBarContainer />
+        <AppBarContainer>
+          <Hidden mdUp>
+            <Typography variant="h6" color="inherit" className="flex">
+              ZHAWo
+            </Typography>
+          </Hidden>
+        </AppBarContainer>
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
             <Select
