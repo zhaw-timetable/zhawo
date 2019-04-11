@@ -16,13 +16,14 @@ class DrawerNav extends Component {
   };
 
   updateViewState = value => {
-    this.setState({ value });
+    let selected;
     switch (value) {
       case 0:
         history.push('/');
         break;
       case 1:
         history.push('/mensa');
+
         break;
       case 2:
         history.push('/zhawo');
@@ -31,6 +32,7 @@ class DrawerNav extends Component {
         history.push('/vszhaw');
         break;
     }
+    this.setState({ value });
     globalActions.setViewState(value);
   };
 
@@ -38,28 +40,40 @@ class DrawerNav extends Component {
     return (
       <div className="DrawerNav">
         <div
-          className="DrawerNavOption"
+          className={
+            'DrawerNavOption ' +
+            (this.state.value === 0 ? 'DrawerNavOption-Selected' : ' ')
+          }
           onClick={() => this.updateViewState(0)}
         >
           <CalendarSVG />
           <p>Stundenplan</p>
         </div>
         <div
-          className="DrawerNavOption"
+          className={
+            'DrawerNavOption ' +
+            (this.state.value === 1 ? 'DrawerNavOption-Selected' : ' ')
+          }
           onClick={() => this.updateViewState(1)}
         >
           <MenuSVG />
           <p>Mensa</p>
         </div>
         <div
-          className="DrawerNavOption"
+          className={
+            'DrawerNavOption ' +
+            (this.state.value === 2 ? 'DrawerNavOption-Selected' : ' ')
+          }
           onClick={() => this.updateViewState(2)}
         >
           <ZHAWOSVG />
           <p>Raumsuche</p>
         </div>
         <div
-          className="DrawerNavOption"
+          className={
+            'DrawerNavOption ' +
+            (this.state.value === 3 ? 'DrawerNavOption-Selected' : ' ')
+          }
           onClick={() => this.updateViewState(3)}
         >
           <VsZHAWSVG />
