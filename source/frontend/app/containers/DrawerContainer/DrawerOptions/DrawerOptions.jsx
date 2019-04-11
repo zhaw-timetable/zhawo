@@ -6,9 +6,6 @@ import globalStore from '../../../stores/GlobalStore.js';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-
 class DrawerOptions extends Component {
   state = {
     themeSwitch: globalStore.theme == 'darkTheme',
@@ -34,15 +31,11 @@ class DrawerOptions extends Component {
   };
 
   handleThemeChanged = () => {
-    if (globalStore.drawerOpen) {
-      this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
-    }
+    this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
   };
 
   handleViewChanged = () => {
-    if (globalStore.drawerOpen) {
-      this.setState({ viewSwitch: globalStore.isDayView });
-    }
+    this.setState({ viewSwitch: globalStore.isDayView });
   };
 
   handleViewSwitchChange = event => {
