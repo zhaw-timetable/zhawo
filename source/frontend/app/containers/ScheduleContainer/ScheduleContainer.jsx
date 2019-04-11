@@ -3,6 +3,9 @@ import './ScheduleContainer.sass';
 
 import Swipe from 'react-easy-swipe';
 
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
+
 import globalStore from '../../stores/GlobalStore';
 
 import scheduleStore from '../../stores/ScheduleStore';
@@ -72,6 +75,11 @@ class Schedule extends Component {
     return (
       <Fragment>
         <AppBarContainer>
+          <Hidden mdUp>
+            <Typography variant="h6" color="inherit" className="flex">
+              ZHAWo
+            </Typography>
+          </Hidden>
           <ScheduleContextMenu />
         </AppBarContainer>
         <Swipe

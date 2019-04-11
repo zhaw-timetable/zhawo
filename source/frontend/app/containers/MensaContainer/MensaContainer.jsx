@@ -4,6 +4,9 @@ import './MensaContainer.sass';
 
 import Swipe from 'react-easy-swipe';
 
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
+
 import mensaStore from '../../stores/MensaStore';
 import * as mensaActions from '../../actions/MensaActions';
 
@@ -38,6 +41,11 @@ class MensaContainer extends Component {
     return (
       <Fragment>
         <AppBarContainer>
+          <Hidden mdUp>
+            <Typography variant="h6" color="inherit" className="flex">
+              ZHAWo
+            </Typography>
+          </Hidden>
           <MensaContextMenu />
         </AppBarContainer>
         <Swipe
