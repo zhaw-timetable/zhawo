@@ -97,6 +97,7 @@ class ScheduleContextMenu extends Component {
     if (event.key === 'Enter') {
       const { suggestions } = this.state;
       if (suggestions.length === 1) {
+        event.preventDefault();
         this.handleSearch(suggestions[0]);
       }
     }
@@ -104,8 +105,8 @@ class ScheduleContextMenu extends Component {
 
   handleSearch = search => {
     const { type, label } = search;
-    this.handleClose();
     scheduleActions.getSchedule(type, label, scheduleStore.displayDay);
+    this.handleClose();
   };
 
   getSuggestions = value => {
