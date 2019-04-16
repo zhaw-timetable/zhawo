@@ -27,10 +27,11 @@ it('getFreeRoomsJson should dispatch correct type', () => {
 });
 
 it('getFreeRoomsByTime should dispatch correct type with payload', () => {
-  roomsearchActions.getFreeRoomsByTime(VALUE);
+  roomsearchActions.getFreeRoomsByTime(VALUE, VALUE);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'GET_FREEROOMBYTIME',
-    payload: VALUE
+    end: 'value',
+    start: 'value'
   });
 });

@@ -43,12 +43,12 @@ it('should call setState via setFreeRooms with correct values ', () => {
   });
 });
 
-it('should call roomSearchActions.getFreeRoomsByTime with the correct value via handleChange', () => {
-  const wrapper = shallow(<RoomSearchContainer />);
-  const instance = wrapper.instance();
-  roomSearchActions.getFreeRoomsByTime = jest.fn();
-  let event = { target: { value: 'test' } };
+// it('should call roomSearchActions.getFreeRoomsByTime with the correct value via handleChange', () => {
+//   const wrapper = shallow(<RoomSearchContainer />);
+//   const instance = wrapper.instance();
+//   roomSearchActions.getFreeRoomsByTime = jest.fn();
+//   let event = { target: { value: 'test' } };
 
-  instance.handleChange(event);
-  expect(roomSearchActions.getFreeRoomsByTime).toHaveBeenCalledWith('test');
-});
+//   instance.handleChange(event);
+//   expect(roomSearchActions.getFreeRoomsByTime).toHaveBeenCalledWith('test');
+// });
