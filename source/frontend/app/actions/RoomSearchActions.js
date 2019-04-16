@@ -6,10 +6,11 @@ export const getFreeRoomsJson = () => {
   });
 };
 
-export const getFreeRoomsByTime = value => {
+export const getFreeRoomsByTime = (start, end) => {
   dispatcher.dispatch({
     type: 'GET_FREEROOMBYTIME',
-    payload: value
+    start: start,
+    end: end
   });
 };
 
