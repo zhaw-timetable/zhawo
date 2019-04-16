@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
 
 class RoomSearchContainer extends Component {
   state = {
@@ -23,7 +24,8 @@ class RoomSearchContainer extends Component {
     currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    currentTimeSlot: '',
+    startTime: '2018-10-29T08:50:00+01:00',
+    endTime: '2018-10-29T11:35:00+01:00',
     roomStates: {}
   };
 
@@ -85,8 +87,27 @@ class RoomSearchContainer extends Component {
     });
   };
 
+  handleButton = () => {
+    console.log(
+      'startTime: ',
+      this.state.startTime,
+      'endtime: ',
+      this.state.endTime
+    );
+
+    roomSearchActions.getFreeRoomsByTime(
+      this.state.startTime,
+      this.state.endTime
+    );
+  };
+
   handleChange = event => {
-    roomSearchActions.getFreeRoomsByTime(event.target.value);
+    // Todo: filter
+    console.log(event.target.name, ':', event.target.value);
+
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   handleClick = event => {
@@ -110,19 +131,50 @@ class RoomSearchContainer extends Component {
         </AppBarContainer>
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
-            <Select
-              value={this.state.currentTimeSlot}
-              onChange={this.handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {this.state.timeSlots.map(slot => (
-                <MenuItem value={slot.startTime} key={slot.startTime}>
-                  {format(slot.startTime, 'HH:mm')}
+            <div className="selectContainer">
+              <Select
+                value={this.state.startTime}
+                onChange={this.handleChange}
+                name="startTime"
+                classes={{
+                  root: 'Select'
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
                 </MenuItem>
-              ))}
-            </Select>
+                {this.state.timeSlots.map(slot => (
+                  <MenuItem value={slot.startTime} key={slot.startTime}>
+                    {format(slot.startTime, 'HH:mm')}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Select
+                value={this.state.endTime}
+                onChange={this.handleChange}
+                name="endTime"
+                classes={{
+                  root: 'Select'
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {this.state.timeSlots.map(slot => (
+                  <MenuItem value={slot.endTime} key={slot.endTime}>
+                    {format(slot.endTime, 'HH:mm')}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Button
+                onClick={this.handleButton}
+                color="inherit"
+                variant="text"
+                fontSize="small"
+              >
+                Search
+              </Button>
+            </div>
             <div className="floorSelector">
               <div
                 id="SOE"
