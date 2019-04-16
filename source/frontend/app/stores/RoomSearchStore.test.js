@@ -17,6 +17,7 @@ it('handleActions should be defined', () => {
 
 it('should have the initial values', () => {
   expect(roomSearchStore.freeRooms).toEqual([]);
-  expect(roomSearchStore.currentTimeSlot).toEqual('');
+  expect(roomSearchStore.startTime).toEqual('');
+  expect(roomSearchStore.endTime).toEqual('');
   expect(roomSearchStore.currentfreeRooms).toEqual([]);
 });
