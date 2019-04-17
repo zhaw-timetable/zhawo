@@ -24,8 +24,10 @@ class RoomSearchContainer extends Component {
     currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    startTime: '2018-10-29T08:50:00+01:00',
-    endTime: '2018-10-29T11:35:00+01:00',
+    // startTime: '2018-10-29T08:00:00+01:00',
+    // endTime: '2018-10-29T11:35:00+01:00',
+    startTime: '',
+    endTime: '',
     roomStates: {}
   };
 

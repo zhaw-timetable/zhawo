@@ -83,8 +83,6 @@ class RoomSearchStore extends EventEmitter {
           this.startTime,
           this.endTime
         );
-        console.log('timeSlots: ', this.timeSlots);
-
         //this.currentfreeRooms = this.getSortedByTimeSlot(this.starTime);
         this.emit('got_currentFreeRooms');
         break;
@@ -110,6 +108,7 @@ class RoomSearchStore extends EventEmitter {
 
   filterRooms(timeSlots) {
     let freeRoomArrays = [];
+    console.log('timeSlots: ', timeSlots);
     for (let i = 0; i < timeSlots.length; i++) {
       freeRoomArrays.push(this.getSortedByTimeSlotIndex(timeSlots[i]));
       console.log('freeRoomArrays: ', freeRoomArrays);
@@ -169,24 +168,23 @@ class RoomSearchStore extends EventEmitter {
     let tempRooms = [];
 
     // Find timeslot
-    if (index) {
-      let found = false;
-      let tempRoom;
+    let found = false;
+    let tempRoom;
 
-      if (this.currentFloor != 'SOE') {
-        // Only add free rooms of same building
-        for (let room in this.freeRooms[index].rooms) {
-          tempRoom = this.freeRooms[index].rooms[room];
-          // Check if same level
-          if (this.currentFloor.substring(0, 2) === tempRoom.substring(0, 2)) {
-            tempRooms.push(tempRoom);
-          }
+    if (this.currentFloor != 'SOE') {
+      // Only add free rooms of same building
+      for (let room in this.freeRooms[index].rooms) {
+        tempRoom = this.freeRooms[index].rooms[room];
+        // Check if same level
+        if (this.currentFloor.substring(0, 2) === tempRoom.substring(0, 2)) {
+          tempRooms.push(tempRoom);
         }
-      } else {
-        // if not in building return all the free rooms
-        tempRooms = this.freeRooms[index].rooms;
       }
+    } else {
+      // if not in building return all the free rooms
+      tempRooms = this.freeRooms[index].rooms;
     }
+    console.log('tempRooms:', tempRooms);
     return tempRooms;
   }
 
