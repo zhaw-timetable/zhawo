@@ -115,13 +115,11 @@ class ScheduleStore extends EventEmitter {
                   ...this.scheduleForCurrentUser.weeks,
                   ...fetchedSchedule.weeks
                 };
-                this.schedule = this.scheduleForCurrentUser;
               } else {
                 this.scheduleForSearchUser.weeks = {
                   ...this.scheduleForSearchUser.weeks,
                   ...fetchedSchedule.weeks
                 };
-                this.schedule = this.scheduleForSearchUser;
               }
             } catch (error) {
               console.log(error);
@@ -146,13 +144,11 @@ class ScheduleStore extends EventEmitter {
                   ...this.scheduleForCurrentUser.weeks,
                   ...fetchedSchedule.weeks
                 };
-                this.schedule = this.scheduleForCurrentUser;
               } else {
                 this.scheduleForSearchUser.weeks = {
                   ...this.scheduleForSearchUser.weeks,
                   ...fetchedSchedule.weeks
                 };
-                this.schedule = this.scheduleForSearchUser;
               }
             } catch (error) {
               console.log(error);

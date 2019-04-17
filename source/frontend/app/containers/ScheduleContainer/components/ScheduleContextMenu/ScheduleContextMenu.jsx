@@ -209,6 +209,7 @@ const Input = inputProps => {
   const { ref, ...other } = inputProps;
   return (
     <TextField
+      autoFocus
       fullWidth
       InputProps={{
         inputRef: ref,
