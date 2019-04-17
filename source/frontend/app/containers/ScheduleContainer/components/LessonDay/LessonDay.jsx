@@ -139,8 +139,8 @@ class LessonDay extends Component {
                   gridRow: `${i + 1} / ${i + 1 + slot.longestEvent}`
                 }}
               >
-                {slot.events &&
-                  slot.events.map((event, j) => {
+                {slot.eventBucket &&
+                  slot.eventBucket.map((event, j) => {
                     return (
                       <div
                         key={format(event.startTime, 'HH:mm').concat(

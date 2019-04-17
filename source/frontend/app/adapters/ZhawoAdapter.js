@@ -77,7 +77,13 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
           : null;
       }
     }
-    schedule ? resolve(convertSchedule(schedule)) : resolve({ weeks: {} });
+    if (schedule) {
+      schedule = convertSchedule(schedule);
+      schedule = resolveOverlaps(schedule);
+      resolve(schedule);
+    } else {
+      resolve({ weeks: {} });
+    }
   });
 }
 
@@ -126,6 +132,42 @@ export function convertSchedule(schedule) {
     }
   });
   return superiorSchedule;
+}
+
+export function resolveOverlaps(schedule) {
+  let newSchedule = schedule;
+  // Go through the week in the schedule
+  Object.values(newSchedule.weeks).forEach(week => {
+    // Go through all days in the schedule
+    Object.values(week).forEach(day => {
+      let { slots } = day;
+      // Go through all slots of the day (events are saved in the slot)
+      for (let i = 0; i < slots.length; i++) {
+        // Go through all events of the slot
+        let slot = slots[i];
+        let { events } = slot;
+        slot.eventBucket = [];
+        for (let j = 0; j < events.length; j++) {
+          let event = events[j];
+          if (event.sortedIntoBucket) break;
+          event.sortedIntoBucket = true;
+          slot.eventBucket = [...slot.eventBucket, event];
+          for (let k = 0; k < event.slots.length; k++) {
+            let nextSlot = slots[i + k];
+            let { events } = nextSlot;
+            for (let x = 0; x < events.length; x++) {
+              let event = events[x];
+              if (event.sortedIntoBucket) break;
+              event.sortedIntoBucket = true;
+              slot.eventBucket = [...slot.eventBucket, event];
+            }
+          }
+        }
+      }
+    });
+  });
+  console.log(newSchedule);
+  return newSchedule;
 }
 
 export function getPossibleNames() {
