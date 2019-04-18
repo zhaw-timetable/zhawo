@@ -47,8 +47,8 @@ class App extends Component {
         render={props =>
           globalStore.currentUser != '' ? (
             <Fragment>
-              <DrawerContainer className={this.state.theme} />
-              <div className={'App ' + this.state.theme}>
+              <DrawerContainer className={globalStore.theme} />
+              <div className={'App ' + globalStore.theme}>
                 <Component {...props} />
                 <Hidden mdUp>
                   <BottomNavContainer />
