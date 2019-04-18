@@ -14,6 +14,9 @@ Push your code and deploy
 git push deploy master
 ```
 
+Todo : add to travis
+https://docs.travis-ci.com/user/deployment/custom/
+
 ## Setup
 
 How to setup on new server?
@@ -110,7 +113,8 @@ mkdir -p $TEMP
 git --work-tree=$TEMP --git-dir=$REPO checkout -f
 
 cd $TEMP
-# Do stuffs, like npm install…
+
+# Install dependencies and build
 npm install
 npm run install-both
 npm run build
@@ -152,7 +156,7 @@ Group=users
 Restart=always
 KillSignal=SIGQUIT
 WorkingDirectory=/srv/www/zhawo
-ExecStart=/usr/bin/node /srv/www/zhawo/backend/dist/index.js
+ExecStart=/usr/bin/node /srv/www/zhawo/dist/index.js
 
 [Install]
 WantedBy=multi-user.target

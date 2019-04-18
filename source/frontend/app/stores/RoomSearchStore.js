@@ -35,7 +35,9 @@ import TP4 from '../assets/img/FloorPlans/TP/TP4';
 class RoomSearchStore extends EventEmitter {
   constructor() {
     super();
-    this.currentTimeSlot = '';
+    this.startTime = '';
+    this.endTime = '';
+    this.timeSlots;
     this.freeRooms = [];
     this.currentFloor = 'SOE';
     this.currentfreeRooms = [];
@@ -77,61 +79,112 @@ class RoomSearchStore extends EventEmitter {
         this.freeRooms = await api.getFreeRoomsJson().catch(err => {
           console.error(err);
         });
-        this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
+        this.timeSlots = this.getTimeSlotsBetweenTimes(
+          this.startTime,
+          this.endTime
+        );
+        //this.currentfreeRooms = this.getSortedByTimeSlot(this.starTime);
         this.emit('got_currentFreeRooms');
         break;
       case 'GET_FREEROOMBYTIME':
-        console.log('action.payload: ', action.payload);
+        //this.currentTimeSlot = action.payload;
+        this.startTime = action.start;
+        this.endTime = action.end;
+        this.timeSlots = this.getTimeSlotsBetweenTimes(
+          this.startTime,
+          this.endTime
+        );
 
-        this.currentTimeSlot = action.payload;
-        this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
+        this.currentfreeRooms = this.filterRooms(this.timeSlots);
         this.emit('got_currentFreeRooms');
         break;
       case 'CHANGE_FLOOR':
         this.setFloor(action.payload);
-        this.currentfreeRooms = this.getSortedByTimeSlot(this.currentTimeSlot);
+        //this.currentfreeRooms = this.getSortedByTimeSlot(this.starTime);
         this.emit('newFloor');
         break;
     }
   }
 
-  getSortedByTimeSlot(value) {
-    console.log('value: ', value);
-    let tempRooms = [];
+  filterRooms(timeSlots) {
+    let freeRoomArrays = [];
+    console.log('timeSlots: ', timeSlots);
+    for (let i = 0; i < timeSlots.length; i++) {
+      freeRoomArrays.push(this.getSortedByTimeSlotIndex(timeSlots[i]));
+      console.log('freeRoomArrays: ', freeRoomArrays);
+    }
+    let tempFreeRooms = freeRoomArrays[0];
+    for (let j = 1; j < freeRoomArrays.length; j++) {
+      tempFreeRooms = this.getCommonElements(tempFreeRooms, freeRoomArrays[j]);
+      console.log('tempFreeRooms: ', tempFreeRooms);
+    }
+    return tempFreeRooms;
+  }
 
-    // Find timeslot
-    if (value) {
+  getCommonElements(array1, array2) {
+    console.log('array1, array2: ', array1, array2);
+
+    let res = array1.filter(function(v) {
+      // iterate over the array
+      // check element present in the second array
+      return array2.includes(v);
+    });
+    console.log('res: ', res);
+    return res;
+  }
+
+  // Gets indexes of all the time slots between to times
+  getTimeSlotsBetweenTimes(start, end) {
+    // Todo: end time before start time
+    let slots = [];
+    if (start && end) {
       let found = false;
       let count = 0;
-      let tempRoom;
-      // Todo: and smaller than slots count
+
+      // find start slot
       while (!found) {
         if (
           format(this.freeRooms[count].slot.startTime, 'HH:mm') ===
-          format(value, 'HH:mm')
+          format(start, 'HH:mm')
         ) {
           found = true;
+          slots.push(count);
+          count++;
         } else {
           count++;
         }
       }
-
-      if (this.currentFloor != 'SOE') {
-        // Only add free rooms of same building
-        for (let room in this.freeRooms[count].rooms) {
-          tempRoom = this.freeRooms[count].rooms[room];
-          // Check if same level
-          if (this.currentFloor.substring(0, 2) === tempRoom.substring(0, 2)) {
-            tempRooms.push(tempRoom);
-          }
+      for (count; count < this.freeRooms.length; count++) {
+        slots.push(count);
+        if (this.freeRooms[count].slot.endTime == end) {
+          return slots;
         }
-      } else {
-        // if not in building return all the free rooms
-        tempRooms = this.freeRooms[count].rooms;
       }
     }
+    return slots;
+  }
 
-    console.log('tempRooms: ', tempRooms);
+  getSortedByTimeSlotIndex(index) {
+    let tempRooms = [];
+
+    // Find timeslot
+    let found = false;
+    let tempRoom;
+
+    if (this.currentFloor != 'SOE') {
+      // Only add free rooms of same building
+      for (let room in this.freeRooms[index].rooms) {
+        tempRoom = this.freeRooms[index].rooms[room];
+        // Check if same level
+        if (this.currentFloor.substring(0, 2) === tempRoom.substring(0, 2)) {
+          tempRooms.push(tempRoom);
+        }
+      }
+    } else {
+      // if not in building return all the free rooms
+      tempRooms = this.freeRooms[index].rooms;
+    }
+    console.log('tempRooms:', tempRooms);
     return tempRooms;
   }
 

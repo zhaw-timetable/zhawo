@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './DrawerContainer.sass';
 
 import * as globalActions from '../../actions/GlobalActions';
 import globalStore from '../../stores/GlobalStore.js';
 
-import scheduleStore from '../../stores/ScheduleStore';
-import * as scheduleActions from '../../actions/ScheduleActions';
+import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import Switch from '@material-ui/core/Switch';
-import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
+import Typography from '@material-ui/core/Typography';
 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
+
+import DrawerOptions from './DrawerOptions/DrawerOptions';
+import DrawerNav from './DrawerNav/DrawerNav';
 
 class DrawerContainer extends Component {
   state = {
@@ -26,14 +27,10 @@ class DrawerContainer extends Component {
 
   componentWillMount() {
     globalStore.on('drawerOpen_changed', this.handleDrawer);
-    globalStore.on('isDayView_changed', this.handleViewChanged);
-    globalStore.on('theme_changed', this.handleThemeChanged);
   }
 
   componentWillUnmount() {
     globalStore.removeListener('drawerOpen_changed', this.handleDrawer);
-    globalStore.removeListener('isDayView_changed', this.handleViewChanged);
-    globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
   toggleDrawer = () => {
@@ -44,87 +41,69 @@ class DrawerContainer extends Component {
     this.setState({ drawerOpen: globalStore.drawerOpen });
   };
 
-  logout = () => {
-    globalActions.logout();
-  };
-
-  handleThemeSwitchChange = event => {
-    globalActions.changeTheme(event.target.checked);
-  };
-
-  handleThemeChanged = () => {
-    if (globalStore.drawerOpen) {
-      this.setState({ themeSwitch: globalStore.theme == 'darkTheme' });
-    }
-  };
-
-  handleViewChanged = () => {
-    if (globalStore.drawerOpen) {
-      this.setState({ viewSwitch: globalStore.isDayView });
-    }
-  };
-
-  handleViewSwitchChange = event => {
-    globalActions.setDayView(event.target.checked);
-  };
-
   render() {
     return (
-      <Drawer
-        anchor="left"
-        open={this.state.drawerOpen}
-        onClose={this.toggleDrawer}
-      >
-        <div
-          className={'DrawerContainer ' + this.props.className}
-          tabIndex={0}
-          role="button"
-        >
-          <div className="InfoContainer">
-            <div className="LogoContainer">
-              <LogoSVG />
-            </div>
-            <div className="TextContainer">
-              <h1>Hello {globalStore.currentUser}</h1>
-              <p>Welcome to ZhaWo </p>
-            </div>
-            <IconButton
-              className="closeButton"
-              color="inherit"
-              aria-label="Close"
-              onClick={this.toggleDrawer}
+      <Fragment>
+        <Hidden mdUp>
+          <Drawer
+            classes={{
+              modal: 'Drawer'
+            }}
+            anchor="left"
+            variant="temporary"
+            open={this.state.drawerOpen}
+            onClose={this.toggleDrawer}
+          >
+            <div
+              className={'DrawerContainer ' + this.props.className}
+              tabIndex={0}
+              role="button"
             >
-              <CloseIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <div className="switchContainer">
-            {' '}
-            <Switch
-              checked={this.state.themeSwitch}
-              onChange={this.handleThemeSwitchChange}
-              value="themeSwitch"
-            />
-            {!this.state.themeSwitch && 'Dark Mode'}
-            {this.state.themeSwitch && 'Light Mode'}
-          </div>
+              <div className="InfoContainer">
+                <div className="LogoContainer">
+                  <LogoSVG />
+                </div>
+                <div className="TextContainer">
+                  <h1>Hoi {globalStore.currentUser}</h1>
+                  <p>Willkommen bei ZhaWo </p>
+                </div>
+                <IconButton
+                  className="closeButton"
+                  color="inherit"
+                  aria-label="Close"
+                  onClick={this.toggleDrawer}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <DrawerOptions />
+            </div>
+          </Drawer>
+        </Hidden>
+        <Hidden smDown>
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              docked: 'Drawer ' + this.props.className,
+              paperAnchorDockedLeft: 'Drawer-docked'
+            }}
+          >
+            <AppBarContainer>
+              <LogoSVG />
+            </AppBarContainer>
 
-          <div className="switchContainer">
-            {' '}
-            <Switch
-              checked={this.state.viewSwitch}
-              onChange={this.handleViewSwitchChange}
-              value="themeSwitch"
-            />
-            {!this.state.viewSwitch && 'Day View'}
-            {this.state.viewSwitch && 'Week View'}
-          </div>
-
-          <Button className="LogoutBtn" onClick={this.logout} color="inherit">
-            Logout
-          </Button>
-        </div>
-      </Drawer>
+            <div className="DrawerContainer ">
+              <div className="TextContainer">
+                <h1>Hoi {globalStore.currentUser}</h1>
+                <p>Willkommen bei ZhaWo </p>
+              </div>
+              <DrawerNav />
+              <DrawerOptions />
+            </div>
+          </Drawer>
+        </Hidden>
+      </Fragment>
     );
   }
 }

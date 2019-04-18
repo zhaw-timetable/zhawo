@@ -4,43 +4,63 @@
   padding: 20px
   display: flex
   flex-direction: column
-  justify-content: center
+  height: 80%
+
+  .selectContainer
+    padding: 30px 0px
+    display: flex
+    justify-content: center
+    .Select
+      width: 20vw !important
 
   svg
     max-height: 60vh
 
-    stroke: var(--text-color)
-    stroke-width: 4.17
+    stroke: var(--primary-text-color)
+    stroke-width: 2
 
     text 
       stroke: none
-      font-weight: 700
-      font-size: 70px
+      font-weight: 300
+      font-size: 60px
+      color: var(--secondary-text-color)
 
      
 
   .Room
-    fill: red
+    fill: var(--background-color)
 
   .free
-    fill: green
-    background-color: green
+    fill: var(--accent-color)
+    // Todo: add radial-gradient
+    background-color: var(--accent-color)
+    color: var(--primary-color-text)
+
+  .selectedFloor  
+    background-color: var(--divider-color)
+    color: var(--accent-color)
 
 .floorSelector
   display: flex
-  height: 100px
-  flex-direction: row
+  flex-direction: column
   justify-content: center
+  padding-right: 20px
+
   div
-    background-color: red
-    color: var(--primary-color)
+    //color: var(--secondary-text-color)
     display: flex
     flex-direction: column
     justify-content: center
     text-align: center
+    border: solid 1px
+    border-color: var(--primary-text-color)
 
     cursor: pointer
     width: 50px
     height: 50px
 
+.selectorContainer
+  display: flex
+  align-items: center
+  flex-grow: 1
 

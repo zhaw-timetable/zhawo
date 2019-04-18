@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { format } from 'date-fns';
 
 import './RoomSearchContainer.sass';
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 
 import roomSearchStore from '../../stores/RoomSearchStore';
 import * as roomSearchActions from '../../actions/RoomSearchActions';
@@ -13,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
 
 class RoomSearchContainer extends Component {
   state = {
@@ -21,7 +24,10 @@ class RoomSearchContainer extends Component {
     currentFloors: [],
     freeRooms: null,
     timeSlots: scheduleStore.slots,
-    currentTimeSlot: '',
+    // startTime: '2018-10-29T08:00:00+01:00',
+    // endTime: '2018-10-29T11:35:00+01:00',
+    startTime: '',
+    endTime: '',
     roomStates: {}
   };
 
@@ -58,6 +64,13 @@ class RoomSearchContainer extends Component {
 
   setRoomBackground = () => {
     let tempRoomState = {};
+    console.log(
+      'roomSearchStore.currentFloor.substring(0, 2): ',
+      roomSearchStore.currentFloor.substring(0, 2)
+    );
+    tempRoomState[roomSearchStore.currentFloor.substring(0, 3)] =
+      'selectedFloor';
+
     // If there is a room then free room in soe
     if (roomSearchStore.currentfreeRooms[0]) {
       tempRoomState['SOE'] = 'free';
@@ -83,8 +96,27 @@ class RoomSearchContainer extends Component {
     });
   };
 
+  handleButton = () => {
+    console.log(
+      'startTime: ',
+      this.state.startTime,
+      'endtime: ',
+      this.state.endTime
+    );
+
+    roomSearchActions.getFreeRoomsByTime(
+      this.state.startTime,
+      this.state.endTime
+    );
+  };
+
   handleChange = event => {
-    roomSearchActions.getFreeRoomsByTime(event.target.value);
+    // Todo: filter
+    console.log(event.target.name, ':', event.target.value);
+
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   handleClick = event => {
@@ -99,45 +131,84 @@ class RoomSearchContainer extends Component {
 
     return (
       <Fragment>
-        <AppBarContainer />
+        <AppBarContainer>
+          <Hidden mdUp>
+            <Typography variant="h6" color="inherit" className="flex">
+              ZHAWo
+            </Typography>
+          </Hidden>
+        </AppBarContainer>
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
-            <Select
-              value={this.state.currentTimeSlot}
-              onChange={this.handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {this.state.timeSlots.map(slot => (
-                <MenuItem value={slot.startTime} key={slot.startTime}>
-                  {format(slot.startTime, 'HH:mm')}
-                </MenuItem>
-              ))}
-            </Select>
-            <div className="floorSelector">
-              <div
-                id="SOE"
-                onClick={this.handleClick}
-                className={this.state.roomStates['SOE']}
+            <div className="selectContainer">
+              <Select
+                value={this.state.startTime}
+                onChange={this.handleChange}
+                name="startTime"
+                classes={{
+                  root: 'Select'
+                }}
               >
-                SOE
-              </div>
-              {this.state.currentFloors.map(floor => (
-                <div
-                  key={floor}
-                  id={floor}
-                  className={this.state.roomStates[floor]}
-                  onClick={this.handleClick}
-                >
-                  {floor}
-                </div>
-              ))}
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {this.state.timeSlots.map(slot => (
+                  <MenuItem value={slot.startTime} key={slot.startTime}>
+                    {format(slot.startTime, 'HH:mm')}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Select
+                value={this.state.endTime}
+                onChange={this.handleChange}
+                name="endTime"
+                classes={{
+                  root: 'Select'
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {this.state.timeSlots.map(slot => (
+                  <MenuItem value={slot.endTime} key={slot.endTime}>
+                    {format(slot.endTime, 'HH:mm')}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Button
+                onClick={this.handleButton}
+                color="inherit"
+                variant="text"
+                fontSize="small"
+              >
+                Search
+              </Button>
             </div>
-            <Floor
-              clickhandler={this.handleClick}
-              roomStates={this.state.roomStates}
-            />
+            <div className="selectorContainer">
+              <div className="floorSelector">
+                <div
+                  id="SOE"
+                  onClick={this.handleClick}
+                  className={this.state.roomStates['SOE']}
+                >
+                  SOE
+                </div>
+                {this.state.currentFloors.map(floor => (
+                  <div
+                    key={floor}
+                    id={floor}
+                    className={this.state.roomStates[floor]}
+                    onClick={this.handleClick}
+                  >
+                    {floor}
+                  </div>
+                ))}
+              </div>
+              <Floor
+                clickhandler={this.handleClick}
+                roomStates={this.state.roomStates}
+              />
+            </div>
           </div>
         </div>
       </Fragment>
