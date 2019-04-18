@@ -64,6 +64,13 @@ class RoomSearchContainer extends Component {
 
   setRoomBackground = () => {
     let tempRoomState = {};
+    console.log(
+      'roomSearchStore.currentFloor.substring(0, 2): ',
+      roomSearchStore.currentFloor.substring(0, 2)
+    );
+    tempRoomState[roomSearchStore.currentFloor.substring(0, 3)] =
+      'selectedFloor';
+
     // If there is a room then free room in soe
     if (roomSearchStore.currentfreeRooms[0]) {
       tempRoomState['SOE'] = 'free';
@@ -177,29 +184,31 @@ class RoomSearchContainer extends Component {
                 Search
               </Button>
             </div>
-            <div className="floorSelector">
-              <div
-                id="SOE"
-                onClick={this.handleClick}
-                className={this.state.roomStates['SOE']}
-              >
-                SOE
-              </div>
-              {this.state.currentFloors.map(floor => (
+            <div className="selectorContainer">
+              <div className="floorSelector">
                 <div
-                  key={floor}
-                  id={floor}
-                  className={this.state.roomStates[floor]}
+                  id="SOE"
                   onClick={this.handleClick}
+                  className={this.state.roomStates['SOE']}
                 >
-                  {floor}
+                  SOE
                 </div>
-              ))}
+                {this.state.currentFloors.map(floor => (
+                  <div
+                    key={floor}
+                    id={floor}
+                    className={this.state.roomStates[floor]}
+                    onClick={this.handleClick}
+                  >
+                    {floor}
+                  </div>
+                ))}
+              </div>
+              <Floor
+                clickhandler={this.handleClick}
+                roomStates={this.state.roomStates}
+              />
             </div>
-            <Floor
-              clickhandler={this.handleClick}
-              roomStates={this.state.roomStates}
-            />
           </div>
         </div>
       </Fragment>
