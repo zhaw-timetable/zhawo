@@ -1,16 +1,21 @@
-.EventFlexBox
+.EventBucketFlex
   display: flex
-  margin-right: 10px
+  margin-right: 5px
   grid-column: 2 / 9
+
+.EventBucketGrid
+  width: 100%
+  display: grid
 
 .LessonDayEvent
   z-index: 1
   display: grid
   grid-template-columns: 1fr 1fr
-  grid-template-rows: 1fr
-  width: 100%
+  box-sizing: border-box
+  width: auto
+  // width: 100%
   height: inherit
-  padding: 5px
+  padding: 2px
   padding-right: 15px
   padding-left: 15px
   margin: 2px

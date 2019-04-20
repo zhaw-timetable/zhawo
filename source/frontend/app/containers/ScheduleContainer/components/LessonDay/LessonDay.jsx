@@ -134,30 +134,43 @@ class LessonDay extends Component {
                 </div>
               </div>
               <div
-                className="EventFlexBox"
+                className="EventBucketFlex"
                 style={{
                   gridRow: `${i + 1} / ${i + 1 + slot.longestEvent}`
                 }}
               >
                 {slot.eventBucket &&
                   slot.eventBucket.map((event, j) => {
+                    console.log(slot.eventBucket);
+                    const rows = '1fr '.repeat(slot.longestEvent);
                     return (
                       <div
-                        key={format(event.startTime, 'HH:mm').concat(
-                          event.name
-                        )}
-                        onClick={this.handleEventClick(event)}
-                        className="LessonDayEvent"
+                        className="EventBucketGrid"
                         style={{
-                          gridRow: `${i + 3} / ${i + 3 + event.slots.length}`
+                          gridTemplateRows: rows
                         }}
                       >
-                        <div className="EventInfo">{event.name}</div>
-                        <div className="EventRoom">
-                          {event.eventRealizations &&
-                            event.eventRealizations[0] &&
-                            event.eventRealizations[0].room &&
-                            event.eventRealizations[0].room.name}
+                        <div
+                          className="LessonDayEvent"
+                          key={format(event.startTime, 'HH:mm').concat(
+                            event.name
+                          )}
+                          onClick={this.handleEventClick(event)}
+                          style={{
+                            gridRow: `${event.offSetFromBucketStart +
+                              1} / ${event.offSetFromBucketStart +
+                              1 +
+                              event.slots.length}`,
+                            maxWidth: `calc(100%/slot.eventBucket.length)`
+                          }}
+                        >
+                          <div className="EventInfo">{event.name}</div>
+                          <div className="EventRoom">
+                            {event.eventRealizations &&
+                              event.eventRealizations[0] &&
+                              event.eventRealizations[0].room &&
+                              event.eventRealizations[0].room.name}
+                          </div>
                         </div>
                       </div>
                     );

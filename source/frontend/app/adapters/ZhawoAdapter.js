@@ -151,6 +151,7 @@ export function resolveOverlaps(schedule) {
           let event = events[j];
           if (event.sortedIntoBucket) break;
           event.sortedIntoBucket = true;
+          event.offSetFromBucketStart = 0;
           slot.eventBucket = [...slot.eventBucket, event];
           for (let k = 0; k < event.slots.length; k++) {
             let nextSlot = slots[i + k];
@@ -159,6 +160,7 @@ export function resolveOverlaps(schedule) {
               let event = events[x];
               if (event.sortedIntoBucket) break;
               event.sortedIntoBucket = true;
+              event.offSetFromBucketStart = k;
               slot.eventBucket = [...slot.eventBucket, event];
             }
           }
@@ -166,7 +168,7 @@ export function resolveOverlaps(schedule) {
       }
     });
   });
-  console.log(newSchedule);
+  // console.log(newSchedule);
   return newSchedule;
 }
 
