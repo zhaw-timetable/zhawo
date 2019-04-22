@@ -3,6 +3,8 @@
 ## Content
 
 - [Sprint Planning](#sprint-planning)
+  - [Sprint 4](#sprint-4)
+  - [Sprint 3](#sprint-3)
   - [Sprint 2](#sprint-2)
   - [Sprint 1](#sprint-1)
   - [Sprint 0](#sprint-0)
@@ -10,21 +12,20 @@
 
 <hr>
 
-### Sprint 2
+### Sprint 4
 
-**(Thu 21 Mar - Thu 4 Apr 2019)**
+**(Thu 18 Apr - Thu 3 May 2019)**
 
 #### Goals
 
-Create floor plan SVGs and basic interaction with campus and building floor plans. Add swipe gesture navigations.
+Set up domain, fix bugs in roomsearch, various enhancements
 
 #### User stories
 
-- [ ] **3 SP** Task - Improve front end testing
-- [ ] **1 SP** Task - Save view state to indexed db
-- [ ] **1 SP** Task - ScheduleSearch: Filter out own name (login name) from suggestions
-- [ ] **6 SP** US31 - As a user I want a floor plan of each floor per building with highlighted unoccupied rooms
-- [ ] **10 SP** US32 - As a user I want an overview of my campus with highlighted buildings where there are unoccupied rooms
+- [ ] **4 SP** US - As a user I want to see upcoming vszhaw events (f.ex. next party)
+- [ ] **1 SP** Task - Set up domain name for ZHAW prod serverr
+- [ ] **1 SP** US35 - As a user I want to see until when a room is unoccupied
+- [ ] **3 SP** US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
 
 #### Decisions
 
@@ -34,9 +35,61 @@ Create floor plan SVGs and basic interaction with campus and building floor plan
 
 ...
 
-#### Burndown
+<hr>
 
-<img src="burndown/burndown_sprint_2_ba_001.jpg?raw=true" height=400 />
+### Sprint 3
+
+**(Thu 4 Apr - Thu 18 Apr 2019)**
+
+#### Goals
+
+Finish RoomSearch Interface, set up server, rework design
+
+#### User stories
+
+- [x] **1 SP** Task - Display bug when clicking on an event
+- [x] **1 SP** Task - Can't type full name and hit enter in Login/Search inputs
+- [x] **1 SP** Task - Schedule resets to users Schedule when Search Schedule is started before all async requests for currentUser are done
+- [x] **3 SP** Task - Rework application design, color palette
+- [x] **2 SP** Task - Dispay of overlapping events doesnt always work correctly
+- [x] **4 SP** Task - Set up ZHAW production server
+- [ ] **1 SP** US35 - As a user I want to see until when a room is unoccupied
+- [ ] **3 SP** US36 - As a user I want to filter my search to only show rooms that are unoccupied for at least x hours/minutes
+
+#### Decisions
+
+- Removed user story for Month navigation in Menuplan -> does not make much sense to provide navigation far back and ahead
+
+#### Review
+
+Tasks and bugfixes could be implemented. ZHAW production server was set up and should allow us to more easily distribute and collect feedback for application (no 30 second delay to wake up from sleep). There is a bug/inconsitencies with SVG floorplans -> 2 related userstories will only be marked completed in next sprint when issues are resolved, but are mostly done.
+
+<hr>
+
+
+### Sprint 2
+
+**(Thu 21 Mar - Thu 4 Apr 2019)**
+
+#### Goals
+
+Improve test coverage, create SVGs of floorplans and display unoccupied rooms, minor enhancements
+
+#### User stories
+
+- [x] **3 SP** Task - Improve front end testing
+- [x] **1 SP** Task - Save view state to indexed db
+- [x] **1 SP** Task - ScheduleSearch: Filter out own name (login name) from suggestions
+- [x] **6 SP** US31 - As a user I want a floor plan of each floor per building with highlighted unoccupied rooms
+- [x] **10 SP** US32 - As a user I want an overview of my campus with highlighted buildings where there are unoccupied rooms
+
+#### Decisions
+
+- Burndown charts will not be added to the repository for future sprints, since focus will be more on deployment and bug fixes / enhancements
+
+#### Review
+
+Planned userstories could be implemented. No changes to approach necessary. Since most important user stories from vision are implemented / planned, we will switch to more tasks and enhancements in future sprints.
 
 <hr>
 
