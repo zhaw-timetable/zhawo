@@ -7,20 +7,15 @@
   width: 100%
   display: grid
 
+
 .LessonDayEvent
   z-index: 1
-  display: grid
-  grid-template-columns: 1fr 1fr
-  box-sizing: border-box
+  display: flex
+  flex-direction: row
   width: auto
-  // width: 100%
-  height: inherit
-  padding: 2px
-  padding-right: 15px
-  padding-left: 15px
+  max-height: 100%
   margin: 2px
   overflow: hidden
-  align-items: center
   font-size: 0.8rem
   border: solid 1px
   border-color: var(--secondary-color)
@@ -29,9 +24,15 @@
     cursor: pointer
 
   .EventInfo
+    width: 80%
+    padding: 5px
+    padding-right: 0px
     grid-column-start: 1
 
   .EventRoom
+    width: 20%
+    padding: 5px
+    padding-left: 0px
     font-weight: bold
     text-align: end
     grid-column-start: 2

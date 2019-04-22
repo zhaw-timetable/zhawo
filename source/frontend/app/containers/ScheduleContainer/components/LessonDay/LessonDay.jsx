@@ -3,11 +3,7 @@ import { format, startOfWeek } from 'date-fns';
 
 import './LessonDay.sass';
 
-import * as globalActions from '../../../../actions/GlobalActions';
-import globalStore from '../../../../stores/GlobalStore.js';
-
 import scheduleStore from '../../../../stores/ScheduleStore';
-import * as scheduleActions from '../../../../actions/ScheduleActions';
 
 import EventDetailDialog from '../EventDetailDialog/EventDetailDialog';
 
@@ -72,115 +68,123 @@ class LessonDay extends Component {
   }
 
   handleEventClick = param => e => {
-    this.setState({ eventDetailsOpen: true, eventForDetails: param });
+    // Check if it is event with actual information (not. f.ex. holiday)
+    if (param.eventRealizations && param.eventRealizations.length > 0) {
+      this.setState({ eventDetailsOpen: true, eventForDetails: param });
+    }
   };
 
   handleCloseEventDetails = () => {
     this.setState({ eventDetailsOpen: false, eventForDetails: null });
   };
 
+  getWeekKey = displayDay => {
+    return format(startOfWeek(displayDay, { weekStartsOn: 1 }), 'YYYY-MM-DD');
+  };
+
+  getDayKey = displayDay => {
+    return format(displayDay, 'YYYY-MM-DD');
+  };
+
   render() {
-    const weekKey = format(
-      startOfWeek(this.state.displayDay, { weekStartsOn: 1 }),
-      'YYYY-MM-DD'
-    );
-    const dayKey = format(this.state.displayDay, 'YYYY-MM-DD');
-    const isThereData =
-      this.state.schedule !== null &&
-      this.state.schedule.weeks !== undefined &&
-      this.state.schedule.weeks[weekKey] !== undefined &&
-      this.state.schedule.weeks[weekKey][dayKey] !== undefined;
+    const {
+      displayDay,
+      schedule,
+      eventDetailsOpen,
+      eventForDetails,
+      activeSlot
+    } = this.state;
+    const weekKey = this.getWeekKey(displayDay);
+    const dayKey = this.getDayKey(displayDay);
     return (
       <Fragment>
-        {this.state.eventDetailsOpen && (
+        {eventDetailsOpen && (
           <EventDetailDialog
             open={true}
-            event={this.state.eventForDetails}
+            event={eventForDetails}
             handleClose={this.handleCloseEventDetails}
           />
         )}
-        {!isThereData &&
-          this.state.slots.map(slot => (
-            <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div
-                className={
-                  'SlotTime ' +
-                  (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
-                }
-              >
-                <div className="SlotStartTime">
-                  {format(slot.startTime, 'HH:mm')}
-                </div>
-                <div className="SlotEndTime">
-                  {format(slot.endTime, 'HH:mm')}
-                </div>
-              </div>
-            </Fragment>
-          ))}
-        {isThereData &&
-          this.state.schedule.weeks[weekKey][dayKey].slots.map((slot, i) => (
-            <Fragment key={format(slot.startTime, 'HH:mm')}>
-              <div
-                className={
-                  'SlotTime ' +
-                  (this.state.activeSlot == format(slot.endTime, 'HH:mm'))
-                }
-              >
-                <div className="SlotStartTime">
-                  {format(slot.startTime, 'HH:mm')}
-                </div>
-                <div className="SlotEndTime">
-                  {format(slot.endTime, 'HH:mm')}
-                </div>
-              </div>
-              <div
-                className="EventBucketFlex"
-                style={{
-                  gridRow: `${i + 1} / ${i + 1 + slot.longestEvent}`
-                }}
-              >
-                {slot.eventBucket &&
-                  slot.eventBucket.map((event, j) => {
-                    console.log(slot.eventBucket);
-                    const rows = '1fr '.repeat(slot.longestEvent);
-                    return (
-                      <div
-                        className="EventBucketGrid"
-                        style={{
-                          gridTemplateRows: rows
-                        }}
-                      >
-                        <div
-                          className="LessonDayEvent"
-                          key={format(event.startTime, 'HH:mm').concat(
-                            event.name
-                          )}
-                          onClick={this.handleEventClick(event)}
-                          style={{
-                            gridRow: `${event.offSetFromBucketStart +
-                              1} / ${event.offSetFromBucketStart +
-                              1 +
-                              event.slots.length}`,
-                            maxWidth: `calc(100%/slot.eventBucket.length)`
-                          }}
-                        >
-                          <div className="EventInfo">{event.name}</div>
-                          <div className="EventRoom">
-                            {event.eventRealizations &&
-                              event.eventRealizations[0] &&
-                              event.eventRealizations[0].room &&
-                              event.eventRealizations[0].room.name}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
+        {schedule &&
+          schedule.weeks &&
+          schedule.weeks[weekKey][dayKey] &&
+          schedule.weeks[weekKey][dayKey].slots &&
+          schedule.weeks[weekKey][dayKey].slots.map((slot, index) => (
+            <Fragment key={index}>
+              <Slots
+                activeSlot={activeSlot}
+                startTime={slot.startTime}
+                endTime={slot.endTime}
+              />
+              <EventBucketFlex
+                slot={slot}
+                index={index}
+                handleEventClick={this.handleEventClick}
+              />
             </Fragment>
           ))}
       </Fragment>
     );
   }
 }
+
+const Slots = ({ activeSlot, startTime, endTime }) => (
+  <div className={'SlotTime ' + (activeSlot == format(endTime, 'HH:mm'))}>
+    <div className="SlotStartTime">{format(startTime, 'HH:mm')}</div>
+    <div className="SlotEndTime">{format(endTime, 'HH:mm')}</div>
+  </div>
+);
+
+const EventBucketFlex = ({ slot, index, handleEventClick }) => {
+  const { eventBucket, longestEvent } = slot;
+  const gridRowStart = `${index + 1}`;
+  const gridRowEnd = `${index + 1 + slot.longestEvent}`;
+  const styles = { gridRow: `${gridRowStart} / ${gridRowEnd}` };
+  return (
+    <div className="EventBucketFlex" style={styles} key={index}>
+      {eventBucket &&
+        eventBucket.map((event, j) => {
+          return (
+            <EventBucketGrid
+              event={event}
+              longestEvent={longestEvent}
+              handleEventClick={handleEventClick}
+              key={j}
+            />
+          );
+        })}
+    </div>
+  );
+};
+
+const EventBucketGrid = ({ event, longestEvent, handleEventClick }) => {
+  const rows = '1fr '.repeat(longestEvent);
+  return (
+    <div
+      className="EventBucketGrid"
+      style={{
+        gridTemplateRows: rows
+      }}
+    >
+      <div
+        className="LessonDayEvent"
+        key={format(event.startTime, 'HH:mm').concat(event.name)}
+        onClick={handleEventClick(event)}
+        style={{
+          gridRow: `${event.offSetFromBucketStart +
+            1} / ${event.offSetFromBucketStart + 1 + event.slots.length}`
+        }}
+      >
+        <div className="EventInfo">{event.name}</div>
+        <div className="EventRoom">
+          {event.eventRealizations &&
+            event.eventRealizations[0] &&
+            event.eventRealizations[0].room &&
+            event.eventRealizations[0].room.name}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LessonDay;
