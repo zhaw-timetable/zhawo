@@ -1,21 +1,21 @@
-.EventFlexBox
+.EventBucketFlex
   display: flex
-  margin-right: 10px
+  margin-right: 5px
   grid-column: 2 / 9
+
+.EventBucketGrid
+  width: 100%
+  display: grid
+
 
 .LessonDayEvent
   z-index: 1
-  display: grid
-  grid-template-columns: 1fr 1fr
-  grid-template-rows: 1fr
-  width: 100%
-  height: inherit
-  padding: 5px
-  padding-right: 15px
-  padding-left: 15px
+  display: flex
+  flex-direction: row
+  width: auto
+  max-height: 100%
   margin: 2px
   overflow: hidden
-  align-items: center
   font-size: 0.8rem
   border: solid 1px
   border-color: var(--primary-text-color)
@@ -24,9 +24,15 @@
     cursor: pointer
 
   .EventInfo
+    width: 80%
+    padding: 5px
+    padding-right: 0px
     grid-column-start: 1
 
   .EventRoom
+    width: 20%
+    padding: 5px
+    padding-left: 0px
     font-weight: bold
     text-align: end
     grid-column-start: 2
