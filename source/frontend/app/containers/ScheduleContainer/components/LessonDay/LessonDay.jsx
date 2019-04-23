@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { format, startOfWeek } from 'date-fns';
+import { format, startOfWeek, isSameDay } from 'date-fns';
 
 import './LessonDay.sass';
 
 import scheduleStore from '../../../../stores/ScheduleStore';
+import vszhawStore from '../../../../stores/VsZhawStore';
 
 import EventDetailDialog from '../EventDetailDialog/EventDetailDialog';
+import VszhawEvent from '../VszhawEvent/VszhawEvent';
 
 class LessonDay extends Component {
   state = {
@@ -14,15 +16,18 @@ class LessonDay extends Component {
     displayDay: scheduleStore.displayDay,
     schedule: scheduleStore.schedule,
     eventDetailsOpen: false,
-    eventForDetails: null
+    eventForDetails: null,
+    vszhawEvents: vszhawStore.events
   };
 
   componentWillMount() {
     scheduleStore.on('schedule_changed', this.refreshSchedule);
+    vszhawStore.on('got_vszhaw_events', this.setEvents);
   }
 
   componentWillUnmount() {
     scheduleStore.removeListener('schedule_changed', this.refreshSchedule);
+    vszhawStore.removeListener('got_vszhaw_events', this.setEvents);
     this.stopTimer();
   }
 
@@ -34,6 +39,12 @@ class LessonDay extends Component {
       activeSlot: this.getTimeSlot(this.state.slots)
     });
   }
+
+  setEvents = () => {
+    this.setState({
+      vszhawEvents: vszhawStore.events
+    });
+  };
 
   refreshSchedule = () => {
     this.setState({
@@ -86,16 +97,28 @@ class LessonDay extends Component {
     return format(displayDay, 'YYYY-MM-DD');
   };
 
+  checkForVszhawEvent = () => {
+    const { vszhawEvents, displayDay } = this.state;
+    if (!vszhawEvents.length > 0) return false;
+    let onThisDay = isSameDay(
+      new Date(this.state.displayDay),
+      new Date(this.state.vszhawEvents[0].eventDate)
+    );
+    return onThisDay;
+  };
+
   render() {
     const {
       displayDay,
       schedule,
       eventDetailsOpen,
       eventForDetails,
-      activeSlot
+      activeSlot,
+      vszhawEvents
     } = this.state;
     const weekKey = this.getWeekKey(displayDay);
     const dayKey = this.getDayKey(displayDay);
+    const isThereVszhawEvent = this.checkForVszhawEvent();
     return (
       <Fragment>
         {eventDetailsOpen && (
@@ -107,6 +130,7 @@ class LessonDay extends Component {
         )}
         {schedule &&
           schedule.weeks &&
+          schedule.weeks[weekKey] &&
           schedule.weeks[weekKey][dayKey] &&
           schedule.weeks[weekKey][dayKey].slots &&
           schedule.weeks[weekKey][dayKey].slots.map((slot, index) => (
@@ -123,6 +147,7 @@ class LessonDay extends Component {
               />
             </Fragment>
           ))}
+        {isThereVszhawEvent && <VszhawEvent event={vszhawEvents[0]} dayView />}
       </Fragment>
     );
   }
