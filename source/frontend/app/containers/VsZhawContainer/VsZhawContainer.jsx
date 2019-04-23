@@ -14,7 +14,7 @@ import AppBarContainer from '../AppBarContainer/AppBarContainer';
 class VsZhawContainer extends Component {
   state = {
     feed: '',
-    events: []
+    events: vszhawStore.events
   };
 
   componentDidMount() {
