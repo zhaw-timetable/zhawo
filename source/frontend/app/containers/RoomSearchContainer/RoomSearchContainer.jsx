@@ -13,8 +13,7 @@ import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
 class RoomSearchContainer extends Component {
@@ -141,40 +140,45 @@ class RoomSearchContainer extends Component {
         <div className="ContentWrapper">
           <div className="RoomSearchContainer">
             <div className="selectContainer">
-              <Select
-                value={this.state.startTime}
-                onChange={this.handleChange}
-                name="startTime"
-                classes={{
-                  root: 'Select'
-                }}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.state.timeSlots.map(slot => (
-                  <MenuItem value={slot.startTime} key={slot.startTime}>
-                    {format(slot.startTime, 'HH:mm')}
+              <FormControl className="formControl">
+                <Select
+                  value={this.state.startTime}
+                  onChange={this.handleChange}
+                  name="startTime"
+                  classes={{
+                    root: 'Select'
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
                   </MenuItem>
-                ))}
-              </Select>
-              <Select
-                value={this.state.endTime}
-                onChange={this.handleChange}
-                name="endTime"
-                classes={{
-                  root: 'Select'
-                }}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.state.timeSlots.map(slot => (
-                  <MenuItem value={slot.endTime} key={slot.endTime}>
-                    {format(slot.endTime, 'HH:mm')}
+                  {this.state.timeSlots.map(slot => (
+                    <MenuItem value={slot.startTime} key={slot.startTime}>
+                      {format(slot.startTime, 'HH:mm')}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl className="formControl">
+                <Select
+                  value={this.state.endTime}
+                  onChange={this.handleChange}
+                  name="endTime"
+                  classes={{
+                    root: 'Select'
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
                   </MenuItem>
-                ))}
-              </Select>
+                  {this.state.timeSlots.map(slot => (
+                    <MenuItem value={slot.endTime} key={slot.endTime}>
+                      {format(slot.endTime, 'HH:mm')}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <Button
                 onClick={this.handleButton}
                 color="inherit"
