@@ -13,12 +13,6 @@
     .Select
       width: 20vw !important
 
-  svg
-    max-height: 60vh
-
-    stroke: var(--primary-text-color)
-    stroke-width: 2
-
     text 
       stroke: none
       font-weight: 300
@@ -63,4 +57,22 @@
   display: flex
   align-items: center
   flex-grow: 1
+  svg
+    height: 60vh
+    stroke: var(--primary-text-color)
+    stroke-width: 2
+
+// Mobile
+@media (max-width: 600px)
+  .floorSelector
+    display: flex
+    flex-direction: row
+    justify-content: center
+    padding-bottom: 50px
+  .selectorContainer
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    svg
+      height: auto
 
