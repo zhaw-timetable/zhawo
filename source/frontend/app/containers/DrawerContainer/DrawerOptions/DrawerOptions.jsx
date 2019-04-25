@@ -54,7 +54,7 @@ class DrawerOptions extends Component {
               value="themeSwitch"
               classes={{
                 checked: 'colorChecked',
-                bar: !this.state.themeSwitch && 'colorBar'
+                bar: this.state.themeSwitch && 'colorBar'
               }}
             />
             {!this.state.themeSwitch && 'Dark Mode'}
