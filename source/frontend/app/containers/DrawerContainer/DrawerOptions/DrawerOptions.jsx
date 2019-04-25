@@ -52,6 +52,10 @@ class DrawerOptions extends Component {
               checked={this.state.themeSwitch}
               onChange={this.handleThemeSwitchChange}
               value="themeSwitch"
+              classes={{
+                checked: 'colorChecked',
+                bar: !this.state.themeSwitch && 'colorBar'
+              }}
             />
             {!this.state.themeSwitch && 'Dark Mode'}
             {this.state.themeSwitch && 'Light Mode'}
@@ -63,6 +67,10 @@ class DrawerOptions extends Component {
               checked={this.state.viewSwitch}
               onChange={this.handleViewSwitchChange}
               value="themeSwitch"
+              classes={{
+                checked: 'colorChecked',
+                bar: this.state.viewSwitch && 'colorBar'
+              }}
             />
             {!this.state.viewSwitch && 'Day View'}
             {this.state.viewSwitch && 'Week View'}
