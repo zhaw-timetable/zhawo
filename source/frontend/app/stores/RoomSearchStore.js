@@ -108,28 +108,24 @@ class RoomSearchStore extends EventEmitter {
 
   filterRooms(timeSlots) {
     let freeRoomArrays = [];
-    console.log('timeSlots: ', timeSlots);
     for (let i = 0; i < timeSlots.length; i++) {
       freeRoomArrays.push(this.getSortedByTimeSlotIndex(timeSlots[i]));
-      console.log('freeRoomArrays: ', freeRoomArrays);
     }
     let tempFreeRooms = freeRoomArrays[0];
     for (let j = 1; j < freeRoomArrays.length; j++) {
       tempFreeRooms = this.getCommonElements(tempFreeRooms, freeRoomArrays[j]);
-      console.log('tempFreeRooms: ', tempFreeRooms);
     }
+
+    console.log('Current Free Rooms: ', tempFreeRooms);
     return tempFreeRooms;
   }
 
   getCommonElements(array1, array2) {
-    console.log('array1, array2: ', array1, array2);
-
     let res = array1.filter(function(v) {
       // iterate over the array
       // check element present in the second array
       return array2.includes(v);
     });
-    console.log('res: ', res);
     return res;
   }
 
@@ -184,7 +180,6 @@ class RoomSearchStore extends EventEmitter {
       // if not in building return all the free rooms
       tempRooms = this.freeRooms[index].rooms;
     }
-    console.log('tempRooms:', tempRooms);
     return tempRooms;
   }
 

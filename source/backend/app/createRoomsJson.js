@@ -116,9 +116,6 @@ const createFreeRoomsObject = async () => {
         }
       }
     }
-
-    console.log(util.inspect(freeRoomsBySlot));
-
     logger.log(`FreeRoom List Created`);
 
     return freeRoomsBySlot;
