@@ -20,6 +20,12 @@ class VszhawStore extends EventEmitter {
         this.events = await api
           .getVszhawEvents()
           .catch(err => console.error(err));
+        this.events[0].eventDate =
+          this.events[0].eventDate.substring(
+            0,
+            this.events[0].eventDate.length - 1
+          ) + '+01:00';
+        console.log(this.events);
         this.emit('got_vszhaw_events');
         break;
     }

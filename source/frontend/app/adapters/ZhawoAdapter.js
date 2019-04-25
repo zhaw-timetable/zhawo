@@ -169,7 +169,6 @@ export function resolveOverlaps(schedule) {
       }
     });
   });
-  // console.log(newSchedule);
   return newSchedule;
 }
 

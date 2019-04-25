@@ -61,10 +61,7 @@ class RoomSearchContainer extends Component {
 
   setRoomBackground = () => {
     let tempRoomState = {};
-    console.log(
-      'roomSearchStore.currentFloor.substring(0, 2): ',
-      roomSearchStore.currentFloor.substring(0, 2)
-    );
+
     tempRoomState[roomSearchStore.currentFloor.substring(0, 3)] =
       'selectedFloor';
 
@@ -73,20 +70,16 @@ class RoomSearchContainer extends Component {
       tempRoomState['SOE'] = 'free';
     }
     roomSearchStore.currentfreeRooms.map(room => {
-      // console.log('room: ', room);
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
-        console.log('room: ', room);
         tempRoomState[room.substring(0, 2)] = 'free';
         tempRoomState[room] = 'free';
       } else {
-        console.log('Levels with free rooms: ', room.substring(0, 3));
         // Sets buildings that have free rooms
         tempRoomState[room.substring(0, 2)] = 'free';
         // Sets floors that have free rooms
         tempRoomState[room.substring(0, 3)] = 'free';
       }
     });
-    console.log(tempRoomState);
 
     this.setState({
       roomStates: tempRoomState
@@ -94,13 +87,6 @@ class RoomSearchContainer extends Component {
   };
 
   handleButton = () => {
-    console.log(
-      'startTime: ',
-      this.state.startTime,
-      'endtime: ',
-      this.state.endTime
-    );
-
     roomSearchActions.getFreeRoomsByTime(
       this.state.startTime,
       this.state.endTime
@@ -109,8 +95,6 @@ class RoomSearchContainer extends Component {
 
   handleChange = event => {
     // Todo: filter
-    console.log(event.target.name, ':', event.target.value);
-
     this.setState({
       [event.target.name]: event.target.value
     });
