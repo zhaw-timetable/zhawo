@@ -1,8 +1,6 @@
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 
-import { startOfDay } from 'date-fns';
-
 import * as api from '../adapters/ZhawoAdapter';
 
 class VszhawStore extends EventEmitter {
@@ -22,8 +20,6 @@ class VszhawStore extends EventEmitter {
         this.events = await api
           .getVszhawEvents()
           .catch(err => console.error(err));
-        this.events[0].eventDate = startOfDay(this.events[0].eventDate);
-        console.log(this.events);
         this.emit('got_vszhaw_events');
         break;
     }

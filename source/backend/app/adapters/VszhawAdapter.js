@@ -27,11 +27,10 @@ export async function getVszhawEvents() {
       let icalData = ical.parseICS(icalString);
       Object.keys(icalData).forEach(key => {
         const entry = icalData[key];
-        console.log(entry.start);
         if (entry.type == 'VEVENT') {
           let event = {
             eventName: entry.summary,
-            eventDate: entry.start,
+            eventDate: new Date(entry.start).toUTCString(),
             eventUrl: entry.url
           };
           events.push(event);
