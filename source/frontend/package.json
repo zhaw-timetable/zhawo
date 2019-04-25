@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --history-api-fallback --mode=development --hot",
-    "build": "webpack --mode=production",
+    "build": "NODE_ENV=production webpack --mode=production ",
     "test": "jest --coverage",
     "test-only": "jest",
     "watch": "jest --watch",
