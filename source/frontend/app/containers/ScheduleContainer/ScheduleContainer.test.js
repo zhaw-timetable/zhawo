@@ -1,5 +1,6 @@
 jest.mock('../../stores/GlobalStore');
 jest.mock('../../stores/ScheduleStore');
+jest.mock('../../stores/VsZhawStore');
 jest.mock('../../adapters/IdbAdapter');
 jest.mock('../../adapters/ZhawoAdapter');
 
