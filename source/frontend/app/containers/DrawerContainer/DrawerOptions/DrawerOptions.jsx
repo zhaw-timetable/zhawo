@@ -45,28 +45,29 @@ class DrawerOptions extends Component {
   render() {
     return (
       <div className="DrawerOptions">
-        <div className="switchContainer">
-          {' '}
-          <Switch
-            checked={this.state.themeSwitch}
-            onChange={this.handleThemeSwitchChange}
-            value="themeSwitch"
-          />
-          {!this.state.themeSwitch && 'Dark Mode'}
-          {this.state.themeSwitch && 'Light Mode'}
-        </div>
+        <div className="switchContainers">
+          <div className="switchContainer">
+            {' '}
+            <Switch
+              checked={this.state.themeSwitch}
+              onChange={this.handleThemeSwitchChange}
+              value="themeSwitch"
+            />
+            {!this.state.themeSwitch && 'Dark Mode'}
+            {this.state.themeSwitch && 'Light Mode'}
+          </div>
 
-        <div className="switchContainer">
-          {' '}
-          <Switch
-            checked={this.state.viewSwitch}
-            onChange={this.handleViewSwitchChange}
-            value="themeSwitch"
-          />
-          {!this.state.viewSwitch && 'Day View'}
-          {this.state.viewSwitch && 'Week View'}
+          <div className="switchContainer">
+            {' '}
+            <Switch
+              checked={this.state.viewSwitch}
+              onChange={this.handleViewSwitchChange}
+              value="themeSwitch"
+            />
+            {!this.state.viewSwitch && 'Day View'}
+            {this.state.viewSwitch && 'Week View'}
+          </div>
         </div>
-
         <Button className="LogoutBtn" onClick={this.logout} color="inherit">
           Logout
         </Button>
