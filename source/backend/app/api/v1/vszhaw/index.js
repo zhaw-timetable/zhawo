@@ -3,14 +3,14 @@ import { Router } from 'express';
 import fs from 'fs-extra';
 // import roomSearchData from '../../../../data/room_search_data.json';
 
-import * as rss from '../../../adapters/VszhawAdapter';
+import * as vszhawApi from '../../../adapters/VszhawAdapter';
 
 export default ({ config, db }) => {
   let router = Router();
 
   router.get('/', async (req, res) => {
     try {
-      const feed = await rss.getVszhawRSS();
+      const feed = await vszhawApi.getVszhawRSS();
       res.header('Content-Type', 'application/json');
       res.json(feed);
     } catch (err) {
@@ -18,16 +18,15 @@ export default ({ config, db }) => {
     }
   });
 
-  const getVszhawRSS = async () => {
-    console.log('Started getting vszhaw RSS Feed');
+  router.get('/events', async (req, res) => {
     try {
-      const feed = await rss.getVszhawRSS();
-      console.log('Finished getting vszhaw RSS Feed');
-      return feed;
+      const events = await vszhawApi.getVszhawEvents();
+      res.header('Content-Type', 'application/json');
+      res.json(events);
     } catch (err) {
       console.error(err);
     }
-  };
+  });
 
   return router;
 };

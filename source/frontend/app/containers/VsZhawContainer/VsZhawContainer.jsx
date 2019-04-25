@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+
 import './VsZhawContainer.sass';
 
 import Typography from '@material-ui/core/Typography';
@@ -12,24 +13,36 @@ import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 class VsZhawContainer extends Component {
   state = {
-    feed: ''
+    feed: '',
+    events: vszhawStore.events
   };
 
   componentDidMount() {
     vszhawActions.getVszhawFeed();
+    if (!vszhawStore.events.length > 0) {
+      vszhawActions.getVszhawEvents();
+    }
   }
 
   componentWillMount() {
     vszhawStore.on('got_vszhaw_feed', this.setFeed);
+    vszhawStore.on('got_vszhaw_events', this.setEvents);
   }
 
   componentWillUnmount() {
     vszhawStore.removeListener('got_vszhaw_feed', this.setFeed);
+    vszhawStore.removeListener('got_vszhaw_events', this.setEvents);
   }
 
   setFeed = () => {
     this.setState({
       feed: vszhawStore.feed
+    });
+  };
+
+  setEvents = () => {
+    this.setState({
+      events: vszhawStore.events
     });
   };
 
@@ -50,6 +63,27 @@ class VsZhawContainer extends Component {
         </AppBarContainer>
         <div className="ContentWrapper">
           <div className="VsZhawContainer">
+            {this.state.events.length > 0 && (
+              <div
+                className="VsZhawEvent Post"
+                onClick={this.gotoLink(this.state.events[0].eventUrl)}
+              >
+                <h2>Nächster Event:</h2>
+                <div className="EventTime">
+                  {format(
+                    new Date(this.state.events[0].eventDate),
+                    'D. MMMM YYYY',
+                    {
+                      locale: deLocale
+                    }
+                  )}
+                  :
+                </div>
+                <div className="EventName">
+                  {this.state.events[0].eventName}
+                </div>
+              </div>
+            )}
             {this.state.feed &&
               this.state.feed.map(post => (
                 <div

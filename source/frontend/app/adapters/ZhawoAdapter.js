@@ -269,6 +269,22 @@ export function getVszhawFeed() {
   });
 }
 
+export function getVszhawEvents() {
+  return new Promise(async (resolve, reject) => {
+    const method = GET;
+    const headers = HEADERS;
+    const config = { method, headers };
+    const url = `${apiUrl}/vszhaw/events/`;
+    const response = await fetch(url, config).catch(err =>
+      handleError(err, url)
+    );
+    let vszhawEvents = await response
+      .json()
+      .catch(err => handleError(err, url));
+    vszhawEvents ? resolve(vszhawEvents) : reject({ status: 404 });
+  });
+}
+
 export function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }

@@ -8,6 +8,9 @@ import Hidden from '@material-ui/core/Hidden';
 
 import globalStore from '../../stores/GlobalStore';
 
+import vszhawStore from '../../stores/VsZhawStore';
+import * as vszhawActions from '../../actions/VsZhawActions';
+
 import scheduleStore from '../../stores/ScheduleStore';
 import * as scheduleActions from '../../actions/ScheduleActions';
 
@@ -33,6 +36,9 @@ class Schedule extends Component {
         globalStore.currentUser,
         scheduleStore.currentDate
       );
+    }
+    if (!vszhawStore.events.length > 0) {
+      vszhawActions.getVszhawEvents();
     }
   }
 
