@@ -2,6 +2,24 @@
 
 How to deploy?
 
+## Surge.sh
+
+Install the Surge CLI
+
+```
+$ npm install --global surge
+```
+
+From the root directory deploy to surge
+
+```
+$ npm run surge-deploy
+```
+
+Don't forget that the backend must still be deployed to the ZHAW server.
+
+## ZHAW Server
+
 Add the server repo as a remote called "deploy"
 
 ```
@@ -17,15 +35,15 @@ git push deploy master
 Todo : add to travis
 https://docs.travis-ci.com/user/deployment/custom/
 
-## Setup
+### Setup
 
 How to setup on new server?
 
-### Git Hooks
+#### Git Hooks
 
 Used to simplify the deployment process.
 
-#### User access and permission
+##### User access and permission
 
 On the server:
 
@@ -47,7 +65,7 @@ sudo chmod g+w /srv/www/
 
 `/srv/www/` contains the actual production files
 
-#### Create an empty Git repo
+##### Create an empty Git repo
 
 On the remote server:
 
@@ -79,7 +97,7 @@ sudo find . -type d -exec chmod g+s '{}' +
 sudo git config core.sharedRepository group
 ```
 
-#### Write a Git Hook to deploy the code
+##### Write a Git Hook to deploy the code
 
 On the remote server:
 
@@ -133,7 +151,7 @@ sudo ./startZhawo.sh
 
 _we explain sudo ./startZhawo.sh later_
 
-#### Deploy from the local computer
+##### Deploy from the local computer
 
 Add the server repo as a remote called "deploy" in local git repo:
 
@@ -141,7 +159,7 @@ Add the server repo as a remote called "deploy" in local git repo:
 git remote add deploy ssh://<user-name>@<server-ip>/srv/git/zhawo.git/
 ```
 
-### Making Node.js service always alive
+#### Making Node.js service always alive
 
 Make SystemD Service on server: `sudo vim /etc/systemd/system/zhawo.service`
 
@@ -185,7 +203,7 @@ Enable service so it will start up when the machine boots:
 sudo systemctl enable zhawo.service
 ```
 
-### Run systemctl/systemd services without password
+#### Run systemctl/systemd services without password
 
 Create bash file on remote server:`vim /home/<user-name>/startZhawo.sh`
 
@@ -213,7 +231,7 @@ Add line:
 <user-name> ALL=(ALL) NOPASSWD: /home/<user-name>/startZhawo.sh
 ```
 
-### Links
+#### Links
 
 https://medium.com/@francoisromain/vps-deploy-with-git-fea605f1303b
 
