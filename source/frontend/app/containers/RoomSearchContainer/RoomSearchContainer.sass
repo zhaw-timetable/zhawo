@@ -22,33 +22,36 @@
     fill: var(--background-color)
 
   .free
+    // Todo:  replace with text color
     fill: var(--accent-color)
-    // Todo: add radial-gradient
-    background-color: var(--accent-color)
-    color: var(--primary-color-text)
+    border-color: var(--primary-text-color)
+    color: var(--primary-text-color)
+
 
   .selectedFloor  
-    background-color: var(--divider-color)
+    background-color: var(--background-color)
+    border-color: var(--accent-color)
     color: var(--accent-color)
 
 .floorSelector
   display: flex
   flex-direction: column
   justify-content: center
-  padding-right: 20px
+  margin-right: 20px
 
-  div
-    //color: var(--secondary-text-color)
+  div 
+    margin: 3px
     display: flex
     flex-direction: column
     justify-content: center
     text-align: center
     border: solid 1px
-    border-color: var(--primary-text-color)
+    border-color: var(--divider-color)
+    color: var(--divider-color)
 
     cursor: pointer
-    width: 50px
-    height: 50px
+    width: 45px
+    height: 45px
 
 .selectorContainer
   display: flex
@@ -62,7 +65,8 @@
       stroke: none
       font-weight: 300
       font-size: 60px
-      color: var(--secondary-text-color)
+      fill: var(--primary-color-text)
+      //fill: var(--divider-color)
 
 // Mobile
 @media (max-width: 600px)
@@ -71,6 +75,8 @@
     flex-direction: row
     justify-content: center
     padding-bottom: 50px
+    border: solid 0px
+
   .selectorContainer
     display: flex
     flex-direction: column
