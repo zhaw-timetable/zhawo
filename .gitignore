@@ -12,7 +12,7 @@ npm-debug.log*
 /source/build
 
 # Logs
-/logs
+/source/logs/
 
 
 .vscode
