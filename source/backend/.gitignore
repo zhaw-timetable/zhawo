@@ -4,6 +4,9 @@
 # Jest
 /coverage
 
+# Logs
+/logs
+
 # Misc
 .DS_Store
 .env.local
