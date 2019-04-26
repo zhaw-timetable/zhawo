@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 import * as api from '../../../adapters/CampusInfoAdapter';
 
+import { logToFile } from '../../../file-logger';
+
 export default ({ config, db }) => {
   let router = Router();
 
@@ -13,6 +15,9 @@ export default ({ config, db }) => {
   router.get('/menus/:facilityId', async (req, res) => {
     const facilityId = req.params.facilityId;
     const startDate = req.query.startDate;
+
+    logToFile('Mensa', 'fetching mensa info for ' + facilityId);
+
     const resource = await api
       .getMensaResource(facilityId, startDate)
       .catch(err => console.error(err));

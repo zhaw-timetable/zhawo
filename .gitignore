@@ -11,6 +11,9 @@ npm-debug.log*
 # Webpack build directory
 /source/build
 
+# Logs
+/logs
+
 
 .vscode
 reports/test-report.xml

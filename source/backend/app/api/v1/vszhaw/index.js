@@ -5,11 +5,15 @@ import fs from 'fs-extra';
 
 import * as vszhawApi from '../../../adapters/VszhawAdapter';
 
+import { logToFile } from '../../../file-logger';
+
 export default ({ config, db }) => {
   let router = Router();
 
   router.get('/', async (req, res) => {
     try {
+      logToFile('Vszhaw', 'fetching rss feed ');
+
       const feed = await vszhawApi.getVszhawRSS();
       res.header('Content-Type', 'application/json');
       res.json(feed);
