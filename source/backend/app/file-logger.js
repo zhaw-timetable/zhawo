@@ -4,10 +4,15 @@ let fs = require('fs');
 import logger from './logger';
 import { fileURLToPath } from 'url';
 
+import { format } from 'date-fns';
+
 export const logToFile = async (file, text) => {
   let timeStamp = new Date();
+  let fileName = format(timeStamp, 'YYYY-MM-DD');
   let logText = timeStamp + ' --- ' + file + ': ' + text + '\n';
-  await fs.appendFile('./logs/logs.txt', logText, function(err) {
+  await fs.appendFile('../logs/' + fileName + '-Logs.txt', logText, function(
+    err
+  ) {
     if (err) {
       return logger.error(err);
     }
