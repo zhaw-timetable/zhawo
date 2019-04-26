@@ -8,6 +8,8 @@ export default ({ config, db }) => {
   let router = Router();
 
   router.get('/', async (req, res) => {
+    logToFile('Schedules', 'student logged in');
+
     const resource = await api
       .getPossibleNames('students')
       .catch(err => console.error(err));
