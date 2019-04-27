@@ -13,7 +13,12 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/bundle/index.html'));
 });
 
-app.server.listen(process.env.PORT || config.port, () => {
+let port = config.port;
+// if (process.env.NODE_ENV === 'development') {
+//   port = config.devPort;
+// }
+
+app.server.listen(port, () => {
   let host = app.server.address().address;
   host = host == '::' ? 'localhost' : host;
   logger.log(

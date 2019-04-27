@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon -w app --exec babel-node app",
     "build": "babel app -d dist --copy-files",
-    "serve": "node dist",
+    "serve": "cross-env NODE_ENV=production node dist",
     "test": "jest --coverage",
     "test-only": "jest",
     "watch": "jest --watch",

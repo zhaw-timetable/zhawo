@@ -12,8 +12,7 @@ const GET = 'GET';
 const POST = 'POST';
 const HEADERS = { 'Content-Type': 'application/json' };
 let address = 'http://localhost:4000';
-if (process.env.NODE_ENV === 'production')
-  address = 'http://160.85.252.131:4000';
+if (process.env.NODE_ENV === 'production') address = 'https://zhawo.ml';
 const apiUrl = `${address}/api/v1`;
 
 export function getMensaResource(facilityId, date) {

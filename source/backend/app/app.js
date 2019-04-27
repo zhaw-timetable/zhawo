@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'test') {
     : app.use(morgan('common'));
 }
 
-app.use(express.static(__dirname + '/bundle'));
+app.use(express.static(__dirname + '/bundle', { dotfiles: 'allow' }));
 
 app.use(
   cors({
