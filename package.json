@@ -19,7 +19,8 @@
     "serve": "cd source/backend && npm run serve",
     "local-serve": "npm run build && npm run serve",
     "heroku-postbuild": "npm run build",
-    "surge-deploy": "npm run build-frontend && cd source/backend/dist/bundle && mv index.html 200.html && surge --domain zhawo.surge.sh"
+    "surge-deploy": "npm run build-frontend && cd source/backend/dist/bundle && mv index.html 200.html && surge --domain https://zhawo.surge.sh",
+    "surge-deploy-windows": "npm run build-frontend && cd source/backend/dist/bundle && move index.html 200.html && surge --domain https://zhawo.surge.sh"
   },
   "repository": {
     "type": "git",
