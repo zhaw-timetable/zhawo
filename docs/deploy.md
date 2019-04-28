@@ -2,7 +2,7 @@
 
 How to deploy?
 
-## Surge.sh
+## Surge
 
 Install the Surge CLI
 
@@ -10,10 +10,16 @@ Install the Surge CLI
 $ npm install --global surge
 ```
 
-From the root directory deploy to surge
+You may have to edit the domain in the npm script to your own. Make sure to add `https://` to force surge to always serve through a secure connection (secure connection is needed for service worker).
+
+From the root directory deploy to surge.
 
 ```
+## On Linux/Mac:
 $ npm run surge-deploy
+
+## On Windows:
+$ npm run surge-deploy-windows
 ```
 
 Don't forget that the backend must still be deployed to the ZHAW server.
@@ -180,7 +186,7 @@ ExecStart=/usr/bin/node /srv/www/zhawo/dist/index.js
 WantedBy=multi-user.target
 ```
 
-Restat systemd:
+Restart systemd:
 
 ```
 sudo systemctl daemon-reload
@@ -231,6 +237,68 @@ Add line:
 <user-name> ALL=(ALL) NOPASSWD: /home/<user-name>/startZhawo.sh
 ```
 
+#### Get server certificate from Lets Encrypt
+
+Register free domain, f.ex. on dot.tk. Configure with an A record pointing to ZHAW Server IP (name: _blank_, target: 160.85.252.131).
+
+If port 80 is open, follow instructions on https://certbot.eff.org/.
+
+If not, perform DNS challenge (after installing certbot):
+
+```
+certbot -d zhawo.ml --manual --preferred-challenges dns certonly
+```
+
+Follo the instructions and add TXT record (name: \_acme-challenge, target: <CHALLENGE_STRING>). Wait until record is visible (check with: https://mxtoolbox.com/SuperTool.aspx?action=txt, enter \_acme-challenge.zhawo.ml).
+
+Certbot will create certificate and private key in `/etc/letsencrypt/live/zhawo.ml/`.
+
+#### Set up nginx server as reverse proxy to express
+
+Install nginx service:
+
+```
+sudo apt-get update
+sudo apt-get install -y nginx
+```
+
+Configure nginx to act as reverse proxy: `sudo vim /etc/nginx/sites-available/default`
+
+```
+# If port 80 is open, redirects all traffic to https
+server {
+  listen 80 default_server;
+  server_name _;
+  return 301 https://$host$request_url;
+}
+
+server {
+  listen 443 ssl default_server;
+  listen [::]:443 ssl default_server;
+
+  ssl_certificate /etc/letsencrypt/live/zhawo.ml/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/zhawo.ml/privkey.pem;
+
+  server_name zhawo.ml;
+
+  location / {
+    proxy_pass http://localhost:4000/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+#### Set up automatic certificate renewal
+
+```
+TODO
+```
+
 #### Links
 
 https://medium.com/@francoisromain/vps-deploy-with-git-fea605f1303b
@@ -244,3 +312,5 @@ https://askubuntu.com/questions/692701/allowing-user-to-run-systemctl-systemd-se
 https://stackoverflow.com/questions/24965160/use-sudoer-to-restart-server-in-post-receive-git-hook
 
 https://superuser.com/questions/745762/how-to-execute-commands-as-root-in-git-post-receive-hook/745773#745773
+
+https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-with-ssl-as-a-reverse-proxy-for-jenkins
