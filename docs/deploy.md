@@ -241,7 +241,7 @@ Add line:
 
 Register free domain, f.ex. on dot.tk. Configure with an A record pointing to ZHAW Server IP (name: _blank_, target: 160.85.252.131).
 
-If port 80 is open, follow instructions on https://certbot.eff.org/.
+If port 80 is open, follow instructions on https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx.html.
 
 If not, perform DNS challenge (after installing certbot):
 
@@ -291,6 +291,19 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 }
+```
+
+Check configuration:
+
+```
+sudo nginx -t
+```
+
+Start nginx service and add to startup:
+
+```
+sudo systemctl restart nginx
+sudo systemctl enable nginx
 ```
 
 #### Set up automatic certificate renewal
