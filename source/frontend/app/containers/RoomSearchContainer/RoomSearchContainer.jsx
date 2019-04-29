@@ -26,6 +26,8 @@ class RoomSearchContainer extends Component {
     slots: scheduleStore.slots,
     startTime: '2018-10-29T08:00:00+01:00',
     endTime: '2018-10-29T10:45:00+01:00',
+    startTimeIndex: 0,
+    endTimeIndex: 2,
     roomStates: {}
   };
 
@@ -86,26 +88,55 @@ class RoomSearchContainer extends Component {
     });
   };
 
-  handleButton = () => {
-    roomSearchActions.getFreeRoomsByTime(
-      this.state.startTime,
-      this.state.endTime
-    );
+  handleSearchClick = () => {
+    let { startTime, endTime } = this.state;
+    roomSearchActions.getFreeRoomsByTime(startTime, endTime);
   };
 
   handleTimeChange = event => {
-    // Todo: filter
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    let { startTimeIndex, endTimeIndex, slots } = this.state;
+    if (event.target.name === 'startTime') {
+      // Save how many slot where selected
+      const distance = endTimeIndex - startTimeIndex;
+      // Find the index corresponding to the value
+      let startIndex = slots.findIndex(slot => {
+        return slot.startTime === event.target.value;
+      });
+      // Set new endIndex with safety for array index bounds
+      let endIndex = Math.min(slots.length - 1, startIndex + distance);
+      this.setState({
+        startTime: event.target.value,
+        startTimeIndex: startIndex,
+        endTime: slots[endIndex].endTime,
+        endTimeIndex: endIndex
+      });
+    } else {
+      // Find the index corresponding to the value
+      let endIndex = slots.findIndex(slot => {
+        return slot.endTime === event.target.value;
+      });
+      this.setState({
+        endTime: event.target.value,
+        endTimeIndex: endIndex
+      });
+    }
   };
 
-  handleClick = event => {
+  handleFloorClick = event => {
     roomSearchActions.changeFloor(event.target.id);
   };
 
   render() {
-    const { currentFloor, allFloors } = this.state;
+    const {
+      currentFloor,
+      allFloors,
+      startTime,
+      endTime,
+      startTimeIndex,
+      slots,
+      roomStates,
+      currentBuildingFloors
+    } = this.state;
 
     // sets current floor to floor component
     const Floor = allFloors[currentFloor];
@@ -124,17 +155,14 @@ class RoomSearchContainer extends Component {
             <div className="selectContainer">
               <FormControl className="formControl">
                 <Select
-                  value={this.state.startTime}
+                  value={startTime}
                   onChange={this.handleTimeChange}
                   name="startTime"
                   classes={{
                     root: 'Select'
                   }}
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {this.state.slots.map(slot => (
+                  {slots.map(slot => (
                     <MenuItem value={slot.startTime} key={slot.startTime}>
                       {format(slot.startTime, 'HH:mm')}
                     </MenuItem>
@@ -144,25 +172,26 @@ class RoomSearchContainer extends Component {
 
               <FormControl className="formControl">
                 <Select
-                  value={this.state.endTime}
+                  value={endTime}
                   onChange={this.handleTimeChange}
                   name="endTime"
                   classes={{
                     root: 'Select'
                   }}
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {this.state.slots.map(slot => (
-                    <MenuItem value={slot.endTime} key={slot.endTime}>
+                  {slots.map((slot, index) => (
+                    <MenuItem
+                      value={slot.endTime}
+                      key={slot.endTime}
+                      disabled={index < startTimeIndex}
+                    >
                       {format(slot.endTime, 'HH:mm')}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
               <Button
-                onClick={this.handleButton}
+                onClick={this.handleSearchClick}
                 color="inherit"
                 variant="text"
                 fontSize="small"
@@ -175,24 +204,24 @@ class RoomSearchContainer extends Component {
                 <div
                   id="SOE"
                   onClick={this.handleClick}
-                  className={this.state.roomStates['SOE']}
+                  className={roomStates['SOE']}
                 >
                   SOE
                 </div>
-                {this.state.currentBuildingFloors.map(floor => (
+                {currentBuildingFloors.map(floor => (
                   <div
                     key={floor}
                     id={floor}
-                    className={this.state.roomStates[floor]}
-                    onClick={this.handleClick}
+                    className={roomStates[floor]}
+                    onClick={this.handleFloorClick}
                   >
                     {floor}
                   </div>
                 ))}
               </div>
               <Floor
-                clickhandler={this.handleClick}
-                roomStates={this.state.roomStates}
+                clickhandler={this.handleFloorClick}
+                roomStates={roomStates}
               />
             </div>
           </div>
