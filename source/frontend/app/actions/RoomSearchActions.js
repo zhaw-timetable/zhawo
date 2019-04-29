@@ -1,22 +1,37 @@
 import dispatcher from '../dispatcher';
 
-export const getFreeRoomsJson = () => {
+/**
+ * Dispatches action to make API call to fetch free room data
+ */
+export const fetchFreeRoomData = () => {
   dispatcher.dispatch({
-    type: 'GET_FREEROOMJSON'
+    type: 'FETCH_FREE_ROOM_DATA'
   });
 };
 
-export const getFreeRoomsByTime = (start, end) => {
+/**
+ * Dispatches action to get free rooms by time between parameters for
+ * startTime and endTime
+ * @param {string} startTime
+ * @param {string} endTime
+ */
+export const getFreeRoomsByTime = (startTime, endTime) => {
   dispatcher.dispatch({
-    type: 'GET_FREEROOMBYTIME',
-    start: start,
-    end: end
+    type: 'GET_FREE_ROOMS_BY_TIME',
+    payload: {
+      startTime,
+      endTime
+    }
   });
 };
 
-export const changeFloor = value => {
+/**
+ * Dispatches action to change selected floor
+ * @param {string} selectedFloor
+ */
+export const changeFloor = selectedFloor => {
   dispatcher.dispatch({
     type: 'CHANGE_FLOOR',
-    payload: value
+    payload: selectedFloor
   });
 };

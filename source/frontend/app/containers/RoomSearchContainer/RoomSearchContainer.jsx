@@ -18,44 +18,44 @@ import Button from '@material-ui/core/Button';
 
 class RoomSearchContainer extends Component {
   state = {
-    floor: roomSearchStore.currentFloor,
-    floors: roomSearchStore.floors,
-    currentFloors: [],
-    freeRooms: null,
-    timeSlots: scheduleStore.slots,
+    currentFreeRooms: roomSearchStore.currentFreeRooms,
+    currentFloor: roomSearchStore.currentFloor,
+    allFloors: roomSearchStore.allFloors,
+    currentBuildingFloors: roomSearchStore.currentBuildingFloors,
+    allRooms: [],
+    slots: scheduleStore.slots,
     startTime: '2018-10-29T08:00:00+01:00',
     endTime: '2018-10-29T10:45:00+01:00',
     roomStates: {}
   };
 
   componentDidMount() {
-    roomSearchActions.getFreeRoomsJson();
+    roomSearchActions.fetchFreeRoomData();
   }
 
   componentWillMount() {
-    roomSearchStore.on('got_currentFreeRooms', this.setFreeRooms);
-    roomSearchStore.on('newFloor', this.setFloor);
+    roomSearchStore.on('free_rooms_changed', this.setFreeRooms);
+    roomSearchStore.on('selected_floor_changed', this.setFloor);
   }
 
   componentWillUnmount() {
-    roomSearchStore.removeListener('got_currentFreeRooms', this.setFreeRooms);
-    roomSearchStore.removeListener('newFloor', this.setFloor);
+    roomSearchStore.removeListener('free_rooms_changed', this.setFreeRooms);
+    roomSearchStore.removeListener('selected_floor_changed', this.setFloor);
   }
 
   setFreeRooms = () => {
     this.setRoomBackground();
     this.setState({
-      freeRooms: roomSearchStore.currentfreeRooms,
-      currentTimeSlot: roomSearchStore.currentTimeSlot
+      currentFreeRooms: roomSearchStore.currentFreeRooms
     });
   };
 
   setFloor = () => {
     this.setRoomBackground();
     this.setState({
-      freeRooms: roomSearchStore.currentfreeRooms,
-      floor: roomSearchStore.currentFloor,
-      currentFloors: roomSearchStore.currentFloors
+      currentFreeRooms: roomSearchStore.currentFreeRooms,
+      currentFloor: roomSearchStore.currentFloor,
+      currentBuildingFloors: roomSearchStore.currentBuildingFloors
     });
   };
 
@@ -66,10 +66,10 @@ class RoomSearchContainer extends Component {
       'selectedFloor';
 
     // If there is a room then free room in soe
-    if (roomSearchStore.currentfreeRooms[0]) {
+    if (roomSearchStore.currentFreeRooms[0]) {
       tempRoomState['SOE'] = 'free';
     }
-    roomSearchStore.currentfreeRooms.map(room => {
+    roomSearchStore.currentFreeRooms.map(room => {
       if (roomSearchStore.currentFloor === room.substring(0, 3)) {
         tempRoomState[room.substring(0, 2)] = 'free';
         tempRoomState[room] = 'free';
@@ -93,7 +93,7 @@ class RoomSearchContainer extends Component {
     );
   };
 
-  handleChange = event => {
+  handleTimeChange = event => {
     // Todo: filter
     this.setState({
       [event.target.name]: event.target.value
@@ -105,10 +105,10 @@ class RoomSearchContainer extends Component {
   };
 
   render() {
-    const isThereData = this.state.freeRooms !== null;
+    const { currentFloor, allFloors } = this.state;
 
     // sets current floor to floor component
-    const Floor = this.state.floors[this.state.floor];
+    const Floor = allFloors[currentFloor];
 
     return (
       <Fragment>
@@ -125,7 +125,7 @@ class RoomSearchContainer extends Component {
               <FormControl className="formControl">
                 <Select
                   value={this.state.startTime}
-                  onChange={this.handleChange}
+                  onChange={this.handleTimeChange}
                   name="startTime"
                   classes={{
                     root: 'Select'
@@ -134,7 +134,7 @@ class RoomSearchContainer extends Component {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {this.state.timeSlots.map(slot => (
+                  {this.state.slots.map(slot => (
                     <MenuItem value={slot.startTime} key={slot.startTime}>
                       {format(slot.startTime, 'HH:mm')}
                     </MenuItem>
@@ -145,7 +145,7 @@ class RoomSearchContainer extends Component {
               <FormControl className="formControl">
                 <Select
                   value={this.state.endTime}
-                  onChange={this.handleChange}
+                  onChange={this.handleTimeChange}
                   name="endTime"
                   classes={{
                     root: 'Select'
@@ -154,7 +154,7 @@ class RoomSearchContainer extends Component {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  {this.state.timeSlots.map(slot => (
+                  {this.state.slots.map(slot => (
                     <MenuItem value={slot.endTime} key={slot.endTime}>
                       {format(slot.endTime, 'HH:mm')}
                     </MenuItem>
@@ -179,7 +179,7 @@ class RoomSearchContainer extends Component {
                 >
                   SOE
                 </div>
-                {this.state.currentFloors.map(floor => (
+                {this.state.currentBuildingFloors.map(floor => (
                   <div
                     key={floor}
                     id={floor}
