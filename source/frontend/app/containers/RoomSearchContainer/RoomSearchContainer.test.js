@@ -27,7 +27,7 @@ it('should render one root element with className  RoomSearchContainer', () => {
   expect(wrapper.find('.RoomSearchContainer')).toHaveLength(1);
 });
 
-it('should call setState via setFreeRooms with correct values ', () => {
+xit('should call setState via setFreeRooms with correct values ', () => {
   const wrapper = shallow(<RoomSearchContainer />);
   const instance = wrapper.instance();
   roomSearchStore.currentfreeRooms = [1, 2, 3];
@@ -43,12 +43,12 @@ it('should call setState via setFreeRooms with correct values ', () => {
   });
 });
 
-// it('should call roomSearchActions.getFreeRoomsByTime with the correct value via handleChange', () => {
-//   const wrapper = shallow(<RoomSearchContainer />);
-//   const instance = wrapper.instance();
-//   roomSearchActions.getFreeRoomsByTime = jest.fn();
-//   let event = { target: { value: 'test' } };
+xit('should call roomSearchActions.getFreeRoomsByTime with the correct value via handleChange', () => {
+  const wrapper = shallow(<RoomSearchContainer />);
+  const instance = wrapper.instance();
+  roomSearchActions.getFreeRoomsByTime = jest.fn();
+  let event = { target: { value: 'test' } };
 
-//   instance.handleChange(event);
-//   expect(roomSearchActions.getFreeRoomsByTime).toHaveBeenCalledWith('test');
-// });
+  instance.handleChange(event);
+  expect(roomSearchActions.getFreeRoomsByTime).toHaveBeenCalledWith('test');
+});

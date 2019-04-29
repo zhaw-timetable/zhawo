@@ -3,8 +3,6 @@ import dispatcher from '../dispatcher.js';
 
 jest.mock('../stores/RoomSearchStore');
 
-const VALUE = 'value';
-
 beforeEach(() => {
   dispatcher.dispatch = jest.fn();
 });
@@ -14,24 +12,36 @@ it('import should be defined', () => {
 });
 
 it('all actions should be defined', () => {
-  expect(roomsearchActions.getFreeRoomsJson).toBeDefined();
+  expect(roomsearchActions.fetchFreeRoomData).toBeDefined();
   expect(roomsearchActions.getFreeRoomsByTime).toBeDefined();
+  expect(roomsearchActions.changeFloor).toBeDefined();
 });
 
-it('getFreeRoomsJson should dispatch correct type', () => {
-  roomsearchActions.getFreeRoomsJson();
+it('fetchFreeRoomData should dispatch correct type', () => {
+  roomsearchActions.fetchFreeRoomData();
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
-    type: 'GET_FREEROOMJSON'
+    type: 'FETCH_FREE_ROOM_DATA'
   });
 });
 
 it('getFreeRoomsByTime should dispatch correct type with payload', () => {
-  roomsearchActions.getFreeRoomsByTime(VALUE, VALUE);
+  const START_TIME = 'startTime';
+  const END_TIME = 'endTime';
+  roomsearchActions.getFreeRoomsByTime(START_TIME, END_TIME);
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
-    type: 'GET_FREEROOMBYTIME',
-    end: 'value',
-    start: 'value'
+    type: 'GET_FREE_ROOMS_BY_TIME',
+    payload: { startTime: START_TIME, endTime: END_TIME }
+  });
+});
+
+it('changeFloor should dispatch correct type with payload', () => {
+  const SELECTED_FLOOR = 'floor';
+  roomsearchActions.changeFloor(SELECTED_FLOOR);
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'CHANGE_FLOOR',
+    payload: SELECTED_FLOOR
   });
 });
