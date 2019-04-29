@@ -269,7 +269,7 @@ Configure nginx to act as reverse proxy: `sudo vim /etc/nginx/sites-available/de
 server {
   listen 80 default_server;
   server_name _;
-  return 301 https://$host$request_url;
+  return 301 https://$host$request_uri;
 }
 
 server {
