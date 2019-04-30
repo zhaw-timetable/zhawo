@@ -203,7 +203,7 @@ class RoomSearchContainer extends Component {
               <div className="floorSelector">
                 <div
                   id="SOE"
-                  onClick={this.handleClick}
+                  onClick={this.handleFloorClick}
                   className={roomStates['SOE']}
                 >
                   SOE
