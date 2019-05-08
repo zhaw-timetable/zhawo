@@ -6,6 +6,55 @@
   - --shell-escape
 - markdown package (https://www.overleaf.com/learn/latex/Articles/How_to_write_in_Markdown_on_Overleaf)
 
+### How to install Latex
+
+Osx : [Install Latex](https://sourabhbajaj.com/mac-setup/LaTeX/)
+
+Windows: [Install Latex](https://miktex.org/download)
+
+### Vscode
+
+Install [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop).
+
+Add to settings:
+
+```
+"latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "--shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["%DOCFILE%"],
+      "env": {}
+    }
+  ],
+  "latex-workshop.view.pdf.viewer": "tab"
+```
+
 ## Set Up
 
 ### Main file
