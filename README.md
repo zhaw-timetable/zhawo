@@ -10,17 +10,6 @@
 
 <hr>
 
-## Content
-
-- [About](#about)
-- [Development](#development)
-- [Workflow](#workflow)
-
-- [Sprint Planning BA](docs/Sprint-Planning-BA.md)
-- [Sprint Planning PA](docs/Sprint-Planning-PA.md)
-
-<hr>
-
 ## About
 
 Our vision for **zhawo** is to build a modern progressive web app to help students of the ZHAW with their every day study needs. Using agile development, the goal is to work closely with students to provide an application that is tailored to their specific needs.
