@@ -12,9 +12,8 @@
 
 ## Content
 
+- [Content](#content)
 - [About](#about)
-- [Development](#development)
-- [Workflow](#workflow)
 
 - [Sprint Planning BA](docs/Sprint-Planning-BA.md)
 - [Sprint Planning PA](docs/Sprint-Planning-PA.md)
@@ -23,7 +22,7 @@
 
 ## About
 
-Our vision for **zhawo** is to build a modern progressive web app to help students of the ZHAW with their every day study needs. Using agile development, the goal is to work closely with students to provide an application that is tailored to their specific needs.
+Our vision for [**zhawo**](https://zhawo.ml) is to build a modern progressive web app to help students of the ZHAW with their every day study needs. Using agile development, the goal is to work closely with students to provide an application that is tailored to their specific needs.
 
 A few features that we are planning to implement:
 
@@ -39,40 +38,6 @@ A few features that we are planning to implement:
 
 <hr>
 
-## Development
-
 The latest release version of this project can be found here: [Latest release](https://github.com/zhaw-timetable/zhawo/releases/tag/v1)
 
-This project is split up into a backend Node service (`./source/backend`) and a frontend progressive web app built with React (`./source/frontend`). For development, please refer to the respective readmes.
-
-There is an npm script provided in the root folder of this repository to start both backend and frontend concurrently. Note that this script only works if all root dependencies have been installed.
-
-```
-# Install root dependencies:
-  npm install
-
-# Install dependencies for both frontend and backend:
-  npm run install-both
-
-# Run backend and frontend for development:
-  npm run start-both
-
-# Run tests for both frontend and backend:
-  npm run test-both
-```
-
-Both backend and frontend are JavaScript stacks. For continous integration we are using Travis CI. For test coverage we are using Codecov. We enforce a consistent coding style with prettier pre-commit hooks.
-
-[Back to top](#content)
-
-<hr>
-
-## Workflow
-
-Product backlog is managed with GitHub issues. All user stories must be labeled correctly with story points. Sprint Planning is done using the GitHub Projects board. For each Sprint, a new Project is added with 3 boards for `ToDo`, `In Progress` and `Done`.
-
-When working on a feature/user story, the developer assigns himself to the issue and moves it from `ToDo` to `In Progress`. Each developed feature is initially on it's own feature branch. The branch is to follow the following naming convention: `feature/{descriptive-name}`. If development of a feature is complete, a pull request onto the `master` branch is made and the code reviewed by a team member whenever possible. After being reviewed the branch can be merged into the `master` branch and the issue can be moved to `Done` on the Sprint board.
-
-[Back to top](#content)
-
-<hr>
+All information regarding this project can be found here:[Wiki](https://github.com/zhaw-timetable/zhawo/wiki).
