@@ -19,20 +19,14 @@ Install [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=Jam
 Add to settings:
 
 ```
-"latex-workshop.latex.tools": [
+  "latex-workshop.latex.recipes": [
     {
-      "name": "latexmk",
-      "command": "latexmk",
-      "args": [
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "-file-line-error",
-        "-pdf",
-        "-outdir=%OUTDIR%",
-        "%DOC%"
-      ],
-      "env": {}
-    },
+      "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    }
+  ],
+
+  "latex-workshop.latex.tools": [
     {
       "name": "pdflatex",
       "command": "pdflatex",
