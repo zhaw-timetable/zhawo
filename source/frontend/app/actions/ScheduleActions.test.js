@@ -62,3 +62,19 @@ it('clearSearch should dispatch correct type', () => {
     type: 'CLEAR_SEARCH'
   });
 });
+
+it('swipeRight should dispatch correct type', () => {
+  globalActions.swipeRight();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'SWIPE_RIGHT'
+  });
+});
+
+it('swipeLeft should dispatch correct type', () => {
+  globalActions.swipeLeft();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'SWIPE_LEFT'
+  });
+});

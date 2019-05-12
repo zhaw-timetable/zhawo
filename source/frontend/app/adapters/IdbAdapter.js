@@ -1,9 +1,19 @@
 import idb from 'idb';
 
+/**
+ * Adapter used to interact with idb
+ */
 class IdbAdapter {
   constructor() {
     this.currentTransaction = null;
   }
+
+  /**
+   * Async function that opens idb on client.
+   * If idb instance does not exist it creates one.
+   *
+   * resolves promise once done
+   */
   async getDBInstance() {
     return new Promise(async resolve => {
       let dbInstance = await idb.open('zhawoDB', 1, function(upgradeDB) {
@@ -18,10 +28,18 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Function that return dbInstance used to make transactions
+   * @param {*} dbInstance
+   * @param {string} accessMode
+   */
   getDBTransaction(dbInstance, accessMode) {
     return dbInstance.transaction('info', accessMode);
   }
 
+  /**
+   * Async function that return the saved user from idb
+   */
   async getUser() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -33,6 +51,9 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that return saved theme
+   */
   async getTheme() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -44,6 +65,10 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that saves theme to idb
+   * @param {string} theme
+   */
   async setTheme(theme) {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -56,6 +81,11 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function saves user to idb
+   * @param {string} name
+   * @param {string} type
+   */
   async setUser(name, type) {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -68,6 +98,9 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that removes saved user from db
+   */
   async removeUser() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -79,6 +112,10 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that saves current ViewState to idb
+   * @param {number} value
+   */
   async setViewState(value) {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -91,6 +128,9 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that gets saved ViewState from idb
+   */
   async getViewState() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();
@@ -103,6 +143,9 @@ class IdbAdapter {
     });
   }
 
+  /**
+   * Async function that removes saved ViewState from idb
+   */
   async removeViewState() {
     return new Promise(async resolve => {
       let dbInstance = await this.getDBInstance();

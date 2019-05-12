@@ -32,6 +32,13 @@ import TP2 from '../assets/img/FloorPlans/TP/TP2';
 import TP4 from '../assets/img/FloorPlans/TP/TP4';
 
 /**
+ * A flux action with a type and optional payload
+ * @typedef {Object} FluxAction
+ * @property {string} type
+ * @property {Object} [payload]
+ */
+
+/**
  * Flux Store RoomSearchStore
  */
 class RoomSearchStore extends EventEmitter {
@@ -78,7 +85,8 @@ class RoomSearchStore extends EventEmitter {
    */
 
   /**
-   * Handles actions dispatched from RoomSearchActions
+   * Function that is called after action is dispatched
+   * Uses switch to filter actions
    * @param {FluxAction} action
    */
   async handleActions(action) {
