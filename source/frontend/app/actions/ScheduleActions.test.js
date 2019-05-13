@@ -64,7 +64,7 @@ it('clearSearch should dispatch correct type', () => {
 });
 
 it('swipeRight should dispatch correct type', () => {
-  globalActions.swipeRight();
+  scheduleActions.swipeRight();
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'SWIPE_RIGHT'
@@ -72,7 +72,7 @@ it('swipeRight should dispatch correct type', () => {
 });
 
 it('swipeLeft should dispatch correct type', () => {
-  globalActions.swipeLeft();
+  scheduleActions.swipeLeft();
   expect(dispatcher.dispatch).toHaveBeenCalled();
   expect(dispatcher.dispatch).toHaveBeenCalledWith({
     type: 'SWIPE_LEFT'
