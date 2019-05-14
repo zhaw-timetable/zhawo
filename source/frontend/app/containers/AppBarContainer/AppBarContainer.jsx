@@ -10,6 +10,9 @@ import Hidden from '@material-ui/core/Hidden';
 
 import * as globalActions from '../../actions/GlobalActions';
 
+/**
+ *
+ */
 class AppBarContainer extends Component {
   toggleDrawer = () => {
     globalActions.toggleDrawer();

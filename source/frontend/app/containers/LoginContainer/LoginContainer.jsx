@@ -31,7 +31,7 @@ class LoginContainer extends Component {
     });
   };
 
-  render() {
+  getCurrentViewPath = () => {
     let currentViewPath = '';
     switch (globalStore.viewState) {
       case 0:
@@ -49,6 +49,11 @@ class LoginContainer extends Component {
       default:
         currentViewPath = '/';
     }
+    return currentViewPath;
+  };
+
+  render() {
+    let currentViewPath = this.getCurrentViewPath();
     const from = { pathname: currentViewPath };
     const { redirectToPreviousRoute } = this.state;
 

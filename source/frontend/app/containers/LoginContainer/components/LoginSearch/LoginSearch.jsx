@@ -34,6 +34,10 @@ class LoginSearch extends Component {
   }
 
   componentDidMount() {
+    this.loadPossibleNames();
+  }
+
+  loadPossibleNames = () => {
     // only reload if globalStore doesnt have the data yet
     if (globalStore.possibleNames.length === 0) {
       globalActions.getPossibleNames();
@@ -42,7 +46,7 @@ class LoginSearch extends Component {
         loadingPossibleNames: false
       });
     }
-  }
+  };
 
   refreshPossibleLoginNames = () => {
     this.setState({
