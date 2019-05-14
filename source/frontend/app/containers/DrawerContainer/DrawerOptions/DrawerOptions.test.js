@@ -81,3 +81,11 @@ it('should call globalActions.setDayView with correct values ', () => {
   instance.handleViewSwitchChange(event);
   expect(globalActions.setDayView).toHaveBeenCalledWith(true);
 });
+
+it('should remove listeners before unmount', () => {
+  globalStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(globalStore.removeListener).toHaveBeenCalled();
+});

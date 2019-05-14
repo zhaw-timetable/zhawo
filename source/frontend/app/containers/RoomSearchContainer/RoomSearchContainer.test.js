@@ -12,9 +12,11 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
+const wrapper = shallow(<RoomSearchContainer />);
+const instance = wrapper.instance();
+
 import roomSearchStore from '../../stores/RoomSearchStore';
 import * as roomSearchActions from '../../actions/RoomSearchActions';
-import scheduleStore from '../../stores/ScheduleStore';
 
 import RoomSearchContainer from './RoomSearchContainer';
 
@@ -23,13 +25,10 @@ it('renders without crashing', () => {
 });
 
 it('should render one root element with className  RoomSearchContainer', () => {
-  const wrapper = shallow(<RoomSearchContainer />);
   expect(wrapper.find('.RoomSearchContainer')).toHaveLength(1);
 });
 
 xit('should call setState via setFreeRooms with correct values ', () => {
-  const wrapper = shallow(<RoomSearchContainer />);
-  const instance = wrapper.instance();
   roomSearchStore.currentfreeRooms = [1, 2, 3];
   roomSearchStore.currentTimeSlot = '00:00';
   instance.setState = jest.fn();
@@ -44,11 +43,17 @@ xit('should call setState via setFreeRooms with correct values ', () => {
 });
 
 xit('should call roomSearchActions.getFreeRoomsByTime with the correct value via handleChange', () => {
-  const wrapper = shallow(<RoomSearchContainer />);
-  const instance = wrapper.instance();
   roomSearchActions.getFreeRoomsByTime = jest.fn();
   let event = { target: { value: 'test' } };
 
   instance.handleChange(event);
   expect(roomSearchActions.getFreeRoomsByTime).toHaveBeenCalledWith('test');
+});
+
+it('should remove listeners before unmount', () => {
+  roomSearchStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(roomSearchStore.removeListener).toHaveBeenCalled();
 });

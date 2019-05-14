@@ -28,6 +28,22 @@ it('should render one root element with className LoginSearch', () => {
   expect(wrapper.find('.LoginSearch')).toHaveLength(1);
 });
 
+it('should only reload if globalStore doesnt have PossibleNames yet', () => {
+  instance.setState = jest.fn();
+  globalActions.getPossibleNames = jest.fn();
+  let temp = {
+    loadingPossibleNames: false
+  };
+
+  globalStore.possibleNames = [];
+  instance.loadPossibleNames();
+  expect(globalActions.getPossibleNames).toHaveBeenCalled();
+
+  globalStore.possibleNames = [1, 2];
+  instance.loadPossibleNames();
+  expect(instance.setState).toHaveBeenCalledWith(temp);
+});
+
 it('should call refreshPossibleLoginNames with correct values ', () => {
   globalStore.possibleLoginNames = ['bachmado2', 'vissejul'];
   instance.setState = jest.fn();
@@ -36,11 +52,12 @@ it('should call refreshPossibleLoginNames with correct values ', () => {
     possibleLoginNames: ['bachmado2', 'vissejul']
   };
   instance.refreshPossibleLoginNames();
-  expect(instance.setState).toHaveBeenCalledWith(temp);
+  expect(instance.setState).toHaveBeenCalled();
 });
 
 it('should call handleSuggestionsFetchRequested with correct values ', () => {
   instance.setState = jest.fn();
+
   let temp = ['bachmado2', 'vissejul'];
   let name;
   instance.getSuggestions = jest.fn().mockImplementation(({ value }) => {
@@ -95,4 +112,12 @@ it('should call onSuggestionSelected with correct values and return correct valu
     suggestion.label,
     '17.07.1994'
   );
+});
+
+it('should remove listeners before unmount', () => {
+  globalStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(globalStore.removeListener).toHaveBeenCalled();
 });

@@ -45,3 +45,11 @@ it('should call setState with the correct value via handleDrawer', () => {
 
   expect(globalActions.toggleDrawer).toHaveBeenCalled();
 });
+
+it('should remove listeners before unmount', () => {
+  globalStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(globalStore.removeListener).toHaveBeenCalled();
+});

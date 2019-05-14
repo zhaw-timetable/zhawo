@@ -14,6 +14,8 @@ import LessonDay from './LessonDay';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+import vszhawStore from '../../../../stores/VsZhawStore';
+
 const wrapper = shallow(<LessonDay />);
 const instance = wrapper.instance();
 
@@ -48,4 +50,14 @@ it('should call setState with the correct value via handleCloseEventDetails', ()
     eventDetailsOpen: false,
     eventForDetails: null
   });
+});
+
+it('should remove listeners before unmount', () => {
+  scheduleStore.removeListener = jest.fn();
+  vszhawStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(scheduleStore.removeListener).toHaveBeenCalled();
+  expect(vszhawStore.removeListener).toHaveBeenCalled();
 });

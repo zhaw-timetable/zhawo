@@ -46,3 +46,38 @@ it('should call setState via handleMensasLoaded with correct values ', () => {
     selectedMensaName: 'mensa1'
   });
 });
+
+it('should call setState via getMenuPlan with correct values ', () => {
+  let tempState = { selectedMensaName: 'name', anchorEl: null };
+  let tempParams = { id: 1, name: 'name' };
+
+  instance.setState = jest.fn();
+  instance.state.currentDate = 'currentDate';
+  mensaActions.getMenuPlan = jest.fn();
+
+  instance.getMenuPlan(tempParams)({ preventDefault: jest.fn() });
+  expect(instance.setState).toHaveBeenCalledWith(tempState);
+  expect(mensaActions.getMenuPlan).toHaveBeenCalledWith(
+    1,
+    'name',
+    'currentDate'
+  );
+});
+
+it('should handle handleGoToTodayClick and call goToDay', () => {
+  const mockedDate = new Date('2019-05-14T13:28:17.133Z');
+  mensaActions.gotoDay = jest.fn();
+  global.Date = jest.fn(() => mockedDate);
+
+  instance.handleGoToTodayClick({ preventDefault: jest.fn() });
+
+  expect(mensaActions.gotoDay).toHaveBeenCalledWith(mockedDate);
+});
+
+it('should remove listeners before unmount', () => {
+  mensaStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(mensaStore.removeListener).toHaveBeenCalled();
+});
