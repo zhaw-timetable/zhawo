@@ -28,6 +28,25 @@ it('should render one root element with className LoginSearch', () => {
   expect(wrapper.find('.LoginSearch')).toHaveLength(1);
 });
 
+it('should get and then return suggestions', () => {
+  instance.state.possibleLoginNames = [
+    { label: 'bachmado2' },
+    { label: 'vissejul' }
+  ];
+
+  let temp = instance.getSuggestions('visse');
+
+  expect(temp).toEqual([
+    {
+      label: 'vissejul'
+    }
+  ]);
+
+  temp = instance.getSuggestions('vissela');
+
+  expect(temp).toEqual([]);
+});
+
 it('should only reload if globalStore doesnt have PossibleNames yet', () => {
   instance.setState = jest.fn();
   globalActions.getPossibleNames = jest.fn();
@@ -79,12 +98,11 @@ it('should call handleSuggestionsClearRequested with correct values ', () => {
   expect(instance.setState).toHaveBeenCalledWith(temp);
 });
 
-// it('should call handleChange with correct values ', () => {
-//   instance.setState = jest.fn();
-//   instance.handleChange(null, 'test');
-//   // TODO: ka wieso undifiend
-//   expect(instance.setState).toHaveBeenCalledWith({ value: 'test' });
-// });
+it('should call handleChange with correct values ', () => {
+  instance.setState = jest.fn();
+  instance.handleChange(null, { newValue: 'test', method: 'method' });
+  expect(instance.setState).toHaveBeenCalledWith({ value: 'test' });
+});
 
 it('should call getSuggestions with correct values and return correct values ', () => {
   instance.state.possibleLoginNames = ['bachmado2', 'vissejul'];
@@ -112,6 +130,56 @@ it('should call onSuggestionSelected with correct values and return correct valu
     suggestion.label,
     '17.07.1994'
   );
+});
+
+it('should call setState from refreshPossibleLoginNames', () => {
+  globalStore.possibleLoginNames = ['bachmado2', 'vissejul'];
+  instance.setState = jest.fn();
+
+  instance.refreshPossibleLoginNames();
+
+  expect(instance.setState).toHaveBeenCalledWith({
+    loadingPossibleNames: false,
+    possibleLoginNames: ['bachmado2', 'vissejul']
+  });
+});
+
+it('should call actions to log in user', () => {
+  let user = { type: 'student', label: 'vissejul' };
+
+  scheduleStore.displayDay = '2018-10-29';
+
+  globalActions.setCurrentUser = jest.fn();
+  scheduleActions.getSchedule = jest.fn();
+
+  instance.loginUser(user);
+
+  expect(globalActions.setCurrentUser).toHaveBeenCalledWith(
+    'vissejul',
+    'student'
+  );
+  expect(scheduleActions.getSchedule).toHaveBeenCalledWith(
+    'student',
+    'vissejul',
+    '2018-10-29'
+  );
+});
+
+it('should call login user on enter press if only 1 suggestion left', () => {
+  let event = { key: 'Enter' };
+
+  instance.loginUser = jest.fn();
+  instance.state.suggestions = ['test', 'test'];
+
+  instance.handleKeyDown(event);
+  expect(instance.loginUser).not.toHaveBeenCalled();
+
+  instance.state.suggestions = ['test'];
+
+  instance.handleKeyDown(event);
+  expect(instance.loginUser).toHaveBeenCalledWith('test');
+
+  instance.loginUser.mockRestore();
 });
 
 it('should remove listeners before unmount', () => {

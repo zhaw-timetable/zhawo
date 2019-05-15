@@ -24,8 +24,6 @@ it('renders without crashing', () => {
 });
 
 it('should call setState with the correct value via refreshNavigation', () => {
-  const wrapper = shallow(<NavigationMonth />);
-  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
   scheduleStore.displayMonth = true;
@@ -38,4 +36,61 @@ it('should call setState with the correct value via refreshNavigation', () => {
     displayWeek: scheduleStore.displayWeek,
     displayMonth: scheduleStore.displayMonth
   });
+});
+
+it('should call setState on refreshNavigation', () => {
+  instance.setState = jest.fn();
+
+  scheduleStore.displayDay = '17.07.1994';
+  scheduleStore.displayWeek = [1, 2, 3];
+  scheduleStore.displayMonth = [1, 2, 3];
+  instance.refreshNavigation();
+
+  expect(instance.setState).toHaveBeenCalledWith({
+    displayDay: '17.07.1994',
+    displayWeek: [1, 2, 3],
+    displayMonth: [1, 2, 3]
+  });
+});
+
+it('should change month on handleMonthBackClick', () => {
+  scheduleActions.gotoDay = jest.fn();
+
+  const date = new Date(2019, 2, 25);
+  instance.state.displayDay = date;
+
+  instance.handleMonthBackClick(null);
+
+  expect(scheduleActions.gotoDay).toHaveBeenCalledWith(
+    new Date('2019-02-03T23:00:00.000Z')
+  );
+});
+
+it('should change month on handleMonthForwardClick', () => {
+  scheduleActions.gotoDay = jest.fn();
+
+  const date = new Date(2019, 2, 25);
+  instance.state.displayDay = date;
+
+  instance.handleMonthForwardClick(null);
+
+  expect(scheduleActions.gotoDay).toHaveBeenCalledWith(
+    new Date('2019-03-31T22:00:00.000Z')
+  );
+});
+
+it('should go to right day on handleclick', () => {
+  scheduleActions.gotoDay = jest.fn();
+
+  instance.handleDateClick('17.07.1994')(null);
+
+  expect(scheduleActions.gotoDay).toHaveBeenCalledWith('17.07.1994');
+});
+
+it('should remove listeners before unmount', () => {
+  scheduleStore.removeListener = jest.fn();
+
+  wrapper.unmount();
+
+  expect(scheduleStore.removeListener).toHaveBeenCalled();
 });
