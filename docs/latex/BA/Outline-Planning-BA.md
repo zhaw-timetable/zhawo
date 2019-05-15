@@ -16,10 +16,11 @@
 - Architecture
 - Backend -> also explain testing
 - Frontend -> also explain testing
-- User Interface
+- ​
 
 #### Results
 
+- User Interface -> application flow with screenshots, demonstrate functionality
 - Feedback -> statistics
 - Usage statistics
 
