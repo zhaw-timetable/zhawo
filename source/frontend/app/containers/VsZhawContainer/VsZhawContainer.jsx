@@ -19,7 +19,7 @@ class VsZhawContainer extends Component {
 
   componentDidMount() {
     vszhawActions.getVszhawFeed();
-    if (!vszhawStore.events.length > 0) {
+    if (!(vszhawStore.events.length > 0)) {
       vszhawActions.getVszhawEvents();
     }
   }
