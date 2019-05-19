@@ -8,6 +8,13 @@ import globalStore from '../../stores/GlobalStore';
 import Splash from '../../assets/img/Splash/Splash';
 import LoginSearch from './components/LoginSearch/LoginSearch';
 
+/**
+ * Login Component.
+ * Login page shown to users that are not loggin.
+ *
+ * @class LoginContainer
+ * @extends {Component}
+ */
 class LoginContainer extends Component {
   state = {
     redirectToPreviousRoute: false
@@ -20,10 +27,6 @@ class LoginContainer extends Component {
   componentWillUnmount() {
     globalStore.removeListener('current_user_login', this.login);
   }
-
-  handleUsernameInputChange = e => {
-    this.setState({ input: e.target.value });
-  };
 
   login = () => {
     this.setState({
