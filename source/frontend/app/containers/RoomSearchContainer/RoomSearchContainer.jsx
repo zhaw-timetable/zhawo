@@ -16,6 +16,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
+/**
+ * Room Search Container Component
+ * Shows all free rooms for current day.
+ *
+ * Time slot can be selected and then rooms that are free for duration of full time are shown.
+ * Free rooms have a colored background.
+ *
+ * @class RoomSearchContainer
+ * @extends {Component}
+ */
 class RoomSearchContainer extends Component {
   state = {
     currentFreeRooms: roomSearchStore.currentFreeRooms,
@@ -45,6 +55,13 @@ class RoomSearchContainer extends Component {
     roomSearchStore.removeListener('selected_floor_changed', this.setFloor);
   }
 
+  /**
+   * Function called when store changes.
+   * Sets local currentFreeRooms state to match store currentFreeRooms state.
+   * Sets background of free rooms using setRoomBackground
+   *
+   * @memberof RoomSearchContainer
+   */
   setFreeRooms = () => {
     this.setRoomBackground();
     this.setState({
@@ -52,6 +69,13 @@ class RoomSearchContainer extends Component {
     });
   };
 
+  /**
+   * Function called when store changes.
+   * Sets local currentFreeRooms, currentFloor and currentBuildingFloors state to match store.
+   * Sets background of free rooms using setRoomBackground
+   *
+   * @memberof RoomSearchContainer
+   */
   setFloor = () => {
     this.setRoomBackground();
     this.setState({
@@ -61,6 +85,11 @@ class RoomSearchContainer extends Component {
     });
   };
 
+  /**
+   * Function that sets the state for rooms/floors that should have a colored background.
+   *
+   * @memberof RoomSearchContainer
+   */
   setRoomBackground = () => {
     let tempRoomState = {};
 
@@ -88,11 +117,23 @@ class RoomSearchContainer extends Component {
     });
   };
 
+  /**
+   * Function that gets free rooms for a given time slot using getFreeRoomsByTime action.
+   * Uses local startTime and endTime state as time slot
+   * @memberof RoomSearchContainer
+   */
   handleSearchClick = () => {
     let { startTime, endTime } = this.state;
     roomSearchActions.getFreeRoomsByTime(startTime, endTime);
   };
 
+  /**
+   * Functions that sets times on change.
+   * Set local startTime, startTimeIndex, endTime and endTimeIndex state.
+   * Makes sure end time is after start time.
+   *
+   * @memberof RoomSearchContainer
+   */
   handleTimeChange = event => {
     let { startTimeIndex, endTimeIndex, slots } = this.state;
     if (event.target.name === 'startTime') {
@@ -122,6 +163,11 @@ class RoomSearchContainer extends Component {
     }
   };
 
+  /**
+   * Function changes floor on changeFloor action.
+   *
+   * @memberof RoomSearchContainer
+   */
   handleFloorClick = event => {
     roomSearchActions.changeFloor(event.target.id);
   };

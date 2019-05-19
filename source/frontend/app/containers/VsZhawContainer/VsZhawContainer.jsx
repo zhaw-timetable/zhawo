@@ -34,18 +34,36 @@ class VsZhawContainer extends Component {
     vszhawStore.removeListener('got_vszhaw_events', this.setEvents);
   }
 
+  /**
+   * Function call when store changes.
+   * Sets local feed state to match store
+   *
+   * @memberof VsZhawContainer
+   */
   setFeed = () => {
     this.setState({
       feed: vszhawStore.feed
     });
   };
 
+  /**
+   * Function call when store changes.
+   * Sets local events state to match store
+   *
+   * @memberof VsZhawContainer
+   */
   setEvents = () => {
     this.setState({
       events: vszhawStore.events
     });
   };
 
+  /**
+   * Function that forwards to given link
+   *
+   * @param {string} link
+   * @memberof VsZhawContainer
+   */
   gotoLink = link => e => {
     let win = window.open(link, '_blank');
     win.focus();

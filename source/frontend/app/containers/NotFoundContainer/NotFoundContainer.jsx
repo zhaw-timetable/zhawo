@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import './NotFoundContainer.sass';
 
+/**
+ * Not Found Container Component
+ * 404 page
+ *
+ * @class NotFoundContainer
+ * @extends {Component}
+ */
 class NotFoundContainer extends Component {
   render() {
     return (

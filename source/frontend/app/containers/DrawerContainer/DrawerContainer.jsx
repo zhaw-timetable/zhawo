@@ -18,6 +18,15 @@ import LogoSVG from '../../assets/img/LogoSVG/LogoSVG';
 import DrawerOptions from './DrawerOptions/DrawerOptions';
 import DrawerNav from './DrawerNav/DrawerNav';
 
+/**
+ * Drawer Component.
+ *
+ * Floats to the right.
+ * Is hidden on Mobile and fixed on lager Screens.
+ *
+ * @class DrawerContainer
+ * @extends {Component}
+ */
 class DrawerContainer extends Component {
   state = {
     drawerOpen: globalStore.drawerOpen,
@@ -33,10 +42,20 @@ class DrawerContainer extends Component {
     globalStore.removeListener('drawerOpen_changed', this.handleDrawer);
   }
 
+  /**
+   * Function that calls action to open/close drawer state
+   *
+   * @memberof DrawerContainer
+   */
   toggleDrawer = () => {
     globalActions.toggleDrawer();
   };
 
+  /**
+   * Function that is called when store changes.
+   * Sets local drawerOpen state to match store drawerOpen state.
+   * @memberof DrawerContainer
+   */
   handleDrawer = () => {
     this.setState({ drawerOpen: globalStore.drawerOpen });
   };

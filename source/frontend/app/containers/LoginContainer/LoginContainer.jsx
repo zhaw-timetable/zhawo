@@ -28,12 +28,23 @@ class LoginContainer extends Component {
     globalStore.removeListener('current_user_login', this.login);
   }
 
+  /**
+   * Function called when store changes
+   * Set local state redirectToPreviousRoute to true.
+   * This allows user to be redirected to next Component.
+   * @memberof LoginContainer
+   */
   login = () => {
     this.setState({
       redirectToPreviousRoute: true
     });
   };
 
+  /**
+   * Function that pushes view to history so Components can be changed using react router.
+   *
+   * @memberof LoginContainer
+   */
   getCurrentViewPath = () => {
     let currentViewPath = '';
     switch (globalStore.viewState) {

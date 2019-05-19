@@ -5,6 +5,13 @@ import './MenuPlan.sass';
 import mensaStore from '../../../../stores/MensaStore';
 import * as mensaActions from '../../../../actions/MensaActions';
 
+/**
+ * Menu Plan Component.
+ * List of the Meals for Selected Mensa on selected day.
+ *
+ * @class MenuPlan
+ * @extends {Component}
+ */
 class MenuPlan extends Component {
   state = {
     currentMenuDay: mensaStore.currentMenuDay,
@@ -20,6 +27,12 @@ class MenuPlan extends Component {
     mensaStore.removeListener('menuplan_changed', this.handleMenuPlanChanged);
   }
 
+  /**
+   * Function called when store changes.
+   * Sets local currentMenuDay, emptyMenuMessage and selectedMensaName state to match store.
+   *
+   * @memberof MenuPlan
+   */
   handleMenuPlanChanged = () => {
     this.setState({
       currentMenuDay: mensaStore.currentMenuDay,

@@ -19,6 +19,14 @@ import './MensaNavigationWeek.sass';
 import mensaStore from '../../../../stores/MensaStore';
 import * as mensaActions from '../../../../actions/MensaActions';
 
+/**
+ * Mensa Navigation Week Component.
+ * Navigation bar with the days of the week.
+ * Used to switch between days.
+ *
+ * @class MensaNavigationWeek
+ * @extends {Component}
+ */
 class MensaNavigationWeek extends Component {
   state = {
     displayDay: mensaStore.displayDay,
@@ -33,6 +41,12 @@ class MensaNavigationWeek extends Component {
     mensaStore.removeListener('menuplan_changed', this.refreshNavigation);
   }
 
+  /**
+   * Function called when store changes.
+   * Sets local displayDay and displayWeek state to match store states.
+   *
+   * @memberof MensaNavigationWeek
+   */
   refreshNavigation = () => {
     this.setState({
       displayDay: mensaStore.displayDay,
@@ -40,15 +54,32 @@ class MensaNavigationWeek extends Component {
     });
   };
 
+  /**
+   * Function that changes day by calling gotoDay action.
+   *
+   * @memberof MensaNavigationWeek
+   */
   handleDateClick = newDate => e => {
     mensaActions.gotoDay(newDate);
   };
 
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay is subtracts a week from the current date.
+   *
+   * @memberof MensaNavigationWeek
+   */
   handleWeekBackClick = e => {
     const newDate = subWeeks(this.state.displayDay, 1);
     mensaActions.gotoDay(newDate);
   };
 
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay is adds a week from the current date.
+   *
+   * @memberof MensaNavigationWeek
+   */
   handleWeekForwardClick = e => {
     const newDate = addWeeks(this.state.displayDay, 1);
     mensaActions.gotoDay(newDate);

@@ -7,7 +7,20 @@ import './VszhawEvent.sass';
 
 import VsZHAWSVG from '../../../../assets/img/VsZHAWSVG/VsZHAWSVG';
 
+/**
+ * Vszhaw Event Component
+ * Container for Event, to place event in schedule
+ *
+ * @class VszhawEvent
+ * @extends {Component}
+ */
 class VszhawEvent extends Component {
+  /**
+   * Function that forwards to given link
+   *
+   * @param {string} link
+   * @memberof VszhawEvent
+   */
   gotoLink = link => e => {
     let win = window.open(link, '_blank');
     win.focus();
