@@ -12,12 +12,4 @@ workbox.routing.registerRoute(
   workbox.strategies.staleWhileRevalidate()
 );
 
-// workbox.routing.registerRoute(
-//   new RegExp('/api/'),
-//   workbox.strategies.networkOnly({
-//     plugins: [bgSyncPlugin]
-//   }),
-//   'POST'
-// );
-
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
