@@ -24,6 +24,12 @@ import './NavigationMonth.sass';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+/**
+ * Function called when store changes.
+ * Sets local displayDay and displayWeek state to match store.
+ *
+ * @memberof NavigationMonth
+ */
 class NavigationMonth extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
@@ -39,6 +45,12 @@ class NavigationMonth extends Component {
     scheduleStore.removeListener('schedule_changed', this.refreshNavigation);
   }
 
+  /**
+   * Function called when store changes.
+   * Sets local displayDay and displayWeek state to match store.
+   *
+   * @memberof NavigationMonth
+   */
   refreshNavigation = () => {
     this.setState({
       displayDay: scheduleStore.displayDay,
@@ -47,11 +59,22 @@ class NavigationMonth extends Component {
     });
   };
 
+  /**
+   * Function set current date to given date using gotoDay action
+   *
+   * @param {date} newDate
+   * @memberof NavigationMonth
+   */
   handleDateClick = newDate => e => {
     scheduleActions.gotoDay(newDate);
   };
 
-  // Goes to first monday of last month
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay Goes to first Monday of the month before current date.
+   *
+   * @memberof NavigationMonth
+   */
   handleMonthBackClick = e => {
     const nextDate = subMonths(this.state.displayDay, 1);
     const firstOfMonth = startOfMonth(nextDate);
@@ -61,7 +84,12 @@ class NavigationMonth extends Component {
     scheduleActions.gotoDay(firstOfWeek);
   };
 
-  // Goes to first monday of next month
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay Goes to first Monday of the month after current date.
+   *
+   * @memberof NavigationMonth
+   */
   handleMonthForwardClick = e => {
     const nextDate = addMonths(this.state.displayDay, 1);
     const firstOfMonth = startOfMonth(nextDate);

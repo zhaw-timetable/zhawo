@@ -65,7 +65,7 @@ class MensaNavigationWeek extends Component {
 
   /**
    * Function that  changes day by calling gotoDay action.
-   * Before calling gotoDay is subtracts a week from the current date.
+   * Before calling gotoDay it subtracts a week from the current date.
    *
    * @memberof MensaNavigationWeek
    */
@@ -76,7 +76,7 @@ class MensaNavigationWeek extends Component {
 
   /**
    * Function that  changes day by calling gotoDay action.
-   * Before calling gotoDay is adds a week from the current date.
+   * Before calling gotoDay it adds a week from the current date.
    *
    * @memberof MensaNavigationWeek
    */

@@ -19,6 +19,13 @@ import './NavigationWeek.sass';
 import scheduleStore from '../../../../stores/ScheduleStore';
 import * as scheduleActions from '../../../../actions/ScheduleActions';
 
+/**
+ * Navigation Week Component
+ * Week days Mon-Sat used for navigation.
+ *
+ * @class NavigationWeek
+ * @extends {Component}
+ */
 class NavigationWeek extends Component {
   state = {
     displayDay: scheduleStore.displayDay,
@@ -33,6 +40,12 @@ class NavigationWeek extends Component {
     scheduleStore.removeListener('schedule_changed', this.refreshNavigation);
   }
 
+  /**
+   * Function called when store changes.
+   * Sets local displayDay and displayWeek state to match store.
+   *
+   * @memberof NavigationWeek
+   */
   refreshNavigation = () => {
     this.setState({
       displayDay: scheduleStore.displayDay,
@@ -40,15 +53,33 @@ class NavigationWeek extends Component {
     });
   };
 
+  /**
+   * Function set current date to given date using gotoDay action
+   *
+   * @param {date} newDate
+   * @memberof NavigationWeek
+   */
   handleDateClick = newDate => e => {
     scheduleActions.gotoDay(newDate);
   };
 
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay it subtracts a week from the current date.
+   *
+   * @memberof NavigationWeek
+   */
   handleWeekBackClick = e => {
     const newDate = subWeeks(this.state.displayDay, 1);
     scheduleActions.gotoDay(newDate);
   };
 
+  /**
+   * Function that  changes day by calling gotoDay action.
+   * Before calling gotoDay it adds a week from the current date.
+   *
+   * @memberof NavigationWeek
+   */
   handleWeekForwardClick = e => {
     const newDate = addWeeks(this.state.displayDay, 1);
     scheduleActions.gotoDay(newDate);

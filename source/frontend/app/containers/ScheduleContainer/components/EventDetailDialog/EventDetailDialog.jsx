@@ -8,6 +8,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import './EventDetailDialog.sass';
 
+/**
+ * Event Detail Dialog Component
+ * Dialog Windows for Events.
+ *
+ * @class EventDetailDialog
+ * @extends {Component}
+ */
 class EventDetailDialog extends Component {
   render() {
     const { open, event, handleClose } = this.props;
