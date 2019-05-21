@@ -16,7 +16,7 @@
 - Architecture
 - Backend Architecture
 - Frontend Architecture
-- Explain implementation of four primary functions with f. ex. whos involved
+- No detailed implementation
 
 #### Results
 
