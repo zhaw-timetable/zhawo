@@ -5,17 +5,29 @@
 
 ## Agile Approach
 
-For development of the ZHAWo prototype we used an iterative agile approach. The code base was managed on a single GitHub repository \cite{OurGithub} for both front- and backend. User stories were tracked using GitHub issues and the sprints were organised using GitHub project boards. Over the course of the project, we structured the development into six sprints of 2 weeks. We regularly considered feedback of other students and our own review of our practices and used technologies in our planning. The flexibility of using only JavaScript and PWA technologies enabled us to rapidly prototype new ideas without the hassle of having to maintain two different code bases.
-User stories were implemented and tested in feature branches and merged into the master branch as part of the sprint reviews. This practice ensured that we had - for the most part - stable new iterations of the application to deploy for user feedback.
+For development of ZHAWo we used an iterative agile approach. The code base was managed on a single GitHub repository \cite{OurGithub} for both front- and backend. User stories were tracked using GitHub issues and the sprints were organised using GitHub project boards. We structured the development into sprints of 2 weeks. We regularly considered feedback of other students and our own review of our practices and used technologies in our planning. The flexibility of using only JavaScript and PWA technologies enabled us to rapidly prototype new ideas without the hassle of having to maintain two different code bases.
+User stories were implemented and tested in feature branches and merged into the master branch as part of the sprint reviews. This practice ensured that we had stable iterations of the application to deploy for user feedback.
 
 ## Continuous Integration \& Deployment
 
 For continuous integration we used Travis CI \cite{Travis} in combination with Codecov \cite{Codecov} to track test coverage. With good integration of both these tools into GitHub - for example reporting of build status and test coverage changes in GitHub comments on each pull request - we achieved good code and test quality across feature implementations and sprints.
-While the goal is to eventually host our application on a ZHAW server, in the scope of this project the prototype was deployed to Heroku \cite{Heroku} and shared amongst students for quick feedback on new features.
+Each new iteration was deployed to a ZHAW server and due to the nature of the PWA technology, the users received the updated version of ZHAWo immediately on their next visit, without having to install an update through an app store as it would be the case with native applications.
 
-\newpage
+## Primary Functions
+
+To structure the development and implementation, we established four primary stories that our application should provide.
+While our goal is to develop a feature rich application tailored to students of the ZHAW, we established the following four primary functions ZHAWo should provide in its prototype. Using an agile development approach, the scope of this project was to implement these primary functions in a prototype and adjust them to student feedback.
+
+\begin{itemize}
+  \item \textbf{Timetable}: A user can access their schedule and look up schedules of lecturers, classes, courses and rooms.
+  \item \textbf{Menu plans}: A user can access menu plans of the different campus mensas across the ZHAW.
+  \item \textbf{Room search}: A user can look for and find free rooms for a specific time-frame and location.
+  \item \textbf{Student events}: A user can access vszhaw news and events to bring more attention to student parties and events.
+\end{itemize}
 
 ## Product Backlog
+
+% TODO rework this part -> structure by primary functions and elaborate
 
 The following planned user stories have been implemented in the scope of this project. We put the focus on implementing the schedule context of ZHAWo in detail and provide prototypical functionality for the other primary functionalities. For implementation details please refer to section 3.
 
@@ -39,8 +51,6 @@ The following planned user stories have been implemented in the scope of this pr
   \item \textbf{US58}: As a user I want to view a specific mensa menu plan
   \item \textbf{US70}: As a user I want to view vszhaw blog posts/event announcements
 \end{itemize}
-
-\newpage
 
 The following user stories are planned to be implemented in the finished application. This list will of course be extended and adjusted based on user feedback and our own review.
 

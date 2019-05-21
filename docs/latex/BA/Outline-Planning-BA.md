@@ -14,9 +14,9 @@
 #### Implementation
 
 - Architecture
-- Backend -> also explain testing
-- Frontend -> also explain testing
-- ​
+- Backend Architecture
+- Frontend Architecture
+- Explain implementation of four primary functions with f. ex. whos involved
 
 #### Results
 
