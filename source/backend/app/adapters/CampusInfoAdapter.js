@@ -10,8 +10,24 @@ const HEADERS = {
 };
 const apiUrl = 'https://api.apps.engineering.zhaw.ch/v1';
 
-// f.ex. route = students, name = bachmdo2, startDate = date
-export function getScheduleResource(route, name, startDate, days) {
+/**
+ * Functions that handle all communication with CampusInfo Api.
+ * @namespace CampusInfoAdapter*/
+
+/**
+ * Async Function that gets schedule for a given user starting at start date and for the given amount of days from the Campus Api.
+ *
+ * @export
+ * @param {string} route
+ * @param {string} name
+ * @param {Date} startDate
+ * @param {number} days (default = 7)
+ * @return {Promise}  On success the promise will be resolved with a JSON object.<br>
+ * On error the promise will be rejected with an { status: 404 }.
+ *
+ * @memberof CampusInfoAdapter
+ */
+export function getScheduleResource(route, name, startDate, days = 7) {
   return new Promise(async (resolve, reject) => {
     const dateString = format(new Date(startDate), 'YYYY-MM-DD');
     const method = GET;
@@ -30,6 +46,16 @@ export function getScheduleResource(route, name, startDate, days) {
 }
 
 // f.ex. route = students
+/**
+ * Async Function that get all the possible name for a given group (route) from the Campus Api.
+ *
+ * @export
+ * @param {string} route (lecturers / rooms / students)
+ * @return {Promise}  On success the promise will be resolved with a JSON object.<br>
+ * On error the promise will be rejected.
+ *
+ *  @memberof CampusInfoAdapter
+ */
 export function getPossibleNames(route) {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -43,6 +69,15 @@ export function getPossibleNames(route) {
   });
 }
 
+/**
+ * Async Function that gets a list of all the Mensa Facilities from the Campus Api.
+ *
+ * @export
+ * @return {Promise}  On success the promise will be resolved with a JSON object.<br>
+ * On error the promise will be rejected.
+ *
+ * @memberof CampusInfoAdapter
+ */
 export function getFacilities() {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -56,6 +91,17 @@ export function getFacilities() {
   });
 }
 
+/**
+ * Async Function that gets Mensa menus for a given facility from the Campus Api.
+ *
+ * @export
+ * @param {number} facilityId
+ * @param {Date} date
+ * @return {Promise}  On success the promise will be resolved with a JSON object.<br>
+ * On error the promise will be rejected.
+ *
+ * @memberof CampusInfoAdapter
+ */
 export function getMensaResource(facilityId, date) {
   return new Promise(async (resolve, reject) => {
     const dateObj = new Date(date);
@@ -74,6 +120,15 @@ export function getMensaResource(facilityId, date) {
   });
 }
 
+/**
+ * Function that filters a given list of menu plans for a facilityId.
+ *
+ * @param {*} menuPlans
+ * @param {*} facilityId
+ * @returns Menu Plan
+ *
+ * @memberof CampusInfoAdapter
+ */
 function filterMenuPlansByFacilityId(menuPlans, facilityId) {
   let filteredMenuPlans = menuPlans.filter(menuPlan =>
     menuPlan.gastronomicFacilityIds.includes(Number(facilityId))
