@@ -15,10 +15,14 @@ let address = 'http://localhost:4000';
 if (process.env.NODE_ENV === 'production') address = 'https://zhawo.ml';
 const apiUrl = `${address}/api/v1`;
 
+/**@namespace ZhawoAdapter*/
+
 /**
  * Function that make Api call to get Mensa Info for specified mensa
  * @param {number} facilityId
  * @param {string} date
+ *
+ * @memberof ZhawoAdapter
  */
 export function getMensaResource(facilityId, date) {
   return new Promise(async (resolve, reject) => {
@@ -38,7 +42,9 @@ export function getMensaResource(facilityId, date) {
 }
 
 /**
- * Function that make api call to get all mensa facilities
+ * Function that make api call to get all mensa facilities.
+ *
+ * @memberof ZhawoAdapter
  */
 export function getAllMensas() {
   return new Promise(async (resolve, reject) => {
@@ -64,6 +70,8 @@ export function getAllMensas() {
  * @param {string} name
  * @param {Date} startDate
  * @param {number} rangeAroundDate
+ *
+ * @memberof ZhawoAdapter
  */
 export function getScheduleResource(route, name, startDate, rangeAroundDate) {
   return new Promise(async (resolve, reject) => {
@@ -107,6 +115,8 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
  *
  * Receives schedule for exactly one week
  * @param {*} schedule
+ *
+ * @memberof ZhawoAdapter
  */
 export function convertSchedule(schedule) {
   // Initialize converted schedule with weeks as empty object
@@ -153,6 +163,8 @@ export function convertSchedule(schedule) {
  * Function that rebuilds schedule to resolve resolveOverlaps
  * returns new schedule
  * @param {*} schedule
+ *
+ * @memberof ZhawoAdapter
  */
 export function resolveOverlaps(schedule) {
   let newSchedule = schedule;
@@ -192,7 +204,9 @@ export function resolveOverlaps(schedule) {
 }
 
 /**
- * Function makes api call to get all possible user names
+ * Function makes api call to get all possible user names.
+ *
+ * @memberof ZhawoAdapter
  */
 export function getPossibleNames() {
   return new Promise(async (resolve, reject) => {
@@ -245,7 +259,9 @@ export function getPossibleNames() {
 
 /**
  * Async Function that makes an api call to get all the Free rooms for the current day.
- * returns array containing all the time slots and the free rooms in said time slot
+ * returns array containing all the time slots and the free rooms in said time slot.
+ *
+ * @memberof ZhawoAdapter
  */
 export function getFreeRoomsJson() {
   return new Promise(async (resolve, reject) => {
@@ -270,8 +286,10 @@ export function getFreeRoomsJson() {
 }
 
 /**
- * // Todo: weiss nüme genau was da gmacht wird
+ * Function that converts freeRooms Object to an array.
  * @param {*} freeRooms
+ *
+ * @memberof ZhawoAdapter
  */
 export function convertFreeRooms(freeRooms) {
   var array = Object.keys(freeRooms).map(function(index) {
@@ -303,7 +321,9 @@ export function getVszhawFeed() {
 }
 
 /**
- * Function that makes api call to get next vszhaw event
+ * Function that makes api call to get next vszhaw event.
+ *
+ * @memberof ZhawoAdapter
  */
 export function getVszhawEvents() {
   return new Promise(async (resolve, reject) => {
@@ -325,6 +345,8 @@ export function getVszhawEvents() {
  * Function used output errors of api calls
  * @param {*} err
  * @param {string} url
+ *
+ * @memberof ZhawoAdapter
  */
 export function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
