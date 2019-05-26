@@ -4,6 +4,11 @@ import * as api from '../../../adapters/CampusInfoAdapter';
 
 import { logToFile } from '../../../file-logger';
 
+/**
+ * Creates Router for courses
+ *
+ * @returns {Router}
+ */
 export default ({ config, db }) => {
   let router = Router();
 

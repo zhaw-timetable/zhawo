@@ -39,10 +39,20 @@ class App extends Component {
     globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
+  /**
+   * Function that forces reload when user is  updated in Store.
+   *
+   * @memberof App
+   */
   handleUserChange = () => {
     this.forceUpdate();
   };
 
+  /**
+   * Function that forces reload when theme is  updated in Store.
+   *
+   * @memberof App
+   */
   handleThemeChanged = () => {
     this.forceUpdate();
   };

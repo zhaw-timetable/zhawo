@@ -1,5 +1,10 @@
-import { Router } from "express";
+import { Router } from 'express';
 
+/**
+ * Creates Router for middleware
+ *
+ * @returns {Router}
+ */
 export default ({ config, db }) => {
   let routes = Router();
 

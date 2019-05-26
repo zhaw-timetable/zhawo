@@ -5,6 +5,10 @@ import util from 'util';
 
 import * as api from './adapters/CampusInfoAdapter';
 
+/**
+ * Async Function that creates new freeRooms Object using createFreeRoomsObject and then writes it to a json file.
+ *
+ */
 export const createFreeRoomsJson = async () => {
   try {
     const myObj = await createFreeRoomsObject();
@@ -14,6 +18,10 @@ export const createFreeRoomsJson = async () => {
   }
 };
 
+/**
+ * Async Function that creates a Object that contains all free Rooms for current day.
+ * @returns Object containing all free Rooms
+ */
 const createFreeRoomsObject = async () => {
   try {
     let fetches = 0;
@@ -130,6 +138,9 @@ const asyncForEach = async (array, callback) => {
   }
 };
 
+/**
+ * Default slots
+ */
 const defaultSlots = [
   {
     endTime: '2018-10-29T08:45:00+01:00',
