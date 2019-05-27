@@ -1,7 +1,6 @@
 % !TEX root = ba_doc.tex
 \begin{markdown}
-
-# Development
+\section{Development} \label{development}
 
 ## Agile Approach
 
@@ -11,12 +10,11 @@ User stories were implemented and tested in feature branches and merged into the
 ## Continuous Integration \& Deployment
 
 For continuous integration we used Travis CI \cite{Travis} in combination with Codecov \cite{Codecov} to track test coverage. With good integration of both these tools into GitHub - for example reporting of build status and test coverage changes in GitHub comments on each pull request - we achieved good code and test quality across feature implementations and sprints.
-Each new iteration was deployed to a ZHAW server and due to the nature of the PWA technology, the users received the updated version of ZHAWo immediately on their next visit, without having to install an update through an app store as it would be the case with native applications.
+Each new iteration was deployed to a ZHAW server and was directly pushed to our users on their next visit, without having to install an update through an app store as it would be the case with native applications.
 
 ## Primary Functions
 
-To structure the development and implementation, we established four primary stories that our application should provide.
-While our goal is to develop a feature rich application tailored to students of the ZHAW, we established the following four primary functions ZHAWo should provide in its prototype. Using an agile development approach, the scope of this project was to implement these primary functions in a prototype and adjust them to student feedback.
+To structure the development and implementation, we established four primary functions that our application should provide.
 
 \begin{itemize}
   \item \textbf{Timetable}: A user can access their schedule and look up schedules of lecturers, classes, courses and rooms.
@@ -27,7 +25,7 @@ While our goal is to develop a feature rich application tailored to students of 
 
 ## Product Backlog
 
-We devided each primary function into seperate smaller user stories to plan our sprints. Additionaly we have defined general user stories that are not directly related to any of the primary functions. Following 
+We divided each primary function into seperate smaller user stories to plan our sprints. Additionaly we have defined general user stories that are not directly related to any of the primary functions. All user stories are listed in the following sections.
 
 ### General
 
