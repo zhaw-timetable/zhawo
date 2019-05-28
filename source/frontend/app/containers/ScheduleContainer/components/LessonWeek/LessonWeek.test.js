@@ -9,13 +9,14 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-import scheduleStore from '../../../../stores/ScheduleStore';
-import globalStore from '../../../../stores/GlobalStore.js';
-
-import LessonWeek from './LessonWeek';
-
 const wrapper = shallow(<LessonWeek />);
 const instance = wrapper.instance();
+
+import scheduleStore from '../../../../stores/ScheduleStore';
+import globalStore from '../../../../stores/GlobalStore.js';
+import vszhawStore from '../../../../stores/VsZhawStore';
+
+import LessonWeek from './LessonWeek';
 
 beforeEach(() => {});
 
@@ -24,8 +25,6 @@ it('renders without crashing', () => {
 });
 
 it('should call setState with the correct value via refreshSchedule', () => {
-  const wrapper = shallow(<LessonWeek />);
-  const instance = wrapper.instance();
   scheduleStore.slots = [1, 2, 3];
   scheduleStore.displayDay = true;
   scheduleStore.schedule = [1, 2, 3];
@@ -42,13 +41,31 @@ it('should call setState with the correct value via refreshSchedule', () => {
 });
 
 it('should call setState with the correct value via handleCloseEventDetails', () => {
-  const wrapper = shallow(<LessonWeek />);
-  const instance = wrapper.instance();
   instance.setState = jest.fn();
 
   instance.handleCloseEventDetails();
   expect(instance.setState).toHaveBeenCalledWith({
     eventDetailsOpen: false,
     eventForDetails: null
+  });
+});
+
+it('should remove listeners before unmount', () => {
+  scheduleStore.removeListener = jest.fn();
+  vszhawStore.removeListener = jest.fn();
+  wrapper.unmount();
+
+  expect(scheduleStore.removeListener).toHaveBeenCalled();
+  expect(vszhawStore.removeListener).toHaveBeenCalled();
+});
+
+it('should call setState from setEvents', () => {
+  vszhawStore.events = 'test';
+
+  instance.setState = jest.fn();
+
+  instance.setEvents();
+  expect(instance.setState).toHaveBeenCalledWith({
+    vszhawEvents: 'test'
   });
 });

@@ -182,6 +182,14 @@ it('should call login user on enter press if only 1 suggestion left', () => {
   instance.loginUser.mockRestore();
 });
 
+it('should retuen label', () => {
+  let suggestion = { label: 'test' };
+
+  let temp = instance.getSuggestionValue(suggestion);
+
+  expect(temp).toEqual('test');
+});
+
 it('should remove listeners before unmount', () => {
   globalStore.removeListener = jest.fn();
 

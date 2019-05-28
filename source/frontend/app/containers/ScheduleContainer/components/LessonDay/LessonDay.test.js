@@ -26,8 +26,6 @@ it('renders without crashing', () => {
 });
 
 it('should call setState with the correct value via refreshSchedule', () => {
-  const wrapper = shallow(<LessonDay />);
-  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.schedule = [1, 2, 3];
 
@@ -41,8 +39,6 @@ it('should call setState with the correct value via refreshSchedule', () => {
 });
 
 it('should call setState with the correct value via handleCloseEventDetails', () => {
-  const wrapper = shallow(<LessonDay />);
-  const instance = wrapper.instance();
   instance.setState = jest.fn();
 
   instance.handleCloseEventDetails();
@@ -60,4 +56,15 @@ it('should remove listeners before unmount', () => {
 
   expect(scheduleStore.removeListener).toHaveBeenCalled();
   expect(vszhawStore.removeListener).toHaveBeenCalled();
+});
+
+it('should call setState from setEvents', () => {
+  vszhawStore.events = 'test';
+
+  instance.setState = jest.fn();
+
+  instance.setEvents();
+  expect(instance.setState).toHaveBeenCalledWith({
+    vszhawEvents: 'test'
+  });
 });

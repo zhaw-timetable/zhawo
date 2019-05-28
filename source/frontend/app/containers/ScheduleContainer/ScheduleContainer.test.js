@@ -60,3 +60,16 @@ it('should remove listeners before unmount', () => {
 
   expect(globalStore.removeListener).toHaveBeenCalled();
 });
+
+it('onSwipeEnd should call mensaActions for the right direction', () => {
+  scheduleActions.swipeLeft = jest.fn();
+  scheduleActions.swipeRight = jest.fn();
+
+  instance.state.swipeInX = global.innerWidth / 4 + 10;
+  instance.onSwipeEnd('event');
+  expect(scheduleActions.swipeLeft).toHaveBeenCalled();
+
+  instance.state.swipeInX = (-1 * global.innerWidth) / 4 - 10;
+  instance.onSwipeEnd('event');
+  expect(scheduleActions.swipeRight).toHaveBeenCalled();
+});
