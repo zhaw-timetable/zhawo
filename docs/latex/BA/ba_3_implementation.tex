@@ -30,7 +30,7 @@ The backend architecture consists of the following modules:
 
 ### Express Server Application
 
-For the backend server application, we have chosen to use the framework Express \cite{Express} based on the Node.js \cite{Node} technology. The server is responsible to serve the frontend application and offers a REST API to get all the data the frontend needs. Most of the server logic handles redirecting user requests from the frontend to either persistence layer or the different API adapters and then serve the data. We have chosen to implement the backend with a JavaScript based framework so there is no technology difference between front- and backend. In the context of agile development in a small team, this allows for a fast implementation of features. A new feature often requires changes to both front- and backend, and by removing the need to switch context between different programming languages, we were able to maintain a good velocity throughout our sprints.
+For the backend server application, we have chosen to use the framework Express \cite{Express} based on the Node.js \cite{Node} technology. The server offers a REST API to get all the data the frontend needs. Most of the server logic handles redirecting user requests from the frontend to either the persistence layer or the different API adapters and then serve the data. We have chosen to implement the backend with a JavaScript based framework so there is no technology difference between front- and backend. In the context of agile development in a small team, this allows for a fast implementation of features. A new feature often requires changes to both front- and backend, and by removing the need to switch context between different programming languages, we were able to maintain a good velocity throughout our sprints.
 
 ### Persistence Layer
 
@@ -44,7 +44,7 @@ Most of the application data for ZHAWo is provided by the CampusInfo API. Since 
 
 ### Vszhaw adapter
 
-Similarly to the CampusInfo API adapter, the Vszhaw adapter provides an additional layer between our application and the RSS feed \cite{VszhawNews} of the vszhaw as well as the calendar web application \cite{VszhawCalendar}. This ensures that should the data received by this third-party feed and calendar application change, the changes needed to our application will be isolated to the adapter.
+Similarly to the CampusInfo API adapter, the vszhaw adapter provides an additional layer between our application and the RSS feed \cite{VszhawNews} of the vszhaw as well as the calendar web application \cite{VszhawCalendar}. This ensures that should the data received by this third-party feed and calendar application change, that changes needed to our application will be isolated to the adapter.
 
 ## Frontend
 
@@ -58,9 +58,9 @@ The frontend is made up of three main parts:
 
 ### React Web Application
 
-For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaniously with little interference.
+For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaneously with little interference.
 
-To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behaviour. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
+To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behavior. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
 
 ### REST API Adapter
 
