@@ -13,7 +13,7 @@ export const getAllMensas = () => {
  * Dispatches action to get menuplan for specific facility on specific date
  * @param {string} facilityId
  * @param {string} facilityName
- * @param {string} date
+ * @param {Date} date
  */
 export const getMenuPlan = (facilityId, facilityName, date) => {
   dispatcher.dispatch({
@@ -42,7 +42,7 @@ export const swipeLeft = () => {
 
 /**
  * Dispatches action to navigate to a specific targetDate
- * @param {string} targetDate
+ * @param {Date} targetDate
  */
 export const gotoDay = targetDate => {
   dispatcher.dispatch({

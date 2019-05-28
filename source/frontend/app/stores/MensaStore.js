@@ -29,9 +29,9 @@ class MensaStore extends EventEmitter {
    * @property {string} type
    * @property {Object} [payload]
    */
-
   /**
-   * Handles actions dispatched from MensaActions
+   * Function that is called after action is dispatched
+   * Uses switch to filter actions
    * @param {FluxAction} action
    */
   async handleActions(action) {

@@ -68,3 +68,16 @@ it('handleError should log error information', () => {
   expect(console.log.mock.calls[0][0]).toContain(`error`);
   console.log = restore;
 });
+
+it('convertSchedule should convert Schedule so that rendering of multiple events in the same slot possible.', () => {
+  // api.convertSchedule();
+});
+
+it('getPossibleNames should call correct api endpoint', async () => {
+  fetch.once(JSON.stringify(FETCH_RESPONSE));
+  const response = await api.getVszhawFeed();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/vszhaw`);
+  expect(response).toBeDefined();
+  expect(response).toEqual(FETCH_RESPONSE);
+});

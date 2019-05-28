@@ -9,6 +9,9 @@ import { configure, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
+const wrapper = shallow(<NavigationWeek />);
+const instance = wrapper.instance();
+
 import NavigationWeek from './NavigationWeek';
 
 import scheduleStore from '../../../../stores/ScheduleStore';
@@ -23,8 +26,6 @@ it('renders without crashing', () => {
 });
 
 it('should call setState with the correct value via refreshNavigation', () => {
-  const wrapper = shallow(<NavigationWeek />);
-  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 
@@ -38,8 +39,6 @@ it('should call setState with the correct value via refreshNavigation', () => {
 });
 
 it('should call scheduleActions.gotoDay with the correct value via handleWeekForwardClick', () => {
-  const wrapper = shallow(<NavigationWeek />);
-  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 
@@ -54,8 +53,6 @@ it('should call scheduleActions.gotoDay with the correct value via handleWeekFor
 });
 
 it('should call scheduleActions.gotoDay with the correct value via handleWeekBackClick', () => {
-  const wrapper = shallow(<NavigationWeek />);
-  const instance = wrapper.instance();
   scheduleStore.displayDay = true;
   scheduleStore.displayWeek = false;
 
@@ -67,4 +64,20 @@ it('should call scheduleActions.gotoDay with the correct value via handleWeekBac
   expect(scheduleActions.gotoDay).toHaveBeenCalledWith(
     new Date('2018-12-19T18:24:34.567Z')
   );
+});
+
+it('should remove listeners before unmount', () => {
+  scheduleStore.removeListener = jest.fn();
+  wrapper.unmount();
+
+  expect(scheduleStore.removeListener).toHaveBeenCalled();
+});
+
+it('should gototoday on handleDateClick', () => {
+  let tempParam = 'day';
+
+  scheduleActions.gotoDay = jest.fn();
+
+  instance.handleDateClick(tempParam)(null);
+  expect(scheduleActions.gotoDay).toHaveBeenCalledWith(tempParam);
 });

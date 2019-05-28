@@ -9,6 +9,13 @@ import vszhawStore from '../../../../stores/VsZhawStore';
 import EventDetailDialog from '../EventDetailDialog/EventDetailDialog';
 import VszhawEvent from '../VszhawEvent/VszhawEvent';
 
+/**
+ * Lesson Week Component
+ * Used to display Week Schedule.
+ *
+ * @class LessonWeek
+ * @extends {Component}
+ */
 class LessonWeek extends Component {
   state = {
     activeSlot: '',
@@ -40,12 +47,24 @@ class LessonWeek extends Component {
     });
   }
 
+  /**
+   * Function called on store change.
+   * Sets local vszhawEvents state to match store events state
+   *
+   * @memberof LessonWeek
+   */
   setEvents = () => {
     this.setState({
       vszhawEvents: vszhawStore.events
     });
   };
 
+  /**
+   * Function called when store changes.
+   * Sets local slots, displayDay and schedule states to match store.
+   *
+   * @memberof LessonWeek
+   */
   refreshSchedule = () => {
     this.setState({
       slots: scheduleStore.slots,
@@ -55,6 +74,20 @@ class LessonWeek extends Component {
   };
 
   // returns the current TimeSlot
+
+  /**
+   * Slot Object
+   * @typedef {Object} slot
+   * @property {string} endTime
+   * @property {string} startTime
+   */
+
+  /**
+   * Function that returns current time slot in a given list of time slots.
+   *
+   * @param {slot[]} slots
+   * @memberof LessonWeek
+   */
   getTimeSlot = slots => {
     const now = format(new Date(), 'HH:mm');
     for (var slot in slots) {
@@ -65,6 +98,12 @@ class LessonWeek extends Component {
     return null;
   };
 
+  /**
+   * Function that start a timer that updates activeSlot state every 60000 milliseconds.
+   * Local activeSlot state is set to current time slot using getTimeSlot.
+   *
+   * @memberof LessonWeek
+   */
   startTimer() {
     if (!this.timerId) {
       this.timerId = setInterval(() => {
@@ -75,10 +114,21 @@ class LessonWeek extends Component {
     }
   }
 
+  /**
+   * Ends interval started using startTimer.
+   *
+   * @memberof LessonWeek
+   */
   stopTimer() {
     clearInterval(this.timerId);
   }
 
+  /**
+   * Function that sets local eventDetailsOpen state to true and eventForDetails to the given param, after checking if the clicked event contains actual information (not. f.ex. holiday).
+   * Doing so will cause model to open.
+   *
+   * @memberof LessonWeek
+   */
   handleEventClick = param => e => {
     // Check if it is event with actual information (not. f.ex. holiday)
     if (param.eventRealizations && param.eventRealizations.length > 0) {
@@ -86,14 +136,31 @@ class LessonWeek extends Component {
     }
   };
 
+  /**
+   * Function that sets local eventDetailsOpen state to false and eventForDetails to null.
+   * Doing so will cause model to close.
+   *
+   * @memberof LessonWeek
+   */
   handleCloseEventDetails = () => {
     this.setState({ eventDetailsOpen: false, eventForDetails: null });
   };
 
+  /**
+   * Function will return the first day of the week for the given date.
+   *
+   * @param {Date} displayDay
+   * @memberof LessonWeek
+   */
   getWeekKey = displayDay => {
     return format(startOfWeek(displayDay, { weekStartsOn: 1 }), 'YYYY-MM-DD');
   };
 
+  /**
+   * Function returns the next vszhawEvents, if one exists during current week.
+   *
+   * @memberof LessonWeek
+   */
   checkForVszhawEvent = () => {
     const { vszhawEvents, displayDay } = this.state;
     if (!vszhawEvents.length > 0) return false;

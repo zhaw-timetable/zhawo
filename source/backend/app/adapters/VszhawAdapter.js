@@ -5,6 +5,17 @@ import ical from 'node-ical';
 
 export const parser = new Parser();
 
+/**
+ * Functions that handle all communication with the vszhaw webpage
+ *
+ * @namespace VszhawAdapter*/
+
+/**
+ * Async Function that reads rss feed from vszhaw.ch
+ *
+ * @export
+ * @return {Promise}  On success the promise will be resolved with a list of articles.
+ */
 export async function getVszhawRSS() {
   return new Promise(async (resolve, reject) => {
     let feed = await parser.parseURL('https://www.vszhaw.ch/feed/');
@@ -12,6 +23,12 @@ export async function getVszhawRSS() {
   });
 }
 
+/**
+ * Async Function that gets all vszhaw events for the current month.
+ *
+ * @export
+ * @return {Promise}  On success the promise will be resolved with an array.
+ */
 export async function getVszhawEvents() {
   return new Promise(async (resolve, reject) => {
     let foundAnEvent = false;

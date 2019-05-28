@@ -19,6 +19,9 @@ class ScheduleStore extends EventEmitter {
     this.initializeStore();
   }
 
+  /**
+   * Functions sets default values for variables
+   */
   initializeStore() {
     this.currentAction = '';
     // general properties
@@ -35,6 +38,9 @@ class ScheduleStore extends EventEmitter {
     this.scheduleForSearchUser = null;
   }
 
+  /**
+   * Functions resets all variables in store
+   */
   clearStore() {
     this.schedule = null;
     this.scheduleForCurrentUser = null;
@@ -44,12 +50,22 @@ class ScheduleStore extends EventEmitter {
     this.currentAction = '';
   }
 
+  /**
+   *
+   * Function that creates array for the week of the given date
+   * @param {*} date
+   */
   createDisplayWeek(date) {
     const weekStartDate = startOfWeek(date, { weekStartsOn: 1 });
     const weekArray = Array.apply(null, Array(6));
     return weekArray.map((value, index) => addDays(weekStartDate, index));
   }
 
+  /**
+   * Function that creates array for the month of the given date
+   * @param {*} date
+   *
+   */
   createDisplayMonth(date) {
     const monthStart = startOfMonth(date);
     var weekStartDate = startOfWeek(monthStart, { weekStartsOn: 1 });
@@ -61,10 +77,17 @@ class ScheduleStore extends EventEmitter {
     return monthArray;
   }
 
+  /**
+   * Function that return the current day unless its a sunday (by using convertSunday)
+   */
   getCurrentDate() {
     return this.convertSunday(new Date());
   }
 
+  /**
+   * Function that returns current day unless is Sunday, then return Monday after
+   * @param {Date} date
+   */
   convertSunday(date) {
     // if currentDate is Sunday, set store currentDate to the Monday after
     if (getDay(date) == 0) {
@@ -74,6 +97,17 @@ class ScheduleStore extends EventEmitter {
     }
   }
 
+  /**
+   * A flux action with a type and optional payload
+   * @typedef {Object} FluxAction
+   * @property {string} type
+   * @property {Object} [payload]
+   */
+  /**
+   * Function that is called after action is dispatched
+   * Uses switch to filter actions
+   * @param {FluxAction} action
+   */
   async handleActions(action) {
     switch (action.type) {
       case 'GET_SCHEDULE_FOR_SEARCH':

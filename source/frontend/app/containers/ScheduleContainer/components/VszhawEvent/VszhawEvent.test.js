@@ -26,6 +26,17 @@ it('renders without crashing', () => {
   const wrapper = shallow(<VszhawEvent event={EVENT} />);
 });
 
+it('should got to link on gotoLink', () => {
+  const wrapper = shallow(<VszhawEvent event={EVENT} />);
+  const instance = wrapper.instance();
+  global.open = jest.fn().mockImplementationOnce(() => {
+    return { focus: jest.fn() };
+  });
+
+  instance.gotoLink(null)(null);
+  expect(global.open).toHaveBeenCalled();
+});
+
 it('should render one root element with className VszhawEvent', () => {
   const wrapper = shallow(<VszhawEvent event={EVENT} />);
   expect(wrapper.find('.VszhawEvent')).toHaveLength(1);

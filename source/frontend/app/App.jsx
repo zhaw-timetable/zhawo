@@ -21,6 +21,13 @@ import VsZhawContainer from './containers/VsZhawContainer/VsZhawContainer';
 import NotFoundContainer from './containers/NotFoundContainer/NotFoundContainer';
 import DrawerContainer from './containers/DrawerContainer/DrawerContainer';
 
+/**
+ * Main Component
+ * Handles Routing.
+ *
+ * @class App
+ * @extends {Component}
+ */
 class App extends Component {
   componentWillMount() {
     globalStore.on('current_user_logout', this.handleUserChange);
@@ -32,15 +39,32 @@ class App extends Component {
     globalStore.removeListener('theme_changed', this.handleThemeChanged);
   }
 
+  /**
+   * Function that forces reload when user is  updated in Store.
+   *
+   * @memberof App
+   */
   handleUserChange = () => {
     this.forceUpdate();
   };
 
+  /**
+   * Function that forces reload when theme is  updated in Store.
+   *
+   * @memberof App
+   */
   handleThemeChanged = () => {
     this.forceUpdate();
   };
 
   render() {
+    /**
+     * Secret Route component
+     * Users that are not login are forwarded to login.
+     * User is login if username is stored in store.
+     *
+     * @memberof App
+     */
     const SecretRoute = ({ component: Component, ...rest }) => (
       <Route
         {...rest}

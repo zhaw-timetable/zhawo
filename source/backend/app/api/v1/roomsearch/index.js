@@ -4,6 +4,11 @@ import fs from 'fs-extra';
 
 import { logToFile } from '../../../file-logger';
 
+/**
+ * Creates Router for Roomsearch
+ *
+ * @returns {Router}
+ */
 export default ({ config, db }) => {
   let router = Router();
 

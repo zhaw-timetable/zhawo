@@ -22,6 +22,12 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 
+/**
+ * Schedule Context Menu Component
+ *
+ * @class ScheduleContextMenu
+ * @extends {Component}
+ */
 class ScheduleContextMenu extends Component {
   state = {
     isScheduleSearchOpen: false,
@@ -45,54 +51,113 @@ class ScheduleContextMenu extends Component {
     scheduleStore.removeListener('schedule_changed', this.refreshState);
   }
 
+  /**
+   * Function called on store change.
+   * Set local currentSearch state to match store.
+   *
+   * @memberof ScheduleContextMenu
+   */
   refreshState = () => {
     this.setState({
       currentSearch: scheduleStore.currentSearch
     });
   };
 
+  /**
+   * Function that prevents the default behavior of an element and uses the gotoDay action to go to current day.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleGoToTodayClick = e => {
     e.preventDefault();
     const currentDate = new Date();
     scheduleActions.gotoDay(currentDate);
   };
 
+  /**
+   * Function used to open Schedule Search by setting isScheduleSearchOpen state to true.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleOpen = () => {
     this.setState({ isScheduleSearchOpen: true });
   };
 
+  /**
+   * Function used to close Schedule Search by setting isScheduleSearchOpen state to false.
+   * Resets value state.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleClose = () => {
     this.setState({ isScheduleSearchOpen: false, value: '' });
   };
 
+  /**
+   * Function clears search by calling clearSearch action
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleClearSearch = e => {
     scheduleActions.clearSearch();
   };
 
+  /**
+   * Function called on store change.
+   * Sets local possibleNames to match store.
+   *
+   * @memberof ScheduleContextMenu
+   */
   refreshPossibleNames = () => {
     this.setState({
       possibleNames: globalStore.possibleNames
     });
   };
 
+  /**
+   * Function used to set local suggestions state by calling getSuggestions.
+   * Used by Autosuggest.
+   *
+   * @param {string} value
+   * @memberof ScheduleContextMenu
+   */
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
   };
 
+  /**
+   * Function used to clear local suggestions state.
+   * Used by Autosuggest.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleSuggestionsClearRequested = () => {
     this.setState({
       suggestions: []
     });
   };
 
+  /**
+   * Function used to set local value state.
+   * Used by Autosuggest.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleChange = (event, { newValue }) => {
     this.setState({
       value: newValue
     });
   };
 
+  /**
+   * Function called on every key press and prevents the default.
+   * Selects suggestion on enter press using handleSearch.
+   *
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleKeyDown = event => {
     if (event.key === 'Enter') {
       const { suggestions } = this.state;
@@ -103,12 +168,23 @@ class ScheduleContextMenu extends Component {
     }
   };
 
+  /**
+   * Function that get schedule for search by calling getSchedule action and closes modular using handleClose.
+   *
+   * @memberof ScheduleContextMenu
+   */
   handleSearch = search => {
     const { type, label } = search;
     scheduleActions.getSchedule(type, label, scheduleStore.displayDay);
     this.handleClose();
   };
 
+  /**
+   * Function that filters possibleNames by value.
+   *
+   * @param {string} value
+   * @memberof ScheduleContextMenu
+   */
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -131,10 +207,21 @@ class ScheduleContextMenu extends Component {
         });
   };
 
+  /**
+   * Function that get suggestion value from given suggestion
+   *
+   * @memberof ScheduleContextMenu
+   */
   getSuggestionValue = suggestion => {
     return suggestion.label;
   };
 
+  /**
+   * Function that selects suggestion using handleSearch.
+   * Prevents Default.
+   *
+   * @memberof ScheduleContextMenu
+   */
   onSuggestionSelected = (event, { suggestion }) => {
     event.preventDefault();
     this.handleSearch(suggestion);

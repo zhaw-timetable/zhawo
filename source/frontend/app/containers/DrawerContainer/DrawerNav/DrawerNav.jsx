@@ -10,13 +10,28 @@ import MenuSVG from '../../../assets/img/MenuSVG/MenuSVG';
 import VsZHAWSVG from '../../../assets/img/VsZHAWSVG/VsZHAWSVG';
 import ZHAWOSVG from '../../../assets/img/ZHAWOSVG/ZHAWOSVG';
 
+/**
+ * DrawerNav Component
+ *
+ * Navigation bar in Drawer.
+ * Contains all the links to the links to the different Views.
+ * Replaces BottomNav on Desktop.
+ *
+ * @class DrawerNav
+ * @extends {Component}
+ */
 class DrawerNav extends Component {
   state = {
     value: globalStore.viewState
   };
 
+  /**
+   * Function that pushes view to history so Components can be changed using react router
+   *
+   * @param {number} value (name of new Component)
+   * @memberof BottomNavContainer
+   */
   updateViewState = value => {
-    let selected;
     switch (value) {
       case 0:
         history.push('/');

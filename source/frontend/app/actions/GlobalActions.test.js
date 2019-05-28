@@ -62,3 +62,19 @@ it('setDayView should dispatch correct type with payload', () => {
     payload: VALUE
   });
 });
+
+it('getViewState should dispatch correct type', () => {
+  globalActions.getViewState();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'GET_VIEWSTATE'
+  });
+});
+
+it('getPossibleNames should dispatch correct type', () => {
+  globalActions.getPossibleNames();
+  expect(dispatcher.dispatch).toHaveBeenCalled();
+  expect(dispatcher.dispatch).toHaveBeenCalledWith({
+    type: 'GET_POSSIBLE_NAMES'
+  });
+});

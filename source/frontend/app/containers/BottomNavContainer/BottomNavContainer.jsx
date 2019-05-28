@@ -14,11 +14,27 @@ import history from '../../history';
 import globalStore from '../../stores/GlobalStore';
 import * as globalActions from '../../actions/GlobalActions';
 
+/**
+ * Bottom App Drawer/ Navigation Component.
+ * Uses React router to switch between Components, by pushing Components to history.
+ * Styled in material design.
+ * Contains Material Icons that can be found in the assets folder.
+ *
+ * @class BottomNavContainer
+ * @extends {Component}
+ */
 class BottomNavContainer extends Component {
   state = {
     value: globalStore.viewState
   };
 
+  /**
+   * Function that pushes view to history so Components can be changed using react router
+   *
+   * @param {event} event
+   * @param {number} value (name of new Component)
+   * @memberof BottomNavContainer
+   */
   updateViewState = (event, value) => {
     this.setState({ value });
     switch (value) {

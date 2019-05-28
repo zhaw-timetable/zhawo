@@ -6,6 +6,11 @@ import classes from './classes';
 import courses from './courses';
 import rooms from './rooms';
 
+/**
+ * Creates Router for schedules
+ *
+ * @returns {Router}
+ */
 export default ({ config, db }) => {
   let router = Router();
 

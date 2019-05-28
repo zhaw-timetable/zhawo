@@ -10,6 +10,17 @@ class VszhawStore extends EventEmitter {
     this.events = [];
   }
 
+  /**
+   * A flux action with a type and optional payload
+   * @typedef {Object} FluxAction
+   * @property {string} type
+   * @property {Object} [payload]
+   */
+  /**
+   * Function that is called after action is dispatched
+   * Uses switch to filter actions
+   * @param {FluxAction} action
+   */
   async handleActions(action) {
     switch (action.type) {
       case 'GET_VSZHAWFEED':

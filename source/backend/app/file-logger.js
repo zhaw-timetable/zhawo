@@ -1,11 +1,15 @@
-// Firstly we'll need to import the fs library
 let fs = require('fs');
 
 import logger from './logger';
-import { fileURLToPath } from 'url';
 
 import { format } from 'date-fns';
 
+/**
+ * Function used to write to log file.
+ *
+ * @param {string} file
+ * @param {string} text
+ */
 export const logToFile = async (file, text) => {
   let timeStamp = new Date();
   let fileName = format(timeStamp, 'YYYY-MM-DD');

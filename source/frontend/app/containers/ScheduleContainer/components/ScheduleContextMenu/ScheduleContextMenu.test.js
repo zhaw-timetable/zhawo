@@ -155,3 +155,35 @@ it('onSuggestionSelected should call handleClose and scheduleActions.getSchedule
     'fakeDisplayDay'
   );
 });
+
+it('should remove listeners before unmount', () => {
+  const wrapper = shallow(<ScheduleContextMenu />);
+  const instance = wrapper.instance();
+  globalStore.removeListener = jest.fn();
+  scheduleStore.removeListener = jest.fn();
+  wrapper.unmount();
+
+  expect(globalStore.removeListener).toHaveBeenCalled();
+  expect(scheduleStore.removeListener).toHaveBeenCalled();
+});
+
+it('should call login user on enter press if only 1 suggestion left', () => {
+  const wrapper = shallow(<ScheduleContextMenu />);
+  const instance = wrapper.instance();
+
+  let event = { key: 'Enter', preventDefault: jest.fn() };
+
+  instance.handleSearch = jest.fn();
+
+  instance.state.suggestions = ['test', 'test'];
+
+  instance.handleKeyDown(event);
+  expect(instance.handleSearch).not.toHaveBeenCalled();
+
+  instance.state.suggestions = ['test'];
+
+  instance.handleKeyDown(event);
+  expect(instance.handleSearch).toHaveBeenCalledWith('test');
+
+  instance.handleSearch.mockRestore();
+});

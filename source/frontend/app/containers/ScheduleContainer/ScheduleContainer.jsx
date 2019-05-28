@@ -17,14 +17,20 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import NavigationWeek from './components/NavigationWeek/NavigationWeek';
-import NavigationMonth from './components/NavigationMonth/NavigationMonth';
 import LessonDay from './components/LessonDay/LessonDay';
 import LessonWeek from './components/LessonWeek/LessonWeek';
 import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
 
+/**
+ * Schedule Component
+ * Displays the schedule for the current user.
+ * User can swipe between days/weeks.
+ *
+ * @class Schedule
+ * @extends {Component}
+ */
 class Schedule extends Component {
   state = {
-    isOpen: false,
     isDayView: globalStore.isDayView,
     swipeInX: 0
   };
@@ -37,7 +43,7 @@ class Schedule extends Component {
         scheduleStore.currentDate
       );
     }
-    if (!vszhawStore.events.length > 0) {
+    if (!(vszhawStore.events.length > 0)) {
       vszhawActions.getVszhawEvents();
     }
   }
@@ -50,24 +56,53 @@ class Schedule extends Component {
     globalStore.removeListener('isDayView_changed', this.handleView);
   }
 
+  /**
+   * Function that toggles local isOpen state.
+   *
+   * @memberof Schedule
+   */
   toggleMonthView = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
   };
 
+  /**
+   * Function that is called when store changes.
+   * Sets local isDayView to match store.
+   *
+   * @memberof Schedule
+   */
   handleView = () => {
     this.setState({ isDayView: globalStore.isDayView });
   };
 
+  /**
+   * Function that sets local swipeInX state to 0.
+   * Used to swipe.
+   *
+   * @memberof Schedule
+   */
   onSwipeStart = event => {
     this.setState({ swipeInX: 0 });
   };
 
+  /**
+   * Function that sets local swipeInX state.
+   * Used to swipe.
+   *
+   * @memberof Schedule
+   */
   onSwipeMove = (position, event) => {
     this.setState({ swipeInX: position.x });
   };
 
+  /**
+   * Function that sets local swipeInX state.
+   * Used to swipe.
+   *
+   * @memberof Schedule
+   */
   onSwipeEnd = event => {
     let { swipeInX } = this.state;
     if (swipeInX > window.innerWidth / 4) {
@@ -96,11 +131,8 @@ class Schedule extends Component {
         >
           <div className="ScheduleContainer">
             <div className="NavigationContainer">
-              {!this.state.isOpen && <NavigationWeek />}
-              {this.state.isOpen && <NavigationMonth />}
+              <NavigationWeek />
             </div>
-            {/* Todo remove gripper in week view and change function of arrows*/}
-            {/* <div id="Gripper" onClick={this.toggleMonthView} /> */}
             <div className="TimetableContainer">
               {this.state.isDayView && <LessonDay />}
               {!this.state.isDayView && <LessonWeek />}

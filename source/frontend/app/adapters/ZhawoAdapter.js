@@ -15,6 +15,15 @@ let address = 'http://localhost:4000';
 if (process.env.NODE_ENV === 'production') address = 'https://zhawo.ml';
 const apiUrl = `${address}/api/v1`;
 
+/**@namespace ZhawoAdapter*/
+
+/**
+ * Function that make Api call to get Mensa Info for specified mensa
+ * @param {string} facilityId
+ * @param {Date} date
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getMensaResource(facilityId, date) {
   return new Promise(async (resolve, reject) => {
     const dateString = format(new Date(date), 'YYYY-MM-DD');
@@ -32,6 +41,11 @@ export function getMensaResource(facilityId, date) {
   });
 }
 
+/**
+ * Function that make api call to get all mensa facilities.
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getAllMensas() {
   return new Promise(async (resolve, reject) => {
     const url = `${apiUrl}/mensa`;
@@ -49,7 +63,16 @@ export function getAllMensas() {
   });
 }
 
-// f.ex. route = students, name = bachmdo2, startDate = date
+/**
+ * Function that gets week schedule for specified user
+ * to improve loading time it also loads weeks around specified start date
+ * @param {string} route
+ * @param {string} name
+ * @param {Date} startDate
+ * @param {number} rangeAroundDate
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getScheduleResource(route, name, startDate, rangeAroundDate) {
   return new Promise(async (resolve, reject) => {
     let schedule;
@@ -87,12 +110,14 @@ export function getScheduleResource(route, name, startDate, rangeAroundDate) {
   });
 }
 
-// Is needed to make rendering of multiple events in the same slot
-// possible, also helps with coordinating which schedules to fetch from the api
-// and allows for nice event indicators in Week Navigation and Month
-
-// Receives schedule for exactly one week
-
+/**
+ * Function to make rendering of multiple events in the same slot possible, also helps with coordinating which schedules to fetch from the api and allows for nice event indicators in Week Navigation and Month
+ *
+ * Receives schedule for exactly one week
+ * @param {*} schedule
+ *
+ * @memberof ZhawoAdapter
+ */
 export function convertSchedule(schedule) {
   // Initialize converted schedule with weeks as empty object
   const superiorSchedule = { weeks: {} };
@@ -103,7 +128,7 @@ export function convertSchedule(schedule) {
   // Loop through all days of the received week
   schedule.days.forEach(day => {
     // Except if it's a useless Sunday
-    if (!getDay(day.date) == 0) {
+    if (!(getDay(day.date) == 0)) {
       // Days within a week will again be identified by their shortened date
       const dayKey = format(day.date, 'YYYY-MM-DD');
       // Events will be added to slots dynamically, to make that easier, initialize array
@@ -134,6 +159,13 @@ export function convertSchedule(schedule) {
   return superiorSchedule;
 }
 
+/**
+ * Function that rebuilds schedule to resolve resolveOverlaps
+ * returns new schedule
+ * @param {*} schedule
+ *
+ * @memberof ZhawoAdapter
+ */
 export function resolveOverlaps(schedule) {
   let newSchedule = schedule;
   // Go through the week in the schedule
@@ -171,6 +203,11 @@ export function resolveOverlaps(schedule) {
   return newSchedule;
 }
 
+/**
+ * Function makes api call to get all possible user names.
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getPossibleNames() {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -220,6 +257,12 @@ export function getPossibleNames() {
   });
 }
 
+/**
+ * Async Function that makes an api call to get all the Free rooms for the current day.
+ * returns array containing all the time slots and the free rooms in said time slot.
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getFreeRoomsJson() {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -242,6 +285,12 @@ export function getFreeRoomsJson() {
   });
 }
 
+/**
+ * Function that converts freeRooms Object to an array.
+ * @param {*} freeRooms
+ *
+ * @memberof ZhawoAdapter
+ */
 export function convertFreeRooms(freeRooms) {
   var array = Object.keys(freeRooms).map(function(index) {
     return freeRooms[index];
@@ -249,6 +298,9 @@ export function convertFreeRooms(freeRooms) {
   return array;
 }
 
+/**
+ * Function that makes api call to get vszhaw feed
+ */
 export function getVszhawFeed() {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -268,6 +320,11 @@ export function getVszhawFeed() {
   });
 }
 
+/**
+ * Function that makes api call to get next vszhaw event.
+ *
+ * @memberof ZhawoAdapter
+ */
 export function getVszhawEvents() {
   return new Promise(async (resolve, reject) => {
     const method = GET;
@@ -284,6 +341,13 @@ export function getVszhawEvents() {
   });
 }
 
+/**
+ * Function used output errors of api calls
+ * @param {*} err
+ * @param {string} url
+ *
+ * @memberof ZhawoAdapter
+ */
 export function handleError(err, url) {
   console.log(`Fetch to ${url} failed with error`, err);
 }

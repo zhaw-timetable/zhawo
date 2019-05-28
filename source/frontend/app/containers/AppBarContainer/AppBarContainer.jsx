@@ -10,7 +10,15 @@ import Hidden from '@material-ui/core/Hidden';
 
 import * as globalActions from '../../actions/GlobalActions';
 
+/**
+ * AppBar Component. Styled in Material design.
+ * Can be passed children that will desplayed in bar.
+ *
+ * @class AppBarContainer
+ * @extends {Component}
+ */
 class AppBarContainer extends Component {
+  /** State of Drawer */
   toggleDrawer = () => {
     globalActions.toggleDrawer();
   };
