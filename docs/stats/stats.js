@@ -7,7 +7,6 @@ const { JSDOM } = jsdom;
 
 const co = require('co');
 const generate = require('node-chartist');
-const htmlToImage = require('html-to-image');
 
 function readFileAsync(filename) {
   return new Promise(function(resolve, reject) {
