@@ -1,5 +1,6 @@
 import request from 'supertest';
 import fetch from 'node-fetch';
+import fs from 'fs-extra';
 
 import app from './app';
 
@@ -133,5 +134,15 @@ it('GET to /vszhaw/events should respond correctly', async () => {
   const response = await request(app).get(url);
   expect(response.body).toEqual('vszhawEvents');
   expect(vszhawApi.getVszhawEvents).toHaveBeenCalled();
+  vszhawApi.getVszhawEvents.mockRestore();
+});
+
+it('GET to /roomsearch/ should respond correctly', async () => {
+  jest.mock('fs-extra');
+  fs.readJson = jest.fn().mockReturnValue(Promise.resolve('freeRooms'));
+  const url = `${API}/roomsearch/`;
+  const response = await request(app).get(url);
+  expect(response.body).toEqual('freeRooms');
+  expect(fs.readJson).toHaveBeenCalled();
   vszhawApi.getVszhawEvents.mockRestore();
 });
