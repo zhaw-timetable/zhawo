@@ -7,13 +7,15 @@
 The architecture for ZHAWo consists of a frontend React \cite{React} web application and a backend server based on the Node.js \cite{Node} server framework Express \cite{Express}. The frontend communicates with the backend through a REST API. The backend server - apart from providing the REST API for the frontend - fetches timetable and menu data from the CampusInfo REST API provided by the ZHAW and fetches vszhaw news and calendar events through their RSS feed \cite{VszhawNews} and their calendar application \cite{VszhawCalendar}.
 
 \bigskip
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=14cm, center]{../../diagrams/applicationArchitecture.png}
-  \caption{\textsf{Application Architecture Diagram}}
+  \captionsetup{width=13.5cm}
+  \caption[Application Architecture Diagram]{\textbf{Application Architecture Diagram}: React frontend application communicating with backend Express server through a REST API. Express server fetches data from vszhaw RSS feed and calendar web application as well as the CampusInfo REST API for timetable and menu data.}
 \end{figure}
 
-\bigskip
+\newpage
 
 ## Backend
 
@@ -42,9 +44,7 @@ Most of the application data for ZHAWo is provided by the CampusInfo API. Since 
 
 ### Vszhaw adapter
 
-Similarly to the CampusInfo API adapter, the RSS feed adapter provides an additional layer between our application and the RSS feed of the vszhaw as well as the calendar web application\cite{VszhawCalendar}. This ensures that should the data received by this third-party feed and calendar application change, the changes needed to our application will be isolated to the adapter.
-
-\newpage
+Similarly to the CampusInfo API adapter, the Vszhaw adapter provides an additional layer between our application and the RSS feed \cite{VszhawNews} of the vszhaw as well as the calendar web application \cite{VszhawCalendar}. This ensures that should the data received by this third-party feed and calendar application change, the changes needed to our application will be isolated to the adapter.
 
 ## Frontend
 
@@ -62,20 +62,21 @@ For the presentation of the web application to the user, we used the React frame
 
 To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behaviour. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
 
-\bigskip
-
-\begin{figure}[H]
-  \includegraphics[width=11.3cm, center]{../../diagrams/flux.png}
-  \caption{\textsf{Flux Pattern Diagram}}
-\end{figure}
-
-\bigskip
-
 ### REST API Adapter
 
 The data such as timetables, menu plans or lists of free rooms are provided by the backend REST API. To ensure modularity between front- and backend, we implemented an adapter module that handles all data requests to the backend. This practice allows easier adaptations to changes in API, as only the adapter would have to be changed, while the other parts such as the React application and service worker do not need to change.
 
 The modularity this design choice provides - similarly to the modularity of React - goes well with the agile principle of fast prototyping of new ideas and features.
+
+\bigskip
+
+\begin{figure}[H]
+  \includegraphics[width=14cm, center]{../../diagrams/flux.png}
+  \captionsetup{width=13.5cm}
+  \caption[Flux Pattern Diagram]{\textbf{Flux Pattern Diagram}: Unidirectional data flow from view components through actions }
+\end{figure}
+
+\bigskip
 
 ### Service Worker
 
@@ -84,14 +85,6 @@ The data for the frontend is provided by the backend REST API. All data received
 In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
 
 These two features enables us to offer the experience of a native application while we avoid having to maintain separate code bases for each platform.
-
-Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Lighthouse various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a score of 92 out of 100. A detailed report can be found on the Github Repository \cite{OurGithub}.
-
-## Testing
-
-For testing we used the framework Jest \cite{Jest} for both front- and backend. To test functionality and output of React components, we used the GUI testing framework \cite{Enzyme} in addition to Jest.
-
-For the express server application, we achieved a test coverage of 62\%. For the frontend React application 53\% of the code was covered, resulting in an overall project test coverage of about 55\% \cite{OurCoverage}. The coverage is lower than we had planned and is something we aim to improve when going from application prototype to production ready application. This can be in part attributed to the prototypical implementation of the primary functions menu plan, room search and student events. Another aspect is that the current JavaScript framework environment is very dynamic and fast paced, which on one hand offers many advantages, on the other hand, best testing practices have not been established. For example, it was challenging to isolate and test the different components of the Flux architecture in the frontend. Therefore, we decided to put a lot of focus on establishing better testing practices in the next stage of this project.
 
 \end{markdown}
 
