@@ -262,6 +262,7 @@ async function main() {
 
   handleFeedback(feedback);
   handleLogs(logs);
+  console.log('logs: ', logs);
 }
 //Your code here
 if (require.main === module) {
