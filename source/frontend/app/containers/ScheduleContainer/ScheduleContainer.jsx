@@ -17,7 +17,6 @@ import * as scheduleActions from '../../actions/ScheduleActions';
 import AppBarContainer from '../AppBarContainer/AppBarContainer';
 
 import NavigationWeek from './components/NavigationWeek/NavigationWeek';
-import NavigationMonth from './components/NavigationMonth/NavigationMonth';
 import LessonDay from './components/LessonDay/LessonDay';
 import LessonWeek from './components/LessonWeek/LessonWeek';
 import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContextMenu';
@@ -32,7 +31,6 @@ import ScheduleContextMenu from './components/ScheduleContextMenu/ScheduleContex
  */
 class Schedule extends Component {
   state = {
-    isOpen: false,
     isDayView: globalStore.isDayView,
     swipeInX: 0
   };
@@ -45,7 +43,7 @@ class Schedule extends Component {
         scheduleStore.currentDate
       );
     }
-    if (!vszhawStore.events.length > 0) {
+    if (!(vszhawStore.events.length > 0)) {
       vszhawActions.getVszhawEvents();
     }
   }
@@ -133,11 +131,8 @@ class Schedule extends Component {
         >
           <div className="ScheduleContainer">
             <div className="NavigationContainer">
-              {!this.state.isOpen && <NavigationWeek />}
-              {this.state.isOpen && <NavigationMonth />}
+              <NavigationWeek />
             </div>
-            {/* Todo remove gripper in week view and change function of arrows*/}
-            {/* <div id="Gripper" onClick={this.toggleMonthView} /> */}
             <div className="TimetableContainer">
               {this.state.isDayView && <LessonDay />}
               {!this.state.isDayView && <LessonWeek />}

@@ -7,7 +7,7 @@ import globalStore from '../stores/GlobalStore';
  * Differentiates between logged in user and user in search
  * @param {string} route
  * @param {string} name
- * @param {string} startDate
+ * @param {Date} startDate
  */
 export const getSchedule = (route, name, startDate) => {
   // Check if this is for the currentUser or for a search
