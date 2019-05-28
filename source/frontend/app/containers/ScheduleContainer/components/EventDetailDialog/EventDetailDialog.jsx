@@ -47,9 +47,6 @@ class EventDetailDialog extends Component {
             ))}
           </DialogContentText>
           <br />
-          <br />
-          {/* maybe add floorplan here with room highlighted? */}
-          <svg className="placeholder" width="300px" height="200px" />
         </DialogContent>
       </Dialog>
     );

@@ -6,6 +6,9 @@
 %\usepackage[utf8]{inputenc}
 %\usepackage[ngerman]{babel}
 
+\usepackage{silence}
+\WarningFilter{biblatex}{File 'english-ieee.lbx'}
+
 % Packages
 \usepackage{blindtext} % Lorem ipsum
 \usepackage[a4paper,includeheadfoot,margin=2cm]{geometry} % Layout, showframe --> to see border
@@ -21,6 +24,8 @@
 \usepackage{pdfpages} % Include pdf
 
 \usepackage[backend=bibtex,style=ieee]{biblatex} % or verbose-trad2
+
+\setlength{\headheight}{15pt}
 
 \bibliography{source.bib} % add sources to source.bib file
 
@@ -80,7 +85,10 @@
 	\include{ba_3_implementation}
   \newpage
 
-  \include{ba_4_discussion}
+  \include{ba_4_results}
+  \newpage
+
+  \include{ba_5_discussion}
   \newpage
 
 	%\markdownInput{example.md}
