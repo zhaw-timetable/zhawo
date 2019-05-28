@@ -56,26 +56,26 @@ it('should call setState on refreshNavigation', () => {
 it('should change month on handleMonthBackClick', () => {
   scheduleActions.gotoDay = jest.fn();
 
-  const date = new Date(2019, 2, 25);
+  const date = '2019-02-25T12:00:00.000Z';
   instance.state.displayDay = date;
 
   instance.handleMonthBackClick(null);
 
   expect(scheduleActions.gotoDay).toHaveBeenCalledWith(
-    new Date('2019-02-03T23:00:00.000Z')
+    new Date('2019-01-06T23:00:00.000Z')
   );
 });
 
 it('should change month on handleMonthForwardClick', () => {
   scheduleActions.gotoDay = jest.fn();
 
-  const date = new Date(2019, 2, 25);
+  const date = '2019-02-25T12:00:00.000Z';
   instance.state.displayDay = date;
 
   instance.handleMonthForwardClick(null);
 
   expect(scheduleActions.gotoDay).toHaveBeenCalledWith(
-    new Date('2019-03-31T22:00:00.000Z')
+    new Date('2019-03-03T23:00:00.000Z')
   );
 });
 
