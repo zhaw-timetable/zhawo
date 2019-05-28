@@ -19,8 +19,8 @@ const apiUrl = `${address}/api/v1`;
 
 /**
  * Function that make Api call to get Mensa Info for specified mensa
- * @param {number} facilityId
- * @param {string} date
+ * @param {string} facilityId
+ * @param {Date} date
  *
  * @memberof ZhawoAdapter
  */
@@ -128,7 +128,7 @@ export function convertSchedule(schedule) {
   // Loop through all days of the received week
   schedule.days.forEach(day => {
     // Except if it's a useless Sunday
-    if (!getDay(day.date) == 0) {
+    if (!(getDay(day.date) == 0)) {
       // Days within a week will again be identified by their shortened date
       const dayKey = format(day.date, 'YYYY-MM-DD');
       // Events will be added to slots dynamically, to make that easier, initialize array
