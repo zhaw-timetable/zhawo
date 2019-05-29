@@ -60,6 +60,15 @@ it('getVszhawFeed should call correct api endpoint', async () => {
   expect(response).toEqual(FETCH_RESPONSE);
 });
 
+it('getVszhawEvents should call correct api endpoint', async () => {
+  fetch.once(JSON.stringify(FETCH_RESPONSE));
+  const response = await api.getVszhawEvents();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/vszhaw/events`);
+  expect(response).toBeDefined();
+  expect(response).toEqual(FETCH_RESPONSE);
+});
+
 it('handleError should log error information', () => {
   const restore = console.log;
   console.log = jest.fn();
@@ -69,15 +78,57 @@ it('handleError should log error information', () => {
   console.log = restore;
 });
 
-it('convertSchedule should convert Schedule so that rendering of multiple events in the same slot possible.', () => {
-  // api.convertSchedule();
+it('getFreeRoomsJson should call correct api endpoint', async () => {
+  const OBJECT = { someKey1: 'entry1', someKey2: 'entry2' };
+  const ARRAY = ['entry1', 'entry2'];
+  fetch.once(JSON.stringify(OBJECT));
+  const response = await api.getFreeRoomsJson();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/roomsearch`);
+  expect(response).toBeDefined();
+  expect(response).toEqual(ARRAY);
 });
 
-it('getPossibleNames should call correct api endpoint', async () => {
-  fetch.once(JSON.stringify(FETCH_RESPONSE));
-  const response = await api.getVszhawFeed();
-  expect(fetch).toHaveBeenCalled();
-  expect(fetch.mock.calls[0][0]).toContain(`api/v1/vszhaw`);
-  expect(response).toBeDefined();
-  expect(response).toEqual(FETCH_RESPONSE);
+it('convertFreeRooms should return array representation of freeRooms object', () => {
+  const OBJECT = { someKey1: 'entry1', someKey2: 'entry2' };
+  const ARRAY = ['entry1', 'entry2'];
+  let array = api.convertFreeRooms(OBJECT);
+  expect(array).toEqual(ARRAY);
 });
+
+it('getPossibleNames should call correct api endpoints and concatenate responses', async () => {
+  const RESPONSE_STUDENTS = JSON.stringify({
+    students: ['student1', 'student2']
+  });
+  const RESPONSE_LECTURERS = JSON.stringify({
+    lecturers: [{ shortName: 'lecturer1' }, { shortName: 'lecturer2' }]
+  });
+  const RESPONSE_CLASSES = JSON.stringify({ classes: ['class1', 'class2'] });
+  const RESPONSE_COURSES = JSON.stringify({
+    courses: [{ name: 'course1' }, { name: 'course2' }]
+  });
+  const RESPONSE_ROOMS = JSON.stringify({
+    rooms: ['room1', 'room2']
+  });
+  fetch
+    .once(RESPONSE_STUDENTS)
+    .once(RESPONSE_LECTURERS)
+    .once(RESPONSE_CLASSES)
+    .once(RESPONSE_COURSES)
+    .once(RESPONSE_ROOMS);
+  const response = await api.getPossibleNames();
+  expect(fetch).toHaveBeenCalled();
+  expect(fetch.mock.calls[0][0]).toContain(`api/v1/schedules/students/`);
+  expect(fetch.mock.calls[1][0]).toContain(`api/v1/schedules/lecturers/`);
+  expect(fetch.mock.calls[2][0]).toContain(`api/v1/schedules/classes/`);
+  expect(fetch.mock.calls[3][0]).toContain(`api/v1/schedules/courses/`);
+  expect(fetch.mock.calls[4][0]).toContain(`api/v1/schedules/rooms/`);
+  expect(response).toBeDefined();
+  expect(response.students).toBeDefined();
+  expect(response.lecturers).toBeDefined();
+  expect(response.classes).toBeDefined();
+  expect(response.courses).toBeDefined();
+  expect(response.rooms).toBeDefined();
+});
+
+// fetch.mockResponses([JSON.stringify(FETCH_RESPONSE), JSON.stringify(FETCH_RESPONSE),JSON.stringify(FETCH_RESPONSE),JSON.stringify(FETCH_RESPONSE),JSON.stringify(FETCH_RESPONSE)]);
