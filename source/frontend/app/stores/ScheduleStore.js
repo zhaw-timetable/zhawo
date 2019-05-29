@@ -13,6 +13,9 @@ import dispatcher from '../dispatcher';
 import * as api from '../adapters/ZhawoAdapter';
 import globalStore from './GlobalStore';
 
+/**
+ * Schedule Flux Store
+ */
 class ScheduleStore extends EventEmitter {
   constructor() {
     super();

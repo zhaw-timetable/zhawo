@@ -3,6 +3,9 @@ import dispatcher from '../dispatcher';
 
 import * as api from '../adapters/ZhawoAdapter';
 
+/**
+ * Vszhaw Flux Store
+ */
 class VszhawStore extends EventEmitter {
   constructor() {
     super();
