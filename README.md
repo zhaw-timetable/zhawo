@@ -13,7 +13,7 @@
 
 - [ZHAWo.ml](https://zhawo.ml)
 - [Latest release](https://github.com/zhaw-timetable/zhawo/releases/tag/v1)
-- [Documentation](https://github.com/zhaw-timetable/zhawo/wiki).
+- [Documentation](https://github.com/zhaw-timetable/zhawo/wiki)
 - [BA Sprint Planning](https://github.com/zhaw-timetable/zhawo/wiki/Workflow%3A-Sprint-Planning-BA) 
 - [PA Sprint Planning](https://github.com/zhaw-timetable/zhawo/wiki/Workflow%3A-Sprint-Planning-PA)
 
