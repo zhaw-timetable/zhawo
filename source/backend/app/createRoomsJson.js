@@ -24,23 +24,30 @@ export async function createFreeRoomsJson() {
 export async function createFreeRoomsObject() {
   try {
     let fetches = 0;
-    let allRooms = await api.getPossibleNames('rooms');
-    allRooms = allRooms.rooms.filter(room => {
-      const re = /^\S\S\s\S/;
-      const correctPattern = re.test(room);
-      return correctPattern;
-    });
+    const currentDate = new Date();
+    let allRooms = allValidRooms;
     let allSchedules = [];
     await asyncForEach(allRooms, async room => {
       let schedule = await api.getScheduleResource(
         'rooms',
         room,
-        new Date(),
+        currentDate,
         1
       );
       fetches++;
       if (schedule && !schedule.status) {
         allSchedules.push(schedule);
+      } else {
+        let defaultSchedule = {
+          course: null,
+          days: [{ date: currentDate, events: [], slots: defaultSlots }],
+          lecturer: null,
+          room: { name: room },
+          class: null,
+          student: null,
+          type: 'Room'
+        };
+        allSchedules.push(defaultSchedule);
       }
     });
 
@@ -135,6 +142,85 @@ const asyncForEach = async (array, callback) => {
     await callback(array[index], index, array);
   }
 };
+
+/**
+ * All rooms that could be available for students to study
+ */
+const allValidRooms = [
+  'tp 208',
+  'tp 212',
+  'tp 402',
+  'tp 404',
+  'tp 405',
+  'tp 406',
+  'tp 407',
+  'tp 408',
+  'tp 410',
+  'th 263',
+  'th 331',
+  'th 333',
+  'th 335',
+  'th 343',
+  'th 344',
+  'th 363',
+  'th 368',
+  'th 431',
+  'th 433',
+  'th 444',
+  'th 541',
+  'th 544',
+  'th 547',
+  'th 553',
+  'th 561',
+  'th 567',
+  'th 568',
+  'tb 230',
+  'tb 330',
+  'tb 320',
+  'tb 404',
+  'tb 410',
+  'tb 414',
+  'tb 426',
+  'tb 432',
+  'tb 434',
+  'tb 504',
+  'tb 510',
+  'tb 514',
+  'tb 526',
+  'tb 532',
+  'tb 610',
+  'tb 630',
+  'te 214',
+  'te 216',
+  'te 225',
+  'te 220',
+  'te 314',
+  'te 316',
+  'te 319',
+  'te 402',
+  'te 407',
+  'te 414',
+  'te 419',
+  'te 423',
+  'te 502',
+  'te 507',
+  'te 514',
+  'te 516',
+  'te 519',
+  'te 523',
+  'te 524',
+  'te 528',
+  'te 602',
+  'te 606',
+  'te 616',
+  'te 622',
+  'te 626',
+  'tl 201',
+  'tl 412',
+  'tl 418',
+  'tl 424',
+  'tl 430'
+];
 
 /**
  * Default slots
