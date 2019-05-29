@@ -4,7 +4,25 @@
 
 ## Application
 
-The user interface was designed to provide students with the familiar look and feel of a native mobile application. We chose a minimalistic design approach. The focus was on displaying relevant information without any distracting noise or clutter and a fast and intuitive user experience. Users can choose between a light theme and a dark theme (Figures \ref{fig:LoginFigure}, \ref{fig:MenuFigure} and \ref{fig:EventsFigure}). A detailed interaction flow with ZHAWo is described in the following sections.
+The user interface was designed to provide students with the familiar look and feel of a native mobile application. We chose a minimalistic design approach. The focus was on displaying relevant information without any distracting noise or clutter and a fast and intuitive user experience. Users can choose between a light theme and a dark theme (Figures \ref{fig:LoginFigure}, \ref{fig:MenuFigure} and \ref{fig:EventsFigure}).
+On desktop devices the drawer is always open and contains the navigation. (Figures \ref{fig:DesktopSchedule} and \ref{fig:DesktopRoomsearch})
+
+A detailed interaction flow with ZHAWo is described in the following sections.
+\begin{figure}[H]
+  \includegraphics[width=13.5cm, center]{./figures/desktop_schedule.png}
+  \captionsetup{width=15.5cm}
+  \caption[Desktop Schedule]{Desktop view of a student schedule.}
+  \label{fig:DesktopSchedule}
+\end{figure}
+
+\vspace{-3ex} % used to reduce padding after figure
+
+\begin{figure}[H]
+  \includegraphics[width=13.5cm, center]{./figures/desktop_roomsearch.png}
+  \captionsetup{width=15.5cm}
+  \caption[Desktop Roomsearch]{Desktop view of the free rooms on the 4. Floor in TE.}
+  \label{fig:DesktopRoomsearch}
+\end{figure}
 
 ### General
 
@@ -21,6 +39,8 @@ Through a collapsible application drawer, users have access to some basic settin
 
 Switching between contexts (corresponding to the four primary functions timetable, mensa menus, room search and student events) is done through labeled icons on a navigation bar at the bottom of the screen (Figure \ref{fig:LoginFigure} C). The application state such as selected date or time frame for the room search are preserved between context switches.
 
+\newpage
+
 ### Timetable
 
 By default, the timetable is displayed in a day view (Figure \ref{fig:TimetableFigure1} A). Individual events are displayed in their corresponding time slots. The time slots are displayed on the left with a subtle indicator for the current time slot. If there are events that run overlap in time, they are displayed next to each other in the day view. To navigate between different dates, users can swipe to the right to advance one day or swipe to the left to go to the previous day respectively. Above the timetable, a navigation bar is displayed which highlights the currently displayed day or week. As an alternative to the swipe interactions, users can directly select a date in the navigation bar or jump one week back or forward by clicking on the arrow buttons. To quickly jump back to the timetable of day current day or week respectively, users can click on the calendar icon in a context action area on the top right of the screen (Figure \ref{fig:TimetableFigure1} B).
@@ -29,13 +49,20 @@ In addition to the day view, users can choose to display their timetable for a w
 
 When clicking on a specific event, a modal pops up displaying detailed information about that event (Figure \ref{fig:TimetableFigure1} C).
 
+\bigskip
+
 \begin{figure}[H]
   \includegraphics[width=16cm, center]{./figures/timetable_figure1.png}
   \captionsetup{width=15.5cm}
   \caption[Timetable user interface]{\textbf{Timetable user interface}: \textbf{A}: Day view of a users timetable with overlapping events from 10:00 to 11:35. Navigation bar to navigate to specific dates and to navigate between weeks (1). Alternatively, navigation between days or weeks can be achieved through swipe gestures. \textbf{B}: Week view of a users timetable with overlapping event indicators and context action area button to jump to current date (2). \textbf{C}: Detail modal of a specific event. Is opened when user clicks on event from either day or week view.}
   \label{fig:TimetableFigure1}
 \end{figure}
+
+\newpage
+
 Users can also search for and display other timetables than their own. Clicking on the search icon button in the context action area opens a modal. Users can search for and display timetables of other students, lecturers, classes, courses or rooms (Figure \ref{fig:TimetableFigure2} A and B). The currently displayed search timetable can be cleared by clicking the indicator in the context action area (Figure \ref{fig:TimetableFigure2} C).
+
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=16cm, center]{./figures/timetable_figure2.png}
@@ -44,9 +71,13 @@ Users can also search for and display other timetables than their own. Clicking 
   \label{fig:TimetableFigure2}
 \end{figure}
 
+\newpage
+
 ### Mensa menus
 
 The mensa menus are displayed as a list of available menus with their category, menu name and description and ZHAW internal prices. The title indicates the mensa where the currently displayed menu is available. By clicking the mensa icon in the context action area, users can select all mensas with menu information available (Figure \ref{fig:MenuFigure} A and B). Navigation between menus of different days is consistent with the navigation for the timetable context, with a navigation bar in addition to swipe gestures.
+
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=16cm, center]{./figures/menu_figure.png}
@@ -55,9 +86,13 @@ The mensa menus are displayed as a list of available menus with their category, 
   \label{fig:MenuFigure}
 \end{figure}
 
+\newpage
+
 ### Room search
 
 To search for currently unoccupied rooms at the ZHAW School of Engineering, users can enter a time range during which they want to use the room (Figure \ref{fig:RoomSearchFigure} A). Once they've entered the start and end time, they can press the search button and the rooms will be filtered to only show rooms that are unoccupied during the choosen time slots. To browse the free rooms, the users can navigate through a map of the School Of Engineering campus showing all the buildings. Buildings highlighted in blue have at least one free room during the entered time range (Figure \ref{fig:RoomSearchFigure} B). To see which rooms are free, users can click on a building on the map, and a floor plan of that building will appear with labeled and highlighted free rooms. They can navigate through the different floors with the buttons above the floor plans. The individual floor plans show which rooms are free and where they are (Figure \ref{fig:RoomSearchFigure} C). To switch to a different building, users can navigate back to the campus overview map through the School Of Engineering button next to the floor navigation.
+
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=16cm, center]{./figures/roomsearch_figure1.png}
@@ -66,9 +101,13 @@ To search for currently unoccupied rooms at the ZHAW School of Engineering, user
   \label{fig:RoomSearchFigure}
 \end{figure}
 
+\newpage
+
 ### Student events
 
 Users can browse vszhaw news as a chronological list of blog posts. The full news posts are linked and can be reached by clicking on the individual posts. If there is an upcoming event in the official vszhaw calendar, it will be featured above the news feed (Figure \ref{fig:EventsFigure} A and B). Additionally, student events are displayed as a banner in the timetable context of their date (Figure \ref{fig:EventsFigure} C). Both the banner and student event feature are linked to more a detailed view of the event on the vszhaw website.
+
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=16cm, center]{./figures/events_figure.png}
@@ -126,6 +165,8 @@ In addition to getting feedback on our application, we also wanted to get a sens
 Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Besides providing performance metrics, Lighthouse can also be used to test various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a performance rating of 100 out of 100, confirming the user feedback that the app has a very good performance. ZHAWo also passed all automated PWA checks confirming that it performs well even on slow network and caching of offline content through the service worker works as intended. Manual tests confirm that as long as a resource such as a timetable or a mensa menu were previously fetched, the application still functions even without any connection to the internet. A detailed report of the Lighthouse audit can be found on the Github Repository \cite{OurGithub}.
 
 During the three weeks we published the application to a broader range of students, outside our small testing and feedback group. To date ZHAWo has had about 70 unique users. We were also positively surprised to see that the users were using the application for everything. To date the schedule has been used 411 times, the room search 295 times, the mensa 373 times and vszhaw 186 times. This user base consists of the participants of the survey and people who either heard about the application through those participants. It also consists of our testing group users. We expect the number of individual users to increase at the start of the next semester when we will send out an email about ZHAWo in collaboration with the vszhaw.
+
+\bigskip
 
 \begin{figure}[H]
   \includegraphics[width=13cm, center]{../../metrics/ZHAWoLighthousereportBAPreformance.png}
