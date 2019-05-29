@@ -12,7 +12,6 @@ it('all exports should be defined', () => {
 
 it('createFreeRoomsObject should resolve with all rooms when no events', async () => {
   const ALL_ROOMS = { rooms: ['te 212', 'NotValid', 'th 488'] };
-  api.getPossibleNames = jest.fn().mockReturnValue(Promise.resolve(ALL_ROOMS));
   api.getScheduleResource = jest.fn().mockReturnValue(
     Promise.resolve({
       days: [{ events: [] }],
@@ -22,7 +21,7 @@ it('createFreeRoomsObject should resolve with all rooms when no events', async (
   const freeRooms = await createRooms.createFreeRoomsObject();
   expect(freeRooms).toBeDefined();
   expect(freeRooms.length).toBe(15);
-  expect(freeRooms[0].rooms.length).toBe(2);
+  expect(freeRooms[0].rooms.length).toBe(73);
   expect(freeRooms[0].rooms).toContainEqual('TE212');
 });
 
@@ -54,7 +53,7 @@ it('createFreeRoomsObject should resolve with all rooms when there are events at
   expect(freeRooms.length).toBe(15);
   expect(freeRooms[0].rooms.length).toBe(0);
   expect(freeRooms[1].rooms.length).toBe(0);
-  expect(freeRooms[2].rooms.length).toBe(1);
+  expect(freeRooms[2].rooms.length).toBe(73);
   expect(freeRooms[2].rooms).toContainEqual('TH212');
 });
 
@@ -84,15 +83,15 @@ it('createFreeRoomsObject should resolve with all rooms when there are events an
   const freeRooms = await createRooms.createFreeRoomsObject();
   expect(freeRooms).toBeDefined();
   expect(freeRooms.length).toBe(15);
-  expect(freeRooms[0].rooms.length).toBe(1);
+  expect(freeRooms[0].rooms.length).toBe(73);
   expect(freeRooms[0].rooms).toContainEqual('TH212');
-  expect(freeRooms[1].rooms.length).toBe(1);
+  expect(freeRooms[1].rooms.length).toBe(73);
   expect(freeRooms[1].rooms).toContainEqual('TH212');
   expect(freeRooms[2].rooms.length).toBe(0);
   expect(freeRooms[2].rooms).not.toContainEqual('TH212');
   expect(freeRooms[3].rooms.length).toBe(0);
   expect(freeRooms[3].rooms).not.toContainEqual('TH212');
-  expect(freeRooms[4].rooms.length).toBe(1);
+  expect(freeRooms[4].rooms.length).toBe(73);
   expect(freeRooms[4].rooms).toContainEqual('TH212');
 });
 
