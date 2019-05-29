@@ -214,7 +214,7 @@ export function getPossibleNames() {
     const headers = HEADERS;
     const config = { method, headers };
     const routes = ['students', 'lecturers', 'classes', 'courses', 'rooms'];
-    let possibleNames;
+    let possibleNames = {};
     for (let route of routes) {
       const url = `${apiUrl}/schedules/${route}/`;
       const response = await fetch(url, config).catch(err =>
@@ -292,7 +292,7 @@ export function getFreeRoomsJson() {
  * @memberof ZhawoAdapter
  */
 export function convertFreeRooms(freeRooms) {
-  var array = Object.keys(freeRooms).map(function(index) {
+  let array = Object.keys(freeRooms).map(index => {
     return freeRooms[index];
   });
   return array;
