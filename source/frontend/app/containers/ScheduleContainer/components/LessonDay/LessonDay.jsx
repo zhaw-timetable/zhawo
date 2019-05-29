@@ -169,7 +169,7 @@ class LessonDay extends Component {
    */
   checkForVszhawEvent = () => {
     const { vszhawEvents, displayDay } = this.state;
-    if (!vszhawEvents.length > 0) return false;
+    if (!(vszhawEvents.length > 0)) return false;
     let onThisDay = isSameDay(
       new Date(this.state.displayDay),
       new Date(this.state.vszhawEvents[0].eventDate)
@@ -179,6 +179,7 @@ class LessonDay extends Component {
 
   render() {
     const {
+      slots,
       displayDay,
       schedule,
       eventDetailsOpen,
@@ -198,6 +199,15 @@ class LessonDay extends Component {
             handleClose={this.handleCloseEventDetails}
           />
         )}
+        {slots.map((slot, index) => (
+          <Fragment key={index}>
+            <Slots
+              activeSlot={activeSlot}
+              startTime={slot.startTime}
+              endTime={slot.endTime}
+            />
+          </Fragment>
+        ))}
         {schedule &&
           schedule.weeks &&
           schedule.weeks[weekKey] &&
@@ -205,11 +215,6 @@ class LessonDay extends Component {
           schedule.weeks[weekKey][dayKey].slots &&
           schedule.weeks[weekKey][dayKey].slots.map((slot, index) => (
             <Fragment key={index}>
-              <Slots
-                activeSlot={activeSlot}
-                startTime={slot.startTime}
-                endTime={slot.endTime}
-              />
               <EventBucketFlex
                 slot={slot}
                 index={index}
