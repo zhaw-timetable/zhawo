@@ -163,7 +163,7 @@ class LessonWeek extends Component {
    */
   checkForVszhawEvent = () => {
     const { vszhawEvents, displayDay } = this.state;
-    if (!vszhawEvents.length > 0) return false;
+    if (!(vszhawEvents.length > 0)) return false;
     let duringThisWeek = isSameWeek(
       new Date(this.state.displayDay),
       new Date(this.state.vszhawEvents[0].eventDate)
@@ -204,7 +204,7 @@ class LessonWeek extends Component {
         {schedule &&
           schedule.weeks &&
           schedule.weeks[weekKey] &&
-          Object.entries(schedule.weeks[weekKey]).map(([key, day, dayNr]) =>
+          Object.entries(schedule.weeks[weekKey]).map(([key, day]) =>
             day.slots.map(
               (slot, i) =>
                 slot.eventBucket &&
