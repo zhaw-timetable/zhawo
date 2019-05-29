@@ -20,10 +20,6 @@
 
 <hr>
 
-
-
-<hr>
-
 ## About
 
 With [**ZHAWo**](https://zhawo.ml) we provide students of the ZHAW a modern progressive web app to help with their every day study needs. Using agile development, the goal was to work closely with students to provide an application that is tailored to their specific needs.
