@@ -6,6 +6,11 @@
 
 <hr>
 
+<p align="center">
+<a href="https://zhawo.ml" target="_blank"><img src="docs/assets/zhawoLogo.png?raw=true" height="200" width="200" /></a>
+</p>
+
+<hr>
 
 - [ZHAWo.ml](https://zhawo.ml)
 - [Latest release](https://github.com/zhaw-timetable/zhawo/releases/tag/v1)
@@ -15,7 +20,7 @@
 
 <hr>
 
-<p align="center"><img src="docs/latex/BA/screenshots_raw/screen_timetable_day.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_mensa_menu.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_rooms_blue.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_vszhaw_feed.png?raw=true" height="380"  /></p>
+
 
 <hr>
 
@@ -35,8 +40,6 @@ The main features of ZHAWo are:
 
 <hr>
 
-<p align="center">
-<a href="https://zhawo.ml" target="_blank"><img src="docs/assets/zhawoLogo.png?raw=true" height="200" width="200" /></a>
-</p>
+<p align="center"><img src="docs/latex/BA/screenshots_raw/screen_timetable_day.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_mensa_menu.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_rooms_blue.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_vszhaw_feed.png?raw=true" height="380"  /></p
 
 <hr>
