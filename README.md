@@ -40,6 +40,6 @@ The main features of ZHAWo are:
 
 <hr>
 
-<p align="center"><img src="docs/latex/BA/screenshots_raw/screen_timetable_day.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_mensa_menu.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_rooms_blue.png?raw=true" height="380"  /> <img src="docs/latex/BA/screenshots_raw/screen_vszhaw_feed.png?raw=true" height="380"  /></p
+<p align="center"><img src="docs/latex/BA/screenshots_raw/screen_timetable_day.png?raw=true" height="360"  /> <img src="docs/latex/BA/screenshots_raw/screen_mensa_menu.png?raw=true" height="360"  /> <img src="docs/latex/BA/screenshots_raw/screen_rooms_blue.png?raw=true" height="360"  /> <img src="docs/latex/BA/screenshots_raw/screen_vszhaw_feed.png?raw=true" height="360"  /></p
 
 <hr>
