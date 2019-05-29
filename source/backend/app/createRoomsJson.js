@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import logger from './logger';
 import { isAfter, format } from 'date-fns';
-import util from 'util';
 
 import * as api from './adapters/CampusInfoAdapter';
 
@@ -9,20 +8,20 @@ import * as api from './adapters/CampusInfoAdapter';
  * Async Function that creates new freeRooms Object using createFreeRoomsObject and then writes it to a json file.
  *
  */
-export const createFreeRoomsJson = async () => {
+export async function createFreeRoomsJson() {
   try {
     const myObj = await createFreeRoomsObject();
     await fs.writeFile('./data/room_search_data.json', JSON.stringify(myObj));
   } catch (err) {
     logger.error(err);
   }
-};
+}
 
 /**
  * Async Function that creates a Object that contains all free Rooms for current day.
  * @returns Object containing all free Rooms
  */
-const createFreeRoomsObject = async () => {
+export async function createFreeRoomsObject() {
   try {
     let fetches = 0;
     let allRooms = await api.getPossibleNames('rooms');
@@ -125,12 +124,11 @@ const createFreeRoomsObject = async () => {
       }
     }
     logger.log(`FreeRoom List Created`);
-
     return freeRoomsBySlot;
   } catch (err) {
     logger.error(err);
   }
-};
+}
 
 const asyncForEach = async (array, callback) => {
   for (let index = 0; index < array.length; index++) {

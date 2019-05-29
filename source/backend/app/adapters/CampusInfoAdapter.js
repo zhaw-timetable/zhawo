@@ -18,7 +18,7 @@ const apiUrl = 'https://api.apps.engineering.zhaw.ch/v1';
  * Async Function that gets schedule for a given user starting at start date and for the given amount of days from the Campus Api.
  *
  * @export
- * @param {string} route
+ * @param {string} route (lecturers / rooms / students / courses / classes)
  * @param {string} name
  * @param {Date} startDate
  * @param {number} days (default = 7)
@@ -45,12 +45,11 @@ export function getScheduleResource(route, name, startDate, days = 7) {
   });
 }
 
-// f.ex. route = students
 /**
  * Async Function that get all the possible name for a given group (route) from the Campus Api.
  *
  * @export
- * @param {string} route (lecturers / rooms / students)
+ * @param {string} route (lecturers / rooms / students / courses / classes)
  * @return {Promise}  On success the promise will be resolved with a JSON object.<br>
  * On error the promise will be rejected.
  *
