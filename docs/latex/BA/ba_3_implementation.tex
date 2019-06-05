@@ -12,7 +12,7 @@ The architecture for ZHAWo consists of a frontend React web application \cite{Re
 \begin{figure}[H]
   \includegraphics[width=14cm, center]{../../diagrams/applicationArchitecture.png}
   \captionsetup{width=13.5cm}
-  \caption[Application Architecture Diagram]{\textbf{Application Architecture Diagram}: React frontend application communicating with backend Express server through a REST API. Express server fetches data from vszhaw RSS feed and calendar web application as well as the CampusInfo REST API for timetable and menu data.}
+  \caption[Application architecture diagram]{\textbf{Application architecture diagram}: React frontend application communicating with backend Express server through a REST API. Express server fetches data from vszhaw RSS feed and calendar web application as well as the CampusInfo REST API for timetable and menu data.}
 \end{figure}
 
 \newpage
@@ -60,7 +60,7 @@ The frontend is made up of three main parts:
 
 For the presentation of the web application to the user, we used the React framework \cite{React}. React was originaly developed by Facebook and is one of the most popular UI libraries in web development. It is based on reusable components built with JSX, a syntax extension to JavaScript. We decided to use React because of its component based modularity, which works well with an agile development approach where multiple features need to be implemented simultaneously with little interference.
 
-To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled. In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behavior. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
+To handle the application data we chose to use the Flux design pattern \cite{Flux}. Using the Flux pattern ensures a unidirectional data flow from view components through actions into a single dispatcher into data stores, where the application data such as timetables and menu plans is handled (Figure \ref{fig:FluxDiag}). In Flux, the dispatcher is a singleton that directs the flow of data to ensure that updates do not cascade, which would lead to unpredictable behavior. When a user interacts with a React view, the view sends an action through the dispatcher, which notifies the stores that hold the application’s data. When the stores change state, the view gets notified and changes accordingly \cite{Flux}.
 
 ### REST API Adapter
 
@@ -73,7 +73,8 @@ The modularity this design choice provides - similarly to the modularity of Reac
 \begin{figure}[H]
   \includegraphics[width=14cm, center]{../../diagrams/flux.png}
   \captionsetup{width=13.5cm}
-  \caption[Flux Pattern Diagram]{\textbf{Flux Pattern Diagram}: Unidirectional data flow from view components through actions }
+  \caption[Flux Pattern diagram]{\textbf{Flux Pattern diagram}: Unidirectional data flow from view React components through actions to the dispatcher singleton to stores. Views update based on changes in stores.}
+  \label{fig:FluxDiag}
 \end{figure}
 
 \bigskip
@@ -82,9 +83,7 @@ The modularity this design choice provides - similarly to the modularity of Reac
 
 The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to, for example, a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
 
-In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
-
-These two features enables us to offer the experience of a native application while we avoid having to maintain separate code bases for each platform.
+In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their mobile phone's home screen.
 
 \newpage
 
@@ -92,13 +91,13 @@ These two features enables us to offer the experience of a native application wh
 
 To test our application we used the framework Jest \cite{Jest} for both front- and backend. To test the React components, we used the GUI testing framework \cite{Enzyme} in addition to Jest.
 
-For the express server application, we achieved a test coverage of 91\%. For the frontend React application 86\% of the code was covered, resulting in an overall project test coverage of about 87\% \cite{OurCoverage}.
+For the express server application, we achieved a test coverage of 91\%. For the frontend React application 86\% of the code was covered, resulting in an overall project test coverage of about 87\% \cite{OurCoverage}. A detailed coverage can be found on our GitHub repository \cite{OurGithub} and on our Codecov page \cite{OurCoverage}.
 
-Achieving a high test coverage was important to us. ZHAWo will be maintained and expanded by other students. Tests help with not breaking the application when doing so.
+Good testing practices and a high test coverage were important to us. Especially with our agile development approach, this was vital to maintan a high velocity by not introducing unexpected breaking changes between sprints.
 
 ## Metrics
 
-Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Besides providing performance metrics, Lighthouse can also be used to test various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a performance rating of 100 out of 100, confirming the user feedback that the app has a very good performance. ZHAWo also passed all automated PWA checks confirming that it performs well even on slow network and caching of offline content through the service worker works as intended. Manual tests confirm that as long as a resource such as a timetable or a mensa menu were previously fetched, the application still functions even without any connection to the internet. A detailed report of the Lighthouse audit can be found on the Github Repository \cite{OurGithub}.
+Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Besides providing performance metrics, Lighthouse can also be used to test various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a performance rating of 100 out of 100, confirming the user feedback that the app has a very good performance (see Feedback Section \ref{feedback}). ZHAWo also passed all automated PWA checks confirming that it performs well even on slow network and caching of offline content through the service worker works as intended. Manual tests confirm that as long as a resource such as a timetable or a mensa menu was previously fetched, the application still functions even without any connection to the internet. A detailed report of the Lighthouse audit can be found on the Github Repository \cite{OurGithub}.
 
 During the three weeks we published the application to a broader range of students, outside our small testing and feedback group. To date ZHAWo has had about 70 unique users. We were also positively surprised to see that the users were using the application for everything. To date the schedule has been used 411 times, the room search 295 times, the mensa 373 times and vszhaw 186 times. This user base consists of the participants of the survey and people who either heard about the application through those participants. It also consists of our testing group users. We expect the number of individual users to increase at the start of the next semester when we will send out an email about ZHAWo in collaboration with the vszhaw.
 
@@ -107,7 +106,7 @@ During the three weeks we published the application to a broader range of studen
 \begin{figure}[H]
   \includegraphics[width=13cm, center]{../../metrics/ZHAWoLighthousereportBAPreformance.png}
   \captionsetup{width=15.5cm}
-  \caption [Lighthouse Preformance]{Preformance Results from Lighthouse report.}
+  \caption [Lighthouse peformance audit]{\textbf{Lighthouse performance audit}: ZHAWo was rated by Lighthouse with a performance score of 100 out of 100 points.}
   \label{fig:LighthousePreformance}
 \end{figure}
 
