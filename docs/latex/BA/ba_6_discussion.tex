@@ -2,27 +2,24 @@
 \begin{markdown}
 \section{Discussion} \label{discussion}
 
+## ZHAWo
+
+We are happy with the outcome of ZHAWo. The feedback we received was also very positive.
+The user survey confirmed that a room search feature is in high demand amongst students of the ZHAW. Our implementation of the building and floor plans was well received and definitely worth the effort of drawing each plan by hand. With the updates to the official CampusInfo application for iOS, a good solution to view timetable and mensa menus was less important than at the start of this project, however to us it makes sense to combine these feature and the room search functionality in one single application. In collaboration with the vszhaw we hope to gain new users at the begin of the next semester.
+
 ## PWA
 
 Using a full JavaScript technology stack for front- and backend and Progressive Web Apps has proven to work well with an agile development approach. While developing native applications, having to maintain different code bases can be awkward in combination with agile principles. The strength of the agile development approach that we have chosen is that we can prototype new features rapidly. This allows us to receive user feedback from both Android and iOS users immediately. In addition to that, not having to stay up to date with best practices, libraries and frameworks for different languages such as Java/Kotlin and Swift/Objective C for Android and iOS development respectively allowed us to implement new features at a faster pace.
 
-
-While there are obvious advantages to building ZHAWo as a cross platform PWA, we also identified some weaknesses. Installing an application from within the browser and not through the App Store or the Google Play Store, is unexpected for most users. There are also some inconsistencies in support offered by different platforms, similar to the browser inconsistencies in web development. This was the cause of much frustration. 
+While there are obvious advantages to building ZHAWo as a cross platform PWA, we also identified some weaknesses. Our user survey indicated that installing an application from within the browser and not through the App Store or the Google Play Store is unexpected for most users. There are also inconsistencies in support offered by the different platforms, similar to the browser inconsistencies in web development \cite{PWACurrentState}.
 
 We identified additional issues and inconsistencies in rendering of our application on different smartphone browsers. Especially the scaling of the SVG images of the building and floor plans was not optimal on some smaller phones and specifically on Huawei smartphones. These issues are not specific to PWA technology, but arise for all mobile websites.
 
+Building PWAs gives you the the benefits of web development, for instance being platform independent. But it also comes with the problems of web development. Because the application relies on a browser to be displayed. You don't have control over how that browser is implemented and how it displays your application. This causes issues and should be considered when deciding between using native technologies or a PWA.
 
-Building PWAs gives you the the benefits of web development, for instance being platform independent. But but it also comes with the problems of web development. Because the application relies on a browser to be displayed. You don't have control on how that browser is implemented and how it displays your application. This causes many issues and inconsistencies and should be considered when deciding between using native technologies or a PWA.
+Some of our issues can be attributed to PWA technologies being relatively new. We expect both support and users familiarity with the concept of PWAs to increase in the near future. At the moment the world of PWAs is a bit chaotic. The different smartphone and browser manufactures do not agree on what a PWA is. Many of them are constantly changing their implementation and support of the technology.
 
-
-Most of our issues can be attributed to PWA technologies being relatively new. We expect both support and users familiarity with the concept of PWAs to increase in the near future. At the moment the world of PWAs is a bit of a wild west. The different Mobile Phone and browser manufactures do not agree on what a PWA is. Many of them are constantly changing their implementation and support of the technology. This means that your PWA might suddenly not work after a browser update.
-
-We would therefor not recommend building a PWA as a primary application, but waiting to see how this new technology pans out. PWAs are definitely an interesting concept and we look forward to seeing what the future holds for them.
-
-## ZHAWo
-
-We are happy with the out come of ZHAWo. The feedback we received was also very positive.
-The user survey confirmed that a room search feature is in high demand amongst students of the ZHAW Our visual implementation with building and floor plans was well received and definitely worth the effort of drawing each plan by hand. With the updates to the official CampusInfo application for iOS, a good solution to view timetable and mensa menus was less important than at the start of this project, however to us it makes sense to combine these feature and the room search functionality in one single application. Looking at the logs also showed that the user that started using ZHAWo, used it for everything.
+Considering both advantages and disadvantages of PWA technology in it's current state, we would currently not recommend building a PWA as a primary application. PWAs are definitely an interesting concept and we look forward to seeing what the future holds for them.
 
 \end{markdown}
 
