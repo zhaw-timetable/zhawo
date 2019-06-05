@@ -4,7 +4,7 @@
 
 ## Architecture
 
-The architecture for ZHAWo consists of a frontend React \cite{React} web application and a backend server based on the Node.js \cite{Node} server framework Express \cite{Express}. The frontend communicates with the backend through a REST API. The backend server - apart from providing the REST API for the frontend - fetches timetable and menu data from the CampusInfo REST API provided by the ZHAW and fetches vszhaw news and calendar events through their RSS feed \cite{VszhawNews} and their calendar application \cite{VszhawCalendar}.
+The architecture for ZHAWo consists of a frontend React web application \cite{React} and a backend REST server. The server is implemented with the Node.js \cite{Node} framework Express \cite{Express}. The frontend fetches data such as timetables, mensa menus and event feeds from the backend through a REST API. The backend server - apart from providing the REST API for the frontend - fetches timetable and menu data from the CampusInfo REST API provided by the ZHAW and fetches vszhaw news and calendar events through their RSS feed \cite{VszhawNews} and their calendar application \cite{VszhawCalendar}.
 
 \bigskip
 \bigskip
@@ -80,11 +80,38 @@ The modularity this design choice provides - similarly to the modularity of Reac
 
 ### Service Worker
 
-The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to ,for example, a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
+The data for the frontend is provided by the backend REST API. All data received from HTTP fetch requests is cached using a service worker \cite{ServiceWorker}. By caching the application data, we ensure that the user can still access all the information that was already loaded once. It also improves the loading speed of ZHAWo, since resources that have been cached are first served from cache, before the data is requested by the backend. After the fetch request has completed the cache is updated. With regard to, for example, a students schedule information, this practice makes a lot of sense since the actual data does not change often during the course of a semester.
 
 In addition to offline caching, the service worker also allows users to install ZHAWo as a Progressive Web App (PWA) \cite{WhatIsPWA} to either their desktop or their phones homescreen.
 
 These two features enables us to offer the experience of a native application while we avoid having to maintain separate code bases for each platform.
+
+\newpage
+
+## Test coverage
+
+To test our application we used the framework Jest \cite{Jest} for both front- and backend. To test the React components, we used the GUI testing framework \cite{Enzyme} in addition to Jest.
+
+For the express server application, we achieved a test coverage of 91\%. For the frontend React application 86\% of the code was covered, resulting in an overall project test coverage of about 87\% \cite{OurCoverage}.
+
+Achieving a high test coverage was important to us. ZHAWo will be maintained and expanded by other students. Tests help with not breaking the application when doing so.
+
+## Metrics
+
+Google provides the automated tool Lighthouse \cite{Lighthouse} to audit and rate PWAs. Besides providing performance metrics, Lighthouse can also be used to test various PWA aspects, including if the application still responds without network connection. ZHAWo achieved a performance rating of 100 out of 100, confirming the user feedback that the app has a very good performance. ZHAWo also passed all automated PWA checks confirming that it performs well even on slow network and caching of offline content through the service worker works as intended. Manual tests confirm that as long as a resource such as a timetable or a mensa menu were previously fetched, the application still functions even without any connection to the internet. A detailed report of the Lighthouse audit can be found on the Github Repository \cite{OurGithub}.
+
+During the three weeks we published the application to a broader range of students, outside our small testing and feedback group. To date ZHAWo has had about 70 unique users. We were also positively surprised to see that the users were using the application for everything. To date the schedule has been used 411 times, the room search 295 times, the mensa 373 times and vszhaw 186 times. This user base consists of the participants of the survey and people who either heard about the application through those participants. It also consists of our testing group users. We expect the number of individual users to increase at the start of the next semester when we will send out an email about ZHAWo in collaboration with the vszhaw.
+
+\bigskip
+
+\begin{figure}[H]
+  \includegraphics[width=13cm, center]{../../metrics/ZHAWoLighthousereportBAPreformance.png}
+  \captionsetup{width=15.5cm}
+  \caption [Lighthouse Preformance]{Preformance Results from Lighthouse report.}
+  \label{fig:LighthousePreformance}
+\end{figure}
+
+\newpage
 
 \end{markdown}
 
