@@ -61,8 +61,6 @@ function main() {
 
   let backendMD = getMD(BACKENDPATH);
 
-  // Todo: remove tags and stuff
-
   writeFile('Development:-Frontend:-Containers.md', containersMD);
   writeFile('Development:-Frontend:-Adapters.md', adaptersMD);
   writeFile('Development:-Frontend:-Stores.md', stroesMD);
