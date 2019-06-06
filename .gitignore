@@ -19,5 +19,3 @@ npm-debug.log*
 reports/test-report.xml
 
 node_modules
-docs/stats/logs
-docs/stats/feedback.csv
