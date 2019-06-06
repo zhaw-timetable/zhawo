@@ -4,5 +4,4 @@ With ZHAWo we want to provide students of the Zurich University of Applied Scien
 A student survey confirmed the high demand for the room search feature. Our application received good ratings for usability, performance and design.
 
 As a secondary objective, we evaluated the practicability of using cross platform web technologies to build a Progressive Web App. It enabled us to apply an agile development approach with fast prototyping of new features while still providing an application with the functionalities and feel that users expect from a native app. With this approach, we also avoided having to maintain multiple code bases for different platforms and mixing different technologies for frontend and backend.
-
 Progressive Web App technology is still very new. There are notable differences in support and implementation. As the the technology matures, we expect it to be a viable alternative to building native applications.
