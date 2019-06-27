@@ -17,6 +17,7 @@
 - [Documentation](https://github.com/zhaw-timetable/zhawo/wiki)
 - [BA Sprint Planning](https://github.com/zhaw-timetable/zhawo/wiki/Workflow%3A-Sprint-Planning-BA) 
 - [PA Sprint Planning](https://github.com/zhaw-timetable/zhawo/wiki/Workflow%3A-Sprint-Planning-PA)
+- [Bachelorarbeit with Appendix](https://github.com/zhaw-timetable/zhawo/tree/master/docs/ZHAWo-Bachelorarbeit)
 
 <hr>
 
