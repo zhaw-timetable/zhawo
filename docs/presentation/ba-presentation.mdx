@@ -1,14 +1,35 @@
-# This is the title of my deck
+import { Head } from 'mdx-deck';
+export { default as theme } from './theme';
+import Carbon from './components/Carbon/Carbon.jsx';
+
+<Head>
+  <title>ZHAWo - Platform Independent Timetable App</title>
+</Head>
+
+# ZHAWo
+
+## Platform Independent Timetable App
+
+### Bachmann Dominik, Visser Julian
 
 ---
 
-# About Me
-
----
-
-```jsx
-<CodeSnippet />
-```
+<Carbon lang="javascript">
+  {`
+    /**
+    * Dispatches action to set a specific user as the current global user
+    * requries username and type (student, teacher)
+    * @param {string} name
+    * @param {string} type
+    */
+    export const setCurrentUser = (name, type) => {
+      dispatcher.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: { name, type }
+      });
+    };
+`}
+</Carbon>
 
 ---
 
