@@ -1,4 +1,4 @@
-import { Head } from 'mdx-deck';
+import { Head, Notes } from 'mdx-deck';
 export { default as theme } from './theme';
 import Carbon from './components/Carbon/Carbon.jsx';
 
@@ -14,22 +14,63 @@ import Carbon from './components/Carbon/Carbon.jsx';
 
 ---
 
-<Carbon lang="javascript">
-  {`
-    /**
-    * Dispatches action to set a specific user as the current global user
-    * requries username and type (student, teacher)
-    * @param {string} name
-    * @param {string} type
-    */
-    export const setCurrentUser = (name, type) => {
-      dispatcher.dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: { name, type }
-      });
-    };
-`}
-</Carbon>
+# Development
+
+---
+
+## Primary functions
+
+- Timetable
+- Mensa
+- Room search
+- vszhaw news
+
+---
+
+## Timetable
+
+- US10: As a student I want to view my timetable for a day
+- US11: As a student I want to view my timetable for a weeks
+- US12: As a student I want to navigate to the current day
+- US13: As a student I want to navigate between days when using the day view
+- ...
+
+---
+
+## GitHub issues
+
+![](./Assets/github_issues.png)
+
+---
+
+## Sprint planning
+
+![](./Assets/github_sprints.png)
+
+---
+
+## Burndown charts
+
+![](./Assets/sprint_burndown.png)
+
+---
+
+# Implementation
+
+<Notes>
+  - Tools: Travis CI, codecov reports - Prettier style rules, GitHooks to run
+  tests before pushing, dont introduce breaking changes
+</Notes>
+
+---
+
+## Architecture
+
+![](./Assets/architecture.png)
+
+---
+
+## Code example
 
 ---
 
