@@ -1,4 +1,7 @@
 import { Head, Notes } from 'mdx-deck';
+
+import { Split } from 'mdx-deck/layouts';
+
 export { default as theme } from './theme';
 import Carbon from './components/Carbon/Carbon.jsx';
 
@@ -25,42 +28,6 @@ Timetable app:
 - for both Android Ios and Desktop
 - Fast
 - Works offline
-
-</Notes>
-
----
-
-## Progressive Web App
-
-![pwa](./Assets/pwa_explainV2.png)
-
-<Notes>
-  
-PWA Advantages vs stuff like native and react-native
-
-- new technology
-- goal of project see how practical
-
-Explain caching with service worker:
-
-Tell with urls to cache
-
-- css, font, images
-- api requests
-
-First cache ->try and get new data
-
-24h
-
-</Notes>
-
----
-
-# Development
-
-<Notes>
-  
-Agile approach with sprints of 2 weeks
 
 </Notes>
 
@@ -95,6 +62,32 @@ Timetable, Mensa menus, room search and vszhaw news events
 
 ---
 
+## Progressive Web App
+
+![pwa](./Assets/pwa_explainV2.png)
+
+<Notes>
+  
+PWA Advantages vs stuff like native and react-native
+
+- new technology
+- goal of project see how practical
+
+Explain caching with service worker:
+
+Tell with urls to cache
+
+- css, font, images
+- api requests
+
+First cache ->try and get new data
+
+24h
+
+</Notes>
+
+---
+
 ## User stories
 
 <div style={{width: 1000, fontSize: '0.8em'}}>
@@ -110,6 +103,8 @@ Timetable, Mensa menus, room search and vszhaw news events
 </div>
 
 <Notes>
+
+Agile approach with sprints of 2 weeks
 
 Split up the primary functions into user stories, f.ex. for timetable ... and
 so on
@@ -151,36 +146,6 @@ For actual sprint planning used GitHub project board
 
 ---
 
-## Testing
-
-Run unit tests before pushing code
-
-Track code test coverage with codecov
-
-<Notes>
-
-Extensive unit tests, with git hook to run test suite before every push
-
-</Notes>
-
----
-
-## Continuous integration
-
-<div className="big">
-
-![](./Assets/travis_dashboard.png)
-
-</div>
-
-<Notes>
-  
-Travis CI to keep track of build status
-
-</Notes>
-
----
-
 ## Sprint reviews
 
 <div className="big">
@@ -195,10 +160,6 @@ Our own review of progress, decisions, and feedback group of classmates and
 other students
 
 </Notes>
-
----
-
-# Implementation
 
 ---
 
@@ -239,17 +200,7 @@ Flux design pattern, unidirectional flow
 
 ---
 
-## Code example
-
-<div style={{width: 900, fontSize: '0.8em'}}>
-
-<b>US13</b>: As a student I want to navigate between days when using the day view
-
-</div>
-
----
-
-## Code example
+## Flux pattern
 
 <div style={{width: 700}}>
 
@@ -261,19 +212,43 @@ Flux design pattern, unidirectional flow
 
 ## View / React component
 
-<Carbon>
+<Split>
+
+<div style={{width: 500}}>
+
+![](./Assets/flux_diagram.png)
+
+</div>
+
+<div style={{width: 700}}>
+
+<Carbon lang="JavaScript">
   {`
-  handleDateClick = newDate => e => {
-    scheduleActions.gotoDay(newDate);
-  }; 
-    `}
+    handleDateClick = newDate => e => {
+      scheduleActions.gotoDay(newDate);
+    }; 
+      `}
 </Carbon>
+
+</div>
+
+</Split>
 
 ---
 
 ## Action dispatcher
 
-<Carbon>
+<Split>
+
+<div style={{width: 500}}>
+
+![](./Assets/flux_diagram.png)
+
+</div>
+
+<div style={{width: 700}}>
+
+<Carbon lang="JavaScript">
   {`
   export const gotoDay = targetDate => {
     dispatcher.dispatch({
@@ -284,11 +259,25 @@ Flux design pattern, unidirectional flow
     `}
 </Carbon>
 
+</div>
+
+</Split>
+
 ---
 
 ## Store
 
-<Carbon>
+<Split>
+
+<div style={{width: 500}}>
+
+![](./Assets/flux_diagram.png)
+
+</div>
+
+<div style={{width: 700}}>
+
+<Carbon lang="JavaScript">
   {`
   async handleActions(action) {
     switch (action.type) {
@@ -304,11 +293,25 @@ Flux design pattern, unidirectional flow
   `}
 </Carbon>
 
+</div>
+
+</Split>
+
 ---
 
 ## View update
 
-<Carbon>
+<Split>
+
+<div style={{width: 500}}>
+
+![](./Assets/flux_diagram.png)
+
+</div>
+
+<div style={{width: 700}}>
+
+<Carbon lang="JavaScript">
   {`
   componentWillMount() {
     scheduleStore.on('schedule_changed', this.refreshSchedule);
@@ -322,6 +325,93 @@ Flux design pattern, unidirectional flow
 `}
 
 </Carbon>
+
+</div>
+
+</Split>
+
+---
+
+## Testing
+
+Run unit tests before pushing code
+
+Track code test coverage with codecov
+
+<Carbon lang="JavaScript">
+  {`
+    it('should call globalActions.toggleDrawer once ', () => {
+      const wrapper = shallow(<AppBarContainer />);
+      const instance = wrapper.instance();
+      globalActions.toggleDrawer = jest.fn();
+      instance.toggleDrawer();
+      expect(globalActions.toggleDrawer).toHaveBeenCalled();
+    });
+  `}
+</Carbon>
+
+<Notes>
+
+Extensive unit tests, with git hook to run test suite before every push
+
+</Notes>
+
+---
+
+## JsDoc
+
+<Carbon lang="JavaScript">
+  {`
+    /**
+    * Dispatches action to set a specific user as the current global user
+    * requries username and type (student, teacher)
+    * @param {string} name
+    * @param {string} type
+    */
+    export const setCurrentUser = (name, type) => {
+      dispatcher.dispatch({
+        type: 'SET_CURRENT_USER',
+        payload: { name, type }
+      });
+    };
+`}
+</Carbon>
+
+<div style={{width: 1000}}>
+
+![](./Assets/screenshot.png)
+
+</div>
+
+<Notes>
+  
+JsDoc allows use Linter in Vscode.
+
+Real time warnings.
+
+Simliar to TypeSript
+
+Helps with lots of functions.
+
+What type now?
+
+</Notes>
+
+---
+
+## Continuous integration
+
+<div className="big">
+
+![](./Assets/travis_dashboard.png)
+
+</div>
+
+<Notes>
+  
+Travis CI to keep track of build status
+
+</Notes>
 
 ---
 
@@ -369,5 +459,31 @@ did not like:
 <Notes>
   
 Show all primary functions in presentation and then let expert use app with phone.
+
+</Notes>
+
+---
+
+## Discussion
+
+<Notes>
+
+Happy with results
+
+- have users
+- good feedback
+
+vszhaw show next semester
+
+would not recommmed pwa YET
+
+- Buggy
+- cahnges with updates
+- not equal support
+- browser problems
+
+Navive now how will look
+
+PWA have to hope
 
 </Notes>
