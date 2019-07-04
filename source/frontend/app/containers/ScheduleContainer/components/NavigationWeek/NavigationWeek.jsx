@@ -56,7 +56,7 @@ class NavigationWeek extends Component {
   /**
    * Function set current date to given date using gotoDay action
    *
-   * @param {date} newDate
+   * @param {Date} newDate
    * @memberof NavigationWeek
    */
   handleDateClick = newDate => e => {
