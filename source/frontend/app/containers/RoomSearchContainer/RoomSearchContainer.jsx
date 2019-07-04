@@ -240,7 +240,6 @@ class RoomSearchContainer extends Component {
                 onClick={this.handleSearchClick}
                 color="inherit"
                 variant="text"
-                fontSize="small"
               >
                 Search
               </Button>
