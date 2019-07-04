@@ -143,7 +143,7 @@ class ScheduleStore extends EventEmitter {
                 'YYYY-MM-DD'
               );
               let fetchedSchedule = await api
-                .getScheduleResource(route, name, newDate, 0)
+                .getScheduleResource(route, name, new Date(newDate), 0)
                 .catch(err => {
                   console.error(err);
                 });
@@ -173,7 +173,7 @@ class ScheduleStore extends EventEmitter {
               let fetchedSchedule = await api.getScheduleResource(
                 route,
                 name,
-                newDate,
+                new Date(newDate),
                 0
               );
               if (isForCurrentUser) {
