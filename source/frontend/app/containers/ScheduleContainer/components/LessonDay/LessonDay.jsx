@@ -225,11 +225,7 @@ class LessonDay extends Component {
               />
             </Fragment>
           ))}
-        {schedule &&
-          schedule.weeks &&
-          schedule.weeks[weekKey] &&
-          schedule.weeks[weekKey][dayKey] &&
-          schedule.weeks[weekKey][dayKey].slots &&
+        {isThereScheduleData &&
           schedule.weeks[weekKey][dayKey].slots.map((slot, index) => (
             <Fragment key={index}>
               <EventBucketFlex
