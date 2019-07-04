@@ -189,6 +189,12 @@ class LessonDay extends Component {
     } = this.state;
     const weekKey = this.getWeekKey(displayDay);
     const dayKey = this.getDayKey(displayDay);
+    const isThereScheduleData =
+      schedule &&
+      schedule.weeks &&
+      schedule.weeks[weekKey] &&
+      schedule.weeks[weekKey][dayKey] &&
+      schedule.weeks[weekKey][dayKey].slots;
     const isThereVszhawEvent = this.checkForVszhawEvent();
     return (
       <Fragment>
@@ -199,15 +205,26 @@ class LessonDay extends Component {
             handleClose={this.handleCloseEventDetails}
           />
         )}
-        {slots.map((slot, index) => (
-          <Fragment key={index}>
-            <Slots
-              activeSlot={activeSlot}
-              startTime={slot.startTime}
-              endTime={slot.endTime}
-            />
-          </Fragment>
-        ))}
+        {!isThereScheduleData &&
+          slots.map((slot, index) => (
+            <Fragment key={index}>
+              <Slots
+                activeSlot={activeSlot}
+                startTime={slot.startTime}
+                endTime={slot.endTime}
+              />
+            </Fragment>
+          ))}
+        {isThereScheduleData &&
+          schedule.weeks[weekKey][dayKey].slots.map((slot, index) => (
+            <Fragment key={index}>
+              <Slots
+                activeSlot={activeSlot}
+                startTime={slot.startTime}
+                endTime={slot.endTime}
+              />
+            </Fragment>
+          ))}
         {schedule &&
           schedule.weeks &&
           schedule.weeks[weekKey] &&
