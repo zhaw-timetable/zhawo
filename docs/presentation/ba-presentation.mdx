@@ -27,7 +27,7 @@ import Carbon from './components/Carbon/Carbon.jsx';
 
 ---
 
-## Timetable
+## User stories
 
 - US10: As a student I want to view my timetable for a day
 - US11: As a student I want to view my timetable for a weeks
@@ -43,24 +43,32 @@ import Carbon from './components/Carbon/Carbon.jsx';
 
 ---
 
-## Sprint planning
+## Sprints
 
 ![](./Assets/github_sprints.png)
 
 ---
 
-## Burndown charts
+## Testing
+
+- Run unit tests before pushing code
+- Tracking code test coverage with codecov
+
+---
+
+## Continuous integration
+
+![](./Assets/travis_dashboard.png)
+
+---
+
+## Sprint reviews
 
 ![](./Assets/sprint_burndown.png)
 
 ---
 
 # Implementation
-
-<Notes>
-  - Tools: Travis CI, codecov reports - Prettier style rules, GitHooks to run
-  tests before pushing, dont introduce breaking changes
-</Notes>
 
 ---
 
@@ -70,7 +78,87 @@ import Carbon from './components/Carbon/Carbon.jsx';
 
 ---
 
+## Flux pattern
+
+![](./Assets/flux_diagram.png)
+
+---
+
 ## Code example
+
+- US13: As a student I want to navigate between days when using the day view
+
+---
+
+## Code example
+
+![](./Assets/navigation_screens.png)
+
+---
+
+## View / React component
+
+<Carbon>
+  {`
+  handleDateClick = newDate => e => {
+    scheduleActions.gotoDay(newDate);
+  }; 
+    `}
+</Carbon>
+
+---
+
+## Action dispatcher
+
+<Carbon>
+  {`
+  export const gotoDay = targetDate => {
+    dispatcher.dispatch({
+      type: 'GOTO_DAY',
+      payload: targetDate
+    });
+  };
+    `}
+</Carbon>
+
+---
+
+## Store
+
+<Carbon>
+  {`
+  async handleActions(action) {
+    switch (action.type) {
+      case 'GOTO_DAY':
+        const targetDate = action.payload;
+        this.displayDay = this.convertSunday(targetDate);
+        this.displayWeek = this.createDisplayWeek(this.displayDay);
+        this.displayMonth = this.createDisplayMonth(this.displayDay);
+        this.emit('schedule_changed');
+        break;
+    }
+  }
+  `}
+</Carbon>
+
+---
+
+## View update
+
+<Carbon>
+  {`
+  componentWillMount() {
+    scheduleStore.on('schedule_changed', this.refreshSchedule);
+  }
+  refreshSchedule = () => {
+    this.setState({
+      displayDay: scheduleStore.displayDay,
+      schedule: scheduleStore.schedule
+    });
+  };
+`}
+
+</Carbon>
 
 ---
 
