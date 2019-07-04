@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-import './Carbon.css';
-
 /* 
 Built to look like carbon.
 beautiful source code
