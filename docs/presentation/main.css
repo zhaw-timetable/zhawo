@@ -6,6 +6,10 @@
   width: 700px;
 }
 
+.extraSmall img {
+  width: 300px;
+}
+
 /* ----- Carbon ----- */
 .Carbon {
   display: inline-block;
